@@ -1,23 +1,26 @@
-package com.yishengma.inlearning.classroom;
+package com.yishengma.inlearning.classroom.attendclass;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.yishengma.inlearning.R;
+import com.yishengma.inlearning.classroom.common.BaseTaskActivity;
 
-public class StudyReportActivity extends AppCompatActivity {
+public class ClassListActivity extends BaseTaskActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_study_report);
+
     }
 
+    @Override
+    protected void setRecyclerViewAdapter() {
+
+    }
 
     public static void startActivity(Context context) {
-        Intent intent = new Intent(context, StudyReportActivity.class);
+        Intent intent = new Intent(context, ClassListActivity.class);
         context.startActivity(intent);
     }
 }
