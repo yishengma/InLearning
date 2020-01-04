@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="68dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="10dp"
+        android:drawableLeft="@drawable/drawable_rect"
+        android:gravity="center"
+        android:text="ZXXX"
+        android:textColor="@color/textBlack"
+        android:textSize="20sp" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="18dp"
+        android:paddingRight="18dp"
+        android:paddingBottom="28dp">
+
+        <LinearLayout
+            android:id="@+id/attend_class"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="68dp"
+                android:layout_height="68dp"
+                android:layout_gravity="center_horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/tab_hot" />
+
+                <View
+                    android:id="@+id/point_attend_class"
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+                    android:layout_gravity="right|top"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginRight="8dp"
+                    android:background="@drawable/red_point"
+                    android:visibility="gone" />
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="xx"
+                android:textColor="@color/textBlack"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/homework_and_exam"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="68dp"
+                android:layout_height="68dp"
+                android:layout_gravity="center_horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/tab_hot" />
+
+                <View
+                    android:id="@+id/red_homework"
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+                    android:layout_gravity="right|top"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginRight="8dp"
+                    android:background="@drawable/red_point"
+                    android:visibility="gone" />
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="xx"
+                android:textColor="@color/textBlack"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/note"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="68dp"
+                android:layout_height="68dp"
+                android:layout_gravity="center_horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/tab_hot" />
+
+                <View
+                    android:id="@+id/point_note"
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+                    android:layout_gravity="right|top"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginRight="8dp"
+                    android:background="@drawable/red_point"
+                    android:visibility="gone" />
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="xx"
+                android:textColor="@color/textBlack"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/study_report"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="68dp"
+                android:layout_height="68dp"
+                android:layout_gravity="center_horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/tab_hot" />
+
+                <View
+                    android:id="@+id/point_study_report"
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+                    android:layout_gravity="right|top"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginRight="8dp"
+                    android:background="@drawable/red_point"
+                    android:visibility="gone" />
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="xx"
+                android:textColor="@color/textBlack"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="68dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:drawableLeft="@drawable/drawable_rect"
+        android:gravity="center"
+        android:text="XXX"
+        android:textColor="@color/textBlack"
+        android:textSize="20sp" />
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
+</LinearLayout>

@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.yishengma.inlearning.R;
+import com.yishengma.inlearning.classroom.ClassFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +34,7 @@ public class HomePageActivity extends AppCompatActivity {
         mHomepageFragmentList = new ArrayList<>();
         mHomepageFragmentList.add(new BaseFragment());
         mHomepageFragmentList.add(new BaseFragment());
-        mHomepageFragmentList.add(new BaseFragment());
+        mHomepageFragmentList.add(new ClassFragment());
         mHomepageFragmentList.add(new BaseFragment());
     }
 

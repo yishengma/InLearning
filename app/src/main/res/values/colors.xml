@@ -25,5 +25,9 @@
     <color name="textBlack">#000000</color>
     <color name="lineGray">#dfdfdd</color>
     <color name="buttonDown">#d9d9d9</color>
+
+
     <color name="transparent">#00000000</color>
+    <color name="app_global_green">#8ab077</color>
+    <color name="point_red">#ff4e4e</color>
 </resources>
