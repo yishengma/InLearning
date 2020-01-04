@@ -81,7 +81,7 @@
                     android:src="@drawable/tab_hot" />
 
                 <View
-                    android:id="@+id/red_homework"
+                    android:id="@+id/point_exam"
                     android:layout_width="8dp"
                     android:layout_height="8dp"
                     android:layout_gravity="right|top"
@@ -188,6 +188,8 @@
         android:textSize="20sp" />
 
     <android.support.v7.widget.RecyclerView
+        android:layout_marginTop="10dp"
+        android:id="@+id/rv_lessons"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
