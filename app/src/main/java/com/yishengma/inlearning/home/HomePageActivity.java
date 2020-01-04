@@ -50,6 +50,10 @@ public class HomePageActivity extends AppCompatActivity {
         mBottomTab.getTabAt(1).setIcon(R.drawable.selector_tab_hot);
         mBottomTab.getTabAt(2).setIcon(R.drawable.selector_tab_original);
         mBottomTab.getTabAt(3).setIcon(R.drawable.selector_tab_excerpt);
+        mBottomTab.getTabAt(0).setText("课后");
+        mBottomTab.getTabAt(1).setText("课后");
+        mBottomTab.getTabAt(2).setText("上课");
+        mBottomTab.getTabAt(3).setText("我的");
     }
 
     public static void startHomePageActivity(Context context) {

@@ -23,8 +23,12 @@
         android:layout_gravity="bottom"
         android:overScrollMode="never"
         app:tabIndicatorColor="#8ab077"
-        app:tabMode="scrollable"
+        app:tabMode="fixed"
         app:tabSelectedTextColor="#8ab077"
-        app:tabTextColor="#C3D7BA" />
+        app:tabBackground="@color/transparent"
+        app:tabRippleColor="@color/transparent"
+        app:tabTextColor="#C3D7BA">
+        <!--   app:tabMode="fixed"设置平均-->
+    </android.support.design.widget.TabLayout>
 
 </RelativeLayout>
