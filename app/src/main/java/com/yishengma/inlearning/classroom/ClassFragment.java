@@ -65,12 +65,16 @@ public class ClassFragment extends BaseFragment implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.attend_class:
+                ClassListActivity.startActivity(getContext());
                 break;
             case R.id.homework_and_exam:
+                ExamListActivity.startActivity(getContext());
                 break;
             case R.id.note:
+                NoteListActivity.startActivity(getContext());
                 break;
             case R.id.study_report:
+                StudyReportActivity.startActivity(getContext());
                 break;
         }
 

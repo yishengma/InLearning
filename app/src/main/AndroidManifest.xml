@@ -3,6 +3,7 @@
     package="com.yishengma.inlearning">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".app.App"
         android:allowBackup="true"
@@ -12,7 +13,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".home.HomePageActivity"></activity>
+        <activity android:name=".classroom.StudyReportActivity"></activity>
+        <activity android:name=".classroom.NoteListActivity" />
+        <activity android:name=".classroom.ExamListActivity" />
+        <activity android:name=".classroom.ClassListActivity" />
+        <activity android:name=".home.HomePageActivity" />
         <activity android:name=".launch.LaunchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
