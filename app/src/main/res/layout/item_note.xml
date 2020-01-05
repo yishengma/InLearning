@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="120dp"
+        android:layout_height="120dp">
+
+        <ImageView
+            android:layout_marginTop="10dp"
+            android:background="@drawable/drawable_rect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/chapter_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:text="第1节"
+            android:textSize="18sp"
+            android:textColor="@color/textBlack" />
+
+
+        <TextView
+            android:id="@+id/chapter_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/chapter_number"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="5dp"
+            android:text="课中课中"
+            android:textColor="@color/textGray" />
+
+
+
+        <TextView
+            android:drawableLeft="@drawable/button_more_down"
+            android:id="@+id/note_count"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/chapter_number"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="50dp"
+            android:text="4条"
+            android:textColor="@color/textGray" />
+    </RelativeLayout>
+</merge>

@@ -14,15 +14,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ExamListActivity extends AppCompatActivity implements View.OnClickListener{
-    private RecyclerView mClassInfosView;
-    private ExamAdapter mClassInfoAdapter;
+    private RecyclerView mExamsView;
+    private ExamAdapter mExamAdapter;
     private ImageView mBackView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_class_common_view);
-        mClassInfosView = findViewById(R.id.rv_common_view);
+        mExamsView = findViewById(R.id.rv_common_view);
         List<String> list = new ArrayList<>();
         list.add("1");
         list.add("2");
@@ -33,9 +33,9 @@ public class ExamListActivity extends AppCompatActivity implements View.OnClickL
         list.add("7");
         list.add("8");
         list.add("9");
-        mClassInfoAdapter = new ExamAdapter(list);
-        mClassInfosView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        mClassInfosView.setAdapter(mClassInfoAdapter);
+        mExamAdapter = new ExamAdapter(list);
+        mExamsView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        mExamsView.setAdapter(mExamAdapter);
         mBackView = findViewById(R.id.back);
         mBackView.setOnClickListener(this);
     }
