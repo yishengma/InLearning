@@ -1,4 +1,4 @@
-package com.yishengma.inlearning.classroom.attendclass;
+package com.yishengma.inlearning.classroom.exam;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -8,25 +8,26 @@ import android.view.ViewGroup;
 
 import com.yishengma.inlearning.R;
 
+
 import java.util.List;
 
-public class ClassInfoAdapter extends RecyclerView.Adapter<ClassInfoAdapter.ViewHolder> {
+public class ExamAdapter extends RecyclerView.Adapter<ExamAdapter.ViewHolder> {
 
     private List<String> mStringList;
 
-    public ClassInfoAdapter(List<String> stringList) {
+    public ExamAdapter(List<String> stringList) {
         mStringList = stringList;
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_task_class_view, viewGroup, false);
-        return new ViewHolder(view);
+    public ExamAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_task_exam_view, viewGroup, false);
+        return new ExamAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull ExamAdapter.ViewHolder viewHolder, int i) {
 
     }
 
