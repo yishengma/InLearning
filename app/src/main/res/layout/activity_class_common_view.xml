@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
-
+<!--    android:fitsSystemWindows="true" 是界面不顶到状态栏-->
     <include layout="@layout/layout_class_common_view" />
 
     <android.support.v7.widget.RecyclerView
