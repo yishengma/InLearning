@@ -11,6 +11,7 @@ import android.os.Bundle;
 
 import com.yishengma.inlearning.R;
 import com.yishengma.inlearning.classroom.ClassFragment;
+import com.yishengma.inlearning.personalinfo.PersonFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +36,7 @@ public class HomePageActivity extends AppCompatActivity {
         mHomepageFragmentList.add(new BaseFragment());
         mHomepageFragmentList.add(new BaseFragment());
         mHomepageFragmentList.add(new ClassFragment());
-        mHomepageFragmentList.add(new BaseFragment());
+        mHomepageFragmentList.add(new PersonFragment());
     }
 
 

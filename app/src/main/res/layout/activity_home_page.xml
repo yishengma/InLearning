@@ -16,17 +16,18 @@
         android:overScrollMode="never" />
 
     <android.support.design.widget.TabLayout
+        android:layout_marginTop="5dp"
         android:id="@+id/tl_bottom_tab"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
         android:overScrollMode="never"
-        app:tabIndicatorColor="#8ab077"
-        app:tabMode="fixed"
-        app:tabSelectedTextColor="#8ab077"
         app:tabBackground="@color/transparent"
+        app:tabIndicatorColor="@color/transparent"
+        app:tabMode="fixed"
         app:tabRippleColor="@color/transparent"
+        app:tabSelectedTextColor="#8ab077"
         app:tabTextColor="#C3D7BA">
         <!--   app:tabMode="fixed"设置平均-->
     </android.support.design.widget.TabLayout>
