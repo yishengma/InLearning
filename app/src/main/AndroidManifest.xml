@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".classroom.report.StudyReportActivity"></activity>
+        <activity android:name=".classroom.LessonTaskActivity"></activity>
+        <activity android:name=".classroom.report.StudyReportActivity" />
         <activity android:name=".classroom.node.NoteListActivity" />
         <activity android:name=".classroom.exam.ExamListActivity" />
         <activity android:name=".classroom.attendclass.ClassListActivity" />

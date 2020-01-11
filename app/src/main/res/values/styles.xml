@@ -10,4 +10,9 @@
         <item name="android:windowTranslucentStatus">true</item>
     </style>
 
+    <style name="toolbar_theme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="colorControlNormal">@color/textBlack</item>
+        <item name="android:actionBarSize">46dp</item>
+        <item name="android:homeAsUpIndicator">@drawable/toolbar_back</item>
+    </style>
 </resources>

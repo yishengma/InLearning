@@ -49,6 +49,12 @@ public class ClassFragment extends BaseFragment implements View.OnClickListener 
         mLessonsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         mLessonsAdapter = new LessonsAdapter(mLessonTasks);
         mLessonsRecyclerView.setAdapter(mLessonsAdapter);
+        mLessonsAdapter.setOnClickListener(new LessonsAdapter.OnClickListener() {
+            @Override
+            public void onClick(LessonTask task) {
+                LessonTaskActivity.startActivity(getActivity());
+            }
+        });
     }
 
     private void initData() {
