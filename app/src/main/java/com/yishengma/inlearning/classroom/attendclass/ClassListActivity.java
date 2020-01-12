@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.yishengma.inlearning.R;
+import com.yishengma.inlearning.util.StatusBar;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,6 +28,8 @@ public class ClassListActivity extends AppCompatActivity implements View.OnClick
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_class_common_view);
+        StatusBar.setStatusBarTranslucent(this);
+        StatusBar.setStatusBarDarkMode(this,true);
         mClassInfosView = findViewById(R.id.rv_common_view);
         List<String> list = new ArrayList<>();
         list.add("1");

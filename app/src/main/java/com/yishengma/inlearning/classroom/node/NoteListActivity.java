@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.yishengma.inlearning.R;
+import com.yishengma.inlearning.util.StatusBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,8 @@ public class NoteListActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_class_common_view);
+        StatusBar.setStatusBarTranslucent(this);
+        StatusBar.setStatusBarDarkMode(this,true);
         mNotesView = findViewById(R.id.rv_common_view);
         List<String> list = new ArrayList<>();
         list.add("1");

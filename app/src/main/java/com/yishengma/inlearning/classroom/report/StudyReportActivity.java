@@ -12,6 +12,7 @@ import android.widget.ImageView;
 
 import com.yishengma.inlearning.R;
 import com.yishengma.inlearning.classroom.node.NoteAdapter;
+import com.yishengma.inlearning.util.StatusBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,8 @@ public class StudyReportActivity extends AppCompatActivity implements View.OnCli
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_class_common_view);
+        StatusBar.setStatusBarTranslucent(this);
+        StatusBar.setStatusBarDarkMode(this,true);
         mStudyReportsView = findViewById(R.id.rv_common_view);
         List<String> list = new ArrayList<>();
         list.add("1");
