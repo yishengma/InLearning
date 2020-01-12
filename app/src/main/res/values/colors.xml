@@ -29,6 +29,7 @@
 
     <color name="transparent">#00000000</color>
     <color name="app_global_green">#8ab077</color>
+    <color name="app_global_gray">#DEDEE2</color>
     <color name="point_red">#ff4e4e</color>
     <color name="split_line">#f3f3f6</color>
 </resources>

@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.yishengma.inlearning.R;
 
@@ -22,9 +23,9 @@ public class LessonTaskActivity extends AppCompatActivity implements View.OnClic
     private RecyclerView mRvLessonTasks;
     private LessonTaskAdapter mLessonTaskAdapter;
     private List<ChapterTask> mChapterTasks;
-    private View mChapterTabView;
-    private View mNoteTabView;
-    private View mClassTabView;
+    private TextView mChapterTabView;
+    private TextView mNoteTabView;
+    private TextView mClassTabView;
     private View mNoteDetailView;
     private View mClassDetailView;
 
@@ -36,13 +37,13 @@ public class LessonTaskActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void initView() {
-        mToolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(mToolbar);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setDisplayShowTitleEnabled(false);
-        }
+//        mToolbar = findViewById(R.id.toolbar);
+//        setSupportActionBar(mToolbar);
+//        ActionBar actionBar = getSupportActionBar();
+//        if (actionBar != null) {
+//            actionBar.setDisplayHomeAsUpEnabled(true);
+//            actionBar.setDisplayShowTitleEnabled(false);
+//        }
         mRvLessonTasks = findViewById(R.id.rv_lesson_task);
         mChapterTasks = new ArrayList<>();
         mChapterTasks.add(new ChapterTask());
@@ -72,31 +73,40 @@ public class LessonTaskActivity extends AppCompatActivity implements View.OnClic
                 mRvLessonTasks.setVisibility(View.VISIBLE);
                 mNoteDetailView.setVisibility(View.INVISIBLE);
                 mClassDetailView.setVisibility(View.INVISIBLE);
+                mChapterTabView.setCompoundDrawablesWithIntrinsicBounds(null, null, null, getDrawable(R.drawable.bg_indicator_on));
+                mNoteTabView.setCompoundDrawablesWithIntrinsicBounds(null, null, null, getDrawable(R.drawable.bg_indicator_off));
+                mClassTabView.setCompoundDrawablesWithIntrinsicBounds(null, null, null, getDrawable(R.drawable.bg_indicator_off));
                 break;
             case R.id.tv_note:
                 mRvLessonTasks.setVisibility(View.INVISIBLE);
                 mNoteDetailView.setVisibility(View.VISIBLE);
                 mClassDetailView.setVisibility(View.INVISIBLE);
+                mChapterTabView.setCompoundDrawablesWithIntrinsicBounds(null, null, null, getDrawable(R.drawable.bg_indicator_off));
+                mNoteTabView.setCompoundDrawablesWithIntrinsicBounds(null, null, null, getDrawable(R.drawable.bg_indicator_on));
+                mClassTabView.setCompoundDrawablesWithIntrinsicBounds(null, null, null, getDrawable(R.drawable.bg_indicator_off));
                 break;
             case R.id.tv_class:
                 mRvLessonTasks.setVisibility(View.INVISIBLE);
                 mNoteDetailView.setVisibility(View.INVISIBLE);
                 mClassDetailView.setVisibility(View.VISIBLE);
+                mChapterTabView.setCompoundDrawablesWithIntrinsicBounds(null, null, null, getDrawable(R.drawable.bg_indicator_off));
+                mNoteTabView.setCompoundDrawablesWithIntrinsicBounds(null, null, null, getDrawable(R.drawable.bg_indicator_off));
+                mClassTabView.setCompoundDrawablesWithIntrinsicBounds(null, null, null, getDrawable(R.drawable.bg_indicator_on));
                 break;
 
         }
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home: {
-                finish();
-            }
-            break;
-        }
-        return true;
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case android.R.id.home: {
+//                finish();
+//            }
+//            break;
+//        }
+//        return true;
+//    }
 
 
     public static void startActivity(Context context) {

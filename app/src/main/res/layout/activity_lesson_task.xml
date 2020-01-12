@@ -9,28 +9,30 @@
     tools:context=".classroom.lessontask.LessonTaskActivity">
 
 
-    <android.support.design.widget.AppBarLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:navigationIcon="@drawable/toolbar_back">
+        android:layout_height="46dp">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="24dp"
+            android:src="@drawable/toolbar_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="课程任务"
+            android:textSize="20sp" />
+
+        <View
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimary"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Toolbar的使用"
-                android:textColor="@color/textBlack"
-                android:textSize="20sp" />
-        </android.support.v7.widget.Toolbar>
-    </android.support.design.widget.AppBarLayout>
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="#EEEEEE" />
+    </RelativeLayout>
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -69,7 +71,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:drawableBottom="@drawable/bg_indecitor"
+                    android:drawableBottom="@drawable/bg_indicator_on"
                     android:gravity="center"
                     android:text="章节"
                     android:textColor="@color/textBlack"
@@ -80,7 +82,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:drawableBottom="@drawable/bg_indecitor"
+                    android:drawableBottom="@drawable/bg_indicator_off"
                     android:gravity="center"
                     android:text="笔记"
                     android:textColor="@color/textBlack"
@@ -91,7 +93,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:drawableBottom="@drawable/bg_indecitor"
+                    android:drawableBottom="@drawable/bg_indicator_off"
                     android:gravity="center"
                     android:text="班级"
                     android:textColor="@color/textBlack"
