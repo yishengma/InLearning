@@ -3,19 +3,13 @@ package com.yishengma.inlearning.classroom.lessontask;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.os.Build;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-
-import com.jaeger.library.StatusBarUtil;
 import com.yishengma.inlearning.R;
 import com.yishengma.inlearning.util.StatusBar;
 

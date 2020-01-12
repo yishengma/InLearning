@@ -5,16 +5,12 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-
-import com.jaeger.library.StatusBarUtil;
 import com.yishengma.inlearning.R;
 import com.yishengma.inlearning.classroom.ClassFragment;
+import com.yishengma.inlearning.discuss.ForumFragment;
 import com.yishengma.inlearning.personalinfo.PersonFragment;
 import com.yishengma.inlearning.util.StatusBar;
 
@@ -41,7 +37,7 @@ public class HomePageActivity extends AppCompatActivity {
     private void initData() {
         mHomepageFragmentList = new ArrayList<>();
         mHomepageFragmentList.add(new BaseFragment());
-        mHomepageFragmentList.add(new BaseFragment());
+        mHomepageFragmentList.add(new ForumFragment());
         mHomepageFragmentList.add(new ClassFragment());
         mHomepageFragmentList.add(new PersonFragment());
     }

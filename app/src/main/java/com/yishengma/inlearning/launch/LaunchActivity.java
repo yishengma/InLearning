@@ -1,13 +1,10 @@
 package com.yishengma.inlearning.launch;
 
-import android.graphics.Color;
-import android.os.Build;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
-import com.jaeger.library.StatusBarUtil;
 import com.yishengma.inlearning.R;
 import com.yishengma.inlearning.home.HomePageActivity;
 import com.yishengma.inlearning.util.StatusBar;
