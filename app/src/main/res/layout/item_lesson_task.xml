@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="24dp"
+        android:text="11月28日 20：05-20：35"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/tv_chapter_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_time"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
+        android:text="text01"
+        android:textColor="@color/textBlack"
+        android:textSize="24sp" />
+
+    <View
+        android:id="@+id/split_line"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@+id/tv_chapter_name"
+        android:layout_marginTop="20dp"
+        android:background="@color/split_line" />
+
+
+    <RelativeLayout
+        android:id="@+id/material_download"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/split_line"
+        android:layout_marginTop="20dp">
+
+        <ImageView
+            android:id="@+id/imv_material_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="24dp"
+            android:src="@drawable/selector_collect" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@id/imv_material_icon"
+            android:text="xxxx"
+            android:textSize="22sp" />
+
+        <ImageView
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="24dp"
+            android:src="@drawable/guide_arrow" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/video"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/material_download"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:id="@+id/imv_video_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="24dp"
+            android:src="@drawable/selector_collect" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@id/imv_video_icon"
+            android:text="xxxx"
+            android:textSize="22sp" />
+
+        <ImageView
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="24dp"
+            android:src="@drawable/guide_arrow" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/discuss"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/video"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:id="@+id/imv_discuss_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="24dp"
+            android:src="@drawable/selector_collect" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@id/imv_discuss_icon"
+            android:text="xxxx"
+            android:textSize="22sp" />
+
+        <ImageView
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="24dp"
+            android:src="@drawable/guide_arrow" />
+    </RelativeLayout>
+
+    <View
+        android:layout_marginTop="20dp"
+        android:background="@color/split_line"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_below="@id/discuss" />
+</RelativeLayout>

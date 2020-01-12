@@ -43,6 +43,7 @@ public class ClassListActivity extends AppCompatActivity implements View.OnClick
         mClassInfosView.setAdapter(mClassInfoAdapter);
         mBackView = findViewById(R.id.back);
         mBackView.setOnClickListener(this);
+
     }
 
     @Override

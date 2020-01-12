@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.yishengma.inlearning.R;
 import com.yishengma.inlearning.classroom.attendclass.ClassListActivity;
 import com.yishengma.inlearning.classroom.exam.ExamListActivity;
+import com.yishengma.inlearning.classroom.lessontask.LessonTaskActivity;
 import com.yishengma.inlearning.classroom.node.NoteListActivity;
 import com.yishengma.inlearning.classroom.report.StudyReportActivity;
 import com.yishengma.inlearning.home.BaseFragment;
