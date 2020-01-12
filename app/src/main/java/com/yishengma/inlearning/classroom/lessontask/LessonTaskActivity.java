@@ -47,7 +47,12 @@ public class LessonTaskActivity extends AppCompatActivity {
         mChapterTasks.add(new ChapterTask());
         mChapterTasks.add(new ChapterTask());
         mLessonTaskAdapter = new LessonTaskAdapter(mChapterTasks);
-        mRvLessonTasks.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        mRvLessonTasks.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false) {
+            @Override
+            public boolean canScrollVertically() {
+                return false;//静止滚动
+            }
+        });
         mRvLessonTasks.setAdapter(mLessonTaskAdapter);
     }
 
