@@ -28,6 +28,7 @@ public class LessonTaskActivity extends AppCompatActivity implements View.OnClic
     private TextView mClassTabView;
     private View mNoteDetailView;
     private View mClassDetailView;
+    private View mTabView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +62,7 @@ public class LessonTaskActivity extends AppCompatActivity implements View.OnClic
         mClassTabView = findViewById(R.id.tv_class);
         mNoteDetailView = findViewById(R.id.layout_note);
         mClassDetailView = findViewById(R.id.layout_class);
+        mTabView = findViewById(R.id.tab_view);
         mChapterTabView.setOnClickListener(this);
         mNoteTabView.setOnClickListener(this);
         mClassTabView.setOnClickListener(this);

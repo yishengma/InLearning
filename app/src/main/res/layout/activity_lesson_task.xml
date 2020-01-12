@@ -62,10 +62,11 @@
                 android:textColor="@color/text" />
 
             <LinearLayout
+                android:id="@+id/tab_view"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:orientation="horizontal">
-
+                <!--todo 根据滑动距离滑动-->
                 <TextView
                     android:id="@+id/tv_chapter"
                     android:layout_width="0dp"
@@ -75,7 +76,7 @@
                     android:gravity="center"
                     android:text="章节"
                     android:textColor="@color/textBlack"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/tv_note"
@@ -86,7 +87,7 @@
                     android:gravity="center"
                     android:text="笔记"
                     android:textColor="@color/textBlack"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/tv_class"
@@ -97,7 +98,7 @@
                     android:gravity="center"
                     android:text="班级"
                     android:textColor="@color/textBlack"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <FrameLayout
