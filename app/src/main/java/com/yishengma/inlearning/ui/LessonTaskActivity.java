@@ -11,7 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 import com.yishengma.inlearning.R;
-import com.yishengma.inlearning.bean.ChapterTask;
+import com.yishengma.inlearning.bean.ChapterBean;
 import com.yishengma.inlearning.adapter.LessonTaskAdapter;
 import com.yishengma.inlearning.util.StatusBar;
 
@@ -22,7 +22,7 @@ public class LessonTaskActivity extends AppCompatActivity implements View.OnClic
     private Toolbar mToolbar;
     private RecyclerView mRvLessonTasks;
     private LessonTaskAdapter mLessonTaskAdapter;
-    private List<ChapterTask> mChapterTasks;
+    private List<ChapterBean> mChapterTasks;
     private TextView mChapterTabView;
     private TextView mNoteTabView;
     private TextView mClassTabView;
@@ -50,13 +50,13 @@ public class LessonTaskActivity extends AppCompatActivity implements View.OnClic
 //        }
         mRvLessonTasks = findViewById(R.id.rv_lesson_task);
         mChapterTasks = new ArrayList<>();
-        mChapterTasks.add(new ChapterTask());
-        mChapterTasks.add(new ChapterTask());
-        mChapterTasks.add(new ChapterTask());
-        mChapterTasks.add(new ChapterTask());
-        mChapterTasks.add(new ChapterTask());
-        mChapterTasks.add(new ChapterTask());
-        mChapterTasks.add(new ChapterTask());
+        mChapterTasks.add(new ChapterBean());
+        mChapterTasks.add(new ChapterBean());
+        mChapterTasks.add(new ChapterBean());
+        mChapterTasks.add(new ChapterBean());
+        mChapterTasks.add(new ChapterBean());
+        mChapterTasks.add(new ChapterBean());
+        mChapterTasks.add(new ChapterBean());
         mLessonTaskAdapter = new LessonTaskAdapter(mChapterTasks);
         mRvLessonTasks.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mRvLessonTasks.setAdapter(mLessonTaskAdapter);

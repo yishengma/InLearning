@@ -1,6 +1,6 @@
 package com.yishengma.inlearning.bean;
 
-public class ChapterTask {
+public class ChapterBean {
     private String mTime;
     private String mName;
     private String mMaterialUrl;

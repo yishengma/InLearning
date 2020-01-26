@@ -7,14 +7,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.yishengma.inlearning.R;
-import com.yishengma.inlearning.bean.ChapterTask;
+import com.yishengma.inlearning.bean.ChapterBean;
 
 import java.util.List;
 
 public class LessonTaskAdapter extends RecyclerView.Adapter<LessonTaskAdapter.ViewHolder> {
-    private List<ChapterTask> mLessonTasks;
+    private List<ChapterBean> mLessonTasks;
 
-    public LessonTaskAdapter(List<ChapterTask> lessonTasks) {
+    public LessonTaskAdapter(List<ChapterBean> lessonTasks) {
         mLessonTasks = lessonTasks;
     }
 
