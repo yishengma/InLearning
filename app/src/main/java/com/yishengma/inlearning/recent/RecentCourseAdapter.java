@@ -17,6 +17,11 @@ public class RecentCourseAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         mList = list;
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        return super.getItemViewType(position);
+    }
+
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {

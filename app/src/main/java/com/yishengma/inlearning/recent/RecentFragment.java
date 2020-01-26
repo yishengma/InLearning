@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.yishengma.inlearning.R;
 import com.yishengma.inlearning.home.BaseFragment;
@@ -22,10 +23,11 @@ import java.util.List;
 
 import static com.zhpan.bannerview.constants.PageStyle.MULTI_PAGE_SCALE;
 
-public class RecentFragment extends BaseFragment {
+public class RecentFragment extends BaseFragment implements View.OnClickListener {
     private List<String> mList;
     private RecentCourseAdapter mCourseAdapter;
     private RecyclerView mRecyclerView;
+    private ImageView mSearchView;
 
     @Nullable
     @Override
@@ -67,9 +69,23 @@ public class RecentFragment extends BaseFragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false));
         mCourseAdapter = new RecentCourseAdapter(mList);
         mRecyclerView.setAdapter(mCourseAdapter);
+        mSearchView = view.findViewById(R.id.imv_search);
+        mSearchView.setOnClickListener(this);
     }
 
-//    @Override
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.imv_search:
+                CourseSearchActivity.startActivity(getContext());
+                break;
+            default:
+                break;
+        }
+    }
+
+
+    //    @Override
 //    protected void onA() {
 //        if (mBannerViewPager != null)
 //            mBannerViewPager.stopLoop();

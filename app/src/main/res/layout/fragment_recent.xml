@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     android:orientation="vertical">
 
     <FrameLayout
@@ -15,8 +14,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableRight="@drawable/guide_arrow"
-            android:text="班级"
+            android:layout_gravity="center_vertical"
+            android:text="马小明"
             android:textColor="@color/textBlack"
             android:textSize="20sp" />
 
@@ -36,7 +35,7 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_recent_course"
-        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp" />
 </LinearLayout>
