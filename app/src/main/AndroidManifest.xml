@@ -13,14 +13,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".recent.CourseSearchActivity"></activity>
-        <activity android:name=".classroom.lessontask.LessonTaskActivity" />
-        <activity android:name=".classroom.report.StudyReportActivity" />
-        <activity android:name=".classroom.node.NoteListActivity" />
-        <activity android:name=".classroom.exam.ExamListActivity" />
-        <activity android:name=".classroom.attendclass.ClassListActivity" />
-        <activity android:name=".home.HomePageActivity" />
-        <activity android:name=".launch.LaunchActivity">
+        <activity android:name=".ui.CourseSearchActivity"></activity>
+        <activity android:name=".ui.LessonTaskActivity" />
+        <activity android:name=".ui.StudyReportActivity" />
+        <activity android:name=".ui.NoteListActivity" />
+        <activity android:name=".ui.ExamListActivity" />
+        <activity android:name=".ui.ClassListActivity" />
+        <activity android:name=".ui.HomePageActivity" />
+        <activity android:name=".ui.LaunchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

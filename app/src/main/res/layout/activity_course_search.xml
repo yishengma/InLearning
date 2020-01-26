@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".recent.CourseSearchActivity">
+    tools:context=".ui.CourseSearchActivity">
 
-    <com.yishengma.inlearning.recent.SearchView
+    <com.yishengma.inlearning.widget.SearchView
         android:id="@+id/search_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
