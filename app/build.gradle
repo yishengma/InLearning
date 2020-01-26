@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.yishengma.inlearning"
-        minSdkVersion 21
+        minSdkVersion 26
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -31,6 +31,12 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation 'com.zhpan.library:bannerview:2.6.5'
     implementation 'com.carson_ho:SearchLayout:1.0.1'
+    implementation 'com.github.dueeeke.dkplayer:dkplayer-java:3.2.4'
+
+    implementation 'com.github.dueeeke.dkplayer:dkplayer-ui:3.2.4'
+    implementation 'com.github.dueeeke.dkplayer:player-exo:3.2.4'
+    implementation 'com.github.dueeeke.dkplayer:player-ijk:3.2.4'
+    implementation 'com.github.dueeeke.dkplayer:videocache:3.2.4'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'

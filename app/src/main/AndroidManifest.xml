@@ -13,7 +13,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.CourseSearchActivity"></activity>
+        <activity android:name=".ui.ClassRoomActivity"
+            android:screenOrientation="landscape"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            ></activity>
+        <activity android:name=".ui.CourseSearchActivity" />
         <activity android:name=".ui.LessonTaskActivity" />
         <activity android:name=".ui.StudyReportActivity" />
         <activity android:name=".ui.NoteListActivity" />

@@ -69,6 +69,12 @@ public class LessonTaskActivity extends AppCompatActivity implements View.OnClic
         mChapterTabView.setOnClickListener(this);
         mNoteTabView.setOnClickListener(this);
         mClassTabView.setOnClickListener(this);
+        mLessonTaskAdapter.setOnClickListener(new LessonTaskAdapter.OnClickListener() {
+            @Override
+            public void onClick(ChapterBean chapter) {
+                ClassRoomActivity.startActivity(LessonTaskActivity.this);
+            }
+        });
     }
 
     @Override

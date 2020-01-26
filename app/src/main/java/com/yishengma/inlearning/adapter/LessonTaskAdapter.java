@@ -18,10 +18,28 @@ public class LessonTaskAdapter extends RecyclerView.Adapter<LessonTaskAdapter.Vi
         mLessonTasks = lessonTasks;
     }
 
+    private OnClickListener mOnClickListener;
+
+    public void setOnClickListener(OnClickListener onClickListener) {
+        this.mOnClickListener = onClickListener;
+    }
+
+    public interface OnClickListener {
+        void onClick(ChapterBean chapter);
+    }
+
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, final int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_lesson_task, viewGroup, false);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mOnClickListener != null) {
+                    mOnClickListener.onClick(mLessonTasks.get(i));
+                }
+            }
+        });
         return new ViewHolder(view);
     }
 
