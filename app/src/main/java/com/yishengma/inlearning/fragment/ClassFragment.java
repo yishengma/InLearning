@@ -7,8 +7,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.yishengma.inlearning.R;
+import com.yishengma.inlearning.bean.CourseBean;
 import com.yishengma.inlearning.widget.ClassTaskView;
 import com.yishengma.inlearning.bean.LessonTask;
 import com.yishengma.inlearning.adapter.LessonsAdapter;
@@ -17,7 +17,6 @@ import com.yishengma.inlearning.ui.ExamListActivity;
 import com.yishengma.inlearning.ui.CourseTaskActivity;
 import com.yishengma.inlearning.ui.NoteListActivity;
 import com.yishengma.inlearning.ui.StudyReportActivity;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +26,7 @@ public class ClassFragment extends BaseFragment implements View.OnClickListener 
     private ClassTaskView mNoteView;
     private ClassTaskView mReportView;
     private RecyclerView mLessonsRecyclerView;
-    private List<LessonTask> mLessonTasks;
+    private List<CourseBean> mLessonTasks;
     private LessonsAdapter mLessonsAdapter;
 
     @Nullable
@@ -62,15 +61,15 @@ public class ClassFragment extends BaseFragment implements View.OnClickListener 
 
     private void initData() {
         mLessonTasks = new ArrayList<>();
-        mLessonTasks.add(new LessonTask("计算机网络","http://pic.weifengke.com/attachments/1/1572/29cca9ba6c7cf1209c7f00918fbef35b.jpg","已结束","小名老师","http://bpic.588ku.com/element_origin_min_pic/01/38/06/41573c70d7d87fb.jpg",12,3));
-        mLessonTasks.add(new LessonTask("计算机网络","http://pic.weifengke.com/attachments/1/1572/29cca9ba6c7cf1209c7f00918fbef35b.jpg","已结束","小名老师","http://bpic.588ku.com/element_origin_min_pic/01/38/06/41573c70d7d87fb.jpg",12,3));
-        mLessonTasks.add(new LessonTask("计算机网络","http://pic.weifengke.com/attachments/1/1572/29cca9ba6c7cf1209c7f00918fbef35b.jpg","已结束","小名老师","http://bpic.588ku.com/element_origin_min_pic/01/38/06/41573c70d7d87fb.jpg",12,3));
-        mLessonTasks.add(new LessonTask("计算机网络","http://pic.weifengke.com/attachments/1/1572/29cca9ba6c7cf1209c7f00918fbef35b.jpg","已结束","小名老师","http://bpic.588ku.com/element_origin_min_pic/01/38/06/41573c70d7d87fb.jpg",12,3));
-        mLessonTasks.add(new LessonTask("计算机网络","http://pic.weifengke.com/attachments/1/1572/29cca9ba6c7cf1209c7f00918fbef35b.jpg","已结束","小名老师","http://bpic.588ku.com/element_origin_min_pic/01/38/06/41573c70d7d87fb.jpg",12,3));
-        mLessonTasks.add(new LessonTask("计算机网络","http://pic.weifengke.com/attachments/1/1572/29cca9ba6c7cf1209c7f00918fbef35b.jpg","已结束","小名老师","http://bpic.588ku.com/element_origin_min_pic/01/38/06/41573c70d7d87fb.jpg",12,3));
-        mLessonTasks.add(new LessonTask("计算机网络","http://pic.weifengke.com/attachments/1/1572/29cca9ba6c7cf1209c7f00918fbef35b.jpg","已结束","小名老师","http://bpic.588ku.com/element_origin_min_pic/01/38/06/41573c70d7d87fb.jpg",12,3));
-        mLessonTasks.add(new LessonTask("计算机网络","http://pic.weifengke.com/attachments/1/1572/29cca9ba6c7cf1209c7f00918fbef35b.jpg","已结束","小名老师","http://bpic.588ku.com/element_origin_min_pic/01/38/06/41573c70d7d87fb.jpg",12,3));
-        mLessonTasks.add(new LessonTask("计算机网络","http://pic.weifengke.com/attachments/1/1572/29cca9ba6c7cf1209c7f00918fbef35b.jpg","已结束","小名老师","http://bpic.588ku.com/element_origin_min_pic/01/38/06/41573c70d7d87fb.jpg",12,3));
+//        mLessonTasks.add(new LessonTask("计算机网络","http://pic.weifengke.com/attachments/1/1572/29cca9ba6c7cf1209c7f00918fbef35b.jpg","已结束","小名老师","http://bpic.588ku.com/element_origin_min_pic/01/38/06/41573c70d7d87fb.jpg",12,3));
+//        mLessonTasks.add(new LessonTask("计算机网络","http://pic.weifengke.com/attachments/1/1572/29cca9ba6c7cf1209c7f00918fbef35b.jpg","已结束","小名老师","http://bpic.588ku.com/element_origin_min_pic/01/38/06/41573c70d7d87fb.jpg",12,3));
+//        mLessonTasks.add(new LessonTask("计算机网络","http://pic.weifengke.com/attachments/1/1572/29cca9ba6c7cf1209c7f00918fbef35b.jpg","已结束","小名老师","http://bpic.588ku.com/element_origin_min_pic/01/38/06/41573c70d7d87fb.jpg",12,3));
+//        mLessonTasks.add(new LessonTask("计算机网络","http://pic.weifengke.com/attachments/1/1572/29cca9ba6c7cf1209c7f00918fbef35b.jpg","已结束","小名老师","http://bpic.588ku.com/element_origin_min_pic/01/38/06/41573c70d7d87fb.jpg",12,3));
+//        mLessonTasks.add(new LessonTask("计算机网络","http://pic.weifengke.com/attachments/1/1572/29cca9ba6c7cf1209c7f00918fbef35b.jpg","已结束","小名老师","http://bpic.588ku.com/element_origin_min_pic/01/38/06/41573c70d7d87fb.jpg",12,3));
+//        mLessonTasks.add(new LessonTask("计算机网络","http://pic.weifengke.com/attachments/1/1572/29cca9ba6c7cf1209c7f00918fbef35b.jpg","已结束","小名老师","http://bpic.588ku.com/element_origin_min_pic/01/38/06/41573c70d7d87fb.jpg",12,3));
+//        mLessonTasks.add(new LessonTask("计算机网络","http://pic.weifengke.com/attachments/1/1572/29cca9ba6c7cf1209c7f00918fbef35b.jpg","已结束","小名老师","http://bpic.588ku.com/element_origin_min_pic/01/38/06/41573c70d7d87fb.jpg",12,3));
+//        mLessonTasks.add(new LessonTask("计算机网络","http://pic.weifengke.com/attachments/1/1572/29cca9ba6c7cf1209c7f00918fbef35b.jpg","已结束","小名老师","http://bpic.588ku.com/element_origin_min_pic/01/38/06/41573c70d7d87fb.jpg",12,3));
+//        mLessonTasks.add(new LessonTask("计算机网络","http://pic.weifengke.com/attachments/1/1572/29cca9ba6c7cf1209c7f00918fbef35b.jpg","已结束","小名老师","http://bpic.588ku.com/element_origin_min_pic/01/38/06/41573c70d7d87fb.jpg",12,3));
 
     }
 
