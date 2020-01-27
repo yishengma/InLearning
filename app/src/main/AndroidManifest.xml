@@ -18,7 +18,7 @@
             android:configChanges="orientation|screenSize|keyboardHidden"
             ></activity>
         <activity android:name=".ui.CourseSearchActivity" />
-        <activity android:name=".ui.LessonTaskActivity" />
+        <activity android:name=".ui.CourseTaskActivity" />
         <activity android:name=".ui.StudyReportActivity" />
         <activity android:name=".ui.NoteListActivity" />
         <activity android:name=".ui.ExamListActivity" />

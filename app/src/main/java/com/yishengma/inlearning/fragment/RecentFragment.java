@@ -12,8 +12,10 @@ import android.widget.ImageView;
 
 import com.yishengma.inlearning.R;
 import com.yishengma.inlearning.adapter.RecentCourseAdapter;
+import com.yishengma.inlearning.bean.CourseBean;
 import com.yishengma.inlearning.fragment.BaseFragment;
 import com.yishengma.inlearning.ui.CourseSearchActivity;
+import com.yishengma.inlearning.ui.CourseTaskActivity;
 import com.yishengma.inlearning.ui.NetViewHolder;
 import com.zhpan.bannerview.BannerViewPager;
 import com.zhpan.bannerview.constants.IndicatorGravity;
@@ -27,7 +29,7 @@ import java.util.List;
 import static com.zhpan.bannerview.constants.PageStyle.MULTI_PAGE_SCALE;
 
 public class RecentFragment extends BaseFragment implements View.OnClickListener {
-    private List<String> mList;
+    private List<CourseBean> mList;
     private RecentCourseAdapter mCourseAdapter;
     private RecyclerView mRecyclerView;
     private ImageView mSearchView;
@@ -36,18 +38,14 @@ public class RecentFragment extends BaseFragment implements View.OnClickListener
     @Override
     public View onCreateView(final LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_recent, container, false);
+        initData();
         initViewPager(view);
         return view;
     }
 
-    private BannerViewPager<String, NetViewHolder> mBannerViewPager;
+    private BannerViewPager<CourseBean, NetViewHolder> mBannerViewPager;
 
     private void initViewPager(View view) {
-        mList = new ArrayList<>();
-        mList.add("0");
-        mList.add("1");
-        mList.add("2");
-        mList.add("3");
         mBannerViewPager = view.findViewById(R.id.banner_view);
         mBannerViewPager.showIndicator(true)
                 .setInterval(3000)
@@ -74,6 +72,12 @@ public class RecentFragment extends BaseFragment implements View.OnClickListener
         mRecyclerView.setAdapter(mCourseAdapter);
         mSearchView = view.findViewById(R.id.imv_search);
         mSearchView.setOnClickListener(this);
+        mCourseAdapter.setOnClickListener(new RecentCourseAdapter.OnClickListener() {
+            @Override
+            public void onClick(CourseBean courseBean) {
+                CourseTaskActivity.startActivity(getContext());
+            }
+        });
     }
 
     @Override
@@ -85,6 +89,19 @@ public class RecentFragment extends BaseFragment implements View.OnClickListener
             default:
                 break;
         }
+    }
+
+    private void initData() {
+        mList = new ArrayList<>();
+        mList.add(new CourseBean());
+        mList.add(new CourseBean());
+        mList.add(new CourseBean());
+        mList.add(new CourseBean());
+        mList.add(new CourseBean());
+        mList.add(new CourseBean());
+        mList.add(new CourseBean());
+        mList.add(new CourseBean());
+        mList.add(new CourseBean());
     }
 
 

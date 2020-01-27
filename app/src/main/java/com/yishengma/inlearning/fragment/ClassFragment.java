@@ -14,7 +14,7 @@ import com.yishengma.inlearning.bean.LessonTask;
 import com.yishengma.inlearning.adapter.LessonsAdapter;
 import com.yishengma.inlearning.ui.ClassListActivity;
 import com.yishengma.inlearning.ui.ExamListActivity;
-import com.yishengma.inlearning.ui.LessonTaskActivity;
+import com.yishengma.inlearning.ui.CourseTaskActivity;
 import com.yishengma.inlearning.ui.NoteListActivity;
 import com.yishengma.inlearning.ui.StudyReportActivity;
 
@@ -55,7 +55,7 @@ public class ClassFragment extends BaseFragment implements View.OnClickListener 
         mLessonsAdapter.setOnClickListener(new LessonsAdapter.OnClickListener() {
             @Override
             public void onClick(LessonTask task) {
-                LessonTaskActivity.startActivity(getActivity());
+                CourseTaskActivity.startActivity(getActivity());
             }
         });
     }

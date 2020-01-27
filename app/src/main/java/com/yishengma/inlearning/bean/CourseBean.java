@@ -6,11 +6,19 @@ public class CourseBean {
     private String mId;
     private String mName;
     private String mTime;
-    private int mType;//课程类别，专业课，选修课
+    private String mType;//课程类别，专业课，选修课
     private int mStudentCount;//人数
     private String mIconUrl;
     private TeacherBean mTeacher;
     private List<ChapterBean> mChapters;
+
+    public CourseBean() {
+        mName = "计算机科学与技术";
+        mTime = "第7-9周";
+        mType = "专业课";
+        mStudentCount = 456;
+        mIconUrl = "";
+    }
 
     public String getId() {
         return mId;
@@ -36,11 +44,11 @@ public class CourseBean {
         this.mTime = time;
     }
 
-    public int getType() {
+    public String getType() {
         return mType;
     }
 
-    public void setType(int type) {
+    public void setType(String type) {
         this.mType = type;
     }
 

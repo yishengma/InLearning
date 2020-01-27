@@ -18,7 +18,7 @@ import com.yishengma.inlearning.util.StatusBar;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LessonTaskActivity extends AppCompatActivity implements View.OnClickListener {
+public class CourseTaskActivity extends AppCompatActivity implements View.OnClickListener {
     private Toolbar mToolbar;
     private RecyclerView mRvLessonTasks;
     private LessonTaskAdapter mLessonTaskAdapter;
@@ -33,7 +33,7 @@ public class LessonTaskActivity extends AppCompatActivity implements View.OnClic
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lesson_task);
+        setContentView(R.layout.activity_course_task);
         StatusBar.setStatusBarTranslucent(this);
         StatusBar.setStatusBarDarkMode(this,true);
 
@@ -72,7 +72,7 @@ public class LessonTaskActivity extends AppCompatActivity implements View.OnClic
         mLessonTaskAdapter.setOnClickListener(new LessonTaskAdapter.OnClickListener() {
             @Override
             public void onClick(ChapterBean chapter) {
-                ClassRoomActivity.startActivity(LessonTaskActivity.this);
+                ClassRoomActivity.startActivity(CourseTaskActivity.this);
             }
         });
     }
@@ -121,7 +121,7 @@ public class LessonTaskActivity extends AppCompatActivity implements View.OnClic
 
 
     public static void startActivity(Context context) {
-        Intent intent = new Intent(context, LessonTaskActivity.class);
+        Intent intent = new Intent(context, CourseTaskActivity.class);
         context.startActivity(intent);
     }
 }
