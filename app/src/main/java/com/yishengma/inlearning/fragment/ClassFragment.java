@@ -51,14 +51,14 @@ public class ClassFragment extends BaseFragment implements View.OnClickListener 
         mLessonsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         mLessonsAdapter = new LessonsAdapter(mLessonTasks);
         mLessonsRecyclerView.setAdapter(mLessonsAdapter);
-        mLessonsAdapter.setOnClickListener(new LessonsAdapter.OnClickListener() {
-            @Override
-            public void onClick(LessonTask task) {
-                CourseTaskActivity.startActivity(getActivity());
-            }
-        });
+//
     }
-
+ //mLessonsAdapter.setOnClickListener(new LessonsAdapter.OnClickListener() {
+//            @Override
+//            public void onClick(LessonTask task) {
+//                CourseTaskActivity.startActivity(getActivity());
+//            }
+//        });
     private void initData() {
         mLessonTasks = new ArrayList<>();
 //        mLessonTasks.add(new LessonTask("计算机网络","http://pic.weifengke.com/attachments/1/1572/29cca9ba6c7cf1209c7f00918fbef35b.jpg","已结束","小名老师","http://bpic.588ku.com/element_origin_min_pic/01/38/06/41573c70d7d87fb.jpg",12,3));
