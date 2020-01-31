@@ -48,9 +48,9 @@ public class RecentFragment extends BaseFragment implements View.OnClickListener
         mTabLayout = view.findViewById(R.id.tab_layout);
         mTabLayout.setSmoothScrollingEnabled(true);
         mTabLayout.setupWithViewPager(mViewPager);
-//        mTabLayout.getTabAt(0).setText("全部");
-//        mTabLayout.getTabAt(1).setText("必修");
-//        mTabLayout.getTabAt(2).setText("选修");
+        mTabLayout.getTabAt(0).setText("全部");
+        mTabLayout.getTabAt(1).setText("必修");
+        mTabLayout.getTabAt(2).setText("选修");
 
     }
 
