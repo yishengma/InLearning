@@ -7,7 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import com.yishengma.inlearning.R;
-import com.yishengma.inlearning.adapter.HomeFragmentStatePagerAdapter;
+import com.yishengma.inlearning.adapter.CommonFragmentStatePagerAdapter;
 import com.yishengma.inlearning.fragment.BaseFragment;
 import com.yishengma.inlearning.fragment.ClassFragment;
 import com.yishengma.inlearning.fragment.ForumFragment;
@@ -20,7 +20,7 @@ import java.util.List;
 
 public class HomePageActivity extends AppCompatActivity {
     private TabLayout mBottomTab;
-    private HomeFragmentStatePagerAdapter mFragmentAdapter;
+    private CommonFragmentStatePagerAdapter mFragmentAdapter;
     private ViewPager mViewPager;
     private List<BaseFragment> mHomepageFragmentList;
 
@@ -46,7 +46,7 @@ public class HomePageActivity extends AppCompatActivity {
 
     private void initView() {
         mViewPager = findViewById(R.id.vp_home_page);
-        mFragmentAdapter = new HomeFragmentStatePagerAdapter<>(getSupportFragmentManager(), mHomepageFragmentList);
+        mFragmentAdapter = new CommonFragmentStatePagerAdapter<>(getSupportFragmentManager(), mHomepageFragmentList);
         mViewPager.setAdapter(mFragmentAdapter);
         mViewPager.setOffscreenPageLimit(2);
         mBottomTab = findViewById(R.id.tl_bottom_tab);
@@ -56,7 +56,7 @@ public class HomePageActivity extends AppCompatActivity {
         mBottomTab.getTabAt(1).setIcon(R.drawable.selector_tab_hot);
         mBottomTab.getTabAt(2).setIcon(R.drawable.selector_tab_original);
         mBottomTab.getTabAt(3).setIcon(R.drawable.selector_tab_excerpt);
-        mBottomTab.getTabAt(0).setText("课后");
+        mBottomTab.getTabAt(0).setText("最近");
         mBottomTab.getTabAt(1).setText("课后");
         mBottomTab.getTabAt(2).setText("上课");
         mBottomTab.getTabAt(3).setText("我的");

@@ -7,13 +7,13 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import java.util.List;
 
 
-public class HomeFragmentStatePagerAdapter<F extends Fragment> extends FragmentStatePagerAdapter {
+public class CommonFragmentStatePagerAdapter<F extends Fragment> extends FragmentStatePagerAdapter {
 
 
     private List<F> list;
     private boolean myNotify = false;
 
-    public HomeFragmentStatePagerAdapter(FragmentManager fm, List<F> list) {
+    public CommonFragmentStatePagerAdapter(FragmentManager fm, List<F> list) {
         super(fm);
         this.list = list;
     }
