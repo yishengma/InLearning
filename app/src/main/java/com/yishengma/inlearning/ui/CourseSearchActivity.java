@@ -5,10 +5,11 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import com.yishengma.inlearning.R;
-import com.yishengma.inlearning.widget.SearchView;
+import com.yishengma.inlearning.util.StatusBar;
+import com.yishengma.inlearning.widget.SearchView.ICallBack;
+import com.yishengma.inlearning.widget.SearchView.SearchView;
+import com.yishengma.inlearning.widget.SearchView.bCallBack;
 
-import scut.carson_ho.searchview.ICallBack;
-import scut.carson_ho.searchview.bCallBack;
 
 public class CourseSearchActivity extends AppCompatActivity {
     private SearchView searchView;
@@ -17,6 +18,8 @@ public class CourseSearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_search);
+        StatusBar.setStatusBarTranslucent(this);
+        StatusBar.setStatusBarDarkMode(this,true);
         searchView = findViewById(R.id.search_view);
         searchView.setOnClickSearch(new ICallBack() {
             @Override

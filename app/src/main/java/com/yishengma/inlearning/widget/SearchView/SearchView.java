@@ -1,4 +1,4 @@
-package com.yishengma.inlearning.widget;
+package com.yishengma.inlearning.widget.SearchView;
 
 
 import android.content.Context;
@@ -20,10 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import com.yishengma.inlearning.R;
-import scut.carson_ho.searchview.ICallBack;
-import scut.carson_ho.searchview.RecordSQLiteOpenHelper;
-import scut.carson_ho.searchview.SearchListView;
-import scut.carson_ho.searchview.bCallBack;
+
 
 public class SearchView extends LinearLayout {
 
@@ -50,7 +47,7 @@ public class SearchView extends LinearLayout {
 
     // 回调接口
     private ICallBack mCallBack;// 搜索按键回调接口
-    private scut.carson_ho.searchview.bCallBack bCallBack; // 返回按键回调接口
+    private bCallBack bCallBack; // 返回按键回调接口
 
     // 自定义属性设置
     // 1. 搜索字体属性设置：大小、颜色 & 默认提示
