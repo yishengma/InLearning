@@ -42,7 +42,7 @@ public class RecentFragment extends BaseFragment implements View.OnClickListener
         mSearchView = view.findViewById(R.id.imv_search);
         mSearchView.setOnClickListener(this);
         mViewPager = view.findViewById(R.id.vp_recent_course);
-        mFragmentAdapter = new CommonFragmentStatePagerAdapter<>(getActivity().getSupportFragmentManager(), mCoursePageFragmentList);
+        mFragmentAdapter = new CommonFragmentStatePagerAdapter<>(getChildFragmentManager(), mCoursePageFragmentList);
         mViewPager.setAdapter(mFragmentAdapter);
         mViewPager.setOffscreenPageLimit(3);
         mTabLayout = view.findViewById(R.id.tab_layout);
