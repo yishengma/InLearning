@@ -1,5 +1,7 @@
 package com.yishengma.inlearning.bean;
 
+import com.yishengma.inlearning.adapter.RecentCourseAdapter;
+
 import java.util.List;
 
 public class CourseBean {
@@ -11,6 +13,7 @@ public class CourseBean {
     private String mIconUrl;
     private TeacherBean mTeacher;
     private List<ChapterBean> mChapters;
+    private int mItemType;
 
     public CourseBean() {
         mName = "计算机科学与技术";
@@ -18,6 +21,7 @@ public class CourseBean {
         mType = "专业课";
         mStudentCount = 456;
         mIconUrl = "";
+        mItemType = RecentCourseAdapter.ITEM_TYPE_COURSE;
     }
 
     public String getId() {
@@ -82,5 +86,14 @@ public class CourseBean {
 
     public void setChapters(List<ChapterBean> chapters) {
         this.mChapters = chapters;
+    }
+
+    public int getItemType() {
+        return mItemType;
+    }
+
+    public CourseBean setItemType(int itemType) {
+        this.mItemType = itemType;
+        return this;
     }
 }
