@@ -10,19 +10,17 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.yishengma.inlearning.R;
 import com.yishengma.inlearning.bean.CourseBean;
-import com.yishengma.inlearning.bean.LessonTask;
 
 import java.util.List;
 
-public class LessonsAdapter extends RecyclerView.Adapter<LessonsAdapter.ViewHolder> {
-    private List<CourseBean> mLessonTasks;
+public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder> {
+    private List<CourseBean> mCourseTasks;
     private OnClickListener mOnClickListener;
 
-    public LessonsAdapter(List<CourseBean> lessonTasks) {
-        mLessonTasks = lessonTasks;
+    public CourseAdapter(List<CourseBean> lessonTasks) {
+        mCourseTasks = lessonTasks;
     }
 
     public interface OnClickListener {
@@ -42,36 +40,43 @@ public class LessonsAdapter extends RecyclerView.Adapter<LessonsAdapter.ViewHold
 
     @SuppressLint("DefaultLocale")
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mOnClickListener != null) {
+                    mOnClickListener.onClick(mCourseTasks.get(i));
+                }
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        if (mLessonTasks == null) {
+        if (mCourseTasks == null) {
             return 0;
         }
-        return mLessonTasks.size();
+        return mCourseTasks.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView mLessonNameView;
-        private ImageView mLessonIconView;
-        private TextView mLessonStateView;
+        private TextView mCourseNameView;
+        private TextView mCourseIconView;
+        private TextView mCourseStateView;
         private ImageView mTeacherIconView;
         private TextView mTeacherNameView;
         private TextView mProgressTextView;
-        private ProgressBar mLessonProgressView;
+        private ProgressBar mCourseProgressView;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
-            mLessonNameView = itemView.findViewById(R.id.lesson_name);
-            mLessonIconView = itemView.findViewById(R.id.lesson_icon);
-            mLessonStateView = itemView.findViewById(R.id.lesson_state);
-            mTeacherIconView = itemView.findViewById(R.id.lesson_teacher_icon);
-            mTeacherNameView = itemView.findViewById(R.id.lesson_teacher_name);
-            mProgressTextView = itemView.findViewById(R.id.lesson_progress_text);
-            mLessonProgressView = itemView.findViewById(R.id.lesson_study_progress);
+            mCourseNameView = itemView.findViewById(R.id.course_name);
+            mCourseIconView = itemView.findViewById(R.id.course_icon);
+            mCourseStateView = itemView.findViewById(R.id.course_state);
+            mTeacherIconView = itemView.findViewById(R.id.course_teacher_icon);
+            mTeacherNameView = itemView.findViewById(R.id.course_teacher_name);
+            mProgressTextView = itemView.findViewById(R.id.course_progress_text);
+            mCourseProgressView = itemView.findViewById(R.id.course_study_progress);
 
         }
     }

@@ -9,8 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.yishengma.inlearning.R;
 import com.yishengma.inlearning.bean.CourseBean;
+import com.yishengma.inlearning.ui.CourseTaskActivity;
 import com.yishengma.inlearning.widget.ClassTaskView;
-import com.yishengma.inlearning.adapter.LessonsAdapter;
+import com.yishengma.inlearning.adapter.CourseAdapter;
 import com.yishengma.inlearning.ui.ClassListActivity;
 import com.yishengma.inlearning.ui.ExamListActivity;
 import com.yishengma.inlearning.ui.NoteListActivity;
@@ -24,8 +25,8 @@ public class ClassFragment extends BaseFragment implements View.OnClickListener 
     private ClassTaskView mNoteView;
     private ClassTaskView mReportView;
     private RecyclerView mLessonsRecyclerView;
-    private List<CourseBean> mLessonTasks;
-    private LessonsAdapter mLessonsAdapter;
+    private List<CourseBean> mCourseTasks;
+    private CourseAdapter mCourseAdapter;
 
     @Nullable
     @Override
@@ -47,27 +48,32 @@ public class ClassFragment extends BaseFragment implements View.OnClickListener 
         mReportView.setOnClickListener(this);
         mLessonsRecyclerView = view.findViewById(R.id.rv_lessons);
         mLessonsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-        mLessonsAdapter = new LessonsAdapter(mLessonTasks);
-        mLessonsRecyclerView.setAdapter(mLessonsAdapter);
-//
+        mCourseAdapter = new CourseAdapter(mCourseTasks);
+        mLessonsRecyclerView.setAdapter(mCourseAdapter);
+        mCourseAdapter.setOnClickListener(new CourseAdapter.OnClickListener() {
+            @Override
+            public void onClick(CourseBean task) {
+                CourseTaskActivity.startActivity(getActivity());
+            }
+        });
     }
- //mLessonsAdapter.setOnClickListener(new LessonsAdapter.OnClickListener() {
-//            @Override
-//            public void onClick(LessonTask task) {
-//                CourseTaskActivity.startActivity(getActivity());
-//            }
-//        });
+
     private void initData() {
-        mLessonTasks = new ArrayList<>();
-//        mLessonTasks.add(new LessonTask("计算机网络","http://pic.weifengke.com/attachments/1/1572/29cca9ba6c7cf1209c7f00918fbef35b.jpg","已结束","小名老师","http://bpic.588ku.com/element_origin_min_pic/01/38/06/41573c70d7d87fb.jpg",12,3));
-//        mLessonTasks.add(new LessonTask("计算机网络","http://pic.weifengke.com/attachments/1/1572/29cca9ba6c7cf1209c7f00918fbef35b.jpg","已结束","小名老师","http://bpic.588ku.com/element_origin_min_pic/01/38/06/41573c70d7d87fb.jpg",12,3));
-//        mLessonTasks.add(new LessonTask("计算机网络","http://pic.weifengke.com/attachments/1/1572/29cca9ba6c7cf1209c7f00918fbef35b.jpg","已结束","小名老师","http://bpic.588ku.com/element_origin_min_pic/01/38/06/41573c70d7d87fb.jpg",12,3));
-//        mLessonTasks.add(new LessonTask("计算机网络","http://pic.weifengke.com/attachments/1/1572/29cca9ba6c7cf1209c7f00918fbef35b.jpg","已结束","小名老师","http://bpic.588ku.com/element_origin_min_pic/01/38/06/41573c70d7d87fb.jpg",12,3));
-//        mLessonTasks.add(new LessonTask("计算机网络","http://pic.weifengke.com/attachments/1/1572/29cca9ba6c7cf1209c7f00918fbef35b.jpg","已结束","小名老师","http://bpic.588ku.com/element_origin_min_pic/01/38/06/41573c70d7d87fb.jpg",12,3));
-//        mLessonTasks.add(new LessonTask("计算机网络","http://pic.weifengke.com/attachments/1/1572/29cca9ba6c7cf1209c7f00918fbef35b.jpg","已结束","小名老师","http://bpic.588ku.com/element_origin_min_pic/01/38/06/41573c70d7d87fb.jpg",12,3));
-//        mLessonTasks.add(new LessonTask("计算机网络","http://pic.weifengke.com/attachments/1/1572/29cca9ba6c7cf1209c7f00918fbef35b.jpg","已结束","小名老师","http://bpic.588ku.com/element_origin_min_pic/01/38/06/41573c70d7d87fb.jpg",12,3));
-//        mLessonTasks.add(new LessonTask("计算机网络","http://pic.weifengke.com/attachments/1/1572/29cca9ba6c7cf1209c7f00918fbef35b.jpg","已结束","小名老师","http://bpic.588ku.com/element_origin_min_pic/01/38/06/41573c70d7d87fb.jpg",12,3));
-//        mLessonTasks.add(new LessonTask("计算机网络","http://pic.weifengke.com/attachments/1/1572/29cca9ba6c7cf1209c7f00918fbef35b.jpg","已结束","小名老师","http://bpic.588ku.com/element_origin_min_pic/01/38/06/41573c70d7d87fb.jpg",12,3));
+        mCourseTasks = new ArrayList<>();
+        mCourseTasks.add(new CourseBean());
+        mCourseTasks.add(new CourseBean());
+        mCourseTasks.add(new CourseBean());
+        mCourseTasks.add(new CourseBean());
+        mCourseTasks.add(new CourseBean());
+        mCourseTasks.add(new CourseBean());
+        mCourseTasks.add(new CourseBean());
+        mCourseTasks.add(new CourseBean());
+        mCourseTasks.add(new CourseBean());
+        mCourseTasks.add(new CourseBean());
+        mCourseTasks.add(new CourseBean());
+        mCourseTasks.add(new CourseBean());
+        mCourseTasks.add(new CourseBean());
+        mCourseTasks.add(new CourseBean());
 
     }
 

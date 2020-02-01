@@ -11,10 +11,10 @@ import com.yishengma.inlearning.bean.ChapterBean;
 
 import java.util.List;
 
-public class LessonTaskAdapter extends RecyclerView.Adapter<LessonTaskAdapter.ViewHolder> {
+public class CourseTaskAdapter extends RecyclerView.Adapter<CourseTaskAdapter.ViewHolder> {
     private List<ChapterBean> mLessonTasks;
 
-    public LessonTaskAdapter(List<ChapterBean> lessonTasks) {
+    public CourseTaskAdapter(List<ChapterBean> lessonTasks) {
         mLessonTasks = lessonTasks;
     }
 

@@ -6,71 +6,87 @@
     android:layout_marginTop="24dp"
     android:layout_marginRight="24dp">
 
-    <ImageView
-        android:id="@+id/lesson_icon"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:src="@drawable/tab_hot" />
-
     <TextView
-        android:id="@+id/lesson_name"
+        android:id="@+id/course_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/lesson_icon"
+        android:background="@color/textBlack"
+        android:gravity="center"
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp"
+        android:text="人文"
+        android:textColor="@color/White" />
+
+    <TextView
+        android:id="@+id/course_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/course_icon"
         android:layout_marginLeft="5dp"
-        android:layout_toRightOf="@id/lesson_icon"
+        android:layout_toRightOf="@id/course_icon"
         android:gravity="center"
         android:text="课程名"
         android:textColor="@color/textBlack"
         android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/lesson_state"
+        android:id="@+id/course_state"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/lesson_icon"
+        android:layout_below="@+id/course_icon"
         android:layout_marginTop="5dp"
         android:text="已结束"
         android:textColor="#777777"
 
         android:textSize="12sp" />
 
-    <ImageView
-        android:id="@+id/lesson_teacher_icon"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/course_teacher_icon"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_below="@+id/lesson_state"
+        android:layout_below="@+id/course_state"
         android:layout_marginTop="5dp"
-        android:src="@drawable/tab_subscribe" />
+        android:src="@drawable/viewpage_guide_3" />
 
     <TextView
-        android:id="@+id/lesson_teacher_name"
+        android:id="@+id/course_teacher_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/lesson_teacher_icon"
+        android:layout_alignTop="@+id/course_teacher_icon"
         android:layout_marginLeft="5dp"
-        android:layout_toRightOf="@+id/lesson_teacher_icon"
+        android:layout_toRightOf="@+id/course_teacher_icon"
         android:text="小名老师"
         android:textColor="#777777"
-        android:textSize="16sp" />
+        android:textSize="13sp" />
 
     <TextView
-        android:id="@+id/lesson_progress_text"
+        android:id="@+id/course_teacher_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/lesson_study_progress"
-        android:layout_alignTop="@+id/lesson_teacher_icon"
+        android:layout_marginLeft="5dp"
+        android:layout_below="@+id/course_teacher_name"
+        android:layout_toRightOf="@+id/course_teacher_icon"
+        android:text="老师"
+        android:textColor="#777777"
+        android:textSize="11sp" />
+
+    <TextView
+        android:id="@+id/course_progress_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/course_study_progress"
+        android:layout_alignTop="@+id/course_teacher_icon"
         android:layout_alignParentRight="true"
         android:text="已学1/12节"
         android:textColor="#BBBBBB"
         android:textSize="12sp" />
 
     <ProgressBar
-        android:id="@+id/lesson_study_progress"
+        android:id="@+id/course_study_progress"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="60dp"
         android:layout_height="3dp"
-        android:layout_below="@id/lesson_progress_text"
+        android:layout_below="@id/course_progress_text"
         android:layout_alignParentRight="true"
         android:layout_marginTop="5dp"
         android:layout_marginRight="24dp"
