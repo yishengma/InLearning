@@ -56,7 +56,7 @@ public class RecentCourseAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        switch (getItemViewType(i)) {
+        switch (i) {
             case ITEM_TYPE_COURSE:
                 View courseView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_recent_course, viewGroup, false);
                 return new CourseViewHolder(courseView);

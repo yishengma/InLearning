@@ -12,7 +12,7 @@
             android:id="@+id/back"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:background="@drawable/button_back_green" />
+            android:background="@drawable/toolbar_back" />
 
 
         <TextView
@@ -25,7 +25,7 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/title"
+            android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/correlation"

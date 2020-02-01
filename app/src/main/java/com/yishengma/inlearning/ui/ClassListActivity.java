@@ -9,9 +9,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.yishengma.inlearning.R;
 import com.yishengma.inlearning.adapter.ClassInfoAdapter;
+import com.yishengma.inlearning.bean.ChapterBean;
+import com.yishengma.inlearning.bean.CourseBean;
 import com.yishengma.inlearning.util.StatusBar;
 
 import java.util.ArrayList;
@@ -21,6 +24,8 @@ public class ClassListActivity extends AppCompatActivity implements View.OnClick
     private RecyclerView mClassInfosView;
     private ClassInfoAdapter mClassInfoAdapter;
     private ImageView mBackView;
+    private List<CourseBean> mCourseList;
+    private TextView mTitleView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,18 +33,53 @@ public class ClassListActivity extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_class_common_view);
         StatusBar.setStatusBarTranslucent(this);
         StatusBar.setStatusBarDarkMode(this,true);
+        List<ChapterBean> list = new ArrayList<>();
+        list.add(new ChapterBean().setName("第一11节拷贝数据"));
+        list.add(new ChapterBean().setName("第一22节拷贝数据"));
+
+        List<ChapterBean> list2 = new ArrayList<>();
+        list2.add(new ChapterBean().setName("第一1节拷贝数据"));
+        list2.add(new ChapterBean().setName("第一2节拷贝数据"));
+        list2.add(new ChapterBean().setName("第一3节拷贝数据"));
+        list2.add(new ChapterBean().setName("第一4节拷贝数据"));
+        list2.add(new ChapterBean().setName("第一5节拷贝数据"));
+        list2.add(new ChapterBean().setName("第一6节拷贝数据"));
+
+        CourseBean courseBean1 = new CourseBean();
+        courseBean1.setName("计算机科学与技术1");
+        courseBean1.setChapters(list2);
+
+        CourseBean courseBean2 = new CourseBean();
+        courseBean2.setName("计算机科学与技术2");
+        courseBean2.setChapters(list2);
+
+        CourseBean courseBean3 = new CourseBean();
+        courseBean3.setName("计算机科学与技术3");
+        courseBean3.setChapters(list);
+
+        CourseBean courseBean4 = new CourseBean();
+        courseBean4.setName("计算机科学与技术4");
+        courseBean4.setChapters(list);
+
+        CourseBean courseBean5 = new CourseBean();
+        courseBean5.setName("计算机科学与技术5");
+        courseBean5.setChapters(list2);
+
+        CourseBean courseBean6 = new CourseBean();
+        courseBean6.setName("计算机科学与技术6");
+        courseBean6.setChapters(list);
+        mCourseList = new ArrayList<>();
+        mCourseList.add(courseBean1);
+        mCourseList.add(courseBean2);
+        mCourseList.add(courseBean3);
+        mCourseList.add(courseBean4);
+        mCourseList.add(courseBean5);
+        mCourseList.add(courseBean6);
+
         mClassInfosView = findViewById(R.id.rv_common_view);
-        List<String> list = new ArrayList<>();
-        list.add("1");
-        list.add("2");
-        list.add("3");
-        list.add("4");
-        list.add("5");
-        list.add("6");
-        list.add("7");
-        list.add("8");
-        list.add("9");
-        mClassInfoAdapter = new ClassInfoAdapter(list);
+        mTitleView = findViewById(R.id.tv_title);
+        mTitleView.setText("上课");
+        mClassInfoAdapter = new ClassInfoAdapter(mCourseList);
         mClassInfosView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mClassInfosView.setAdapter(mClassInfoAdapter);
         mBackView = findViewById(R.id.back);
