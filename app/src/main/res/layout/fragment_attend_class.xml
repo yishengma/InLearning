@@ -46,13 +46,14 @@
                 android:orientation="vertical">
 
                 <FrameLayout
+                    android:background="@drawable/bg_task"
                     android:layout_width="68dp"
                     android:layout_height="68dp"
                     android:layout_gravity="center_horizontal">
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_gravity="center"
                         android:src="@drawable/tab_hot" />
 
@@ -84,13 +85,14 @@
                 android:orientation="vertical">
 
                 <FrameLayout
+                    android:background="@drawable/bg_task"
                     android:layout_width="68dp"
                     android:layout_height="68dp"
                     android:layout_gravity="center_horizontal">
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_gravity="center"
                         android:src="@drawable/tab_hot" />
 
@@ -122,13 +124,14 @@
                 android:orientation="vertical">
 
                 <FrameLayout
+                    android:background="@drawable/bg_task"
                     android:layout_width="68dp"
                     android:layout_height="68dp"
                     android:layout_gravity="center_horizontal">
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_gravity="center"
                         android:src="@drawable/tab_hot" />
 
@@ -160,13 +163,14 @@
                 android:orientation="vertical">
 
                 <FrameLayout
+                    android:background="@drawable/bg_task"
                     android:layout_width="68dp"
                     android:layout_height="68dp"
                     android:layout_gravity="center_horizontal">
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_gravity="center"
                         android:src="@drawable/tab_hot" />
 

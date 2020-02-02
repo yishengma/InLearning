@@ -15,7 +15,7 @@ import com.yishengma.inlearning.adapter.CourseAdapter;
 import com.yishengma.inlearning.ui.ClassListActivity;
 import com.yishengma.inlearning.ui.HomeworkListActivity;
 import com.yishengma.inlearning.ui.NoteListActivity;
-import com.yishengma.inlearning.ui.StudyReportActivity;
+import com.yishengma.inlearning.ui.ExerciseActivity;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -90,7 +90,7 @@ public class ClassFragment extends BaseFragment implements View.OnClickListener 
                 NoteListActivity.startActivity(getContext());
                 break;
             case R.id.study_report:
-                StudyReportActivity.startActivity(getContext());
+                ExerciseActivity.startActivity(getContext());
                 break;
         }
 
