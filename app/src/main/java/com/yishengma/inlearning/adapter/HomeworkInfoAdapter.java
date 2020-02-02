@@ -12,7 +12,6 @@ import com.yishengma.inlearning.bean.CourseBean;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class HomeworkInfoAdapter extends RecyclerView.Adapter<HomeworkInfoAdapter.CourseViewHolder> {
     private List<CourseBean> mCourseList;
 
@@ -23,7 +22,7 @@ public class HomeworkInfoAdapter extends RecyclerView.Adapter<HomeworkInfoAdapte
     @NonNull
     @Override
     public CourseViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_task_class_view, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_task_homework_view, viewGroup, false);
         return new CourseViewHolder(view);
     }
 
