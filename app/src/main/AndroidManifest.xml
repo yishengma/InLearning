@@ -30,7 +30,7 @@
         <activity android:name=".ui.CourseTaskActivity" />
         <activity android:name=".ui.StudyReportActivity" />
         <activity android:name=".ui.NoteListActivity" />
-        <activity android:name=".ui.ExamListActivity" />
+        <activity android:name=".ui.HomeworkListActivity" />
         <activity android:name=".ui.ClassListActivity" />
         <activity android:name=".ui.HomePageActivity" />
         <activity android:name=".ui.LaunchActivity">
