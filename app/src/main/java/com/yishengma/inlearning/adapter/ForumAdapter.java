@@ -7,14 +7,24 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.yishengma.inlearning.R;
+import com.yishengma.inlearning.bean.QuestionBean;
 
 import java.util.List;
 
 public class ForumAdapter extends RecyclerView.Adapter<ForumAdapter.ViewHolder> {
-    private List<String> mStringList;
+    private List<QuestionBean> mQuestionList;
+    private ClickListener mClickListener;
+    public ForumAdapter(List<QuestionBean> questionList) {
+        mQuestionList = questionList;
+    }
 
-    public ForumAdapter(List<String> stringList) {
-        mStringList = stringList;
+    public interface ClickListener {
+        void onClick(QuestionBean question);
+    }
+
+    public ForumAdapter setClickListener(ClickListener clickListener) {
+        mClickListener = clickListener;
+        return this;
     }
 
     @NonNull
@@ -26,15 +36,23 @@ public class ForumAdapter extends RecyclerView.Adapter<ForumAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-
+       final QuestionBean questionBean = mQuestionList.get(i);
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mClickListener != null) {
+                    mClickListener.onClick(questionBean);
+                }
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        if (mStringList == null) {
+        if (mQuestionList == null) {
             return 0;
         }
-        return mStringList.size();
+        return mQuestionList.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

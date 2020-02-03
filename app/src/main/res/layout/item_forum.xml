@@ -9,37 +9,36 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:src="@drawable/selector_tab_hot" />
+            android:src="@drawable/viewpage_guide_3" />
 
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:src="@drawable/selector_tab_hot" />
-
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:src="@drawable/selector_tab_hot" />
+            android:src="@drawable/viewpage_guide_3" />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/viewpage_guide_3" />
 
         <TextView
+            android:textSize="12sp"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="5dp"
             android:gravity="center_vertical"
-            android:text="xxxx" />
+            android:text="等赞同了该回答" />
     </LinearLayout>
 
     <View
@@ -51,9 +50,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:text="xxxxxxxxxxx"
+        android:text="毕业设计该怎么写？"
         android:textColor="@color/textBlack"
-        android:textSize="18sp" />
+        android:textSize="14sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -63,6 +62,8 @@
         android:orientation="horizontal">
 
         <TextView
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -72,14 +73,15 @@
             android:textColor="@color/White" />
 
         <TextView
+
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:layout_weight="12"
+            android:layout_weight="10"
             android:maxLines="2"
-            android:text="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-            android:textColor="@color/app_global_gray"
-            android:textSize="15sp" />
+            android:text="改怎么写就怎么写。"
+            android:textColor="@color/textBlack"
+            android:textSize="13sp" />
     </LinearLayout>
 
     <View
@@ -93,7 +95,7 @@
         android:layout_height="30dp"
         android:layout_marginLeft="10dp"
         android:gravity="center_vertical"
-        android:text="1月2号 19191" />
+        android:text="1月2号 00:21" />
 
     <View
         android:layout_width="match_parent"
