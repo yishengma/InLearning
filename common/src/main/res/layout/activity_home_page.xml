@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/homepage_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <com.inlearning.student.widget.FixedViewPager
+        android:id="@+id/vp_home_page"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/tl_bottom_tab"
+        android:overScrollMode="never" />
+
+    <android.support.design.widget.TabLayout
+        android:layout_marginTop="5dp"
+        android:id="@+id/tl_bottom_tab"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:overScrollMode="never"
+        app:tabBackground="@color/transparent"
+        app:tabIndicatorColor="@color/transparent"
+        app:tabMode="fixed"
+        app:tabRippleColor="@color/transparent"
+        app:tabSelectedTextColor="#8ab077"
+        app:tabTextColor="#C3D7BA">
+        <!--   app:tabMode="fixed"设置平均-->
+    </android.support.design.widget.TabLayout>
+
+</RelativeLayout>

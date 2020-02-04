@@ -1,1 +1,1 @@
-include ':student', ':teacher', ':director'
+include ':student', ':teacher', ':director', ':common'

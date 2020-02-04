@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/imv_icon"
+        android:layout_width="119dp"
+        android:layout_height="119dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="140dp"
+        android:gravity="center"
+        android:text="在 学"
+        android:textColor="@color/textGreen"
+        android:textSize="40sp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="90dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="297.5dp"
+        android:gravity="center"
+        android:text="在 学"
+        android:textColor="@color/textGreen" />
+
+    <Button
+        android:id="@+id/btn_login"
+
+        android:layout_width="288.5dp"
+        android:layout_height="55dp"
+        android:layout_alignBottom="@+id/btn_register"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="86dp"
+        android:background="@drawable/btn_login_selector"
+        android:gravity="center_vertical|center_horizontal"
+        android:paddingBottom="5dp"
+        android:text="登   录"
+        android:textColor="@color/White"
+        android:textSize="20sp" />
+
+
+    <Button
+        android:id="@+id/btn_register"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="288.5dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="506dp"
+        android:background="@drawable/btn_registe_selector"
+        android:text="注  册"
+        android:textColor="@color/textGreen"
+        android:textSize="20sp" />
+
+
+</RelativeLayout>
