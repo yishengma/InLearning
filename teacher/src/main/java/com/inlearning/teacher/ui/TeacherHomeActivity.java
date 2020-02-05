@@ -11,6 +11,7 @@ import com.inlearning.common.adapter.CommonFragmentStatePagerAdapter;
 import com.inlearning.common.base.BaseFragment;
 import com.inlearning.common.util.StatusBar;
 import com.inlearning.teacher.R;
+import com.inlearning.teacher.fragment.PersonFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +38,7 @@ public class TeacherHomeActivity extends AppCompatActivity {
         mHomepageFragmentList.add(new BaseFragment());
         mHomepageFragmentList.add(new BaseFragment());
         mHomepageFragmentList.add(new BaseFragment());
-        mHomepageFragmentList.add(new BaseFragment());
+        mHomepageFragmentList.add(new PersonFragment());
     }
 
 

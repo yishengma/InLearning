@@ -12,13 +12,15 @@ import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 
 public class UserModel {
-    private static User sUser;
+    private static Director sDirector;
+    private static Student sStudent;
+    private static Teacher sTeacher;
 
     public interface Callback {
         void onResult(User user);
     }
 
-    public static User onLogin(@User.Type int userType, String account, String password, final Callback callback) {
+    public static void onLogin(@User.Type int userType, String account, String password, final Callback callback) {
         switch (userType) {
             case User.Type.STUDENT:
                 BmobQuery<Student> studentBeanBmobQuery = new BmobQuery<>();
@@ -28,12 +30,12 @@ public class UserModel {
                     @Override
                     public void done(List<Student> list, BmobException e) {
                         if (list == null || list.size() == 0) {
-                            sUser = null;
+                            sStudent = null;
                         } else {
-                            sUser = list.get(0);
-                            sUser.setType(User.Type.STUDENT);
+                            sStudent = list.get(0);
+                            sStudent.setType(User.Type.STUDENT);
                         }
-                        callback.onResult(sUser);
+                        callback.onResult(sStudent);
                     }
                 });
                 break;
@@ -46,12 +48,12 @@ public class UserModel {
                     @Override
                     public void done(List<Teacher> list, BmobException e) {
                         if (list == null || list.size() == 0) {
-                            sUser = null;
+                            sTeacher = null;
                         } else {
-                            sUser = list.get(0);
-                            sUser.setType(User.Type.TEACHER);
+                            sTeacher = list.get(0);
+                            sTeacher.setType(User.Type.TEACHER);
                         }
-                        callback.onResult(sUser);
+                        callback.onResult(sTeacher);
                     }
                 });
                 break;
@@ -64,18 +66,29 @@ public class UserModel {
                     @Override
                     public void done(List<Director> list, BmobException e) {
                         if (list == null || list.size() == 0) {
-                            sUser = null;
+                            sDirector = null;
                         } else {
-                            sUser = list.get(0);
-                            sUser.setType(User.Type.DIRECTOR);
+                            sDirector = list.get(0);
+                            sDirector.setType(User.Type.DIRECTOR);
                         }
-                        callback.onResult(sUser);
+                        callback.onResult(sDirector);
                     }
                 });
                 break;
             default:
                 break;
         }
-        return sUser;
+    }
+
+    public static Director getDirector() {
+        return sDirector;
+    }
+
+    public static Student getStudent() {
+        return sStudent;
+    }
+
+    public static Teacher getTeacher() {
+        return sTeacher;
     }
 }

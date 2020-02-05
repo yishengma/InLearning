@@ -1,4 +1,4 @@
-package com.inlearning.student.fragment;
+package com.inlearning.teacher.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,8 +8,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.inlearning.common.base.BaseFragment;
 import com.inlearning.common.model.UserModel;
-import com.inlearning.student.R;
+import com.inlearning.teacher.R;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -29,8 +30,8 @@ public class PersonFragment extends BaseFragment {
         mProfilePhotoView = view.findViewById(R.id.cv_profile_photo);
         mNameView = view.findViewById(R.id.tv_name);
         mInfoView = view.findViewById(R.id.tv_info);
-        Glide.with(this).load(UserModel.getStudent().getProfilePhotoUrl()).into(mProfilePhotoView);
-        mNameView.setText(UserModel.getStudent().getName());
-        mInfoView.setText(UserModel.getStudent().getStudentClass());
+        Glide.with(this).load(UserModel.getTeacher().getProfilePhotoUrl()).into(mProfilePhotoView);
+        mNameView.setText(UserModel.getTeacher().getName());
+        mInfoView.setText(UserModel.getTeacher().getTitle());
     }
 }

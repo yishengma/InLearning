@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.inlearning.common.adapter.CommonFragmentStatePagerAdapter;
 import com.inlearning.common.base.BaseFragment;
 import com.inlearning.common.util.StatusBar;
+import com.inlearning.director.fragment.PersonFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +38,7 @@ public class DirectorHomeActivity extends AppCompatActivity {
         mHomepageFragmentList.add(new BaseFragment());
         mHomepageFragmentList.add(new BaseFragment());
         mHomepageFragmentList.add(new BaseFragment());
-        mHomepageFragmentList.add(new BaseFragment());
+        mHomepageFragmentList.add(new PersonFragment());
     }
 
 

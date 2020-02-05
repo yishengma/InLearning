@@ -15,6 +15,8 @@ public abstract class User extends BmobObject {
     public String mPassword;
     public String mName;
     public BmobFile mProfilePhoto;
+    private String mProfilePhotoUrl;
+
     @Type
     public int mType;
 
@@ -72,4 +74,9 @@ public abstract class User extends BmobObject {
         mType = type;
         return this;
     }
+
+    public String getProfilePhotoUrl() {
+        return getProfilePhoto().getUrl();
+    }
+
 }
