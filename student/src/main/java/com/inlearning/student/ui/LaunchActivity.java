@@ -29,7 +29,7 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_login:
-                HomePageActivity.startHomePageActivity(LaunchActivity.this);
+                StudentHomeActivity.startHomePageActivity(LaunchActivity.this);
                 break;
         }
     }

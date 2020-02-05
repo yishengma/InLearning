@@ -29,8 +29,11 @@
         <activity android:name="com.inlearning.student.ui.NoteListActivity" />
         <activity android:name="com.inlearning.student.ui.HomeworkListActivity" />
         <activity android:name="com.inlearning.student.ui.ClassListActivity" />
-        <activity android:name="com.inlearning.student.ui.HomePageActivity" />
+        <activity android:name="com.inlearning.student.ui.StudentHomeActivity" />
         <activity android:name="com.inlearning.student.ui.LaunchActivity">
+
+        </activity>
+        <activity android:name=".ui.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,4 +1,4 @@
-package com.inlearning.teacher.ui;
+package com.inlearning.director;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,12 +10,12 @@ import android.support.v7.app.AppCompatActivity;
 import com.inlearning.common.adapter.CommonFragmentStatePagerAdapter;
 import com.inlearning.common.base.BaseFragment;
 import com.inlearning.common.util.StatusBar;
-import com.inlearning.teacher.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomePageActivity extends AppCompatActivity {
+public class DirectorHomeActivity extends AppCompatActivity {
+
     private TabLayout mBottomTab;
     private CommonFragmentStatePagerAdapter mFragmentAdapter;
     private ViewPager mViewPager;
@@ -34,10 +34,10 @@ public class HomePageActivity extends AppCompatActivity {
 
     private void initData() {
         mHomepageFragmentList = new ArrayList<>();
-//        mHomepageFragmentList.add(new RecentFragment());
-//        mHomepageFragmentList.add(new ForumFragment());
-//        mHomepageFragmentList.add(new ClassFragment());
-//        mHomepageFragmentList.add(new PersonFragment());
+        mHomepageFragmentList.add(new BaseFragment());
+        mHomepageFragmentList.add(new BaseFragment());
+        mHomepageFragmentList.add(new BaseFragment());
+        mHomepageFragmentList.add(new BaseFragment());
     }
 
 
@@ -53,14 +53,14 @@ public class HomePageActivity extends AppCompatActivity {
         mBottomTab.getTabAt(1).setIcon(R.drawable.selector_tab_hot);
         mBottomTab.getTabAt(2).setIcon(R.drawable.selector_tab_original);
         mBottomTab.getTabAt(3).setIcon(R.drawable.selector_tab_excerpt);
-        mBottomTab.getTabAt(0).setText("最近");
-        mBottomTab.getTabAt(1).setText("课后");
-        mBottomTab.getTabAt(2).setText("上课");
+        mBottomTab.getTabAt(0).setText("专业");
+        mBottomTab.getTabAt(1).setText("老师");
+        mBottomTab.getTabAt(2).setText("课程");
         mBottomTab.getTabAt(3).setText("我的");
     }
 
     public static void startHomePageActivity(Context context) {
-        Intent intent = new Intent(context, HomePageActivity.class);
+        Intent intent = new Intent(context, DirectorHomeActivity.class);
         context.startActivity(intent);
     }
 }

@@ -3,7 +3,7 @@
     package="com.inlearning.director">
 
     <application>
-        <activity android:name=".HomePageActivity"></activity>
+        <activity android:name=".DirectorHomeActivity"></activity>
     </application>
 
 </manifest>

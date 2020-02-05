@@ -18,7 +18,7 @@ import com.inlearning.student.util.StatusBar;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomePageActivity extends AppCompatActivity {
+public class StudentHomeActivity extends AppCompatActivity {
     private TabLayout mBottomTab;
     private CommonFragmentStatePagerAdapter mFragmentAdapter;
     private ViewPager mViewPager;
@@ -63,7 +63,7 @@ public class HomePageActivity extends AppCompatActivity {
     }
 
     public static void startHomePageActivity(Context context) {
-        Intent intent = new Intent(context, HomePageActivity.class);
+        Intent intent = new Intent(context, StudentHomeActivity.class);
         context.startActivity(intent);
     }
 }
