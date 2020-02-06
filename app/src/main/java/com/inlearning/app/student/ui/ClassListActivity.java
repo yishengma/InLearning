@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.inlearning.app.student.adapter.ClassInfoAdapter;
 import com.inlearning.app.student.bean.ChapterBean;
-import com.inlearning.app.student.bean.CourseBean;
+import com.inlearning.app.common.bean.Course;
 import com.inlearning.app.R;
 import com.inlearning.app.common.util.StatusBar;
 
@@ -24,7 +24,7 @@ public class ClassListActivity extends AppCompatActivity implements View.OnClick
     private RecyclerView mClassInfosView;
     private ClassInfoAdapter mClassInfoAdapter;
     private ImageView mBackView;
-    private List<CourseBean> mCourseList;
+    private List<Course> mCourseList;
     private TextView mTitleView;
 
     @Override
@@ -45,36 +45,36 @@ public class ClassListActivity extends AppCompatActivity implements View.OnClick
         list2.add(new ChapterBean().setName("第一5节拷贝数据"));
         list2.add(new ChapterBean().setName("第一6节拷贝数据"));
 
-        CourseBean courseBean1 = new CourseBean();
-        courseBean1.setName("计算机科学与技术1");
-        courseBean1.setChapters(list2);
+        Course course1 = new Course();
+        course1.setName("计算机科学与技术1");
+        course1.setChapters(list2);
 
-        CourseBean courseBean2 = new CourseBean();
-        courseBean2.setName("计算机科学与技术2");
-        courseBean2.setChapters(list2);
+        Course course2 = new Course();
+        course2.setName("计算机科学与技术2");
+        course2.setChapters(list2);
 
-        CourseBean courseBean3 = new CourseBean();
-        courseBean3.setName("计算机科学与技术3");
-        courseBean3.setChapters(list);
+        Course course3 = new Course();
+        course3.setName("计算机科学与技术3");
+        course3.setChapters(list);
 
-        CourseBean courseBean4 = new CourseBean();
-        courseBean4.setName("计算机科学与技术4");
-        courseBean4.setChapters(list);
+        Course course4 = new Course();
+        course4.setName("计算机科学与技术4");
+        course4.setChapters(list);
 
-        CourseBean courseBean5 = new CourseBean();
-        courseBean5.setName("计算机科学与技术5");
-        courseBean5.setChapters(list2);
+        Course course5 = new Course();
+        course5.setName("计算机科学与技术5");
+        course5.setChapters(list2);
 
-        CourseBean courseBean6 = new CourseBean();
-        courseBean6.setName("计算机科学与技术6");
-        courseBean6.setChapters(list);
+        Course course6 = new Course();
+        course6.setName("计算机科学与技术6");
+        course6.setChapters(list);
         mCourseList = new ArrayList<>();
-        mCourseList.add(courseBean1);
-        mCourseList.add(courseBean2);
-        mCourseList.add(courseBean3);
-        mCourseList.add(courseBean4);
-        mCourseList.add(courseBean5);
-        mCourseList.add(courseBean6);
+        mCourseList.add(course1);
+        mCourseList.add(course2);
+        mCourseList.add(course3);
+        mCourseList.add(course4);
+        mCourseList.add(course5);
+        mCourseList.add(course6);
 
         mClassInfosView = findViewById(R.id.rv_common_view);
         mTitleView = findViewById(R.id.tv_title);

@@ -9,16 +9,16 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import com.inlearning.app.R;
 import com.inlearning.app.student.bean.ChapterBean;
-import com.inlearning.app.student.bean.CourseBean;
+import com.inlearning.app.common.bean.Course;
 import com.inlearning.app.student.ui.ClassRoomActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ClassInfoAdapter extends RecyclerView.Adapter<ClassInfoAdapter.CourseViewHolder> {
-    private List<CourseBean> mCourseList;
+    private List<Course> mCourseList;
 
-    public ClassInfoAdapter(List<CourseBean> courseList) {
+    public ClassInfoAdapter(List<Course> courseList) {
         mCourseList = courseList;
     }
 
@@ -31,7 +31,7 @@ public class ClassInfoAdapter extends RecyclerView.Adapter<ClassInfoAdapter.Cour
 
     @Override
     public void onBindViewHolder(@NonNull CourseViewHolder viewHolder, int i) {
-        CourseBean bean = mCourseList.get(i);
+        Course bean = mCourseList.get(i);
         viewHolder.mCourseName.setText(bean.getName());
         CourseViewHolder.Adapter adapter = new CourseViewHolder.Adapter(bean.getChapters());
         viewHolder.mRvCourseChapter.setLayoutManager(new LinearLayoutManager(viewHolder.itemView.getContext(), LinearLayoutManager.VERTICAL, false));

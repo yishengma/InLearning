@@ -7,10 +7,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.inlearning.app.common.BaseFragment;
 import com.inlearning.app.R;
-import com.inlearning.app.student.bean.CourseBean;
+import com.inlearning.app.common.bean.Course;
 import com.inlearning.app.student.ui.CourseTaskActivity;
 import com.inlearning.app.common.widget.ClassTaskView;
 import com.inlearning.app.student.adapter.CourseAdapter;
@@ -27,7 +26,7 @@ public class ClassFragment extends BaseFragment implements View.OnClickListener 
     private ClassTaskView mNoteView;
     private ClassTaskView mReportView;
     private RecyclerView mLessonsRecyclerView;
-    private List<CourseBean> mCourseTasks;
+    private List<Course> mCourseTasks;
     private CourseAdapter mCourseAdapter;
 
     @Nullable
@@ -54,7 +53,7 @@ public class ClassFragment extends BaseFragment implements View.OnClickListener 
         mLessonsRecyclerView.setAdapter(mCourseAdapter);
         mCourseAdapter.setOnClickListener(new CourseAdapter.OnClickListener() {
             @Override
-            public void onClick(CourseBean task) {
+            public void onClick(Course task) {
                 CourseTaskActivity.startActivity(getActivity());
             }
         });
@@ -62,20 +61,20 @@ public class ClassFragment extends BaseFragment implements View.OnClickListener 
 
     private void initData() {
         mCourseTasks = new ArrayList<>();
-        mCourseTasks.add(new CourseBean());
-        mCourseTasks.add(new CourseBean());
-        mCourseTasks.add(new CourseBean());
-        mCourseTasks.add(new CourseBean());
-        mCourseTasks.add(new CourseBean());
-        mCourseTasks.add(new CourseBean());
-        mCourseTasks.add(new CourseBean());
-        mCourseTasks.add(new CourseBean());
-        mCourseTasks.add(new CourseBean());
-        mCourseTasks.add(new CourseBean());
-        mCourseTasks.add(new CourseBean());
-        mCourseTasks.add(new CourseBean());
-        mCourseTasks.add(new CourseBean());
-        mCourseTasks.add(new CourseBean());
+        mCourseTasks.add(new Course());
+        mCourseTasks.add(new Course());
+        mCourseTasks.add(new Course());
+        mCourseTasks.add(new Course());
+        mCourseTasks.add(new Course());
+        mCourseTasks.add(new Course());
+        mCourseTasks.add(new Course());
+        mCourseTasks.add(new Course());
+        mCourseTasks.add(new Course());
+        mCourseTasks.add(new Course());
+        mCourseTasks.add(new Course());
+        mCourseTasks.add(new Course());
+        mCourseTasks.add(new Course());
+        mCourseTasks.add(new Course());
 
     }
 

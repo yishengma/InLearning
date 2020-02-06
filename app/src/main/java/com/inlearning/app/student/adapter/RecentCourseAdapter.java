@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.inlearning.app.R;
-import com.inlearning.app.student.bean.CourseBean;
+import com.inlearning.app.common.bean.Course;
 import com.inlearning.app.student.ui.NetViewHolder;
 import com.zhpan.bannerview.BannerViewPager;
 import com.zhpan.bannerview.constants.IndicatorSlideMode;
@@ -25,11 +25,11 @@ public class RecentCourseAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public static final int ITEM_TYPE_BANNER = 0;
     public static final int ITEM_TYPE_TITLE= 1;
     public static final int ITEM_TYPE_COURSE = 2;
-    private List<CourseBean> mList;
+    private List<Course> mList;
     private OnClickListener mOnClickListener;
     private List<NetViewHolder.Banner> mBannerList;
 
-    public RecentCourseAdapter(List<CourseBean> list) {
+    public RecentCourseAdapter(List<Course> list) {
         mList = list;
         mBannerList = new ArrayList<>();
         mBannerList.add(new NetViewHolder.Banner(R.drawable.test10));
@@ -39,7 +39,7 @@ public class RecentCourseAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     public interface OnClickListener {
-        void onClick(CourseBean courseBean);
+        void onClick(Course course);
     }
 
     public void setOnClickListener(OnClickListener onClickListener) {
@@ -86,7 +86,7 @@ public class RecentCourseAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     private void bindCourseView(RecentCourseAdapter.CourseViewHolder viewHolder, int i) {
-        final CourseBean course = mList.get(i);
+        final Course course = mList.get(i);
         viewHolder.mCourseName.setText(course.getName());
         viewHolder.mCourseTime.setText(course.getTime());
         viewHolder.mCourseType.setText(course.getType());

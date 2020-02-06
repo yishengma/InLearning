@@ -10,20 +10,20 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.inlearning.app.R;
-import com.inlearning.app.student.bean.CourseBean;
+import com.inlearning.app.common.bean.Course;
 
 import java.util.List;
 
 public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder> {
-    private List<CourseBean> mCourseTasks;
+    private List<Course> mCourseTasks;
     private OnClickListener mOnClickListener;
 
-    public CourseAdapter(List<CourseBean> lessonTasks) {
+    public CourseAdapter(List<Course> lessonTasks) {
         mCourseTasks = lessonTasks;
     }
 
     public interface OnClickListener {
-        void onClick(CourseBean task);
+        void onClick(Course task);
     }
 
     public void setOnClickListener(OnClickListener onClickListener) {

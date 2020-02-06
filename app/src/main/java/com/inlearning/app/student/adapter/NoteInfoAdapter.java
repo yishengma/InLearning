@@ -12,12 +12,12 @@ import com.inlearning.app.R;
 import java.util.List;
 import android.widget.TextView;
 import com.inlearning.app.student.bean.ChapterBean;
-import com.inlearning.app.student.bean.CourseBean;
+import com.inlearning.app.common.bean.Course;
 
 public class NoteInfoAdapter extends RecyclerView.Adapter<NoteInfoAdapter.CourseViewHolder> {
-    private List<CourseBean> mCourseList;
+    private List<Course> mCourseList;
 
-    public NoteInfoAdapter(List<CourseBean> courseList) {
+    public NoteInfoAdapter(List<Course> courseList) {
         mCourseList = courseList;
     }
 
@@ -30,7 +30,7 @@ public class NoteInfoAdapter extends RecyclerView.Adapter<NoteInfoAdapter.Course
 
     @Override
     public void onBindViewHolder(@NonNull CourseViewHolder viewHolder, int i) {
-        CourseBean bean = mCourseList.get(i);
+        Course bean = mCourseList.get(i);
         viewHolder.mCourseName.setText(bean.getName());
         CourseViewHolder.Adapter adapter = new CourseViewHolder.Adapter(bean.getChapters());
         viewHolder.mRvCourseChapter.setLayoutManager(new LinearLayoutManager(viewHolder.itemView.getContext(), LinearLayoutManager.HORIZONTAL, false));

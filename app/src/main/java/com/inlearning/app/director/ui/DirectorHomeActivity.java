@@ -6,14 +6,15 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+
 import com.inlearning.app.R;
+import com.inlearning.app.common.BaseFragment;
 import com.inlearning.app.common.adapter.CommonFragmentStatePagerAdapter;
 import com.inlearning.app.common.util.StatusBar;
 import com.inlearning.app.director.fragment.CourseFragment;
 import com.inlearning.app.director.fragment.PersonFragment;
 import com.inlearning.app.director.fragment.SpecialityFragment;
 import com.inlearning.app.director.fragment.TeacherFragment;
-import com.inlearning.app.common.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,8 +40,8 @@ public class DirectorHomeActivity extends AppCompatActivity {
     private void initData() {
         mHomepageFragmentList = new ArrayList<>();
         mHomepageFragmentList.add(new SpecialityFragment());
-        mHomepageFragmentList.add(new TeacherFragment());
         mHomepageFragmentList.add(new CourseFragment());
+        mHomepageFragmentList.add(new TeacherFragment());
         mHomepageFragmentList.add(new PersonFragment());
     }
 
@@ -58,8 +59,8 @@ public class DirectorHomeActivity extends AppCompatActivity {
         mBottomTab.getTabAt(2).setIcon(R.drawable.selector_tab_original);
         mBottomTab.getTabAt(3).setIcon(R.drawable.selector_tab_excerpt);
         mBottomTab.getTabAt(0).setText("专业");
-        mBottomTab.getTabAt(1).setText("教师");
-        mBottomTab.getTabAt(2).setText("课程");
+        mBottomTab.getTabAt(1).setText("课程");
+        mBottomTab.getTabAt(2).setText("教师");
         mBottomTab.getTabAt(3).setText("我的");
     }
 

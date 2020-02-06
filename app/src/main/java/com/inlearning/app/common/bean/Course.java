@@ -1,10 +1,12 @@
-package com.inlearning.app.student.bean;
+package com.inlearning.app.common.bean;
 
 import com.inlearning.app.student.adapter.RecentCourseAdapter;
+import com.inlearning.app.student.bean.ChapterBean;
+import com.inlearning.app.student.bean.TeacherBean;
 
 import java.util.List;
 
-public class CourseBean {
+public class Course {
     private String mId;
     private String mName;
     private String mTime;
@@ -15,7 +17,7 @@ public class CourseBean {
     private List<ChapterBean> mChapters;
     private int mItemType;
 
-    public CourseBean() {
+    public Course() {
         mName = "计算机科学与技术";
         mTime = "第7-9周";
         mType = "专业课";
@@ -92,7 +94,7 @@ public class CourseBean {
         return mItemType;
     }
 
-    public CourseBean setItemType(int itemType) {
+    public Course setItemType(int itemType) {
         this.mItemType = itemType;
         return this;
     }

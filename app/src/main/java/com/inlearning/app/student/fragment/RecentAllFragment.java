@@ -11,13 +11,13 @@ import android.view.ViewGroup;
 import com.inlearning.app.common.BaseFragment;
 import com.inlearning.app.R;
 import com.inlearning.app.student.adapter.RecentCourseAdapter;
-import com.inlearning.app.student.bean.CourseBean;
+import com.inlearning.app.common.bean.Course;
 import com.inlearning.app.student.ui.CourseTaskActivity;
 import java.util.ArrayList;
 import java.util.List;
 
 public class RecentAllFragment extends BaseFragment {
-    private List<CourseBean> mList;
+    private List<Course> mList;
     private RecentCourseAdapter mCourseAdapter;
     private RecyclerView mRecyclerView;
 
@@ -41,7 +41,7 @@ public class RecentAllFragment extends BaseFragment {
         mRecyclerView.setAdapter(mCourseAdapter);
         mCourseAdapter.setOnClickListener(new RecentCourseAdapter.OnClickListener() {
             @Override
-            public void onClick(CourseBean courseBean) {
+            public void onClick(Course course) {
                 CourseTaskActivity.startActivity(getContext());
             }
         });
@@ -50,25 +50,25 @@ public class RecentAllFragment extends BaseFragment {
     private void initData() {
         mList = new ArrayList<>();
 
-        mList.add(new CourseBean().setItemType(RecentCourseAdapter.ITEM_TYPE_BANNER));
-        mList.add(new CourseBean().setItemType(RecentCourseAdapter.ITEM_TYPE_TITLE));
-        mList.add(new CourseBean());
-        mList.add(new CourseBean());
-        mList.add(new CourseBean());
-        mList.add(new CourseBean());
-        mList.add(new CourseBean());
-        mList.add(new CourseBean());
-        mList.add(new CourseBean());
-        mList.add(new CourseBean());
-        mList.add(new CourseBean().setItemType(RecentCourseAdapter.ITEM_TYPE_TITLE));
-        mList.add(new CourseBean());
-        mList.add(new CourseBean());
-        mList.add(new CourseBean());
-        mList.add(new CourseBean());
-        mList.add(new CourseBean());
-        mList.add(new CourseBean());
-        mList.add(new CourseBean());
-        mList.add(new CourseBean());
+        mList.add(new Course().setItemType(RecentCourseAdapter.ITEM_TYPE_BANNER));
+        mList.add(new Course().setItemType(RecentCourseAdapter.ITEM_TYPE_TITLE));
+        mList.add(new Course());
+        mList.add(new Course());
+        mList.add(new Course());
+        mList.add(new Course());
+        mList.add(new Course());
+        mList.add(new Course());
+        mList.add(new Course());
+        mList.add(new Course());
+        mList.add(new Course().setItemType(RecentCourseAdapter.ITEM_TYPE_TITLE));
+        mList.add(new Course());
+        mList.add(new Course());
+        mList.add(new Course());
+        mList.add(new Course());
+        mList.add(new Course());
+        mList.add(new Course());
+        mList.add(new Course());
+        mList.add(new Course());
     }
 
 
