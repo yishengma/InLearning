@@ -1,4 +1,4 @@
-package com.inlearning.common;
+package com.inlearning.app.common;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

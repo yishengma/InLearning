@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.inlearning.app.student.ui.QuestionActivity;
-import com.inlearning.common.BaseFragment;
+import com.inlearning.app.common.BaseFragment;
 import com.inlearning.app.R;
 import com.inlearning.app.student.adapter.ForumAdapter;
 import com.inlearning.app.student.bean.QuestionBean;

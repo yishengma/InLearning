@@ -62,7 +62,7 @@ public class RecentCourseAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 View bannerView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_banner_view, viewGroup, false);
                 return new BannerViewHolder(bannerView);
             case ITEM_TYPE_TITLE:
-                View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_course_type, viewGroup, false);
+                View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_separate, viewGroup, false);
                 return new TypeViewHolder(view);
             default:
                 break;
@@ -163,7 +163,7 @@ public class RecentCourseAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         public TypeViewHolder(@NonNull View itemView) {
             super(itemView);
-            mType = itemView.findViewById(R.id.tv_course_type);
+            mType = itemView.findViewById(R.id.tv_info);
         }
     }
 }

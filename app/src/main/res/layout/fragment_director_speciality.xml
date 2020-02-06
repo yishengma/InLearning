@@ -49,13 +49,24 @@
         <android.support.design.widget.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="选修" />
+            android:text="计科" />
 
         <android.support.design.widget.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="必修" />
+            android:text="网工" />
+
+        <android.support.design.widget.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="软工" />
+
+        <android.support.design.widget.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="信安" />
     </android.support.design.widget.TabLayout>
+
     <android.support.v4.view.ViewPager
         android:id="@+id/vp_recent_course"
         android:layout_width="match_parent"

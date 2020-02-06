@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import com.inlearning.app.R;
 import com.inlearning.app.common.adapter.CommonFragmentStatePagerAdapter;
 import com.inlearning.app.student.ui.CourseSearchActivity;
-import com.inlearning.common.BaseFragment;
+import com.inlearning.app.common.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;

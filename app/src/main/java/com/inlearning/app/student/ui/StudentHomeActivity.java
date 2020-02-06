@@ -14,7 +14,7 @@ import com.inlearning.app.student.fragment.ClassFragment;
 import com.inlearning.app.student.fragment.ForumFragment;
 import com.inlearning.app.student.fragment.PersonFragment;
 import com.inlearning.app.student.fragment.RecentFragment;
-import com.inlearning.common.BaseFragment;
+import com.inlearning.app.common.BaseFragment;
 import java.util.ArrayList;
 import java.util.List;
 

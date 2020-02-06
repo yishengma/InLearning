@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.inlearning.common.BaseFragment;
+import com.inlearning.app.common.BaseFragment;
 import com.inlearning.app.R;
 import com.inlearning.app.student.bean.CourseBean;
 import com.inlearning.app.student.ui.CourseTaskActivity;

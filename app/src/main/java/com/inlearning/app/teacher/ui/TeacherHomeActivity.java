@@ -11,7 +11,7 @@ import com.inlearning.app.R;
 import com.inlearning.app.common.adapter.CommonFragmentStatePagerAdapter;
 import com.inlearning.app.common.util.StatusBar;
 import com.inlearning.app.teacher.fragment.PersonFragment;
-import com.inlearning.common.BaseFragment;
+import com.inlearning.app.common.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;

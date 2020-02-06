@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.inlearning.app.R;
 import com.inlearning.app.common.model.UserModel;
-import com.inlearning.common.BaseFragment;
+import com.inlearning.app.common.BaseFragment;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
