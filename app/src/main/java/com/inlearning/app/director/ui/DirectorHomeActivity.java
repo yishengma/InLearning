@@ -13,7 +13,7 @@ import com.inlearning.app.common.adapter.CommonFragmentStatePagerAdapter;
 import com.inlearning.app.common.util.StatusBar;
 import com.inlearning.app.director.fragment.CourseFragment;
 import com.inlearning.app.director.fragment.PersonFragment;
-import com.inlearning.app.director.fragment.SpecialityFragment;
+import com.inlearning.app.director.speciality.SpecialityFragment;
 import com.inlearning.app.director.fragment.TeacherFragment;
 
 import java.util.ArrayList;

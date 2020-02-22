@@ -15,4 +15,9 @@
         <item name="android:textAllCaps">true</item>
         <item name="android:textSize">15sp</item>
     </style>
+
+    <style name="SimpleDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@color/transparent</item>
+    </style>
 </resources>
