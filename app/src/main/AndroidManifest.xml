@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- 保持CPU 运转，屏幕和键盘灯有可能是关闭的,用于文件上传和下载 -->
     <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- 获取sd卡写的权限，用于文件上传和下载 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 允许读取手机状态 用于创建BmobInstallation -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
@@ -18,7 +19,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".student.ui.QuestionActivity"></activity>
+        <activity android:name=".director.speciality.classinfo.ClassInfoActivity"></activity>
+        <activity android:name=".student.ui.QuestionActivity" />
         <activity
             android:name=".student.ui.ClassRoomActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
@@ -30,9 +32,7 @@
         <activity android:name=".student.ui.HomeworkListActivity" />
         <activity android:name=".student.ui.ClassListActivity" />
         <activity android:name=".student.ui.StudentHomeActivity" />
-        <activity android:name=".student.ui.LaunchActivity">
-
-        </activity>
+        <activity android:name=".student.ui.LaunchActivity"></activity>
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -45,7 +45,7 @@
 
         <provider
             android:name="cn.bmob.v3.util.BmobContentProvider"
-            android:authorities="com.inlearning.app.BmobContentProvider"></provider>
+            android:authorities="com.inlearning.app.BmobContentProvider" />
     </application>
 
 </manifest>
