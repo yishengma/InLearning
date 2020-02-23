@@ -13,8 +13,7 @@ import com.inlearning.app.common.bean.ClassInfo;
 import java.util.List;
 
 public class SpecialityInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    public static final int ITEM_SEPARATE = 1;
-    public static final int ITEM_CLASS_INFO = 2;
+
     private List<ClassInfo> mClassInfoList;
 
     public SpecialityInfoAdapter(List<ClassInfo> classInfoList) {
@@ -26,10 +25,10 @@ public class SpecialityInfoAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view;
         switch (i) {
-            case ITEM_CLASS_INFO:
+            case ClassInfo.ITEM_CLASS_INFO:
                 view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_director_speciality_info, viewGroup, false);
                 return new InfoViewHolder(view);
-            case ITEM_SEPARATE:
+            case ClassInfo.ITEM_SEPARATE:
                 view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_separate, viewGroup, false);
                 return new SeparateViewHolder(view);
         }
@@ -38,11 +37,13 @@ public class SpecialityInfoAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+        ClassInfo classInfo = mClassInfoList.get(i);
         if (viewHolder instanceof InfoViewHolder) {
-//            ((InfoViewHolder)viewHolder).mClassCount.;
+            ((InfoViewHolder) viewHolder).mClassInfo.setText(classInfo.getName());
+            ((InfoViewHolder) viewHolder).mClassCount.setText(String.valueOf(classInfo.getCount()));
         }
         if (viewHolder instanceof SeparateViewHolder) {
-
+            ((SeparateViewHolder) viewHolder).mInfo.setText(classInfo.getSpeciality().getShortName());
         }
     }
 

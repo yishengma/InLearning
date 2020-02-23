@@ -5,7 +5,14 @@ import cn.bmob.v3.BmobObject;
 public class ClassInfo extends BmobObject {
     private String mName;
     private int mCount;
-    private int mType;
+    private int mType ;
+    private Speciality mSpeciality;
+    public static final int ITEM_SEPARATE = 1;
+    public static final int ITEM_CLASS_INFO = 2;
+
+    public ClassInfo() {
+        mType = ITEM_CLASS_INFO;
+    }
 
     public String getName() {
         return mName == null ? "" : mName;
@@ -34,5 +41,12 @@ public class ClassInfo extends BmobObject {
         return this;
     }
 
+    public Speciality getSpeciality() {
+        return mSpeciality;
+    }
 
+    public ClassInfo setSpeciality(Speciality speciality) {
+        mSpeciality = speciality;
+        return this;
+    }
 }

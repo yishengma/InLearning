@@ -75,6 +75,7 @@ public class SpecialityFragment extends BaseFragment implements View.OnClickList
             @Override
             public void run() {
                 for (Speciality s : specialities) {
+
                     addSpeciality(true, s);
                 }
             }
@@ -88,6 +89,7 @@ public class SpecialityFragment extends BaseFragment implements View.OnClickList
         TextView confirmView = dialog.findViewById(R.id.tv_confirm);
         final EditText nameView = dialog.findViewById(R.id.et_name);
         final EditText shortView = dialog.findViewById(R.id.et_short_name);
+        final EditText countView = dialog.findViewById(R.id.et_class_count);
 
         cancelView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,13 +100,14 @@ public class SpecialityFragment extends BaseFragment implements View.OnClickList
         confirmView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SpecialityModel.addSpeciality(String.valueOf(nameView.getText()), String.valueOf(shortView.getText()), new SpecialityModel.Callback<Speciality>() {
+                SpecialityModel.addSpeciality(String.valueOf(nameView.getText()), String.valueOf(shortView.getText()),Integer.valueOf(countView.getText().toString()), new SpecialityModel.Callback<Speciality>() {
                     @Override
                     public void onResult(boolean suc, Speciality speciality) {
                         addSpeciality(suc, speciality);
-                        dialog.dismiss();
+
                     }
                 });
+                dialog.dismiss();
             }
         });
         dialog.show();

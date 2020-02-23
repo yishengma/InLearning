@@ -20,15 +20,19 @@ public class SpecialityPresenter {
     private List<BaseFragment> mSpecialityFragmentList;
     private List<TabLayout.Tab> mTabList;
     private List<Speciality> mSpecialities;
+    private SpecialityInfoFragment mTotalSpecialityInfoFragment;
+    private Speciality mTotalSpeciality;
 
     public SpecialityPresenter(FragmentManager manager, View rootView) {
         mSpecialityFragmentList = new ArrayList<>();
         mTabList = new ArrayList<>();
         mSpecialities = new ArrayList<>();
-        mSpecialityFragmentList.add(new SpecialityInfoFragment());
+        mTotalSpecialityInfoFragment = new SpecialityInfoFragment();
+        mTotalSpeciality = new Speciality().setShortName("全部");
+        mSpecialityFragmentList.add(mTotalSpecialityInfoFragment);
         mTabLayout = rootView.findViewById(R.id.tab_layout);
         mTabList.add(mTabLayout.newTab());
-        mSpecialities.add(new Speciality().setShortName("全部"));
+        mSpecialities.add(mTotalSpeciality);
         mViewPager = rootView.findViewById(R.id.vp_recent_course);
         mFragmentAdapter = new CommonFragmentStatePagerAdapter<>(manager, mSpecialityFragmentList);
         mViewPager.setAdapter(mFragmentAdapter);
@@ -44,7 +48,7 @@ public class SpecialityPresenter {
     }
 
     public void addSpeciality(Speciality speciality) {
-        mSpecialityFragmentList.add(new SpecialityInfoFragment());
+        mSpecialityFragmentList.add(new SpecialityInfoFragment().setSpeciality(speciality));
         mFragmentAdapter.notifyDataSetChanged(true);
         TabLayout.Tab tab = mTabLayout.newTab();
         tab.setText(speciality.getShortName());
@@ -55,7 +59,6 @@ public class SpecialityPresenter {
         for (int i = 0; i < mTabList.size(); i++) {
             mTabLayout.getTabAt(i).setText(mSpecialities.get(i).getShortName());
         }
+        mTotalSpecialityInfoFragment.setSpecialities(mSpecialities);
     }
-
-
 }

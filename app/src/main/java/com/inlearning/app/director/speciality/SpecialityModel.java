@@ -2,8 +2,10 @@ package com.inlearning.app.director.speciality;
 
 import android.util.Log;
 
+import com.inlearning.app.common.bean.ClassInfo;
 import com.inlearning.app.common.bean.Speciality;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
@@ -19,10 +21,16 @@ public class SpecialityModel {
         void onResult(boolean suc, T t);
     }
 
-    public static void addSpeciality(String name, final String shortName, final Callback<Speciality> callback) {
+    public static void addSpeciality(String name, final String shortName,int count, final Callback<Speciality> callback) {
         final Speciality speciality = new Speciality();
         speciality.setName(name);
         speciality.setShortName(shortName);
+        speciality.setClassCount(count);
+        List<ClassInfo> classInfos = new ArrayList<>(count);
+        for (int i = 1; i <= count ; i++) {
+            classInfos.add(new ClassInfo().setName(String.format(name+" %s 班",i)));
+        }
+        speciality.setClassInfoList(classInfos);
         speciality.save(new SaveListener<String>() {
             @Override
             public void done(String objectId, BmobException e) {
