@@ -12,6 +12,7 @@ import com.inlearning.app.R;
 import com.inlearning.app.common.BaseFragment;
 import com.inlearning.app.common.bean.ClassInfo;
 import com.inlearning.app.common.bean.Speciality;
+import com.inlearning.app.director.speciality.classinfo.ClassInfoActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +39,12 @@ public class SpecialityInfoFragment extends BaseFragment {
         mRvSpecialityClass.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
         mSpecialityInfoAdapter = new SpecialityInfoAdapter(mClassList);
         mRvSpecialityClass.setAdapter(mSpecialityInfoAdapter);
+        mSpecialityInfoAdapter.setClickListener(new SpecialityInfoAdapter.ClickListener() {
+            @Override
+            public void onClick(ClassInfo classInfo) {
+                ClassInfoActivity.startActivity(getContext(),classInfo);
+            }
+        });
     }
 
     public SpecialityInfoFragment setSpeciality(Speciality speciality) {

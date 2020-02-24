@@ -8,7 +8,6 @@ import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,7 +16,6 @@ import android.widget.Toast;
 
 import com.inlearning.app.common.bean.User;
 import com.inlearning.app.common.model.UserModel;
-import com.inlearning.app.common.util.FileUtil;
 import com.inlearning.app.common.util.StatusBar;
 import com.inlearning.app.director.ui.DirectorHomeActivity;
 import com.inlearning.app.student.ui.StudentHomeActivity;
@@ -47,7 +45,6 @@ public class LoginActivity extends AppCompatActivity {
                 //请求授权
                 requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 2);
             } else {
-                Log.e("LoginActivity", FileUtil.readExcel(new String[]{"编号","姓名", "部门", "公司", "电话"}).toString());
 
             }
         }
@@ -57,7 +54,6 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        Log.e("LoginActivity", FileUtil.readExcel(new String[]{"编号","姓名", "部门", "公司", "电话"}).toString());
 
     }
 

@@ -15,7 +15,16 @@ import java.util.List;
 public class SpecialityInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<ClassInfo> mClassInfoList;
+    private ClickListener mClickListener;
 
+    public SpecialityInfoAdapter setClickListener(ClickListener clickListener) {
+        mClickListener = clickListener;
+        return this;
+    }
+
+    public interface ClickListener {
+        void onClick(ClassInfo classInfo);
+    }
     public SpecialityInfoAdapter(List<ClassInfo> classInfoList) {
         mClassInfoList = classInfoList;
     }
@@ -37,10 +46,18 @@ public class SpecialityInfoAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-        ClassInfo classInfo = mClassInfoList.get(i);
+        final ClassInfo classInfo = mClassInfoList.get(i);
         if (viewHolder instanceof InfoViewHolder) {
             ((InfoViewHolder) viewHolder).mClassInfo.setText(classInfo.getName());
             ((InfoViewHolder) viewHolder).mClassCount.setText(String.valueOf(classInfo.getCount()));
+            viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (mClickListener != null) {
+                        mClickListener.onClick(classInfo);
+                    }
+                }
+            });
         }
         if (viewHolder instanceof SeparateViewHolder) {
             ((SeparateViewHolder) viewHolder).mInfo.setText(classInfo.getSpeciality().getShortName());
