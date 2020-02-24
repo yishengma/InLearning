@@ -3,6 +3,7 @@ package com.inlearning.app.director.speciality;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +29,12 @@ public class SpecialityFragment extends BaseFragment implements View.OnClickList
         mParentView = inflater.inflate(R.layout.fragment_director_speciality, container, false);
         initView();
         initPresenter();
-        initData();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                initData();
+            }
+        }).start();
         return mParentView;
     }
 
@@ -60,6 +66,7 @@ public class SpecialityFragment extends BaseFragment implements View.OnClickList
     }
 
     private void initData() {
+        Log.e("initData", "initData: ");
         SpecialityModel.getSpeciality(new SpecialityModel.Callback<List<Speciality>>() {
             @Override
             public void onResult(boolean suc, List<Speciality> specialities) {
@@ -75,7 +82,6 @@ public class SpecialityFragment extends BaseFragment implements View.OnClickList
             @Override
             public void run() {
                 for (Speciality s : specialities) {
-
                     addSpeciality(true, s);
                 }
             }

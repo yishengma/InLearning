@@ -8,9 +8,13 @@ import com.inlearning.app.common.bean.Speciality;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.bmob.v3.BmobBatch;
+import cn.bmob.v3.BmobObject;
 import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.datatype.BatchResult;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.QueryListListener;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
 
@@ -21,26 +25,42 @@ public class SpecialityModel {
         void onResult(boolean suc, T t);
     }
 
-    public static void addSpeciality(String name, final String shortName,int count, final Callback<Speciality> callback) {
+    public static void addSpeciality(final String name, final String shortName, final int count, final Callback<Speciality> callback) {
         final Speciality speciality = new Speciality();
         speciality.setName(name);
         speciality.setShortName(shortName);
-        speciality.setClassCount(count);
-        List<ClassInfo> classInfos = new ArrayList<>(count);
-        for (int i = 1; i <= count ; i++) {
-            classInfos.add(new ClassInfo().setName(String.format(name+" %s 班",i)));
-        }
-        speciality.setClassInfoList(classInfos);
         speciality.save(new SaveListener<String>() {
             @Override
             public void done(String objectId, BmobException e) {
                 Log.i(TAG, "done: %s", e);
                 if (e == null) {
                     speciality.setObjectId(objectId);
+                    addClassInfo(speciality, name, count, callback);
+                }
+            }
+        });
+    }
+
+    private static void addClassInfo(final Speciality speciality, String name, int count, final Callback<Speciality> callback) {
+        final List<ClassInfo> classInfos = new ArrayList<>(count);
+        List<BmobObject> bmobObjects = new ArrayList<>(count);
+        for (int i = 1; i <= count; i++) {
+            ClassInfo classInfo = new ClassInfo().setName(String.format(name + " %s 班", i)).setSpeciality(speciality);
+            classInfos.add(classInfo);
+            bmobObjects.add(classInfo);
+        }
+        new BmobBatch().insertBatch(bmobObjects).doBatch(new QueryListListener<BatchResult>() {
+
+            @Override
+            public void done(List<BatchResult> results, BmobException e) {
+                Log.i(TAG, "done: %s", e);
+                if (e == null) {
+                    speciality.setClassInfoList(classInfos);
                     callback.onResult(true, speciality);
                 }
             }
         });
+
     }
 
     public static void deleteSpeciality(final Speciality speciality, final Callback<Speciality> callback) {
@@ -69,14 +89,31 @@ public class SpecialityModel {
 
 
     public static void getSpeciality(final Callback<List<Speciality>> callback) {
-        BmobQuery<Speciality> specialityBmobQuery = new BmobQuery<>();
+        Log.i(TAG, "getSpeciality done: list getSpeciality");
+
+        final BmobQuery<Speciality> specialityBmobQuery = new BmobQuery<>();
         specialityBmobQuery.findObjects(new FindListener<Speciality>() {
             @Override
-            public void done(List<Speciality> list, BmobException e) {
-                Log.i(TAG, "done: list " + (list == null ? 0 : list.size()));
-                if (e == null) {
-                    callback.onResult(true, list);
+            public void done(final List<Speciality> list, BmobException e) {
+                Log.i(TAG, "getSpeciality done: list " + (list == null ? 0 : list.size()));
+                if (e != null) {
+                    Log.i(TAG, "getSpeciality done: list "+e );
+                    return;
                 }
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        for (Speciality s:list) {
+
+                            BmobQuery<ClassInfo> classInfoBmobQuery = new BmobQuery<>();
+                            classInfoBmobQuery.addWhereEqualTo("mSpeciality",s);
+                            List<ClassInfo> classInfos = classInfoBmobQuery.findObjectsSync(ClassInfo.class);
+                            Log.i(TAG, "ClassInfo done: list "+classInfos.size()+s.getObjectId());
+                            s.setClassInfoList(classInfos);
+                        }
+                        callback.onResult(true,list);
+                    }
+                }).start();
             }
         });
     }
