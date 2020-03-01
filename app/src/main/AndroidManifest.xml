@@ -19,7 +19,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".director.speciality.classinfo.StudentInfoActivity"></activity>
+        <activity android:name=".director.course.CourseEditActivity"></activity>
+        <activity android:name=".director.speciality.classinfo.StudentInfoActivity" />
         <activity android:name=".director.speciality.classinfo.ClassInfoActivity" />
         <activity android:name=".student.ui.QuestionActivity" />
         <activity

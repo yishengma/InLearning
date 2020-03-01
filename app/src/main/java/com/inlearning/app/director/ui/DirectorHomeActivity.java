@@ -11,7 +11,7 @@ import com.inlearning.app.R;
 import com.inlearning.app.common.BaseFragment;
 import com.inlearning.app.common.adapter.CommonFragmentStatePagerAdapter;
 import com.inlearning.app.common.util.StatusBar;
-import com.inlearning.app.director.fragment.CourseFragment;
+import com.inlearning.app.director.course.CourseFragment;
 import com.inlearning.app.director.fragment.PersonFragment;
 import com.inlearning.app.director.speciality.SpecialityFragment;
 import com.inlearning.app.director.fragment.TeacherFragment;

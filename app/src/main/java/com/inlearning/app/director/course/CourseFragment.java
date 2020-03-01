@@ -1,4 +1,4 @@
-package com.inlearning.app.director.fragment;
+package com.inlearning.app.director.course;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.inlearning.app.R;
 import com.inlearning.app.common.BaseFragment;
@@ -21,6 +22,8 @@ public class CourseFragment extends BaseFragment implements View.OnClickListener
     private ViewPager mViewPager;
     private CommonFragmentStatePagerAdapter mFragmentAdapter;
     private List<BaseFragment> mCourseFragmentList;
+    private ImageView mAddView;
+    private ImageView mSearchView;
 
     @Nullable
     @Override
@@ -37,19 +40,19 @@ public class CourseFragment extends BaseFragment implements View.OnClickListener
         mCourseFragmentList = new ArrayList<>();
         mCourseFragmentList.add(new CourseInfoFragment());
         mCourseFragmentList.add(new CourseInfoFragment());
-        mCourseFragmentList.add(new CourseInfoFragment());
-        mCourseFragmentList.add(new CourseInfoFragment());
         mViewPager = view.findViewById(R.id.vp_content);
         mFragmentAdapter = new CommonFragmentStatePagerAdapter<>(getChildFragmentManager(), mCourseFragmentList);
         mViewPager.setAdapter(mFragmentAdapter);
         mViewPager.setOffscreenPageLimit(3);
         mTabLayout = view.findViewById(R.id.tab_layout);
+        mAddView = view.findViewById(R.id.imv_add);
+        mSearchView = view.findViewById(R.id.imv_search);
         mTabLayout.setSmoothScrollingEnabled(true);
         mTabLayout.setupWithViewPager(mViewPager);
-        mTabLayout.getTabAt(0).setText("第一学年");
-        mTabLayout.getTabAt(1).setText("第二学年");
-        mTabLayout.getTabAt(2).setText("第三学年");
-        mTabLayout.getTabAt(3).setText("第四学年");
+        mTabLayout.getTabAt(0).setText("专业课");
+        mTabLayout.getTabAt(1).setText("选修课");
+        mAddView.setOnClickListener(this);
+        mSearchView.setOnClickListener(this);
     }
 
     @Override
@@ -57,6 +60,9 @@ public class CourseFragment extends BaseFragment implements View.OnClickListener
         switch (view.getId()) {
             case R.id.imv_search:
 //                CourseSearchActivity.startActivity(getContext());
+                break;
+            case R.id.imv_add:
+                CourseEditActivity.startActivity(getContext());
                 break;
             default:
                 break;

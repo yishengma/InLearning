@@ -6,15 +6,38 @@
     android:orientation="vertical">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="41dp">
+        android:layout_height="?actionBarSize">
 
-        <TextView
-            android:textColor="@color/textBlack"
-            android:layout_width="wrap_content"
+        <FrameLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="课程"
-            android:textSize="20sp" />
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginRight="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="课程"
+                android:textColor="@color/textBlack"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/imv_search"
+                android:layout_width="24dp"
+                android:layout_height="30dp"
+                android:layout_gravity="end"
+                android:layout_marginRight="40dp"
+                android:src="@drawable/imv_search" />
+
+            <ImageView
+                android:id="@+id/imv_add"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_gravity="end|center_vertical"
+                android:src="@drawable/imv_add" />
+        </FrameLayout>
 
         <View
             android:layout_width="match_parent"
@@ -39,23 +62,12 @@
         <android.support.design.widget.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="第一学年" />
+            android:text="专业课" />
 
         <android.support.design.widget.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="第二学年" />
-
-        <android.support.design.widget.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="第三学年" />
-
-        <android.support.design.widget.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="第四学年" />
-
+            android:text="选修课" />
 
     </android.support.design.widget.TabLayout>
 

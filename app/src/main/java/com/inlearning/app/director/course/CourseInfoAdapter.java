@@ -1,4 +1,4 @@
-package com.inlearning.app.director.adapter;
+package com.inlearning.app.director.course;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;

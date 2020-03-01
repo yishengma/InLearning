@@ -1,4 +1,4 @@
-package com.inlearning.app.director.fragment;
+package com.inlearning.app.director.course;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import com.inlearning.app.R;
 import com.inlearning.app.common.BaseFragment;
 import com.inlearning.app.common.bean.Course;
-import com.inlearning.app.director.adapter.CourseInfoAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,15 +32,6 @@ public class CourseInfoFragment extends BaseFragment{
         mRvCourseInfo = view.findViewById(R.id.rv_content);
         mRvCourseInfo.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
         mCourseList = new ArrayList<>();
-        mCourseList.add(new Course());
-        mCourseList.add(new Course());
-        mCourseList.add(new Course());
-        mCourseList.add(new Course());
-        mCourseList.add(new Course());
-        mCourseList.add(new Course());
-        mCourseList.add(new Course());
-        mCourseList.add(new Course());
-        mCourseList.add(new Course());
         mCourseInfoAdapter = new CourseInfoAdapter(mCourseList);
         mRvCourseInfo.setAdapter(mCourseInfoAdapter);
     }
