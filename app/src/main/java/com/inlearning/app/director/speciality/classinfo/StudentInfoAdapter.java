@@ -22,6 +22,17 @@ public class StudentInfoAdapter extends RecyclerView.Adapter<StudentInfoAdapter.
         mStudentList = studentList;
     }
 
+    private ClickListener mClickListener;
+
+    public StudentInfoAdapter setClickListener(ClickListener clickListener) {
+        mClickListener = clickListener;
+        return this;
+    }
+
+    public interface ClickListener {
+        void onClick(Student student);
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -30,9 +41,17 @@ public class StudentInfoAdapter extends RecyclerView.Adapter<StudentInfoAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        Student student = mStudentList.get(i);
+        final Student student = mStudentList.get(i);
         viewHolder.mNumberView.setText(String.valueOf(student.getAccount()));
         viewHolder.mNameView.setText(String.valueOf(student.getName()));
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mClickListener != null) {
+                    mClickListener.onClick(student);
+                }
+            }
+        });
     }
 
     @Override

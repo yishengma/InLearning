@@ -19,7 +19,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".director.speciality.classinfo.ClassInfoActivity"></activity>
+        <activity android:name=".director.speciality.classinfo.StudentInfoActivity"></activity>
+        <activity android:name=".director.speciality.classinfo.ClassInfoActivity" />
         <activity android:name=".student.ui.QuestionActivity" />
         <activity
             android:name=".student.ui.ClassRoomActivity"
@@ -32,7 +33,7 @@
         <activity android:name=".student.ui.HomeworkListActivity" />
         <activity android:name=".student.ui.ClassListActivity" />
         <activity android:name=".student.ui.StudentHomeActivity" />
-        <activity android:name=".student.ui.LaunchActivity"></activity>
+        <activity android:name=".student.ui.LaunchActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

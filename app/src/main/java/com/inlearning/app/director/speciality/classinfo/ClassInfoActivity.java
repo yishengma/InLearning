@@ -70,6 +70,12 @@ public class ClassInfoActivity extends AppCompatActivity {
                 ClassInfoModel.saveStudents(mClassInfo,mStudentList);
             }
         });
+        mStudentInfoAdapter.setClickListener(new StudentInfoAdapter.ClickListener() {
+            @Override
+            public void onClick(Student student) {
+                StudentInfoActivity.startActivity(ClassInfoActivity.this, student);
+            }
+        });
     }
 
     private void getIntentData() {
