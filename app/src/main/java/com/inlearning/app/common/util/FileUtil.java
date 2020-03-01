@@ -34,28 +34,20 @@ public class FileUtil {
     private Context context;
     private static FileUtil util = null;
 
-    private FileUtil(Context context) {
-        this.context = context;
+    private FileUtil() {
+
     }
 
-    public static FileUtil getInstance(Context context) {
+    public static FileUtil getInstance() {
         if (util == null) {
-            util = new FileUtil(context);
+            util = new FileUtil();
         }
         return util;
     }
 
-    public static List<Map<String, String>> readExcel(String columns[]) {
-        String logFilePath = Environment.getExternalStorageDirectory() + File.separator;
-        File file = new File(logFilePath, "test.xls");
+    public static List<Map<String, String>> readExcel(String path,String columns[]) {
+        File file = new File(path);
         String filePath = file.getAbsolutePath();
-        if (!file.exists()) {
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
         Sheet sheet = null;
         Row row = null;
         Row rowHeader = null;
@@ -157,7 +149,7 @@ public class FileUtil {
         return cellValue;
     }
 
-    public String getChooseFileResultPath(Context context,Uri uri) {
+    public static String getChooseFileResultPath(Context context,Uri uri) {
         String chooseFilePath = null;
         if ("file".equalsIgnoreCase(uri.getScheme())) {//使用第三方应用打开
             chooseFilePath = uri.getPath();
@@ -172,7 +164,7 @@ public class FileUtil {
         return chooseFilePath;
     }
 
-    private String getRealPathFromURI(Context context,Uri contentUri) {
+    private static String getRealPathFromURI(Context context,Uri contentUri) {
         String res = null;
         String[] proj = {MediaStore.Images.Media.DATA};
         Cursor cursor = context.getContentResolver().query(contentUri, proj, null, null, null);
@@ -188,7 +180,7 @@ public class FileUtil {
      * 专为Android4.4设计的从Uri获取文件绝对路径，以前的方法已不好使
      */
     @SuppressLint("NewApi")
-    private String getPath(final Context context, final Uri uri) {
+    private static String getPath(final Context context, final Uri uri) {
 
         final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
 
@@ -251,7 +243,7 @@ public class FileUtil {
         return null;
     }
 
-    private String getDataColumn(Context context, Uri uri, String selection, String[] selectionArgs) {
+    private static String getDataColumn(Context context, Uri uri, String selection, String[] selectionArgs) {
         Cursor cursor = null;
         final String column = "_data";
         final String[] projection = {column};
@@ -273,7 +265,7 @@ public class FileUtil {
      * @param uri The Uri to check.
      * @return Whether the Uri authority is ExternalStorageProvider.
      */
-    private boolean isExternalStorageDocument(Uri uri) {
+    private static boolean isExternalStorageDocument(Uri uri) {
         return "com.android.externalstorage.documents".equals(uri.getAuthority());
     }
 
@@ -281,7 +273,7 @@ public class FileUtil {
      * @param uri The Uri to check.
      * @return Whether the Uri authority is DownloadsProvider.
      */
-    private boolean isDownloadsDocument(Uri uri) {
+    private static boolean isDownloadsDocument(Uri uri) {
         return "com.android.providers.downloads.documents".equals(uri.getAuthority());
     }
 
@@ -289,7 +281,7 @@ public class FileUtil {
      * @param uri The Uri to check.
      * @return Whether the Uri authority is MediaProvider.
      */
-    private boolean isMediaDocument(Uri uri) {
+    private static boolean isMediaDocument(Uri uri) {
         return "com.android.providers.media.documents".equals(uri.getAuthority());
     }
 

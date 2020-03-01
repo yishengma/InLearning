@@ -1,13 +1,24 @@
 package com.inlearning.app.common.bean;
 
 public class Student extends User {
-    private String mClass;
-    public String getStudentClass() {
-        return mClass == null ? "" : mClass;
+    private ClassInfo mClassInfo;
+    private String mSex;
+
+    public ClassInfo getClassInfo() {
+        return mClassInfo;
     }
 
-    public Student setStudentClass(String aClass) {
-        mClass = aClass;
+    public Student setClassInfo(ClassInfo classInfo) {
+        mClassInfo = classInfo;
+        return this;
+    }
+
+    public String getSex() {
+        return mSex == null ? "" : mSex;
+    }
+
+    public Student setSex(String sex) {
+        mSex = sex;
         return this;
     }
 }

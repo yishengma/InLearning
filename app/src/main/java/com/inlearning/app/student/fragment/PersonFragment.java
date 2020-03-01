@@ -32,6 +32,6 @@ public class PersonFragment extends BaseFragment {
         mInfoView = view.findViewById(R.id.tv_info);
         Glide.with(this).load(UserModel.getStudent().getProfilePhotoUrl()).into(mProfilePhotoView);
         mNameView.setText(UserModel.getStudent().getName());
-        mInfoView.setText(UserModel.getStudent().getStudentClass());
+//        mInfoView.setText(UserModel.getStudent().getStudentClass());
     }
 }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -27,8 +28,10 @@ public class ClassInfoActivity extends AppCompatActivity {
     private StudentInfoAdapter mStudentInfoAdapter;
     private ClassInfo mClassInfo;
     private List<Student> mStudentList;
-    private ImageView mAddView;
+    private FloatingActionButton mAddView;
+    private ImageView mSaveView;
     private TextView mClassInfoView;
+    private ClassInfoPresenter mClassInfoPresenter;
 
     public static void startActivity(Context context,ClassInfo classInfo) {
         Intent intent = new Intent(context, ClassInfoActivity.class);
@@ -49,6 +52,7 @@ public class ClassInfoActivity extends AppCompatActivity {
         StatusBar.setStatusBarDarkMode(this, true);
         mStudentInfoRecyclerView = findViewById(R.id.rv_student_info);
         mClassInfoView = findViewById(R.id.tv_class_info);
+        mSaveView = findViewById(R.id.imv_save);
         mStudentList = new ArrayList<>();
         mStudentInfoAdapter = new StudentInfoAdapter(mStudentList);
         mStudentInfoRecyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
@@ -58,6 +62,12 @@ public class ClassInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 openFileManager();
+            }
+        });
+        mSaveView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ClassInfoModel.saveStudents(mClassInfo,mStudentList);
             }
         });
     }
@@ -70,6 +80,7 @@ public class ClassInfoActivity extends AppCompatActivity {
 
     private void initData() {
         getIntentData();
+        mClassInfoPresenter = new ClassInfoPresenter();
         ClassInfoModel.getStudents(mClassInfo, new ClassInfoModel.Callback<List<Student>>() {
             @Override
             public void onResult(boolean suc, List<Student> students) {
@@ -97,6 +108,7 @@ public class ClassInfoActivity extends AppCompatActivity {
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         startActivityForResult(intent, 1);
     }
+
     @Override
     protected void onActivityResult(int requestCode,int resultCode,Intent data){//选择文件返回
         super.onActivityResult(requestCode,resultCode,data);
@@ -105,11 +117,17 @@ public class ClassInfoActivity extends AppCompatActivity {
                 case 1:
                     String chooseFilePath;
                     Uri uri=data.getData();
-                    chooseFilePath= FileUtil.getInstance(this).getChooseFileResultPath(ClassInfoActivity.this,uri);
+                    chooseFilePath = FileUtil.getChooseFileResultPath(ClassInfoActivity.this,uri);
                     Log.e("chooseFilePath",chooseFilePath);
+                    mStudentList.clear();
+                    mStudentList.addAll(mClassInfoPresenter.addStudents(chooseFilePath));
+                    mStudentInfoAdapter.notifyDataSetChanged();
                     break;
             }
         }
     }
+
+
+
 
 }
