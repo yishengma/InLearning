@@ -10,14 +10,14 @@ import android.view.ViewGroup;
 
 import com.inlearning.app.R;
 import com.inlearning.app.common.BaseFragment;
-import com.inlearning.app.common.bean.Course;
+import com.inlearning.app.common.bean.Course2;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CourseInfoFragment extends BaseFragment{
     private RecyclerView mRvCourseInfo;
-    private List<Course> mCourseList;
+    private List<Course2> mCourseList;
     private CourseInfoAdapter mCourseInfoAdapter;
 
     @Nullable
@@ -34,6 +34,20 @@ public class CourseInfoFragment extends BaseFragment{
         mCourseList = new ArrayList<>();
         mCourseInfoAdapter = new CourseInfoAdapter(mCourseList);
         mRvCourseInfo.setAdapter(mCourseInfoAdapter);
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        CourseModel.getCourseList(new CourseModel.Callback<List<Course2>>() {
+            @Override
+            public void onResult(boolean suc, List<Course2> course2s) {
+                mCourseList.clear();
+                mCourseList.addAll(course2s);
+                mCourseInfoAdapter.notifyDataSetChanged();
+            }
+        });
     }
 }
 

@@ -53,7 +53,7 @@
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/tv_student_count"
+                android:id="@+id/tv_course_score"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_course_type"

@@ -55,6 +55,9 @@ public class EditTypeView extends LinearLayout implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.imv_edit_course_back:
+                setVisibility(GONE);
+                break;
             case R.id.tv_course_type_speciality:
                 if (mHideListener != null) {
                     mHideListener.onHide(mSpecialityView.getText().toString());

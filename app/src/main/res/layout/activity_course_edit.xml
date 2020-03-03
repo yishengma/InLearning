@@ -71,8 +71,8 @@
                 android:src="@drawable/viewpage_guide_3" />
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_gravity="end|center_vertical"
                 android:src="@drawable/guide_arrow" />
         </FrameLayout>
@@ -111,8 +111,8 @@
                 android:textSize="17sp" />
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_gravity="end|center_vertical"
                 android:src="@drawable/guide_arrow" />
         </FrameLayout>
@@ -151,8 +151,8 @@
                 android:textSize="17sp" />
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_gravity="end|center_vertical"
                 android:src="@drawable/guide_arrow" />
         </FrameLayout>
@@ -191,8 +191,8 @@
                 android:textSize="17sp" />
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_gravity="end|center_vertical"
                 android:src="@drawable/guide_arrow" />
         </FrameLayout>
@@ -231,8 +231,8 @@
                 android:textSize="17sp" />
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_gravity="end|center_vertical"
                 android:src="@drawable/guide_arrow" />
         </FrameLayout>
