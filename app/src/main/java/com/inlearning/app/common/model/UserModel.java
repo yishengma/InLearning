@@ -50,9 +50,9 @@ public class UserModel {
                             sTeacher = null;
                         } else {
                             sTeacher = list.get(0);
-                            sTeacher.setType(User.Type.TEACHER);
+//                            sTeacher.setType(User.Type.TEACHER);
                         }
-                        callback.onResult(sTeacher);
+//                        callback.onResult(sTeacher);
                     }
                 });
                 break;

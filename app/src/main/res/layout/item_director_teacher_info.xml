@@ -12,24 +12,36 @@
         android:src="@drawable/viewpage_guide_3" />
 
     <TextView
-        android:id="@+id/course_teacher_name"
+        android:id="@+id/director_teacher_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/course_teacher_icon"
         android:layout_marginLeft="10dp"
         android:layout_toRightOf="@+id/course_teacher_icon"
-        android:text="小名老师"
+        android:text="马小生"
+        android:textColor="@color/textBlack"
+        android:textSize="16sp" />
+
+
+    <TextView
+        android:id="@+id/director_teacher_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/course_teacher_icon"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/director_teacher_name"
+        android:text=" 教授"
         android:textColor="@color/textBlack"
         android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/course_teacher_title"
+        android:id="@+id/director_teacher_job_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:layout_below="@+id/course_teacher_name"
+        android:layout_below="@+id/director_teacher_name"
         android:layout_toRightOf="@+id/course_teacher_icon"
-        android:text="老师"
+        android:text="31156454562"
         android:textColor="#777777"
         android:textSize="14sp" />
     <View

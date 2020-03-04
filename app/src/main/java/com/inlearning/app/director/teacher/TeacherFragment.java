@@ -7,19 +7,23 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.inlearning.app.R;
 import com.inlearning.app.common.BaseFragment;
 import com.inlearning.app.common.bean.Teacher;
+import com.inlearning.app.common.util.ThreadMgr;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class TeacherFragment extends BaseFragment {
+public class TeacherFragment extends BaseFragment implements View.OnClickListener {
     private RecyclerView mRvTeacherInfo;
     private List<Teacher> mTeacherList;
     private TeacherInfoAdapter mTeacherInfoAdapter;
+    private ImageView mAddView;
+    private ImageView mSearchView;
 
     @Nullable
     @Override
@@ -31,18 +35,60 @@ public class TeacherFragment extends BaseFragment {
 
     private void initView(View view) {
         mRvTeacherInfo = view.findViewById(R.id.rv_content);
-        mRvTeacherInfo.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
+        mSearchView = view.findViewById(R.id.imv_search);
+        mAddView = view.findViewById(R.id.imv_add);
+        mRvTeacherInfo.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         mTeacherList = new ArrayList<>();
-        mTeacherList.add(new Teacher());
-        mTeacherList.add(new Teacher());
-        mTeacherList.add(new Teacher());
-        mTeacherList.add(new Teacher());
-        mTeacherList.add(new Teacher());
-        mTeacherList.add(new Teacher());
-        mTeacherList.add(new Teacher());
-        mTeacherList.add(new Teacher());
-        mTeacherList.add(new Teacher());
         mTeacherInfoAdapter = new TeacherInfoAdapter(mTeacherList);
         mRvTeacherInfo.setAdapter(mTeacherInfoAdapter);
+        mTeacherInfoAdapter.setClickListener(new TeacherInfoAdapter.ClickListener() {
+            @Override
+            public void onClick(Teacher tea) {
+
+            }
+        });
+        mAddView.setOnClickListener(this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        initData();
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.imv_search:
+                break;
+            case R.id.imv_add:
+                TeacherEditActivity.startTeacherEditActivity(getContext());
+                break;
+            default:
+                break;
+
+        }
+    }
+
+    private void initData() {
+        TeacherModel.getTeacherList(new TeacherModel.Callback<List<Teacher>>() {
+            @Override
+            public void onResult(boolean suc, List<Teacher> teachers) {
+                if (suc) {
+                    updateList(teachers);
+                }
+            }
+        });
+    }
+
+    private void updateList(final List<Teacher> teachers) {
+        ThreadMgr.getInstance().postToUIThread(new Runnable() {
+            @Override
+            public void run() {
+                mTeacherList.clear();
+                mTeacherList.addAll(teachers);
+                mTeacherInfoAdapter.notifyDataSetChanged();
+            }
+        });
     }
 }
