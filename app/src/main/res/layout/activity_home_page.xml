@@ -12,14 +12,20 @@
         android:id="@+id/vp_home_page"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/tl_bottom_tab"
+        android:layout_above="@+id/tab_divide"
         android:overScrollMode="never" />
 
+    <View
+        android:id="@+id/tab_divide"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_above="@id/tl_bottom_tab"
+        android:background="@color/app_global_item_divide" />
     <android.support.design.widget.TabLayout
         android:layout_marginTop="5dp"
         android:id="@+id/tl_bottom_tab"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
         android:overScrollMode="never"
@@ -27,8 +33,9 @@
         app:tabIndicatorColor="@color/transparent"
         app:tabMode="fixed"
         app:tabRippleColor="@color/transparent"
-        app:tabSelectedTextColor="#8ab077"
-        app:tabTextColor="#C3D7BA">
+        app:tabSelectedTextColor="@color/app_global_blue"
+        app:tabTextAppearance="@style/HomePageTabLayout"
+        app:tabTextColor="@color/app_global_gray">
         <!--   app:tabMode="fixed"设置平均-->
     </android.support.design.widget.TabLayout>
 

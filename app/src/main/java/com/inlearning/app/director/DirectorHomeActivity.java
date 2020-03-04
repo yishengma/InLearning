@@ -54,10 +54,10 @@ public class DirectorHomeActivity extends AppCompatActivity {
         mBottomTab = findViewById(R.id.tl_bottom_tab);
         mBottomTab.setSmoothScrollingEnabled(true);
         mBottomTab.setupWithViewPager(mViewPager);
-        mBottomTab.getTabAt(0).setIcon(R.drawable.selector_tab_subscribe);
-        mBottomTab.getTabAt(1).setIcon(R.drawable.selector_tab_hot);
-        mBottomTab.getTabAt(2).setIcon(R.drawable.selector_tab_original);
-        mBottomTab.getTabAt(3).setIcon(R.drawable.selector_tab_excerpt);
+        mBottomTab.getTabAt(0).setIcon(R.drawable.tab_selector_speciality);
+        mBottomTab.getTabAt(1).setIcon(R.drawable.tab_selector_course);
+        mBottomTab.getTabAt(2).setIcon(R.drawable.tab_selector_teacher);
+        mBottomTab.getTabAt(3).setIcon(R.drawable.tab_selector_mine);
         mBottomTab.getTabAt(0).setText("专业");
         mBottomTab.getTabAt(1).setText("课程");
         mBottomTab.getTabAt(2).setText("教师");

@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="colorPrimary">#ffffff</color><!--导航栏-->
-    <color name="colorPrimaryDark">#ffffff</color><!--状态栏-->
-    <color name="colorAccent">#000000</color><!--其他-->
+    <color name="colorPrimary">#FFFFFF</color><!--导航栏-->
+    <color name="colorPrimaryDark">#FFFFFF</color><!--状态栏-->
+    <color name="colorAccent">#000000</color><!--其他，edit选中-->
+    <color name="windowBackground">#FFFFFF</color> <!--其他-->
 
-    <color name="windowBackground">#ffffff</color>
+
     <color name="White">#ffffff</color>
     <color name="text">#7e8287</color>
     <color name="colorStart">#8ab077</color>
@@ -39,7 +40,7 @@
     <color name="app_global_red">#FFFF0031</color>
     <color name="app_global_blue">#FF2196F3</color>
     <color name="app_global_gray">#777777</color>
-    <color name="app_global_white">#FFF5F5F5</color>
+    <color name="app_global_white">#FFFFFF</color>
     <color name="app_global_item_divide">#DDDDDD</color>
 
 </resources>
