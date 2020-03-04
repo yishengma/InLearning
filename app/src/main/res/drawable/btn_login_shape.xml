@@ -86,7 +86,7 @@
             <gradient
                 android:angle="0"
                 android:endColor="@color/colorEnd"
-                android:startColor="@color/app_global_green"/>
+                android:startColor="@color/app_global_blue"/>
 
             <corners
                 android:bottomLeftRadius="6dp"

@@ -34,7 +34,7 @@
             android:layout_gravity="end|center_vertical"
             android:layout_marginRight="24dp"
             android:text="确定"
-            android:textColor="@color/app_global_green"
+            android:textColor="@color/app_global_blue"
             android:textSize="18sp" />
     </FrameLayout>
 

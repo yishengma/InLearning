@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:text="xxx"
-            android:textColor="@color/app_global_green"
+            android:textColor="@color/app_global_blue"
             android:textSize="18sp" />
 
         <TextView

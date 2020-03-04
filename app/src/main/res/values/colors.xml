@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#ffffff</color>
-    <color name="colorPrimaryDark">#ffffff</color>
-    <color name="colorAccent">#ffffff</color>
+
+    <color name="colorPrimary">#ffffff</color><!--导航栏-->
+    <color name="colorPrimaryDark">#ffffff</color><!--状态栏-->
+    <color name="colorAccent">#000000</color><!--其他-->
+
     <color name="windowBackground">#ffffff</color>
     <color name="White">#ffffff</color>
     <color name="text">#7e8287</color>
@@ -29,7 +31,15 @@
 
     <color name="transparent">#00000000</color>
     <color name="app_global_green">#8ab077</color>
-    <color name="app_global_gray">#DEDEE2</color>
     <color name="point_red">#ff4e4e</color>
     <color name="split_line">#f3f3f6</color>
+
+
+    <!--director-->
+    <color name="app_global_red">#FFFF0031</color>
+    <color name="app_global_blue">#FF2196F3</color>
+    <color name="app_global_gray">#777777</color>
+    <color name="app_global_white">#FFF5F5F5</color>
+    <color name="app_global_item_divide">#DDDDDD</color>
+
 </resources>
