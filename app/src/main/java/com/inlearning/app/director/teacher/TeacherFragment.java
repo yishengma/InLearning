@@ -1,4 +1,4 @@
-package com.inlearning.app.director.fragment;
+package com.inlearning.app.director.teacher;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import com.inlearning.app.R;
 import com.inlearning.app.common.BaseFragment;
 import com.inlearning.app.common.bean.Teacher;
-import com.inlearning.app.director.adapter.TeacherInfoAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

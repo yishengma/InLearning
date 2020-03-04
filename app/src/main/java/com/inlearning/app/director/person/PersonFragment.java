@@ -1,4 +1,4 @@
-package com.inlearning.app.director.fragment;
+package com.inlearning.app.director.person;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

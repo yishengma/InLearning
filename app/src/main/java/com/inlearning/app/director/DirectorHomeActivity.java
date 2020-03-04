@@ -1,4 +1,4 @@
-package com.inlearning.app.director.ui;
+package com.inlearning.app.director;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,9 +12,9 @@ import com.inlearning.app.common.BaseFragment;
 import com.inlearning.app.common.adapter.CommonFragmentStatePagerAdapter;
 import com.inlearning.app.common.util.StatusBar;
 import com.inlearning.app.director.course.CourseFragment;
-import com.inlearning.app.director.fragment.PersonFragment;
+import com.inlearning.app.director.person.PersonFragment;
 import com.inlearning.app.director.speciality.SpecialityFragment;
-import com.inlearning.app.director.fragment.TeacherFragment;
+import com.inlearning.app.director.teacher.TeacherFragment;
 
 import java.util.ArrayList;
 import java.util.List;

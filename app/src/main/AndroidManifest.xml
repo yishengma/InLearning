@@ -43,7 +43,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".teacher.ui.TeacherHomeActivity" />
-        <activity android:name=".director.ui.DirectorHomeActivity" />
+        <activity android:name=".director.DirectorHomeActivity" />
 
         <provider
             android:name="cn.bmob.v3.util.BmobContentProvider"

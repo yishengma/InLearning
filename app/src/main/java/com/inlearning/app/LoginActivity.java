@@ -17,7 +17,7 @@ import android.widget.Toast;
 import com.inlearning.app.common.bean.User;
 import com.inlearning.app.common.model.UserModel;
 import com.inlearning.app.common.util.StatusBar;
-import com.inlearning.app.director.ui.DirectorHomeActivity;
+import com.inlearning.app.director.DirectorHomeActivity;
 import com.inlearning.app.student.ui.StudentHomeActivity;
 import com.inlearning.app.teacher.ui.TeacherHomeActivity;
 

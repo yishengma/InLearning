@@ -5,24 +5,36 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="41dp">
+        android:layout_height="?actionBarSize"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp">
 
         <TextView
-            android:textColor="@color/textBlack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
+            android:layout_gravity="center_vertical"
             android:text="教师"
+            android:textColor="@color/textBlack"
             android:textSize="20sp" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_alignParentBottom="true"
-            android:background="#EEEEEE" />
-    </RelativeLayout>
+        <ImageView
+            android:id="@+id/imv_search"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginRight="72dp"
+            android:src="@drawable/imv_search" />
+
+        <ImageView
+            android:id="@+id/imv_add"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginRight="12dp"
+            android:src="@drawable/imv_add" />
+    </FrameLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_content"
