@@ -30,14 +30,14 @@ public class EditInfoView extends LinearLayout implements View.OnClickListener {
     private ImageView mBackView;
     private TextView mTitleView;
     private TextView mConfirmView;
-    private OneKeyClearEditText mInputView;
+    private OneKeyClearEditText mEditView;
 
     private void initView() {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.layout_edit_course_info, this);
         mBackView = view.findViewById(R.id.imv_edit_course_back);
         mTitleView = view.findViewById(R.id.tv_edit_course_title);
         mConfirmView = view.findViewById(R.id.tv_edit_course_confirm);
-        mInputView = view.findViewById(R.id.et_edit_course_content);
+        mEditView = view.findViewById(R.id.et_edit_course_content);
         mBackView.setOnClickListener(this);
         mConfirmView.setOnClickListener(this);
     }
@@ -61,7 +61,7 @@ public class EditInfoView extends LinearLayout implements View.OnClickListener {
                 break;
             case R.id.tv_edit_course_confirm:
                 if (mHideListener != null) {
-                    mHideListener.onHide(mInputView.getText().toString());
+                    mHideListener.onHide(mEditView.getText().toString());
                 }
                 setVisibility(GONE);
                 break;
