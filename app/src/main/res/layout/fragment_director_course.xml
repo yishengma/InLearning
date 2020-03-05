@@ -5,51 +5,55 @@
     android:layout_height="match_parent"
     android:background="@color/app_global_white"
     android:orientation="vertical">
-    <RelativeLayout
+<!--    <RelativeLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="?actionBarSize">-->
+
+<!--        <FrameLayout-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_centerVertical="true"-->
+<!--            android:paddingLeft="12dp"-->
+<!--            android:paddingRight="12dp">-->
+
+<!--            <TextView-->
+<!--                android:textStyle="bold"-->
+<!--                android:layout_marginLeft="12dp"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center_vertical"-->
+<!--                android:text="课程"-->
+<!--                android:textColor="@color/textBlack"-->
+<!--                android:textSize="20sp" />-->
+
+<!--            <ImageView-->
+<!--                android:id="@+id/imv_search"-->
+<!--                android:layout_width="24dp"-->
+<!--                android:layout_height="24dp"-->
+<!--                android:layout_gravity="end|center_vertical"-->
+<!--                android:layout_marginRight="72dp"-->
+<!--                android:src="@drawable/imv_search" />-->
+
+<!--            <ImageView-->
+<!--                android:layout_marginRight="12dp"-->
+<!--                android:id="@+id/imv_add"-->
+<!--                android:layout_width="22dp"-->
+<!--                android:layout_height="22dp"-->
+<!--                android:layout_gravity="end|center_vertical"-->
+<!--                android:src="@drawable/imv_add" />-->
+<!--        </FrameLayout>-->
+
+<!--        &lt;!&ndash;        <View&ndash;&gt;-->
+<!--        &lt;!&ndash;            android:layout_width="match_parent"&ndash;&gt;-->
+<!--        &lt;!&ndash;            android:layout_height="1dp"&ndash;&gt;-->
+<!--        &lt;!&ndash;            android:layout_alignParentBottom="true"&ndash;&gt;-->
+<!--        &lt;!&ndash;            android:background="#EEEEEE" />&ndash;&gt;-->
+<!--    </RelativeLayout>-->
+    <View
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize">
-
-        <FrameLayout
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            android:layout_centerVertical="true"
-            android:paddingLeft="12dp"
-            android:paddingRight="12dp">
-
-            <TextView
-                android:textStyle="bold"
-                android:layout_marginLeft="12dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text="课程"
-                android:textColor="@color/textBlack"
-                android:textSize="20sp" />
-
-            <ImageView
-                android:id="@+id/imv_search"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_gravity="end|center_vertical"
-                android:layout_marginRight="72dp"
-                android:src="@drawable/imv_search" />
-
-            <ImageView
-                android:layout_marginRight="12dp"
-                android:id="@+id/imv_add"
-                android:layout_width="22dp"
-                android:layout_height="22dp"
-                android:layout_gravity="end|center_vertical"
-                android:src="@drawable/imv_add" />
-        </FrameLayout>
-
-        <!--        <View-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="1dp"-->
-        <!--            android:layout_alignParentBottom="true"-->
-        <!--            android:background="#EEEEEE" />-->
-    </RelativeLayout>
-
+        android:layout_height="0.5dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/app_global_item_divide" />
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tab_layout"

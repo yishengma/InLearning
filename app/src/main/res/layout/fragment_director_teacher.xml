@@ -6,38 +6,38 @@
     android:background="@color/app_global_white"
     android:orientation="vertical">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:paddingLeft="12dp"
-        android:paddingRight="12dp">
+<!--    <FrameLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="?actionBarSize"-->
+<!--        android:paddingLeft="12dp"-->
+<!--        android:paddingRight="12dp">-->
 
-        <TextView
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="教师"
-            android:layout_marginLeft="12dp"
-            android:textColor="@color/textBlack"
-            android:textSize="20sp" />
+<!--        <TextView-->
+<!--            android:textStyle="bold"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center_vertical"-->
+<!--            android:text="教师"-->
+<!--            android:layout_marginLeft="12dp"-->
+<!--            android:textColor="@color/textBlack"-->
+<!--            android:textSize="20sp" />-->
 
-        <ImageView
-            android:id="@+id/imv_search"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_gravity="end|center_vertical"
-            android:layout_marginRight="72dp"
-            android:src="@drawable/imv_search" />
+<!--        <ImageView-->
+<!--            android:id="@+id/imv_search"-->
+<!--            android:layout_width="24dp"-->
+<!--            android:layout_height="24dp"-->
+<!--            android:layout_gravity="end|center_vertical"-->
+<!--            android:layout_marginRight="72dp"-->
+<!--            android:src="@drawable/imv_search" />-->
 
-        <ImageView
-            android:id="@+id/imv_add"
-            android:layout_width="22dp"
-            android:layout_height="22dp"
-            android:layout_gravity="end|center_vertical"
-            android:layout_marginRight="12dp"
-            android:src="@drawable/imv_add" />
-    </FrameLayout>
+<!--        <ImageView-->
+<!--            android:id="@+id/imv_add"-->
+<!--            android:layout_width="22dp"-->
+<!--            android:layout_height="22dp"-->
+<!--            android:layout_gravity="end|center_vertical"-->
+<!--            android:layout_marginRight="12dp"-->
+<!--            android:src="@drawable/imv_add" />-->
+<!--    </FrameLayout>-->
 
     <View
         android:layout_width="match_parent"

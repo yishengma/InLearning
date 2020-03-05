@@ -7,7 +7,6 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.inlearning.app.R;
 import com.inlearning.app.common.BaseFragment;
@@ -22,8 +21,8 @@ public class CourseFragment extends BaseFragment implements View.OnClickListener
     private ViewPager mViewPager;
     private CommonFragmentStatePagerAdapter mFragmentAdapter;
     private List<BaseFragment> mCourseFragmentList;
-    private ImageView mAddView;
-    private ImageView mSearchView;
+//    private ImageView mAddView;
+//    private ImageView mSearchView;
 
     @Nullable
     @Override
@@ -45,14 +44,14 @@ public class CourseFragment extends BaseFragment implements View.OnClickListener
         mViewPager.setAdapter(mFragmentAdapter);
         mViewPager.setOffscreenPageLimit(3);
         mTabLayout = view.findViewById(R.id.tab_layout);
-        mAddView = view.findViewById(R.id.imv_add);
-        mSearchView = view.findViewById(R.id.imv_search);
+//        mAddView = view.findViewById(R.id.imv_add);
+//        mSearchView = view.findViewById(R.id.imv_search);
         mTabLayout.setSmoothScrollingEnabled(true);
         mTabLayout.setupWithViewPager(mViewPager);
         mTabLayout.getTabAt(0).setText("专业课");
         mTabLayout.getTabAt(1).setText("选修课");
-        mAddView.setOnClickListener(this);
-        mSearchView.setOnClickListener(this);
+//        mAddView.setOnClickListener(this);
+//        mSearchView.setOnClickListener(this);
     }
 
     @Override

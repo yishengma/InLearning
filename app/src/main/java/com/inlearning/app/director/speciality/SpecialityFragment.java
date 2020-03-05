@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.inlearning.app.R;
@@ -19,8 +18,8 @@ import com.inlearning.app.common.util.ThreadMgr;
 import java.util.List;
 
 public class SpecialityFragment extends BaseFragment implements View.OnClickListener{
-    private ImageView mSearchView;
-    private ImageView mAddView;
+//    private ImageView mSearchView;
+//    private ImageView mAddView;
     private View mParentView;
     private SpecialityPresenter mSpecialityPresenter;
     @Nullable
@@ -42,10 +41,10 @@ public class SpecialityFragment extends BaseFragment implements View.OnClickList
         if (null == getActivity()) {
             return;
         }
-        mSearchView = mParentView.findViewById(R.id.imv_search);
-        mSearchView.setOnClickListener(this);
-        mAddView = mParentView.findViewById(R.id.imv_add);
-        mAddView.setOnClickListener(this);
+//        mSearchView = mParentView.findViewById(R.id.imv_search);
+//        mSearchView.setOnClickListener(this);
+//        mAddView = mParentView.findViewById(R.id.imv_add);
+//        mAddView.setOnClickListener(this);
     }
 
     private void initPresenter() {

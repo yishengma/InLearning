@@ -1,55 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
-    android:orientation="vertical"
-    android:paddingBottom="10dp"
+    android:layout_height="68dp"
     >
 
-    <android.support.v7.widget.CardView
+    <!--    <android.support.v7.widget.CardView-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="60dp"-->
+    <!--        android:layout_marginStart="10dp"-->
+    <!--        android:layout_marginTop="6dp"-->
+    <!--        android:layout_marginEnd="10dp"-->
+    <!--        app:cardCornerRadius="2dp"-->
+    <!--        app:cardElevation="2dp">-->
+    <TextView
+        android:id="@+id/tv_class_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imv_course_icon"
+        android:layout_marginLeft="12dp"
+        android:layout_toRightOf="@+id/imv_course_icon"
+        android:text="计算机科学与技术5班"
+        android:textColor="@color/textBlack"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_class_student_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_class_info"
+        android:layout_marginLeft="12dp"
+        android:layout_toRightOf="@+id/imv_course_icon"
+        android:gravity="center"
+        android:text="35 人"
+        android:textSize="14sp" />
+
+    <ImageView
+        android:id="@+id/imv_course_icon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="12dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/viewpage_guide_3" />
+    <!--    </android.support.v7.widget.CardView>-->
+
+    <View
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="6dp"
-        android:layout_marginEnd="10dp"
-        app:cardCornerRadius="2dp"
-        app:cardElevation="2dp">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="12dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp">
-
-            <TextView
-                android:id="@+id/tv_class_info"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="计算机科学与技术5班"
-                android:textColor="@color/textBlack"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/tv_class_student_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_class_info"
-                android:layout_alignParentBottom="true"
-                android:gravity="center"
-                android:text="35 人"
-                android:textSize="14sp" />
-
-            <ImageView
-                android:id="@+id/imv_course_icon"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="24dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/viewpage_guide_3" />
-        </RelativeLayout>
-    </android.support.v7.widget.CardView>
-</LinearLayout>
+        android:layout_height="0.5dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/app_global_item_divide" />
+</RelativeLayout>

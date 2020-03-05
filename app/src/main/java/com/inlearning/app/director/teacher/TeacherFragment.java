@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.inlearning.app.R;
 import com.inlearning.app.common.BaseFragment;
@@ -22,8 +21,8 @@ public class TeacherFragment extends BaseFragment implements View.OnClickListene
     private RecyclerView mRvTeacherInfo;
     private List<Teacher> mTeacherList;
     private TeacherInfoAdapter mTeacherInfoAdapter;
-    private ImageView mAddView;
-    private ImageView mSearchView;
+//    private ImageView mAddView;
+//    private ImageView mSearchView;
 
     @Nullable
     @Override
@@ -35,8 +34,8 @@ public class TeacherFragment extends BaseFragment implements View.OnClickListene
 
     private void initView(View view) {
         mRvTeacherInfo = view.findViewById(R.id.rv_content);
-        mSearchView = view.findViewById(R.id.imv_search);
-        mAddView = view.findViewById(R.id.imv_add);
+//        mSearchView = view.findViewById(R.id.imv_search);
+//        mAddView = view.findViewById(R.id.imv_add);
         mRvTeacherInfo.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         mTeacherList = new ArrayList<>();
         mTeacherInfoAdapter = new TeacherInfoAdapter(mTeacherList);
@@ -47,7 +46,7 @@ public class TeacherFragment extends BaseFragment implements View.OnClickListene
 
             }
         });
-        mAddView.setOnClickListener(this);
+//        mAddView.setOnClickListener(this);
     }
 
     @Override

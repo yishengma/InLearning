@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.inlearning.app.R;
 import com.inlearning.app.common.BaseFragment;
@@ -25,6 +28,8 @@ public class DirectorHomeActivity extends AppCompatActivity {
     private CommonFragmentStatePagerAdapter mFragmentAdapter;
     private ViewPager mViewPager;
     private List<BaseFragment> mHomepageFragmentList;
+    private TextView mBarTitle;
+    private FrameLayout mTitleBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +56,8 @@ public class DirectorHomeActivity extends AppCompatActivity {
         mFragmentAdapter = new CommonFragmentStatePagerAdapter<>(getSupportFragmentManager(), mHomepageFragmentList);
         mViewPager.setAdapter(mFragmentAdapter);
         mViewPager.setOffscreenPageLimit(2);
+        mBarTitle = findViewById(R.id.bar_title);
+        mTitleBar = findViewById(R.id.fl_title_bar);
         mBottomTab = findViewById(R.id.tl_bottom_tab);
         mBottomTab.setSmoothScrollingEnabled(true);
         mBottomTab.setupWithViewPager(mViewPager);
@@ -62,6 +69,31 @@ public class DirectorHomeActivity extends AppCompatActivity {
         mBottomTab.getTabAt(1).setText("课程");
         mBottomTab.getTabAt(2).setText("教师");
         mBottomTab.getTabAt(3).setText("我的");
+        mBottomTab.addOnTabSelectedListener(new TabLayout.BaseOnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                onTabSelect(tab);
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+    }
+
+    private void onTabSelect(TabLayout.Tab tab) {
+        if ("我的".equals(tab.getText())) {
+            mTitleBar.setVisibility(View.GONE);
+        } else {
+            mTitleBar.setVisibility(View.VISIBLE);
+            mBarTitle.setText(tab.getText());
+        }
     }
 
     public static void startHomePageActivity(Context context) {
