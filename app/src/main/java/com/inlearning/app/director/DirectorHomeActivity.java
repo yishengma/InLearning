@@ -7,7 +7,8 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.inlearning.app.R;
@@ -22,14 +23,16 @@ import com.inlearning.app.director.teacher.TeacherFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DirectorHomeActivity extends AppCompatActivity {
+public class DirectorHomeActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TabLayout mBottomTab;
     private CommonFragmentStatePagerAdapter mFragmentAdapter;
     private ViewPager mViewPager;
     private List<BaseFragment> mHomepageFragmentList;
     private TextView mBarTitle;
-    private FrameLayout mTitleBar;
+    private RelativeLayout mTitleBar;
+    private ImageView mAddView;
+    private ImageView mSearchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +62,10 @@ public class DirectorHomeActivity extends AppCompatActivity {
         mBarTitle = findViewById(R.id.bar_title);
         mTitleBar = findViewById(R.id.fl_title_bar);
         mBottomTab = findViewById(R.id.tl_bottom_tab);
+        mAddView = findViewById(R.id.imv_bar_add);
+        mSearchView = findViewById(R.id.imv_bar_search);
+        mAddView.setOnClickListener(this);
+        mSearchView.setOnClickListener(this);
         mBottomTab.setSmoothScrollingEnabled(true);
         mBottomTab.setupWithViewPager(mViewPager);
         mBottomTab.getTabAt(0).setIcon(R.drawable.tab_selector_speciality);
@@ -94,6 +101,11 @@ public class DirectorHomeActivity extends AppCompatActivity {
             mTitleBar.setVisibility(View.VISIBLE);
             mBarTitle.setText(tab.getText());
         }
+    }
+
+    @Override
+    public void onClick(View view) {
+
     }
 
     public static void startHomePageActivity(Context context) {

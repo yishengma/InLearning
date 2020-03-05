@@ -8,7 +8,7 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-    <FrameLayout
+    <RelativeLayout
         android:id="@+id/fl_title_bar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
@@ -19,7 +19,7 @@
             android:id="@+id/bar_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
+            android:layout_centerVertical="true"
             android:layout_marginLeft="12dp"
             android:text="马小明"
             android:textColor="@color/textBlack"
@@ -27,21 +27,27 @@
             android:textStyle="bold" />
 
         <ImageView
-            android:id="@+id/imv__bar_search"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:clickable="true"
+            android:layout_width="?actionBarSize"
+            android:layout_height="?actionBarSize"
+            android:layout_toLeftOf="@+id/imv_bar_add"
+            android:id="@+id/imv_bar_search"
+            android:background="@drawable/bg_title_bar_tool_selector"
+            android:padding="15dp"
             android:layout_gravity="end|center_vertical"
-            android:layout_marginRight="72dp"
-            android:src="@drawable/imv_search" />
+            android:src="@drawable/imv_search_nomral" />
 
         <ImageView
-            android:id="@+id/imv__bar_add"
-            android:layout_width="22dp"
-            android:layout_height="22dp"
+            android:clickable="true"
+            android:layout_width="?actionBarSize"
+            android:layout_height="?actionBarSize"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/imv_bar_add"
+            android:background="@drawable/bg_title_bar_tool_selector"
+            android:padding="15dp"
             android:layout_gravity="end|center_vertical"
-            android:layout_marginRight="12dp"
-            android:src="@drawable/imv_add" />
-    </FrameLayout>
+            android:src="@drawable/imv_add_normal" />
+    </RelativeLayout>
     <com.inlearning.app.common.widget.FixedViewPager
         android:layout_below="@+id/fl_title_bar"
         android:id="@+id/vp_home_page"

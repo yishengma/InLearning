@@ -61,7 +61,7 @@
         android:layout_height="24dp"
         android:layout_marginTop="10dp"
         app:tabBackground="@android:color/transparent"
-        app:tabMode="fixed"
+        app:tabMode="scrollable"
         app:tabIndicatorColor="@color/transparent"
         app:tabRippleColor="@android:color/transparent"
         app:tabSelectedTextColor="@color/app_global_blue"
