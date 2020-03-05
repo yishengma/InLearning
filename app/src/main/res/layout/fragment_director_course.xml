@@ -49,11 +49,11 @@
 <!--        &lt;!&ndash;            android:layout_alignParentBottom="true"&ndash;&gt;-->
 <!--        &lt;!&ndash;            android:background="#EEEEEE" />&ndash;&gt;-->
 <!--    </RelativeLayout>-->
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/app_global_item_divide" />
+<!--    <View-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0.5dp"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:background="@color/app_global_item_divide" />-->
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tab_layout"
