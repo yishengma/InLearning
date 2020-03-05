@@ -60,9 +60,9 @@ public class CourseFragment extends BaseFragment implements View.OnClickListener
             case R.id.imv_search:
 //                CourseSearchActivity.startActivity(getContext());
                 break;
-            case R.id.imv_add:
-                CourseEditActivity.startActivity(getContext());
-                break;
+//            case R.id.imv_add:
+//                CourseEditActivity.startActivity(getContext());
+//                break;
             default:
                 break;
         }

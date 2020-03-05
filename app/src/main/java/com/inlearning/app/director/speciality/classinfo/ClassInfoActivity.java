@@ -4,13 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.inlearning.app.R;
@@ -28,8 +25,6 @@ public class ClassInfoActivity extends AppCompatActivity {
     private StudentInfoAdapter mStudentInfoAdapter;
     private ClassInfo mClassInfo;
     private List<Student> mStudentList;
-    private FloatingActionButton mAddView;
-    private ImageView mSaveView;
     private TextView mClassInfoView;
     private ClassInfoPresenter mClassInfoPresenter;
 
@@ -51,25 +46,24 @@ public class ClassInfoActivity extends AppCompatActivity {
         StatusBar.setStatusBarTranslucent(this);
         StatusBar.setStatusBarDarkMode(this, true);
         mStudentInfoRecyclerView = findViewById(R.id.rv_student_info);
-        mClassInfoView = findViewById(R.id.tv_class_info);
-        mSaveView = findViewById(R.id.imv_save);
+        mClassInfoView = findViewById(R.id.bar_title);
         mStudentList = new ArrayList<>();
         mStudentInfoAdapter = new StudentInfoAdapter(mStudentList);
         mStudentInfoRecyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         mStudentInfoRecyclerView.setAdapter(mStudentInfoAdapter);
-        mAddView = findViewById(R.id.imv_add);
-        mAddView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openFileManager();
-            }
-        });
-        mSaveView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ClassInfoModel.saveStudents(mClassInfo,mStudentList);
-            }
-        });
+//        mAddView = findViewById(R.id.imv_add);
+//        mAddView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                openFileManager();
+//            }
+//        });
+//        mSaveView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                ClassInfoModel.saveStudents(mClassInfo,mStudentList);
+//            }
+//        });
         mStudentInfoAdapter.setClickListener(new StudentInfoAdapter.ClickListener() {
             @Override
             public void onClick(Student student) {
@@ -132,8 +126,4 @@ public class ClassInfoActivity extends AppCompatActivity {
             }
         }
     }
-
-
-
-
 }

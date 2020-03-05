@@ -60,9 +60,9 @@ public class TeacherFragment extends BaseFragment implements View.OnClickListene
         switch (view.getId()) {
             case R.id.imv_search:
                 break;
-            case R.id.imv_add:
-                TeacherEditActivity.startTeacherEditActivity(getContext());
-                break;
+//            case R.id.imv_add:
+//                TeacherEditActivity.startTeacherEditActivity(getContext());
+//                break;
             default:
                 break;
 

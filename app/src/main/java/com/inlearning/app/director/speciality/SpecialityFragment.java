@@ -56,9 +56,9 @@ public class SpecialityFragment extends BaseFragment implements View.OnClickList
         switch (view.getId()) {
             case R.id.imv_search:
                 break;
-            case R.id.imv_add:
-                showDialog();
-                break;
+//            case R.id.imv_add:
+//                showDialog();
+//                break;
             default:
                 break;
         }
