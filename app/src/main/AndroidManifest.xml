@@ -19,7 +19,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".director.speciality.classinfo.StudentSearchActivity"></activity>
+        <activity android:name=".director.teacher.TeacherExcelImportActivity"></activity>
+        <activity android:name=".director.speciality.classinfo.StudentSearchActivity" />
         <activity android:name=".director.teacher.TeacherSingleImportActivity2" />
         <activity android:name=".director.course.CourseSingleImportActivity2" />
         <activity android:name=".director.speciality.SpecialitySingleImportActivity" />
