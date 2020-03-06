@@ -15,6 +15,7 @@ import com.inlearning.app.director.course.edit.ScoreItemView;
 import com.inlearning.app.director.course.edit.TimeItemView;
 import com.inlearning.app.director.course.edit.TypeItemView;
 
+@Deprecated
 public class CourseEditActivity extends AppCompatActivity {
 
     public static void startActivity(Context context) {

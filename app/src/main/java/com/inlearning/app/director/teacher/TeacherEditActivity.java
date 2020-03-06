@@ -15,6 +15,8 @@ import com.inlearning.app.director.teacher.edit.JobNumberItem;
 import com.inlearning.app.director.teacher.edit.NameItem;
 import com.inlearning.app.director.teacher.edit.TitleItem;
 
+
+@Deprecated
 public class TeacherEditActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static void startTeacherEditActivity(Context context) {
