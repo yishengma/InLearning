@@ -1,14 +1,11 @@
 package com.inlearning.app.director.speciality;
 
-import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import com.inlearning.app.R;
 import com.inlearning.app.common.BaseFragment;
@@ -87,36 +84,6 @@ public class SpecialityFragment extends BaseFragment implements View.OnClickList
         });
     }
 
-    private void showDialog() {
-        final Dialog dialog = new Dialog(getContext(), R.style.SimpleDialog);//SimpleDialog
-        dialog.setContentView(R.layout.layout_add_speciality);
-        TextView cancelView = dialog.findViewById(R.id.tv_cancel);
-        TextView confirmView = dialog.findViewById(R.id.tv_confirm);
-        final EditText nameView = dialog.findViewById(R.id.et_name);
-        final EditText shortView = dialog.findViewById(R.id.et_short_name);
-        final EditText countView = dialog.findViewById(R.id.et_class_count);
-
-        cancelView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-        confirmView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SpecialityModel.addSpeciality(String.valueOf(nameView.getText()), String.valueOf(shortView.getText()),Integer.valueOf(countView.getText().toString()), new SpecialityModel.Callback<Speciality>() {
-                    @Override
-                    public void onResult(boolean suc, Speciality speciality) {
-                        addSpeciality(suc, speciality);
-
-                    }
-                });
-                dialog.dismiss();
-            }
-        });
-        dialog.show();
-    }
 
     private void addSpeciality(boolean suc, Speciality speciality) {
         if (suc) {

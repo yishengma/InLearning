@@ -19,7 +19,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".director.course.CourseSearchActivity"></activity>
+        <activity android:name=".director.speciality.SpecialityEditActivity"></activity>
+        <activity android:name=".director.course.CourseSearchActivity" />
         <activity android:name=".director.speciality.SpecialityClassSearchActivity" />
         <activity android:name=".director.teacher.TeacherSearchActivity" />
         <activity android:name=".director.teacher.TeacherEditActivity" />

@@ -20,6 +20,7 @@ import com.inlearning.app.director.course.CourseFragment;
 import com.inlearning.app.director.course.CourseSearchActivity;
 import com.inlearning.app.director.person.PersonFragment;
 import com.inlearning.app.director.speciality.SpecialityClassSearchActivity;
+import com.inlearning.app.director.speciality.SpecialityEditActivity;
 import com.inlearning.app.director.speciality.SpecialityFragment;
 import com.inlearning.app.director.teacher.TeacherFragment;
 import com.inlearning.app.director.teacher.TeacherSearchActivity;
@@ -116,6 +117,9 @@ public class DirectorHomeActivity extends AppCompatActivity implements View.OnCl
             case R.id.imv_bar_search:
                 jumpToSearch();
                 break;
+            case R.id.imv_bar_add:
+                jumpToAdd();
+                break;
         }
     }
 
@@ -136,6 +140,26 @@ public class DirectorHomeActivity extends AppCompatActivity implements View.OnCl
                 break;
         }
     }
+
+    private void jumpToAdd() {
+        if (mSelectedTab == null) {
+            Log.e(TAG, "jumpToAdd");
+            return;
+        }
+        switch (mSelectedTab.getText().toString()) {
+            case "专业":
+                SpecialityEditActivity.startEditActivity(this);
+                break;
+            case "课程":
+                CourseSearchActivity.startSearchActivity(this);
+                break;
+            case "教师":
+                TeacherSearchActivity.startSearchActivity(this);
+                break;
+        }
+    }
+
+
 
     public static void startHomePageActivity(Context context) {
         Intent intent = new Intent(context, DirectorHomeActivity.class);

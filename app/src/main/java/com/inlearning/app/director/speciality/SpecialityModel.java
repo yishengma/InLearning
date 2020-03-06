@@ -25,27 +25,24 @@ public class SpecialityModel {
         void onResult(boolean suc, T t);
     }
 
-    public static void addSpeciality(final String name, final String shortName, final int count, final Callback<Speciality> callback) {
-        final Speciality speciality = new Speciality();
-        speciality.setName(name);
-        speciality.setShortName(shortName);
+    public static void addSpeciality(final Speciality speciality,final Callback<Speciality> callback) {
         speciality.save(new SaveListener<String>() {
             @Override
             public void done(String objectId, BmobException e) {
                 Log.i(TAG, "done: %s", e);
                 if (e == null) {
                     speciality.setObjectId(objectId);
-                    addClassInfo(speciality, name, count, callback);
+                    addClassInfo(speciality, callback);
                 }
             }
         });
     }
 
-    private static void addClassInfo(final Speciality speciality, String name, int count, final Callback<Speciality> callback) {
-        final List<ClassInfo> classInfos = new ArrayList<>(count);
-        List<BmobObject> bmobObjects = new ArrayList<>(count);
-        for (int i = 1; i <= count; i++) {
-            ClassInfo classInfo = new ClassInfo().setName(String.format(name + " %s 班", i)).setSpeciality(speciality);
+    private static void addClassInfo(final Speciality speciality, final Callback<Speciality> callback) {
+        final List<ClassInfo> classInfos = new ArrayList<>(speciality.getClassCount());
+        List<BmobObject> bmobObjects = new ArrayList<>(speciality.getClassCount());
+        for (int i = 1; i <= speciality.getClassCount(); i++) {
+            ClassInfo classInfo = new ClassInfo().setName(String.format(speciality.getName() + " %s 班", i)).setSpeciality(speciality);
             classInfos.add(classInfo);
             bmobObjects.add(classInfo);
         }

@@ -1,11 +1,13 @@
 package com.inlearning.app;
 
 import android.app.Application;
+import android.content.Context;
 
 import cn.bmob.v3.Bmob;
 
 public class App extends Application {
 
+    private static Context mContext;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -29,6 +31,11 @@ public class App extends Application {
         //.setFileExpiration(2500)
         //.build();
         //Bmob.initialize(config);
+        mContext = this;
+    }
+
+    public static Context getGlobalContext() {
+        return mContext;
     }
 
 }
