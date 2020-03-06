@@ -13,10 +13,10 @@ import android.widget.TextView;
 import com.inlearning.app.R;
 import com.inlearning.app.common.util.StatusBar;
 
-public abstract class BaseEditActivity extends AppCompatActivity {
+public abstract class BaseSingleImportActivity extends AppCompatActivity {
 
     public static void startEditActivity(Context context) {
-        Intent intent = new Intent(context, BaseEditActivity.class);
+        Intent intent = new Intent(context, BaseSingleImportActivity.class);
         context.startActivity(intent);
     }
 
@@ -27,7 +27,7 @@ public abstract class BaseEditActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_base_edit);
+        setContentView(R.layout.activity_base_single_import);
         StatusBar.setStatusBarTranslucent(this);
         StatusBar.setStatusBarDarkMode(this,true);
         mRootView = findViewById(R.id.root_view);

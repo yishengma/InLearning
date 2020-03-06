@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.inlearning.app.R;
@@ -20,13 +22,15 @@ import com.inlearning.app.common.util.ThreadMgr;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClassInfoActivity extends AppCompatActivity {
+public class ClassInfoActivity extends AppCompatActivity implements View.OnClickListener {
     private RecyclerView mStudentInfoRecyclerView;
     private StudentInfoAdapter mStudentInfoAdapter;
     private ClassInfo mClassInfo;
     private List<Student> mStudentList;
     private TextView mClassInfoView;
     private ClassInfoPresenter mClassInfoPresenter;
+    private ImageView mAddView;
+    private ImageView mSearchView;
 
     public static void startActivity(Context context,ClassInfo classInfo) {
         Intent intent = new Intent(context, ClassInfoActivity.class);
@@ -51,19 +55,10 @@ public class ClassInfoActivity extends AppCompatActivity {
         mStudentInfoAdapter = new StudentInfoAdapter(mStudentList);
         mStudentInfoRecyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         mStudentInfoRecyclerView.setAdapter(mStudentInfoAdapter);
-//        mAddView = findViewById(R.id.imv_add);
-//        mAddView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                openFileManager();
-//            }
-//        });
-//        mSaveView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                ClassInfoModel.saveStudents(mClassInfo,mStudentList);
-//            }
-//        });
+        mAddView = findViewById(R.id.imv_bar_add);
+        mSearchView = findViewById(R.id.imv_bar_search);
+        mAddView.setOnClickListener(this);
+        mSearchView.setOnClickListener(this);
         mStudentInfoAdapter.setClickListener(new StudentInfoAdapter.ClickListener() {
             @Override
             public void onClick(Student student) {
@@ -110,7 +105,20 @@ public class ClassInfoActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode,int resultCode,Intent data){//选择文件返回
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.imv_bar_search:
+                StudentSearchActivity.startSearchActivity(this);
+                break;
+            case R.id.imv_bar_add:
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {//选择文件返回
         super.onActivityResult(requestCode,resultCode,data);
         if(resultCode==RESULT_OK){
             switch(requestCode){

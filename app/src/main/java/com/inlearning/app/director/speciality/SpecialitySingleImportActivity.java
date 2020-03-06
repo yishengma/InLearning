@@ -1,10 +1,11 @@
-package com.inlearning.app.director.course;
+package com.inlearning.app.director.speciality;
 
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
@@ -14,24 +15,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.inlearning.app.R;
-import com.inlearning.app.common.bean.Course2;
+import com.inlearning.app.common.bean.Speciality;
 import com.inlearning.app.common.util.PixeUtil;
 import com.inlearning.app.common.util.ThreadMgr;
 import com.inlearning.app.common.widget.EditItemView;
-import com.inlearning.app.director.BaseEditActivity;
+import com.inlearning.app.director.BaseSingleImportActivity;
 
 import static android.view.Gravity.CENTER;
 
-public class CourseEditActivity2 extends BaseEditActivity implements TextWatcher {
+public class SpecialitySingleImportActivity extends BaseSingleImportActivity implements TextWatcher {
     public static void startEditActivity(Context context) {
-        Intent intent = new Intent(context, CourseEditActivity2.class);
+        Intent intent = new Intent(context, SpecialitySingleImportActivity.class);
         context.startActivity(intent);
     }
 
     private EditItemView mNameEditView;
-    private EditItemView mTypeEditView;
-    private EditItemView mDurationEditView;
-    private EditItemView mScoreEditView;
+    private EditItemView mShortEditView;
+    private EditItemView mCountEditView;
     private TextView mSaveView;
 
     @Override
@@ -42,23 +42,20 @@ public class CourseEditActivity2 extends BaseEditActivity implements TextWatcher
     }
 
     private void initView() {
-        mTitleView.setText("新增课程");
+        mTitleView.setText("新增专业");
         mNameEditView = new EditItemView(this);
+        mNameEditView.setHint("专业名称");
+        mShortEditView = new EditItemView(this);
+        mShortEditView.setHint("专业简称（2-3个字符）");
+        mCountEditView = new EditItemView(this);
+        mCountEditView.setHint("班级数目");
+        mCountEditView.setInputType(InputType.TYPE_CLASS_NUMBER);
+        mCountEditView.setTextWatcher(this);
+        mShortEditView.setTextWatcher(this);
         mNameEditView.setTextWatcher(this);
-        mNameEditView.setHint("课程名");
-        mTypeEditView = new EditItemView(this);
-        mTypeEditView.setTextWatcher(this);
-        mTypeEditView.setHint("类型");
-        mDurationEditView = new EditItemView(this);
-        mDurationEditView.setTextWatcher(this);
-        mDurationEditView.setHint("学时");
-        mScoreEditView = new EditItemView(this);
-        mScoreEditView.setTextWatcher(this);
-        mScoreEditView.setHint("学分");
         mRootView.addView(mNameEditView);
-        mRootView.addView(mTypeEditView);
-        mRootView.addView(mDurationEditView);
-        mRootView.addView(mScoreEditView);
+        mRootView.addView(mShortEditView);
+        mRootView.addView(mCountEditView);
     }
 
     private void initSaveButton() {
@@ -78,7 +75,7 @@ public class CourseEditActivity2 extends BaseEditActivity implements TextWatcher
         mSaveView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addCourse();
+                addSpeciality();
             }
         });
     }
@@ -104,29 +101,27 @@ public class CourseEditActivity2 extends BaseEditActivity implements TextWatcher
     }
 
     private void changeSaveViewStatus() {
-        if (!TextUtils.isEmpty(mNameEditView.getContent())
-                && !TextUtils.isEmpty(mTypeEditView.getContent())
-                && !TextUtils.isEmpty(mScoreEditView.getContent())
-                && !TextUtils.isEmpty(mDurationEditView.getContent())) {
+        if (!TextUtils.isEmpty(mCountEditView.getContent())
+                && !TextUtils.isEmpty(mShortEditView.getContent())
+                && !TextUtils.isEmpty(mNameEditView.getContent())) {
             mSaveView.setTextColor(Color.WHITE);
             mSaveView.setBackgroundResource(R.drawable.bg_edit_blue_shape);
             mSaveView.setEnabled(true);
-        } else{
+        } else {
             mSaveView.setBackgroundResource(R.drawable.bg_edit_gray_shape);
             mSaveView.setEnabled(false);
             mSaveView.setTextColor(Color.parseColor("#61000000"));
         }
     }
 
-    private void addCourse() {
-        Course2 course = new Course2();
-        course.setName(mNameEditView.getContent())
-                .setType(mTypeEditView.getContent())
-                .setTime(mDurationEditView.getContent())
-                .setScore(mScoreEditView.getContent());
-        CourseModel.saveCourseInfo(course, new CourseModel.Callback<Course2>() {
+    private void addSpeciality() {
+        Speciality speciality = new Speciality();
+        speciality.setName(mNameEditView.getContent())
+                .setShortName(mShortEditView.getContent())
+                .setClassCount(Integer.valueOf(mCountEditView.getContent()));
+        SpecialityModel.addSpeciality(speciality, new SpecialityModel.Callback<Speciality>() {
             @Override
-            public void onResult(boolean suc, Course2 speciality) {
+            public void onResult(boolean suc, Speciality speciality) {
                 if (suc) {
                     showToast();
                     finish();
@@ -139,7 +134,7 @@ public class CourseEditActivity2 extends BaseEditActivity implements TextWatcher
         ThreadMgr.getInstance().postToUIThread(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(CourseEditActivity2.this, "添加成功", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SpecialitySingleImportActivity.this, "添加成功", Toast.LENGTH_SHORT).show();
             }
         });
     }

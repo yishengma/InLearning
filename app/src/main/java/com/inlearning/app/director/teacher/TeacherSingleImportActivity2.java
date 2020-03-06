@@ -18,13 +18,13 @@ import com.inlearning.app.common.bean.Teacher;
 import com.inlearning.app.common.util.PixeUtil;
 import com.inlearning.app.common.util.ThreadMgr;
 import com.inlearning.app.common.widget.EditItemView;
-import com.inlearning.app.director.BaseEditActivity;
+import com.inlearning.app.director.BaseSingleImportActivity;
 
 import static android.view.Gravity.CENTER;
 
-public class TeacherEditActivity2 extends BaseEditActivity implements TextWatcher {
+public class TeacherSingleImportActivity2 extends BaseSingleImportActivity implements TextWatcher {
     public static void startEditActivity(Context context) {
-        Intent intent = new Intent(context, TeacherEditActivity2.class);
+        Intent intent = new Intent(context, TeacherSingleImportActivity2.class);
         context.startActivity(intent);
     }
 
@@ -132,7 +132,7 @@ public class TeacherEditActivity2 extends BaseEditActivity implements TextWatche
         ThreadMgr.getInstance().postToUIThread(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(TeacherEditActivity2.this, "添加成功", Toast.LENGTH_SHORT).show();
+                Toast.makeText(TeacherSingleImportActivity2.this, "添加成功", Toast.LENGTH_SHORT).show();
             }
         });
     }

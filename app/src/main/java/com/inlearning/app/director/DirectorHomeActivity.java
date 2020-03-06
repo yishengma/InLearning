@@ -16,14 +16,14 @@ import com.inlearning.app.R;
 import com.inlearning.app.common.BaseFragment;
 import com.inlearning.app.common.adapter.CommonFragmentStatePagerAdapter;
 import com.inlearning.app.common.util.StatusBar;
-import com.inlearning.app.director.course.CourseEditActivity2;
+import com.inlearning.app.director.course.CourseSingleImportActivity2;
 import com.inlearning.app.director.course.CourseFragment;
 import com.inlearning.app.director.course.CourseSearchActivity;
 import com.inlearning.app.director.person.PersonFragment;
 import com.inlearning.app.director.speciality.SpecialityClassSearchActivity;
-import com.inlearning.app.director.speciality.SpecialityEditActivity;
+import com.inlearning.app.director.speciality.SpecialitySingleImportActivity;
 import com.inlearning.app.director.speciality.SpecialityFragment;
-import com.inlearning.app.director.teacher.TeacherEditActivity2;
+import com.inlearning.app.director.teacher.TeacherSingleImportActivity2;
 import com.inlearning.app.director.teacher.TeacherFragment;
 import com.inlearning.app.director.teacher.TeacherSearchActivity;
 
@@ -150,13 +150,13 @@ public class DirectorHomeActivity extends AppCompatActivity implements View.OnCl
         }
         switch (mSelectedTab.getText().toString()) {
             case "专业":
-                SpecialityEditActivity.startEditActivity(this);
+                SpecialitySingleImportActivity.startEditActivity(this);
                 break;
             case "课程":
-                CourseEditActivity2.startEditActivity(this);
+                CourseSingleImportActivity2.startEditActivity(this);
                 break;
             case "教师":
-                TeacherEditActivity2.startEditActivity(this);
+                TeacherSingleImportActivity2.startEditActivity(this);
                 break;
         }
     }
