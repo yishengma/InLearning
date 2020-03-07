@@ -7,6 +7,7 @@ public class Course2 extends BmobObject {
     private String mType;
     private String mTime;
     private String mScore;
+    private boolean isSelected;
 
     public String getName() {
         return mName == null ? "" : mName;
@@ -41,6 +42,15 @@ public class Course2 extends BmobObject {
 
     public Course2 setScore(String score) {
         mScore = score;
+        return this;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public Course2 setSelected(boolean selected) {
+        isSelected = selected;
         return this;
     }
 }
