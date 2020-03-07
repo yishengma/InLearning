@@ -24,7 +24,7 @@ import com.inlearning.app.director.BaseSingleImportActivity;
 import static android.view.Gravity.CENTER;
 
 public class StudentSingleImportActivity extends BaseSingleImportActivity implements TextWatcher {
-    public static void startEditActivity(Context context, ClassInfo classInfo) {
+    public static void startSingleImportActivity(Context context, ClassInfo classInfo) {
         Intent intent = new Intent(context, StudentSingleImportActivity.class);
         intent.putExtra("classInfo", classInfo);
         context.startActivity(intent);

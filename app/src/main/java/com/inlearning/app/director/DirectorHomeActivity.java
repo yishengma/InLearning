@@ -1,5 +1,6 @@
 package com.inlearning.app.director;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import com.inlearning.app.R;
 import com.inlearning.app.common.BaseFragment;
 import com.inlearning.app.common.adapter.CommonFragmentStatePagerAdapter;
 import com.inlearning.app.common.util.StatusBar;
+import com.inlearning.app.director.course.CourseExcelImportActivity;
 import com.inlearning.app.director.course.CourseFragment;
 import com.inlearning.app.director.course.CourseSearchActivity;
 import com.inlearning.app.director.course.CourseSingleImportActivity2;
@@ -26,6 +28,7 @@ import com.inlearning.app.director.speciality.SpecialitySingleImportActivity;
 import com.inlearning.app.director.teacher.TeacherExcelImportActivity;
 import com.inlearning.app.director.teacher.TeacherFragment;
 import com.inlearning.app.director.teacher.TeacherSearchActivity;
+import com.inlearning.app.director.teacher.TeacherSingleImportActivity2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -150,17 +153,59 @@ public class DirectorHomeActivity extends AppCompatActivity implements View.OnCl
         }
         switch (mSelectedTab.getText().toString()) {
             case "专业":
-                SpecialitySingleImportActivity.startEditActivity(this);
+                SpecialitySingleImportActivity.startSingleImportActivity(this);
                 break;
             case "课程":
-                CourseSingleImportActivity2.startEditActivity(this);
+            case "教师":
+                showDialog();
+                break;
+        }
+    }
+
+
+    private void showDialog() {
+        final Dialog dialog = new Dialog(this, R.style.SimpleDialog);//SimpleDialog
+        dialog.setContentView(R.layout.dialog_import_way);
+        TextView singleView = dialog.findViewById(R.id.tv_single_import);
+        TextView excelView = dialog.findViewById(R.id.tv_excel_import);
+        singleView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                jumpToSingleAdd();
+                dialog.dismiss();
+            }
+        });
+        excelView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                jumpToExcelAdd();
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
+
+    private void jumpToSingleAdd() {
+        switch (mSelectedTab.getText().toString()) {
+            case "课程":
+                CourseSingleImportActivity2.startSingleImportActivity(this);
+                break;
+            case "教师":
+                TeacherSingleImportActivity2.startSingleImportActivity(this);
+                break;
+        }
+    }
+
+    private void jumpToExcelAdd() {
+        switch (mSelectedTab.getText().toString()) {
+            case "课程":
+                CourseExcelImportActivity.startExcelImportActivity(this);
                 break;
             case "教师":
                 TeacherExcelImportActivity.startExcelImportActivity(this);
                 break;
         }
     }
-
 
 
     public static void startHomePageActivity(Context context) {

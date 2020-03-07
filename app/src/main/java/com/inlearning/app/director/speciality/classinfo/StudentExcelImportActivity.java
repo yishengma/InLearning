@@ -43,7 +43,7 @@ public class StudentExcelImportActivity extends BaseExcelImportActivity {
 
     @Override
     protected String getTitleMsg() {
-        return "新增教师";
+        return "新增学生";
     }
 
     @Override

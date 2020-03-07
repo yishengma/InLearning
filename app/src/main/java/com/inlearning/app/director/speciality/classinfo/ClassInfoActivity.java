@@ -1,13 +1,12 @@
 package com.inlearning.app.director.speciality.classinfo;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,7 +14,6 @@ import android.widget.TextView;
 import com.inlearning.app.R;
 import com.inlearning.app.common.bean.ClassInfo;
 import com.inlearning.app.common.bean.Student;
-import com.inlearning.app.common.util.FileUtil;
 import com.inlearning.app.common.util.StatusBar;
 import com.inlearning.app.common.util.ThreadMgr;
 
@@ -97,13 +95,6 @@ public class ClassInfoActivity extends AppCompatActivity implements View.OnClick
         });
     }
 
-    private void openFileManager() {
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("*/*.xls");//设置类型，我这里是任意类型，任意后缀的可以这样写。
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
-        startActivityForResult(intent, 1);
-    }
-
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -111,27 +102,33 @@ public class ClassInfoActivity extends AppCompatActivity implements View.OnClick
                 StudentSearchActivity.startSearchActivity(this);
                 break;
             case R.id.imv_bar_add:
+                showDialog();
                 break;
             default:
                 break;
         }
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {//选择文件返回
-        super.onActivityResult(requestCode,resultCode,data);
-        if(resultCode==RESULT_OK){
-            switch(requestCode){
-                case 1:
-                    String chooseFilePath;
-                    Uri uri=data.getData();
-                    chooseFilePath = FileUtil.getChooseFileResultPath(ClassInfoActivity.this,uri);
-                    Log.e("chooseFilePath",chooseFilePath);
-                    mStudentList.clear();
-                    mStudentList.addAll(mClassInfoPresenter.addStudents(chooseFilePath));
-                    mStudentInfoAdapter.notifyDataSetChanged();
-                    break;
+
+    private void showDialog() {
+        final Dialog dialog = new Dialog(this, R.style.SimpleDialog);//SimpleDialog
+        dialog.setContentView(R.layout.dialog_import_way);
+        TextView singleView = dialog.findViewById(R.id.tv_single_import);
+        TextView excelView = dialog.findViewById(R.id.tv_excel_import);
+        singleView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StudentSingleImportActivity.startSingleImportActivity(ClassInfoActivity.this, mClassInfo);
+                dialog.dismiss();
             }
-        }
+        });
+        excelView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                StudentExcelImportActivity.startExcelImportActivity(ClassInfoActivity.this, mClassInfo);
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 }

@@ -1,7 +1,5 @@
 package com.inlearning.app.director;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -15,10 +13,10 @@ import com.inlearning.app.common.util.StatusBar;
 
 public abstract class BaseSingleImportActivity extends AppCompatActivity {
 
-    public static void startEditActivity(Context context) {
-        Intent intent = new Intent(context, BaseSingleImportActivity.class);
-        context.startActivity(intent);
-    }
+//    public static void startEditActivity(Context context) {
+//        Intent intent = new Intent(context, BaseSingleImportActivity.class);
+//        context.startActivity(intent);
+//    }
 
     protected ViewGroup mRootView;
     protected ImageView mBackView;
