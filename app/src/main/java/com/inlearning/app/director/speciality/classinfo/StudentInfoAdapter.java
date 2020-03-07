@@ -5,6 +5,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.inlearning.app.R;
@@ -17,6 +19,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class StudentInfoAdapter extends RecyclerView.Adapter<StudentInfoAdapter.ViewHolder> {
 
     private List<Student> mStudentList;
+    private boolean mIsImport;
 
     public StudentInfoAdapter(List<Student> studentList) {
         mStudentList = studentList;
@@ -26,6 +29,11 @@ public class StudentInfoAdapter extends RecyclerView.Adapter<StudentInfoAdapter.
 
     public StudentInfoAdapter setClickListener(ClickListener clickListener) {
         mClickListener = clickListener;
+        return this;
+    }
+
+    public StudentInfoAdapter setImport(boolean isImport) {
+        mIsImport = isImport;
         return this;
     }
 
@@ -42,6 +50,14 @@ public class StudentInfoAdapter extends RecyclerView.Adapter<StudentInfoAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         final Student student = mStudentList.get(i);
+        viewHolder.mSelectView.setVisibility(mIsImport ? View.VISIBLE : View.GONE);
+        viewHolder.mSelectView.setChecked(student.isSelected());
+        viewHolder.mSelectView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                student.setSelected(b);
+            }
+        });
         viewHolder.mNumberView.setText(String.valueOf(student.getAccount()));
         viewHolder.mNameView.setText(String.valueOf(student.getName()));
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -63,9 +79,11 @@ public class StudentInfoAdapter extends RecyclerView.Adapter<StudentInfoAdapter.
         private CircleImageView mImageView;
         private TextView mNameView;
         private TextView mNumberView;
+        private CheckBox mSelectView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            mSelectView = itemView.findViewById(R.id.btn_select);
             mImageView = itemView.findViewById(R.id.imv_student_image);
             mNameView = itemView.findViewById(R.id.tv_student_name);
             mNumberView = itemView.findViewById(R.id.tv_student_number);

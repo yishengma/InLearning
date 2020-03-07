@@ -15,6 +15,7 @@ import cn.bmob.v3.datatype.BatchResult;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.QueryListListener;
+import cn.bmob.v3.listener.SaveListener;
 
 public class ClassInfoModel {
 
@@ -36,7 +37,19 @@ public class ClassInfoModel {
         });
     }
 
-    public static void saveStudents(ClassInfo classInfo, List<Student> students) {
+    public static void saveStudent(final Student student, final Callback<Student> callback) {
+        student.save(new SaveListener<String>() {
+            @Override
+            public void done(String s, BmobException e) {
+                if (e == null) {
+                    student.setObjectId(s);
+                    callback.onResult(true, student);
+                }
+            }
+        });
+    }
+
+    public static void saveStudents(ClassInfo classInfo, List<Student> students, final Callback<Student> callback) {
         List<BmobObject> list = new ArrayList<>();
         ClassInfo newClassInfo = new ClassInfo();
         newClassInfo.setObjectId(classInfo.getObjectId());
@@ -48,6 +61,9 @@ public class ClassInfoModel {
             @Override
             public void done(List<BatchResult> list, BmobException e) {
                 Log.e("done",""+e);
+                if (e == null) {
+                    callback.onResult(true, null);
+                }
             }
         });
 

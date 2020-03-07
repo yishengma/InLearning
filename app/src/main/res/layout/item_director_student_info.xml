@@ -2,8 +2,19 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="68dp">
+    <CheckBox
+        android:id="@+id/btn_select"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="12dp"
+        android:background="@drawable/bg_rbtn_selector"
+        android:buttonTint="@color/app_global_blue"
+        android:visibility="visible" />
 
     <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_toRightOf="@+id/btn_select"
         android:id="@+id/imv_student_image"
         android:layout_width="40dp"
         android:layout_height="40dp"
