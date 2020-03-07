@@ -1,5 +1,6 @@
 package com.inlearning.app.director;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,9 +10,9 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -25,7 +26,7 @@ public abstract class BaseExcelImportActivity extends AppCompatActivity implemen
     private TextView mTitleView;
     private TextView mManageView;
     private RecyclerView mRvContent;
-    private RadioButton mChooseAllView;
+    private CheckBox mChooseAllView;
     private ViewGroup mEmptyTipsView;
     private TextView mDeleteView;
     private RelativeLayout mBottomBar;
@@ -56,7 +57,7 @@ public abstract class BaseExcelImportActivity extends AppCompatActivity implemen
         mChooseAllView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-
+                chooseAll(b);
             }
         });
     }
@@ -73,6 +74,8 @@ public abstract class BaseExcelImportActivity extends AppCompatActivity implemen
                 break;
             case R.id.tv_delete:
                 delete();
+                mBottomBar.setVisibility(View.GONE);
+                mChooseAllView.setChecked(false);
                 break;
             case R.id.tv_edit_manager:
                 onClickManager();
@@ -92,7 +95,27 @@ public abstract class BaseExcelImportActivity extends AppCompatActivity implemen
     }
 
     private void showUploadDialog() {
-
+        final Dialog dialog = new Dialog(this, R.style.SimpleDialog);//SimpleDialog
+        dialog.setContentView(R.layout.dialog_excel_import);
+        TextView titleView = dialog.findViewById(R.id.tv_title);
+        titleView.setText(getTitleMsg());
+        TextView infoView = dialog.findViewById(R.id.tv_content);
+        TextView cancelView = dialog.findViewById(R.id.tv_cancel);
+        TextView confirmView = dialog.findViewById(R.id.tv_confirm);
+        cancelView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        confirmView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                upload();
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 
 
@@ -115,6 +138,13 @@ public abstract class BaseExcelImportActivity extends AppCompatActivity implemen
         }
     }
 
+    protected void setEmptyTipsVisibility(int visibility) {
+        mEmptyTipsView.setVisibility(visibility);
+    }
+
+    protected void setRvContentVisibility(int visibility) {
+        mRvContent.setVisibility(visibility);
+    }
 
     protected abstract String getTitleMsg();
 
@@ -125,4 +155,7 @@ public abstract class BaseExcelImportActivity extends AppCompatActivity implemen
     protected abstract void upload();
 
     protected abstract void doOpenFileResult(String path);
+
+    protected abstract void chooseAll(boolean is);
+
 }

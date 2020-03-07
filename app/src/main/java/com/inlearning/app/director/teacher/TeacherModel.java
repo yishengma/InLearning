@@ -4,11 +4,16 @@ import android.util.Log;
 
 import com.inlearning.app.common.bean.Teacher;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import cn.bmob.v3.BmobBatch;
+import cn.bmob.v3.BmobObject;
 import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.datatype.BatchResult;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.QueryListListener;
 import cn.bmob.v3.listener.SaveListener;
 
 public class TeacherModel {
@@ -44,5 +49,19 @@ public class TeacherModel {
                 Log.e(TAG,"addTeacher"+e);
             }
         });
+    }
+
+    public static void addTeacherList(List<Teacher> teachers, final Callback<List<Teacher>> callback) {
+        List<BmobObject> list = new ArrayList<BmobObject>(teachers);
+        new BmobBatch().insertBatch(list).doBatch(new QueryListListener<BatchResult>() {
+            @Override
+            public void done(List<BatchResult> list, BmobException e) {
+                Log.e("done", "" + e);
+                if (e == null) {
+                    callback.onResult(true, null);
+                }
+            }
+        });
+
     }
 }

@@ -6,6 +6,7 @@ public class Teacher extends BmobObject {
     private String mJobNumber;
     private String mTitle;
     private String mName;
+    private boolean isSelected;//不做Bmob
     public String getTitle() {
         return mTitle == null ? "" : mTitle;
     }
@@ -30,6 +31,15 @@ public class Teacher extends BmobObject {
 
     public Teacher setJobNumber(String jobNumber) {
         mJobNumber = jobNumber;
+        return this;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public Teacher setSeleted(boolean seleted) {
+        isSelected = seleted;
         return this;
     }
 }

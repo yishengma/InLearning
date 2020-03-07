@@ -18,7 +18,7 @@ import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -63,9 +63,10 @@ public class FileUtil {
             is = new FileInputStream(filePath);
             if (".xls".equals(extString)) {
                 wb = new HSSFWorkbook(is);
-            } else if (".xlsx".equals(extString)) {
-                wb = new XSSFWorkbook(is);
+//            } else if (".xlsx".equals(extString)) {
+//                wb = new XSSFWorkbook(is);
             } else {
+
                 wb = null;
             }
             if (wb != null) {

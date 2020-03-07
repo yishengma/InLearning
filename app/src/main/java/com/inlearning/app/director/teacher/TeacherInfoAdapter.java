@@ -5,6 +5,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.inlearning.app.R;
@@ -14,6 +16,7 @@ import java.util.List;
 
 public class TeacherInfoAdapter extends RecyclerView.Adapter<TeacherInfoAdapter.ViewHolder> {
     private List<Teacher> mTeacherList;
+    private boolean isImport = false;
 
     public TeacherInfoAdapter(List<Teacher> teacherList) {
         mTeacherList = teacherList;
@@ -30,6 +33,11 @@ public class TeacherInfoAdapter extends RecyclerView.Adapter<TeacherInfoAdapter.
         return this;
     }
 
+    public TeacherInfoAdapter setImport(boolean isImport) {
+        this.isImport = isImport;
+        return this;
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -40,6 +48,14 @@ public class TeacherInfoAdapter extends RecyclerView.Adapter<TeacherInfoAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         final Teacher teacher = mTeacherList.get(i);
+        viewHolder.mSelectView.setVisibility(isImport ? View.VISIBLE : View.GONE);
+        viewHolder.mSelectView.setChecked(teacher.isSelected());
+        viewHolder.mSelectView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                teacher.setSeleted(b);
+            }
+        });
         viewHolder.mTeaName.setText(teacher.getName());
         viewHolder.mTeaTitle.setText(teacher.getTitle());
         viewHolder.mTeaJobNumber.setText(teacher.getJobNumber());
@@ -62,9 +78,11 @@ public class TeacherInfoAdapter extends RecyclerView.Adapter<TeacherInfoAdapter.
         private TextView mTeaName;
         private TextView mTeaTitle;
         private TextView mTeaJobNumber;
+        private CheckBox mSelectView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            mSelectView = itemView.findViewById(R.id.btn_select);
             mTeaName = itemView.findViewById(R.id.director_teacher_name);
             mTeaTitle = itemView.findViewById(R.id.director_teacher_title);
             mTeaJobNumber = itemView.findViewById(R.id.director_teacher_job_number);

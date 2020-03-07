@@ -48,6 +48,7 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_content"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/rl_bottom_tool"
@@ -62,12 +63,20 @@
         android:layout_above="@+id/rl_bottom_tool"
         android:layout_below="@id/line_divide"
         android:orientation="vertical"
-        android:visibility="gone">
+       >
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/app_global_simple_gray"
+            android:gravity="center"
+            android:text="打开文件夹导入"
+            android:textSize="18sp" />
     </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/rl_bottom_tool"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
         android:layout_alignParentBottom="true">
@@ -79,7 +88,8 @@
             android:background="@color/app_global_item_divide" />
 
 
-        <RadioButton
+        <CheckBox
+            android:background="@drawable/bg_rbtn_selector"
             android:id="@+id/btn_choose_all"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
