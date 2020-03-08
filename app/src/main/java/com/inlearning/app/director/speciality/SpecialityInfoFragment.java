@@ -53,21 +53,6 @@ public class SpecialityInfoFragment extends BaseFragment {
         for (ClassInfo classInfo : speciality.getClassInfoList()) {
             mClassList.add(classInfo.setType(ClassInfo.ITEM_CLASS_INFO).setSpeciality(speciality));
         }
-        return this;
-    }
-
-    public SpecialityInfoFragment setSpecialities(List<Speciality> specialities) {
-        mSpecialities = specialities;
-        mClassList.clear();
-        for (Speciality s : specialities) {
-            if (s.getShortName().equals("全部")) {
-                continue;
-            }
-            mClassList.add(new ClassInfo().setName(s.getShortName()).setType(ClassInfo.ITEM_SEPARATE).setSpeciality(s));
-            for (ClassInfo classInfo : s.getClassInfoList()) {
-                mClassList.add(classInfo.setType(ClassInfo.ITEM_CLASS_INFO).setSpeciality(s));
-            }
-        }
         if (mSpecialityInfoAdapter != null) {
             mSpecialityInfoAdapter.notifyDataSetChanged();
         }

@@ -22,6 +22,7 @@ import com.inlearning.app.director.course.CourseFragment;
 import com.inlearning.app.director.course.CourseSearchActivity;
 import com.inlearning.app.director.course.CourseSingleImportActivity2;
 import com.inlearning.app.director.person.PersonFragment;
+import com.inlearning.app.director.speciality.SpecialityAddClassActivity;
 import com.inlearning.app.director.speciality.SpecialityClassSearchActivity;
 import com.inlearning.app.director.speciality.SpecialityFragment;
 import com.inlearning.app.director.speciality.SpecialitySingleImportActivity;
@@ -153,7 +154,7 @@ public class DirectorHomeActivity extends AppCompatActivity implements View.OnCl
         }
         switch (mSelectedTab.getText().toString()) {
             case "专业":
-                SpecialitySingleImportActivity.startSingleImportActivity(this);
+                showAddDialog();
                 break;
             case "课程":
             case "教师":
@@ -183,6 +184,29 @@ public class DirectorHomeActivity extends AppCompatActivity implements View.OnCl
             }
         });
         dialog.show();
+    }
+
+    private void showAddDialog() {
+        final Dialog dialog = new Dialog(this, R.style.SimpleDialog);//SimpleDialog
+        dialog.setContentView(R.layout.dialog_add_way);
+        TextView addSpecialityView = dialog.findViewById(R.id.tv_add_speciality);
+        TextView addClassView = dialog.findViewById(R.id.tv_add_class);
+        addSpecialityView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SpecialitySingleImportActivity.startSingleImportActivity(DirectorHomeActivity.this);
+                dialog.dismiss();
+            }
+        });
+        addClassView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SpecialityAddClassActivity.startSpecialityAddClassActivity(DirectorHomeActivity.this);
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+
     }
 
     private void jumpToSingleAdd() {

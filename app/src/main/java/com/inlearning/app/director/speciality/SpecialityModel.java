@@ -60,6 +60,33 @@ public class SpecialityModel {
 
     }
 
+    public static void addClasses(final Speciality speciality, int count, final Callback<Speciality> callback) {
+        final List<ClassInfo> classInfos = new ArrayList<>(count);
+        List<BmobObject> bmobObjects = new ArrayList<>(count);
+        Speciality bmobNewSpeciality = new Speciality();
+        bmobNewSpeciality.setClassCount(speciality.getClassCount())
+                .setName(speciality.getName())
+                .setShortName(speciality.getShortName())
+                .setObjectId(speciality.getObjectId());
+        for (int i = speciality.getClassCount() + 1; i <= speciality.getClassCount() + count; i++) {
+            ClassInfo classInfo = new ClassInfo().setName(String.format(speciality.getName() + " %s 班", i)).setSpeciality(bmobNewSpeciality);
+            classInfos.add(classInfo);
+            bmobObjects.add(classInfo);
+        }
+        new BmobBatch().insertBatch(bmobObjects).doBatch(new QueryListListener<BatchResult>() {
+
+            @Override
+            public void done(List<BatchResult> results, BmobException e) {
+                Log.i(TAG, "done: %s", e);
+                if (e == null) {
+                    speciality.addClassInfoList(classInfos);
+                    callback.onResult(true, speciality);
+                }
+            }
+        });
+
+    }
+
     public static void deleteSpeciality(final Speciality speciality, final Callback<Speciality> callback) {
         speciality.delete(new UpdateListener() {
             @Override

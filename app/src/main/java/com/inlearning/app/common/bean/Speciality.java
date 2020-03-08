@@ -41,6 +41,11 @@ public class Speciality extends BmobObject {
         return this;
     }
 
+    public Speciality addClassInfoList(List<ClassInfo> classInfoList) {
+        mClassInfoList.addAll(classInfoList);
+        return this;
+    }
+
     public int getClassCount() {
         return mClassCount;
     }

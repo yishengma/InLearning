@@ -19,7 +19,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".director.teacher.TeacherEditActivity"></activity>
+        <activity android:name=".director.speciality.SpecialityAddClassActivity"></activity>
+        <activity android:name=".director.teacher.TeacherEditActivity" />
         <activity android:name=".director.person.SpecialityEditActivity" />
         <activity android:name=".director.person.SpecialityManagerActivity" />
         <activity android:name=".director.speciality.classinfo.StudentExcelImportActivity" />
