@@ -15,6 +15,7 @@ import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.QueryListListener;
 import cn.bmob.v3.listener.SaveListener;
+import cn.bmob.v3.listener.UpdateListener;
 
 public class CourseModel {
 
@@ -32,6 +33,21 @@ public class CourseModel {
                 if (e == null) {
                     course.setObjectId(s);
                     callback.onResult(true, course);
+                }
+            }
+        });
+    }
+
+
+    public static void updateCourse(final Course2 course, final Callback<Course2> callback) {
+        if (course == null) {
+            return;
+        }
+        course.update(new UpdateListener() {
+            @Override
+            public void done(BmobException e) {
+                if (e == null) {
+                    callback.onResult(true,course);
                 }
             }
         });

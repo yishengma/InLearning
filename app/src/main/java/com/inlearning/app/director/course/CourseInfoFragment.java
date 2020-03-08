@@ -34,6 +34,12 @@ public class CourseInfoFragment extends BaseFragment{
         mCourseList = new ArrayList<>();
         mCourseInfoAdapter = new CourseInfoAdapter(mCourseList);
         mRvCourseInfo.setAdapter(mCourseInfoAdapter);
+        mCourseInfoAdapter.setClickListener(new CourseInfoAdapter.ClickListener() {
+            @Override
+            public void onClick(Course2 course) {
+                CourseEditActivity.startActivity(getContext(),course);
+            }
+        });
     }
 
 

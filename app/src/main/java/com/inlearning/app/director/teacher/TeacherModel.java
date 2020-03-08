@@ -15,6 +15,7 @@ import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.QueryListListener;
 import cn.bmob.v3.listener.SaveListener;
+import cn.bmob.v3.listener.UpdateListener;
 
 public class TeacherModel {
     private static final String TAG = "TeacherModel";
@@ -47,6 +48,22 @@ public class TeacherModel {
                     callback.onResult(true, teacher);
                 }
                 Log.e(TAG,"addTeacher"+e);
+            }
+        });
+    }
+
+
+
+    public static void updateTeacher(final Teacher teacher, final Callback<Teacher> callback) {
+        if (teacher == null) {
+            return;
+        }
+        teacher.update(new UpdateListener() {
+            @Override
+            public void done(BmobException e) {
+                if (e == null) {
+                    callback.onResult(true,teacher);
+                }
             }
         });
     }

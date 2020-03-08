@@ -27,6 +27,17 @@ public class CourseInfoAdapter extends  RecyclerView.Adapter<CourseInfoAdapter.V
         return this;
     }
 
+    public interface ClickListener {
+        void onClick(Course2 course);
+    }
+
+    private ClickListener mClickListener;
+
+    public CourseInfoAdapter setClickListener(ClickListener clickListener) {
+        mClickListener = clickListener;
+        return this;
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -49,6 +60,14 @@ public class CourseInfoAdapter extends  RecyclerView.Adapter<CourseInfoAdapter.V
         viewHolder.mCourseTime.setText(course.getTime());
         viewHolder.mCourseScore.setText(course.getScore());
         viewHolder.mCourseType.setText(course.getType());
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mClickListener != null) {
+                    mClickListener.onClick(course);
+                }
+            }
+        });
 
     }
 

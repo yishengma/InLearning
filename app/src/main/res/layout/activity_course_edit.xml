@@ -1,265 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/root_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:orientation="vertical"
-    tools:context=".director.course.CourseEditActivity">
+    android:orientation="vertical">
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="?actionBarSize">
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="?actionBarSize">
-
-            <ImageView
-                android:id="@+id/imv_edit_course_back"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="24dp"
-                android:src="@drawable/toolbar_back" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="添加课程"
-                android:textSize="20sp" />
-
-            <ImageView
-                android:id="@+id/imv_edit_course_save"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_gravity="end|center_vertical"
-                android:layout_marginRight="24dp"
-                android:src="@drawable/imv_save" />
-        </FrameLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="@color/lineGray" />
-
-        <FrameLayout
-            android:id="@+id/fl_edit_course_icon"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            android:paddingLeft="24dp"
-            android:paddingRight="24dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text="图标"
-                android:textSize="18sp" />
-
-            <ImageView
-                android:id="@+id/imv_edit_course_icon"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="end"
-                android:layout_marginRight="50dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/viewpage_guide_3" />
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="end|center_vertical"
-                android:src="@drawable/guide_arrow" />
-        </FrameLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
+        <ImageView
+            android:id="@+id/imv_edit_back"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center_vertical"
             android:layout_marginLeft="24dp"
-            android:layout_marginTop="10dp"
-            android:background="@color/lineGray" />
+            android:src="@drawable/toolbar_back" />
 
-        <FrameLayout
-            android:id="@+id/fl_edit_course_name"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            android:paddingLeft="24dp"
-            android:paddingRight="24dp">
+        <TextView
+            android:id="@+id/tv_edit_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="专业信息"
+            android:textColor="@color/textBlack"
+            android:textSize="18sp" />
+    </FrameLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text="名称"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/tv_edit_course_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end|center_vertical"
-                android:layout_marginRight="50dp"
-                android:scaleType="centerCrop"
-                android:text="计算机科学与技术"
-                android:textColor="@color/textBlack"
-                android:textSize="17sp" />
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="end|center_vertical"
-                android:src="@drawable/guide_arrow" />
-        </FrameLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="10dp"
-            android:background="@color/lineGray" />
-
-        <FrameLayout
-            android:id="@+id/fl_edit_course_type"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            android:paddingLeft="24dp"
-            android:paddingRight="24dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text="类别"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/tv_edit_course_type"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end|center_vertical"
-                android:layout_marginRight="50dp"
-                android:scaleType="centerCrop"
-                android:text="选修课"
-                android:textColor="@color/textBlack"
-                android:textSize="17sp" />
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="end|center_vertical"
-                android:src="@drawable/guide_arrow" />
-        </FrameLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="10dp"
-            android:background="@color/lineGray" />
-
-        <FrameLayout
-            android:id="@+id/fl_edit_course_time"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            android:paddingLeft="24dp"
-            android:paddingRight="24dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text="学时"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/tv_edit_course_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end|center_vertical"
-                android:layout_marginRight="50dp"
-                android:scaleType="centerCrop"
-                android:text="48"
-                android:textColor="@color/textBlack"
-                android:textSize="17sp" />
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="end|center_vertical"
-                android:src="@drawable/guide_arrow" />
-        </FrameLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="10dp"
-            android:background="@color/lineGray" />
-
-        <FrameLayout
-            android:id="@+id/fl_edit_course_score"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            android:paddingLeft="24dp"
-            android:paddingRight="24dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text="学分"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/tv_edit_course_score"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end|center_vertical"
-                android:layout_marginRight="50dp"
-                android:scaleType="centerCrop"
-                android:text="0.5"
-                android:textColor="@color/textBlack"
-                android:textSize="17sp" />
-
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="end|center_vertical"
-                android:src="@drawable/guide_arrow" />
-        </FrameLayout>
-    </LinearLayout>
-
-    <com.inlearning.app.director.course.edit.EditInfoView
-        android:id="@+id/edit_name_view"
+    <View
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone" />
+        android:layout_height="0.5dp"
+        android:background="@color/app_global_item_divide" />
 
-    <com.inlearning.app.director.course.edit.EditInfoView
-        android:id="@+id/edit_score_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone" />
-
-    <com.inlearning.app.director.course.edit.EditInfoView
-        android:id="@+id/edit_time_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone" />
-
-    <com.inlearning.app.director.course.edit.EditTypeView
-        android:id="@+id/edit_type_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone" />
-</FrameLayout>
+</LinearLayout>

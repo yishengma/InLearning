@@ -19,7 +19,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".director.person.SpecialityEditActivity"></activity>
+        <activity android:name=".director.teacher.TeacherEditActivity"></activity>
+        <activity android:name=".director.person.SpecialityEditActivity" />
         <activity android:name=".director.person.SpecialityManagerActivity" />
         <activity android:name=".director.speciality.classinfo.StudentExcelImportActivity" />
         <activity android:name=".director.speciality.classinfo.StudentSingleImportActivity" />
@@ -32,8 +33,6 @@
         <activity android:name=".director.course.CourseSearchActivity" />
         <activity android:name=".director.speciality.SpecialityClassSearchActivity" />
         <activity android:name=".director.teacher.TeacherSearchActivity" />
-        <activity android:name=".director.teacher.TeacherEditActivity" />
-        <activity android:name=".director.course.CourseEditActivity" />
         <activity android:name=".director.speciality.classinfo.StudentInfoActivity" />
         <activity android:name=".director.speciality.classinfo.ClassInfoActivity" />
         <activity android:name=".student.ui.QuestionActivity" />
@@ -58,6 +57,7 @@
         </activity>
         <activity android:name=".teacher.ui.TeacherHomeActivity" />
         <activity android:name=".director.DirectorHomeActivity" />
+        <activity android:name=".director.course.CourseEditActivity" />
 
         <provider
             android:name="cn.bmob.v3.util.BmobContentProvider"

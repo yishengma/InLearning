@@ -43,7 +43,7 @@ public class TeacherFragment extends BaseFragment implements View.OnClickListene
         mTeacherInfoAdapter.setClickListener(new TeacherInfoAdapter.ClickListener() {
             @Override
             public void onClick(Teacher tea) {
-
+                TeacherEditActivity.startActivity(getContext(),tea);
             }
         });
 //        mAddView.setOnClickListener(this);
