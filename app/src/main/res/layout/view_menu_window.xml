@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="150dp"
+    android:layout_height="50dp"
     android:background="@drawable/bg_item_click"
     android:clickable="true"
+    android:layout_gravity="center"
+    android:gravity="center"
     android:orientation="vertical">
 
     <TextView
+        android:layout_gravity="center"
+        android:text="删除该班级"
         android:id="@+id/tv_menu_msg"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:gravity="center"
-        android:text="删除该项"
-        android:textSize="18sp" />
+        android:textColor="@color/textBlack"
+        android:textSize="16sp" />
 
 </LinearLayout>

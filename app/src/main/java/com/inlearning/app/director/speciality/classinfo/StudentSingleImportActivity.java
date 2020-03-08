@@ -123,8 +123,10 @@ public class StudentSingleImportActivity extends BaseSingleImportActivity implem
 
     private void addStudent() {
         Student student = new Student();
+        ClassInfo classInfo = new ClassInfo();
+        classInfo.setObjectId(mClassInfo.getObjectId());
         student.setSex(mSexEditView.getContent())
-                .setClassInfo(mClassInfo)
+                .setClassInfo(classInfo)
                 .setName(mNameEditView.getContent())
                 .setAccount(mNumberEditView.getContent());
         ClassInfoModel.saveStudent(student, new ClassInfoModel.Callback<Student>() {

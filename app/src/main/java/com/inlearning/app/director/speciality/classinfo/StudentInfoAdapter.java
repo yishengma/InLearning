@@ -3,6 +3,7 @@ package com.inlearning.app.director.speciality.classinfo;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
@@ -37,8 +38,13 @@ public class StudentInfoAdapter extends RecyclerView.Adapter<StudentInfoAdapter.
         return this;
     }
 
+    private float mX;
+    private float mY;
     public interface ClickListener {
         void onClick(Student student);
+
+        void onLongClick(View view, float x, float y, Student student);
+
     }
 
     @NonNull
@@ -66,6 +72,23 @@ public class StudentInfoAdapter extends RecyclerView.Adapter<StudentInfoAdapter.
                 if (mClickListener != null) {
                     mClickListener.onClick(student);
                 }
+            }
+        });
+        viewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                if (mClickListener != null) {
+                    mClickListener.onLongClick(view, mX, mY, student);
+                }
+                return false;
+            }
+        });
+        viewHolder.itemView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                mX = motionEvent.getX();
+                mY = motionEvent.getY();
+                return false;
             }
         });
     }

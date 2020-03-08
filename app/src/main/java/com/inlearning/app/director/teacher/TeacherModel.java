@@ -81,4 +81,16 @@ public class TeacherModel {
         });
 
     }
+
+
+    public static void deleteTeacher(Teacher teacher, final Callback<Teacher> callback) {
+        teacher.delete(new UpdateListener() {
+            @Override
+            public void done(BmobException e) {
+                if (e == null) {
+                    callback.onResult(true, null);
+                }
+            }
+        });
+    }
 }

@@ -3,6 +3,7 @@ package com.inlearning.app.director.speciality;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -16,7 +17,8 @@ public class SpecialityInfoAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     private List<ClassInfo> mClassInfoList;
     private ClickListener mClickListener;
-
+    private float mX;
+    private float mY;
     public SpecialityInfoAdapter setClickListener(ClickListener clickListener) {
         mClickListener = clickListener;
         return this;
@@ -24,6 +26,8 @@ public class SpecialityInfoAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     public interface ClickListener {
         void onClick(ClassInfo classInfo);
+
+        void onLongClick(View view, float x, float y, ClassInfo classInfo);
     }
     public SpecialityInfoAdapter(List<ClassInfo> classInfoList) {
         mClassInfoList = classInfoList;
@@ -58,6 +62,24 @@ public class SpecialityInfoAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                     }
                 }
             });
+            viewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    if (mClickListener != null) {
+                        mClickListener.onLongClick(view, mX, mY, classInfo);
+                    }
+                    return false;
+                }
+            });
+            viewHolder.itemView.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    mX = motionEvent.getX();
+                    mY = motionEvent.getY();
+                    return false;
+                }
+            });
+
         }
         if (viewHolder instanceof SeparateViewHolder) {
             ((SeparateViewHolder) viewHolder).mInfo.setText(classInfo.getSpeciality().getShortName());

@@ -53,8 +53,22 @@ public class CourseModel {
         });
     }
 
+    public static void deleteCourse(final Course2 course, final Callback<Course2> callback) {
+        if (course == null) {
+            return;
+        }
+        course.delete(new UpdateListener() {
+            @Override
+            public void done(BmobException e) {
+                if (e == null) {
+                    callback.onResult(true,null);
+                }
+            }
+        });
+    }
 
-    public static void addCourseList(List<Course2> course2s, final Callback<List<Course2>> callback) {
+    public static void addCourseList(List<Course2> course2s,
+                                     final Callback<List<Course2>> callback) {
         List<BmobObject> list = new ArrayList<BmobObject>(course2s);
         new BmobBatch().insertBatch(list).doBatch(new QueryListListener<BatchResult>() {
             @Override

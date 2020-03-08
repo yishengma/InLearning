@@ -16,6 +16,7 @@ import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.QueryListListener;
 import cn.bmob.v3.listener.SaveListener;
+import cn.bmob.v3.listener.UpdateListener;
 
 public class ClassInfoModel {
 
@@ -67,5 +68,17 @@ public class ClassInfoModel {
             }
         });
 
+    }
+
+
+    public static void deleteStudent(Student student, final Callback<Student> callback) {
+        student.delete(new UpdateListener() {
+            @Override
+            public void done(BmobException e) {
+                if (e == null) {
+                    callback.onResult(true, null);
+                }
+            }
+        });
     }
 }

@@ -145,4 +145,15 @@ public class SpecialityModel {
             }
         });
     }
+
+    public static void deleteClass(ClassInfo classInfo, final Callback<ClassInfo> callback) {
+        classInfo.delete(new UpdateListener() {
+            @Override
+            public void done(BmobException e) {
+                if (e == null) {
+                    callback.onResult(true, null);
+                }
+            }
+        });
+    }
 }
