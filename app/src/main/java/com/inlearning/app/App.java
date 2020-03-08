@@ -3,6 +3,8 @@ package com.inlearning.app;
 import android.app.Application;
 import android.content.Context;
 
+import com.inlearning.app.director.DirectorAppRuntime;
+
 import cn.bmob.v3.Bmob;
 
 public class App extends Application {
@@ -32,6 +34,7 @@ public class App extends Application {
         //.build();
         //Bmob.initialize(config);
         mContext = this;
+        DirectorAppRuntime.setApplicationContext(this);
     }
 
     public static Context getGlobalContext() {

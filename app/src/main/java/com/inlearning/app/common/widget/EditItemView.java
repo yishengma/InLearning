@@ -52,6 +52,10 @@ public class EditItemView extends LinearLayout {
         return this;
     }
 
+    public void setText(String msg) {
+        mTextInputEditText.setText(msg);
+    }
+
 
     public EditItemView setDivideGone() {
         mDivideView.setVisibility(GONE);

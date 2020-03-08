@@ -72,8 +72,12 @@ public class SpecialityModel {
         });
     }
 
-    public static void changeSpeciality(final Speciality speciality, final Callback<Speciality> callback) {
-        speciality.update(new UpdateListener() {
+    public static void updateSpeciality(final Speciality speciality, final Callback<Speciality> callback) {
+        Speciality update = new Speciality();
+        update.setName(speciality.getName())
+                .setShortName(speciality.getShortName())
+                .setClassCount(speciality.getClassCount());
+        update.update(speciality.getObjectId(),new UpdateListener() {
             @Override
             public void done(BmobException e) {
                 Log.i(TAG, "done: %s", e);

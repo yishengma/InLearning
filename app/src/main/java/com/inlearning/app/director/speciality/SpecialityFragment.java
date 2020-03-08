@@ -11,6 +11,7 @@ import com.inlearning.app.R;
 import com.inlearning.app.common.BaseFragment;
 import com.inlearning.app.common.bean.Speciality;
 import com.inlearning.app.common.util.ThreadMgr;
+import com.inlearning.app.director.DirectorAppRuntime;
 
 import java.util.List;
 
@@ -80,6 +81,7 @@ public class SpecialityFragment extends BaseFragment implements View.OnClickList
                 for (Speciality s : specialities) {
                     addSpeciality(true, s);
                 }
+                DirectorAppRuntime.setSpecialities(specialities);
             }
         });
     }

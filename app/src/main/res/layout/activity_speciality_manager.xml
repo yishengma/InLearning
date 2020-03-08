@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/root_view"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:fitsSystemWindows="true"
-    android:orientation="vertical">
+    tools:context=".director.person.SpecialityManagerActivity">
 
     <FrameLayout
+        android:id="@+id/fl_title_bar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize">
 
         <ImageView
-            android:id="@+id/imv_manager_back"
+            android:id="@+id/imv_bar_back"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_gravity="center_vertical"
@@ -19,28 +21,37 @@
             android:src="@drawable/toolbar_back" />
 
         <TextView
-            android:id="@+id/tv_manager_title"
+            android:id="@+id/tv_edit_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="专业信息"
+            android:text="专业管理"
             android:textColor="@color/textBlack"
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/tv_manager_delete"
+            android:id="@+id/tv_edit_manager"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|center_vertical"
             android:layout_marginRight="24dp"
-            android:text="删除"
-            android:textColor="@color/app_global_red"
-            android:textSize="16sp" />
+            android:text="管理"
+            android:textColor="@color/textBlack"
+            android:textSize="16sp"
+            android:visibility="gone" />
     </FrameLayout>
 
+
     <View
+        android:id="@+id/line_divide"
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
+        android:layout_below="@+id/fl_title_bar"
         android:background="@color/app_global_item_divide" />
 
+    <android.support.v7.widget.RecyclerView
+        android:layout_marginTop="12dp"
+        android:id="@+id/rv_speciality"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </LinearLayout>
