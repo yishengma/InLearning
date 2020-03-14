@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 
 import com.inlearning.app.common.bean.ClassInfo;
+import com.inlearning.app.common.bean.Speciality;
 import com.inlearning.app.director.BaseSearchActivity;
+import com.inlearning.app.director.DirectorAppRuntime;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,11 +21,16 @@ public class SpecialityClassSearchActivity extends BaseSearchActivity {
 
     private List<ClassInfo> mClassList;
     private SpecialityInfoAdapter mInfoAdapter;
+    private List<ClassInfo> mTotalClassList;
 
     @Override
     protected void initAdapter() {
+        mTotalClassList = new ArrayList<>();
         mClassList = new ArrayList<>();
         mInfoAdapter = new SpecialityInfoAdapter(mClassList);
+        for (Speciality s : DirectorAppRuntime.getSpecialities()) {
+            mTotalClassList.addAll(s.getClassInfoList());
+        }
     }
 
     @Override
@@ -33,7 +40,13 @@ public class SpecialityClassSearchActivity extends BaseSearchActivity {
 
     @Override
     protected void doSearch(String key) {
-
+        mClassList.clear();
+        for (ClassInfo classInfo: mTotalClassList) {
+            if (classInfo.getName().contains(key)) {
+                mClassList.add(classInfo);
+            }
+        }
+        mInfoAdapter.notifyDataSetChanged();
     }
 
     @Override

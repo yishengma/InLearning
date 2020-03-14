@@ -50,6 +50,18 @@ public class ClassInfoModel {
         });
     }
 
+
+    public static void updateStudent(final Student student, final Callback<Student> callback) {
+        student.update(new UpdateListener() {
+            @Override
+            public void done(BmobException e) {
+                if (e == null) {
+                    callback.onResult(true, student);
+                }
+            }
+        });
+    }
+
     public static void saveStudents(ClassInfo classInfo, List<Student> students, final Callback<Student> callback) {
         List<BmobObject> list = new ArrayList<>();
         ClassInfo newClassInfo = new ClassInfo();

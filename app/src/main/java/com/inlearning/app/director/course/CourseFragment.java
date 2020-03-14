@@ -37,8 +37,8 @@ public class CourseFragment extends BaseFragment implements View.OnClickListener
             return;
         }
         mCourseFragmentList = new ArrayList<>();
-        mCourseFragmentList.add(new CourseInfoFragment());
-        mCourseFragmentList.add(new CourseInfoFragment());
+        mCourseFragmentList.add(new CourseInfoFragment().setFragmentTitle("专业课"));
+        mCourseFragmentList.add(new CourseInfoFragment().setFragmentTitle("选修课"));
         mViewPager = view.findViewById(R.id.vp_content);
         mFragmentAdapter = new CommonFragmentStatePagerAdapter<>(getChildFragmentManager(), mCourseFragmentList);
         mViewPager.setAdapter(mFragmentAdapter);

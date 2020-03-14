@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.inlearning.app.R;
 import com.inlearning.app.common.BaseFragment;
 import com.inlearning.app.common.model.UserModel;
@@ -33,7 +32,7 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
         mNameView = view.findViewById(R.id.tv_name);
         mInfoView = view.findViewById(R.id.tv_info);
         mSpecialityManagerView = view.findViewById(R.id.rl_speciality_manager);
-        Glide.with(this).load(UserModel.getDirector().getProfilePhotoUrl()).into(mProfilePhotoView);
+//        Glide.with(this).load(UserModel.getDirector().getProfilePhotoUrl()).into(mProfilePhotoView);
         mNameView.setText(UserModel.getDirector().getName());
         mInfoView.setText("管理员");
         mSpecialityManagerView.setOnClickListener(this);

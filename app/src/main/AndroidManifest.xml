@@ -34,7 +34,7 @@
         <activity android:name=".director.course.CourseSearchActivity" />
         <activity android:name=".director.speciality.SpecialityClassSearchActivity" />
         <activity android:name=".director.teacher.TeacherSearchActivity" />
-        <activity android:name=".director.speciality.classinfo.StudentInfoActivity" />
+        <activity android:name=".director.speciality.classinfo.StudentEditActivity" />
         <activity android:name=".director.speciality.classinfo.ClassInfoActivity" />
         <activity android:name=".student.ui.QuestionActivity" />
         <activity

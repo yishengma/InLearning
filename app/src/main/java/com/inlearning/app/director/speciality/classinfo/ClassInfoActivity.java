@@ -46,6 +46,11 @@ public class ClassInfoActivity extends AppCompatActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_class_info);
         initView();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         initData();
     }
 
@@ -65,7 +70,7 @@ public class ClassInfoActivity extends AppCompatActivity implements View.OnClick
         mStudentInfoAdapter.setClickListener(new StudentInfoAdapter.ClickListener() {
             @Override
             public void onClick(Student student) {
-                StudentInfoActivity.startActivity(ClassInfoActivity.this, student);
+                StudentEditActivity.startActivity(ClassInfoActivity.this, student);
 
             }
 
@@ -110,7 +115,7 @@ public class ClassInfoActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.imv_bar_search:
-                StudentSearchActivity.startSearchActivity(this);
+                StudentSearchActivity.startSearchActivity(this, (ArrayList<Student>) mStudentList);
                 break;
             case R.id.imv_bar_add:
                 showDialog();

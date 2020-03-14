@@ -2,6 +2,7 @@ package com.inlearning.app.director.speciality.classinfo;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 
 import com.inlearning.app.common.bean.Student;
@@ -17,6 +18,27 @@ public class StudentSearchActivity extends BaseSearchActivity {
         context.startActivity(intent);
     }
 
+    public static void startSearchActivity(Context context, ArrayList<Student> students) {
+        Intent intent = new Intent(context, StudentSearchActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("students",students);
+        intent.putExtra("bundle",bundle);
+        context.startActivity(intent);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getIntentData();
+    }
+
+    private void getIntentData() {
+        Intent intent = getIntent();
+        Bundle bundle = intent.getBundleExtra("bundle");
+        mStudents = (ArrayList<Student>) bundle.getSerializable("students");
+    }
+
+    private ArrayList<Student> mStudents;
     private List<Student> mStudentList;
     private StudentInfoAdapter mInfoAdapter;
 
@@ -33,7 +55,13 @@ public class StudentSearchActivity extends BaseSearchActivity {
 
     @Override
     protected void doSearch(String key) {
-
+        mStudentList.clear();
+        for (Student student: mStudents) {
+            if (student.getName().contains(key) || student.getAccount().contains(key)) {
+                mStudentList.add(student);
+            }
+        }
+        mInfoAdapter.notifyDataSetChanged();
     }
 
     @Override

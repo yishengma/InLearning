@@ -18,6 +18,7 @@ import com.inlearning.app.R;
 import com.inlearning.app.common.BaseFragment;
 import com.inlearning.app.common.bean.Course2;
 import com.inlearning.app.common.util.ThreadMgr;
+import com.inlearning.app.director.DirectorAppRuntime;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -27,6 +28,7 @@ public class CourseInfoFragment extends BaseFragment{
     private RecyclerView mRvCourseInfo;
     private List<Course2> mCourseList;
     private CourseInfoAdapter mCourseInfoAdapter;
+    private String mFragmentTitle;
 
     @Nullable
     @Override
@@ -63,7 +65,12 @@ public class CourseInfoFragment extends BaseFragment{
             @Override
             public void onResult(boolean suc, List<Course2> course2s) {
                 mCourseList.clear();
-                mCourseList.addAll(course2s);
+                for (Course2 c : course2s) {
+                    if (mFragmentTitle.contains(c.getType())) {
+                        mCourseList.add(c);
+                    }
+                }
+                DirectorAppRuntime.setCourse2s(course2s);
                 mCourseInfoAdapter.notifyDataSetChanged();
             }
         });
@@ -168,6 +175,11 @@ public class CourseInfoFragment extends BaseFragment{
                 Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public CourseInfoFragment setFragmentTitle(String fragmentTitle) {
+        mFragmentTitle = fragmentTitle;
+        return this;
     }
 }
 

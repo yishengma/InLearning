@@ -18,6 +18,7 @@ import com.inlearning.app.R;
 import com.inlearning.app.common.BaseFragment;
 import com.inlearning.app.common.bean.Teacher;
 import com.inlearning.app.common.util.ThreadMgr;
+import com.inlearning.app.director.DirectorAppRuntime;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -98,6 +99,7 @@ public class TeacherFragment extends BaseFragment implements View.OnClickListene
                 mTeacherList.clear();
                 mTeacherList.addAll(teachers);
                 mTeacherInfoAdapter.notifyDataSetChanged();
+                DirectorAppRuntime.setTeachers(teachers);
             }
         });
     }
