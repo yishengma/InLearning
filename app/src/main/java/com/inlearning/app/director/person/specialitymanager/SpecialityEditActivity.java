@@ -1,4 +1,4 @@
-package com.inlearning.app.director.person;
+package com.inlearning.app.director.person.specialitymanager;
 
 import android.app.Dialog;
 import android.content.Context;

@@ -19,10 +19,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".director.speciality.SpecialityAddClassActivity"></activity>
+        <activity android:name=".director.person.coursemanager.CourseManagerActivity" />
+        <activity android:name=".director.speciality.SpecialityAddClassActivity" />
         <activity android:name=".director.teacher.TeacherEditActivity" />
-        <activity android:name=".director.person.SpecialityEditActivity" />
-        <activity android:name=".director.person.SpecialityManagerActivity" />
+        <activity android:name=".director.person.specialitymanager.SpecialityEditActivity" />
+        <activity android:name=".director.person.specialitymanager.SpecialityManagerActivity" />
         <activity android:name=".director.speciality.classinfo.StudentExcelImportActivity" />
         <activity android:name=".director.speciality.classinfo.StudentSingleImportActivity" />
         <activity android:name=".director.course.CourseExcelImportActivity" />

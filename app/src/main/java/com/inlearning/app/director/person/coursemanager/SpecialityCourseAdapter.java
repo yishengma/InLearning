@@ -1,4 +1,4 @@
-package com.inlearning.app.director.person;
+package com.inlearning.app.director.person.coursemanager;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -12,11 +12,11 @@ import com.inlearning.app.common.bean.Speciality;
 
 import java.util.List;
 
-public class SpecialityManagerAdapter extends RecyclerView.Adapter<SpecialityManagerAdapter.ViewHolder> {
+public class SpecialityCourseAdapter extends RecyclerView.Adapter<SpecialityCourseAdapter.ViewHolder> {
 
     private List<Speciality> mSpecialities;
 
-    public SpecialityManagerAdapter(List<Speciality> specialities) {
+    public SpecialityCourseAdapter(List<Speciality> specialities) {
         mSpecialities = specialities;
     }
 
@@ -26,7 +26,7 @@ public class SpecialityManagerAdapter extends RecyclerView.Adapter<SpecialityMan
 
     private ClickListener mClickListener;
 
-    public SpecialityManagerAdapter setClickListener(ClickListener clickListener) {
+    public SpecialityCourseAdapter setClickListener(ClickListener clickListener) {
         mClickListener = clickListener;
         return this;
     }
