@@ -59,6 +59,12 @@ public class SpecialityCourseView extends LinearLayout implements View.OnClickLi
         mSpecialityCourseAdapter = new SpecialityCourseAdapter(mSpecialities);
         mRvSpecialityView.setAdapter(mSpecialityCourseAdapter);
         mBackView.setOnClickListener(this);
+        mSpecialityCourseAdapter.setClickListener(new SpecialityCourseAdapter.ClickListener() {
+            @Override
+            public void onClick(Speciality speciality) {
+                SpecialityScheduleActivity.startScheduleActivity(getContext(), speciality);
+            }
+        });
     }
 
     @Override

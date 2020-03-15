@@ -53,4 +53,15 @@ public class Course2 extends BmobObject {
         isSelected = selected;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "Course2{" +
+                "mName='" + mName + '\'' +
+                ", mType='" + mType + '\'' +
+                ", mTime='" + mTime + '\'' +
+                ", mScore='" + mScore + '\'' +
+                ", isSelected=" + isSelected +
+                '}';
+    }
 }
