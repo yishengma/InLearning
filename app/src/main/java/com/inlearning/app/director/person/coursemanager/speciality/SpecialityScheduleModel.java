@@ -1,4 +1,4 @@
-package com.inlearning.app.director.person.coursemanager;
+package com.inlearning.app.director.person.coursemanager.speciality;
 
 import com.inlearning.app.common.bean.Speciality;
 import com.inlearning.app.common.bean.SpecialitySchedule;

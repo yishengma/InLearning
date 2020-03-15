@@ -116,10 +116,9 @@
         </LinearLayout>
     </LinearLayout>
 
-    <com.inlearning.app.director.person.coursemanager.SpecialityCourseView
+    <com.inlearning.app.director.person.coursemanager.speciality.SpecialityCourseView
         android:id="@+id/view_speciality_course"
         android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
 </FrameLayout>

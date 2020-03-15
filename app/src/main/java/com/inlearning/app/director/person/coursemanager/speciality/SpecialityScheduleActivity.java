@@ -1,4 +1,4 @@
-package com.inlearning.app.director.person.coursemanager;
+package com.inlearning.app.director.person.coursemanager.speciality;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -26,7 +26,7 @@ import com.inlearning.app.common.util.ThreadMgr;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.inlearning.app.director.person.coursemanager.CourseActivity.REQUEST_CODE;
+import static com.inlearning.app.director.person.coursemanager.speciality.CourseActivity.REQUEST_CODE;
 
 public class SpecialityScheduleActivity extends AppCompatActivity implements View.OnClickListener, CourseInfoFragment.ClickListener {
 

@@ -1,4 +1,4 @@
-package com.inlearning.app.director.person.coursemanager;
+package com.inlearning.app.director.person.coursemanager.speciality;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

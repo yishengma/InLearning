@@ -1,4 +1,4 @@
-package com.inlearning.app.director.person.coursemanager;
+package com.inlearning.app.director.person.coursemanager.speciality;
 
 import android.app.Activity;
 import android.content.Context;

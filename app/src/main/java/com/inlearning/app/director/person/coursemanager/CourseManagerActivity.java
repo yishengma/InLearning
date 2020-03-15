@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.inlearning.app.R;
 import com.inlearning.app.common.util.StatusBar;
+import com.inlearning.app.director.person.coursemanager.classes.ClassListActivity;
+import com.inlearning.app.director.person.coursemanager.speciality.SpecialityCoursePresenter;
 
 public class CourseManagerActivity extends AppCompatActivity implements View.OnClickListener {
     public static void startActivity(Context context) {
@@ -24,6 +26,7 @@ public class CourseManagerActivity extends AppCompatActivity implements View.OnC
     private View mRootView;
     private LinearLayout mManagerChooseView;
     private SpecialityCoursePresenter mSpecialityPresenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +59,7 @@ public class CourseManagerActivity extends AppCompatActivity implements View.OnC
                 mManagerChooseView.setVisibility(View.GONE);
                 break;
             case R.id.tv_class_course:
+                ClassListActivity.startActivity(CourseManagerActivity.this);
                 break;
         }
     }

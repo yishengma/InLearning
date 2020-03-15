@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context=".director.person.coursemanager.SpecialityScheduleActivity">
+    tools:context=".director.person.coursemanager.speciality.SpecialityScheduleActivity">
 
 
     <FrameLayout
