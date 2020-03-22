@@ -19,7 +19,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".director.person.coursemanager.classes.ClassCourseActivity"></activity>
+        <activity android:name=".teacher.attendclass.CourseChapterActivity"></activity>
+        <activity android:name=".director.person.coursemanager.classes.ClassCourseActivity" />
         <activity android:name=".director.person.coursemanager.classes.ClassListActivity" />
         <activity android:name=".director.person.coursemanager.speciality.CourseActivity" />
         <activity android:name=".director.person.coursemanager.speciality.SpecialityScheduleActivity" />

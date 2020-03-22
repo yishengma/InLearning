@@ -43,7 +43,7 @@ public class AttendClassFragment extends BaseFragment {
         mCourseInfoAdapter.setClickListener(new CourseInfoAdapter.ClickListener() {
             @Override
             public void onClick(Course2 course) {
-
+                CourseChapterActivity.startActivity(getContext(), course);
             }
         });
     }
