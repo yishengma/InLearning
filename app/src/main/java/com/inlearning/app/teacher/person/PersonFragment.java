@@ -1,4 +1,4 @@
-package com.inlearning.app.teacher.fragment;
+package com.inlearning.app.teacher.person;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,18 +9,18 @@ import android.widget.TextView;
 
 import com.inlearning.app.R;
 import com.inlearning.app.common.BaseFragment;
-import com.inlearning.app.common.model.UserModel;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class PersonFragment extends BaseFragment {
+public class PersonFragment extends BaseFragment implements View.OnClickListener {
     private CircleImageView mProfilePhotoView;
     private TextView mNameView;
     private TextView mInfoView;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_person, container, false);
+        View view = inflater.inflate(R.layout.fragment_teacher_person, container, false);
         initView(view);
         return view;
     }
@@ -29,8 +29,14 @@ public class PersonFragment extends BaseFragment {
         mProfilePhotoView = view.findViewById(R.id.cv_profile_photo);
         mNameView = view.findViewById(R.id.tv_name);
         mInfoView = view.findViewById(R.id.tv_info);
-//        Glide.with(this).load(UserModel.getTeacher().getProfilePhotoUrl()).into(mProfilePhotoView);
-        mNameView.setText(UserModel.getTeacher().getName());
-        mInfoView.setText(UserModel.getTeacher().getTitle());
+//        Glide.with(this).load(UserModel.getDirector().getProfilePhotoUrl()).into(mProfilePhotoView);
+//        mNameView.setText(UserModel.getDirector().getName());
+        mInfoView.setText("老师");
+
+    }
+
+    @Override
+    public void onClick(View view) {
+
     }
 }

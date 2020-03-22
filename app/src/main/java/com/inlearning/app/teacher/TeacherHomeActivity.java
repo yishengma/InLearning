@@ -1,4 +1,4 @@
-package com.inlearning.app.teacher.ui;
+package com.inlearning.app.teacher;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,26 +6,39 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.inlearning.app.R;
+import com.inlearning.app.common.BaseFragment;
 import com.inlearning.app.common.adapter.CommonFragmentStatePagerAdapter;
 import com.inlearning.app.common.util.StatusBar;
-import com.inlearning.app.teacher.fragment.PersonFragment;
-import com.inlearning.app.common.BaseFragment;
+import com.inlearning.app.teacher.attendclass.AttendClassFragment;
+import com.inlearning.app.teacher.person.PersonFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TeacherHomeActivity extends AppCompatActivity {
+public class TeacherHomeActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final String TAG = "DirectorHomeActivity";
     private TabLayout mBottomTab;
     private CommonFragmentStatePagerAdapter mFragmentAdapter;
     private ViewPager mViewPager;
     private List<BaseFragment> mHomepageFragmentList;
+    private TextView mBarTitle;
+    private RelativeLayout mTitleBar;
+
+
+    public static void startHomePageActivity(Context context) {
+        Intent intent = new Intent(context, TeacherHomeActivity.class);
+        context.startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_page);
+        setContentView(R.layout.activity_teacher_home_page);
         StatusBar.setStatusBarTranslucent(this);
         StatusBar.setStatusBarDarkMode(this,true);
         mHomepageFragmentList = new ArrayList<>();
@@ -35,9 +48,7 @@ public class TeacherHomeActivity extends AppCompatActivity {
 
     private void initData() {
         mHomepageFragmentList = new ArrayList<>();
-        mHomepageFragmentList.add(new BaseFragment());
-        mHomepageFragmentList.add(new BaseFragment());
-        mHomepageFragmentList.add(new BaseFragment());
+        mHomepageFragmentList.add(new AttendClassFragment());
         mHomepageFragmentList.add(new PersonFragment());
     }
 
@@ -47,21 +58,20 @@ public class TeacherHomeActivity extends AppCompatActivity {
         mFragmentAdapter = new CommonFragmentStatePagerAdapter<>(getSupportFragmentManager(), mHomepageFragmentList);
         mViewPager.setAdapter(mFragmentAdapter);
         mViewPager.setOffscreenPageLimit(2);
+        mBarTitle = findViewById(R.id.bar_title);
+        mTitleBar = findViewById(R.id.fl_title_bar);
         mBottomTab = findViewById(R.id.tl_bottom_tab);
+
         mBottomTab.setSmoothScrollingEnabled(true);
         mBottomTab.setupWithViewPager(mViewPager);
-        mBottomTab.getTabAt(0).setIcon(R.drawable.selector_tab_subscribe);
-        mBottomTab.getTabAt(1).setIcon(R.drawable.selector_tab_hot);
-        mBottomTab.getTabAt(2).setIcon(R.drawable.selector_tab_original);
-        mBottomTab.getTabAt(3).setIcon(R.drawable.selector_tab_excerpt);
-        mBottomTab.getTabAt(0).setText("班级");
-        mBottomTab.getTabAt(1).setText("课后");
-        mBottomTab.getTabAt(2).setText("课程");
-        mBottomTab.getTabAt(3).setText("我的");
+        mBottomTab.getTabAt(0).setIcon(R.drawable.tab_selector_attend_class);
+        mBottomTab.getTabAt(1).setIcon(R.drawable.tab_selector_mine);
+        mBottomTab.getTabAt(0).setText("上课");
+        mBottomTab.getTabAt(1).setText("我的");
     }
 
-    public static void startHomePageActivity(Context context) {
-        Intent intent = new Intent(context, TeacherHomeActivity.class);
-        context.startActivity(intent);
+    @Override
+    public void onClick(View view) {
+
     }
 }

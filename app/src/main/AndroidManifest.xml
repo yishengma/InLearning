@@ -61,7 +61,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".teacher.ui.TeacherHomeActivity" />
+        <activity android:name=".teacher.TeacherHomeActivity" />
         <activity android:name=".director.DirectorHomeActivity" />
         <activity android:name=".director.course.CourseEditActivity" />
 

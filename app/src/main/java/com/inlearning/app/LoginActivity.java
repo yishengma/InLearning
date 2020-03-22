@@ -19,7 +19,7 @@ import com.inlearning.app.common.model.UserModel;
 import com.inlearning.app.common.util.StatusBar;
 import com.inlearning.app.director.DirectorHomeActivity;
 import com.inlearning.app.student.ui.StudentHomeActivity;
-import com.inlearning.app.teacher.ui.TeacherHomeActivity;
+import com.inlearning.app.teacher.TeacherHomeActivity;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
@@ -104,6 +104,8 @@ public class LoginActivity extends AppCompatActivity {
             type = User.Type.STUDENT;
         } else if (mTeacherView.isChecked()) {
             type = User.Type.TEACHER;
+            TeacherHomeActivity.startHomePageActivity(LoginActivity.this);
+            return;
         } else if (mDirectorView.isChecked()) {
             type = User.Type.DIRECTOR;
         }
