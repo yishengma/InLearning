@@ -21,7 +21,7 @@ public class PersonFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_person, container, false);
+        View view = inflater.inflate(R.layout.fragment_director_person, container, false);
         initView(view);
         return view;
     }

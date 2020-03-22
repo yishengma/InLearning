@@ -27,7 +27,7 @@ public class StudentHomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_page);
+        setContentView(R.layout.activity_director_home_page);
         StatusBar.setStatusBarTranslucent(this);
         StatusBar.setStatusBarDarkMode(this,true);
         mHomepageFragmentList = new ArrayList<>();

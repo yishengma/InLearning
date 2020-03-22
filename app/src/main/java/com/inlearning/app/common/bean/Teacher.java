@@ -1,11 +1,8 @@
 package com.inlearning.app.common.bean;
 
-import cn.bmob.v3.BmobObject;
-
-public class Teacher extends BmobObject {
+public class Teacher extends User {
     private String mJobNumber;
     private String mTitle;
-    private String mName;
     private boolean isSelected;//不做Bmob
     public String getTitle() {
         return mTitle == null ? "" : mTitle;

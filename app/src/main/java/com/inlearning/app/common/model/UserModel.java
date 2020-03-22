@@ -5,7 +5,9 @@ import com.inlearning.app.common.bean.Director;
 import com.inlearning.app.common.bean.Student;
 import com.inlearning.app.common.bean.Teacher;
 import com.inlearning.app.common.bean.User;
+
 import java.util.List;
+
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
@@ -50,9 +52,9 @@ public class UserModel {
                             sTeacher = null;
                         } else {
                             sTeacher = list.get(0);
-//                            sTeacher.setType(User.Type.TEACHER);
+                            sTeacher.setType(User.Type.TEACHER);
                         }
-//                        callback.onResult(sTeacher);
+                        callback.onResult(sTeacher);
                     }
                 });
                 break;

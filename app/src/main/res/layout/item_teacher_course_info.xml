@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:clickable="true"
+    android:background="@drawable/bg_item_click"
+    android:orientation="vertical">
+
+    <CheckBox
+        android:id="@+id/btn_select"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="12dp"
+        android:background="@drawable/bg_rbtn_selector"
+        android:buttonTint="@color/app_global_blue"
+        android:visibility="visible" />
+    <!--    <android.support.v7.widget.CardView-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="140dp"-->
+    <!--        android:layout_marginStart="10dp"-->
+    <!--        android:layout_marginTop="6dp"-->
+    <!--        android:layout_marginEnd="10dp"-->
+    <!--        android:layout_marginBottom="6dp"-->
+    <!--        app:cardElevation ="5dp"-->
+    <!--        app:cardCornerRadius="5dp">-->
+
+    <RelativeLayout
+        android:layout_toRightOf="@+id/btn_select"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="12dp"
+        >
+
+        <TextView
+            android:id="@+id/tv_course_name"
+            android:layout_alignTop="@+id/imv_course_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="计算机科学与技术"
+            android:textColor="@color/textBlack"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_course_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_course_name"
+            android:layout_marginTop="5dp"
+            android:text="1019月第二学期"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_course_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_course_name"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@+id/tv_course_time"
+            android:text="专业课"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_course_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_course_type"
+            android:layout_marginTop="15dp"
+            android:text="1019月第二学期"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/imv_course_icon"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="24dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/viewpage_guide_3" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/app_global_item_divide" />
+
+    <!--    </android.support.v7.widget.CardView>-->
+</RelativeLayout>
