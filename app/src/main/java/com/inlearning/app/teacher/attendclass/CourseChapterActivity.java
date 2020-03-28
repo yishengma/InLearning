@@ -14,6 +14,7 @@ import com.inlearning.app.R;
 import com.inlearning.app.common.bean.Course2;
 import com.inlearning.app.common.bean.CourseChapter;
 import com.inlearning.app.common.util.StatusBar;
+import com.inlearning.app.common.util.ThreadMgr;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +28,7 @@ public class CourseChapterActivity extends AppCompatActivity implements View.OnC
     }
 
     private ImageView mBackView;
+    private TextView mAddView;
     private TextView mTitleView;
     private Course2 mCourse2;
     private RecyclerView mRvChapter;
@@ -44,10 +46,18 @@ public class CourseChapterActivity extends AppCompatActivity implements View.OnC
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        initData();
+    }
+
+    @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.imv_bar_back:
                 finish();
+                break;
+            case R.id.imv_bar_add:
                 break;
         }
     }
@@ -55,20 +65,12 @@ public class CourseChapterActivity extends AppCompatActivity implements View.OnC
     private void initView() {
         mBackView = findViewById(R.id.imv_bar_back);
         mTitleView = findViewById(R.id.tv_edit_title);
+        mAddView = findViewById(R.id.tv_bar_add);
         mBackView.setOnClickListener(this);
+        mAddView.setOnClickListener(this);
         mTitleView.setText(mCourse2.getName());
         mRvChapter = findViewById(R.id.rv_chapter);
         mChapters = new ArrayList<>();
-        mChapters.add(new CourseChapter());
-        mChapters.add(new CourseChapter());
-        mChapters.add(new CourseChapter());
-        mChapters.add(new CourseChapter());
-        mChapters.add(new CourseChapter());
-        mChapters.add(new CourseChapter());
-        mChapters.add(new CourseChapter());
-        mChapters.add(new CourseChapter());
-        mChapters.add(new CourseChapter());
-        mChapters.add(new CourseChapter());
         mChapterAdapter = new CourseChapterAdapter(mChapters);
         mRvChapter.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mRvChapter.setAdapter(mChapterAdapter);
@@ -77,4 +79,25 @@ public class CourseChapterActivity extends AppCompatActivity implements View.OnC
     private void getIntentData() {
         mCourse2 = (Course2) getIntent().getSerializableExtra("course");
     }
+
+    private void initData() {
+        CourseModel.getCourseChapter(mCourse2, new CourseModel.Callback<List<CourseChapter>>() {
+            @Override
+            public void onResult(List<CourseChapter> courseChapters) {
+                updateChapters(courseChapters);
+            }
+        });
+    }
+
+    private void updateChapters(final List<CourseChapter> courseChapters) {
+        ThreadMgr.getInstance().postToUIThread(new Runnable() {
+            @Override
+            public void run() {
+                mChapters.clear();
+                mChapters.addAll(courseChapters);
+                mChapterAdapter.notifyDataSetChanged();
+            }
+        });
+    }
+
 }

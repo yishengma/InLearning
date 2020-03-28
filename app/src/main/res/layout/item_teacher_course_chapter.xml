@@ -4,7 +4,7 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/tv_time"
+        android:id="@+id/tv_chapter_num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="24dp"
@@ -18,7 +18,7 @@
         android:id="@+id/tv_chapter_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_time"
+        android:layout_below="@id/tv_chapter_num"
         android:layout_marginLeft="24dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
@@ -28,6 +28,7 @@
         android:textSize="16sp" />
 
     <ImageView
+        android:id="@+id/imv_video_play"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_alignTop="@+id/tv_chapter_name"
@@ -43,201 +44,50 @@
         android:layout_marginTop="20dp"
         android:background="@color/split_line" />
 
-    <RelativeLayout
-        android:id="@+id/time_view"
+    <com.inlearning.app.teacher.attendclass.ChapterFuncItemView
+        android:id="@+id/func_time_view"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_below="@id/split_line"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_item_click" />
 
-        <ImageView
-            android:id="@+id/imv_time"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="24dp"
-            android:src="@drawable/icon_time_blue" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="20dp"
-            android:layout_toRightOf="@id/imv_time"
-            android:text="时间"
-            android:textColor="@color/app_global_blue"
-            android:textSize="16sp" />
-
-        <ImageView
-            android:layout_width="12dp"
-            android:layout_height="12dp"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="24dp"
-            android:src="@drawable/guide_arrow" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/material_view"
+    <com.inlearning.app.teacher.attendclass.ChapterFuncItemView
+        android:id="@+id/func_material_view"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_below="@id/time_view"
-        android:layout_marginTop="10dp">
+        android:layout_below="@id/split_line"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_item_click" />
 
-        <ImageView
-            android:id="@+id/imv_material"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="24dp"
-            android:src="@drawable/icon_material_blue" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="20dp"
-            android:layout_toRightOf="@id/imv_material"
-            android:text="资料"
-            android:textColor="@color/app_global_blue"
-            android:textSize="16sp" />
-
-        <ImageView
-            android:layout_width="12dp"
-            android:layout_height="12dp"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="24dp"
-            android:src="@drawable/guide_arrow" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/exercise_view"
+    <com.inlearning.app.teacher.attendclass.ChapterFuncItemView
+        android:id="@+id/func_exercise_view"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_below="@id/material_view"
-        android:layout_marginTop="10dp">
+        android:layout_below="@id/split_line"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_item_click" />
 
-        <ImageView
-            android:id="@+id/imv_exercise"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="24dp"
-            android:src="@drawable/icon_prative_blue" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="20dp"
-            android:layout_toRightOf="@id/imv_exercise"
-            android:text="练习"
-            android:textColor="@color/app_global_blue"
-            android:textSize="16sp" />
-
-        <ImageView
-            android:layout_width="12dp"
-            android:layout_height="12dp"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="24dp"
-            android:src="@drawable/guide_arrow" />
-
-    </RelativeLayout>
-
-
-    <RelativeLayout
-        android:id="@+id/homework_view"
+    <com.inlearning.app.teacher.attendclass.ChapterFuncItemView
+        android:id="@+id/func_homework_view"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_below="@id/exercise_view"
-        android:layout_marginTop="10dp">
+        android:layout_below="@id/split_line"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_item_click" />
 
-        <ImageView
-            android:id="@+id/imv_homework"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="24dp"
-            android:src="@drawable/icon_homework_blue" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="20dp"
-            android:layout_toRightOf="@id/imv_homework"
-            android:text="作业"
-            android:textColor="@color/app_global_blue"
-            android:textSize="16sp" />
-
-        <ImageView
-            android:layout_width="12dp"
-            android:layout_height="12dp"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="24dp"
-            android:src="@drawable/guide_arrow" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/discuss_view"
+    <com.inlearning.app.teacher.attendclass.ChapterFuncItemView
+        android:id="@+id/func_discuss_view"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_below="@id/homework_view"
-        android:layout_marginTop="10dp">
-
-        <ImageView
-            android:id="@+id/imv_discuss"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="24dp"
-            android:src="@drawable/icon_dicuss_gray" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="20dp"
-            android:layout_toRightOf="@id/imv_discuss"
-            android:text="讨论"
-            android:textColor="#FF777777"
-            android:textSize="16sp" />
-
-        <ImageView
-            android:layout_width="12dp"
-            android:layout_height="12dp"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="24dp"
-            android:src="@drawable/guide_arrow" />
-    </RelativeLayout>
-
+        android:layout_below="@id/split_line"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_item_click" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="10dp"
-        android:layout_below="@+id/discuss_view"
+        android:layout_below="@+id/func_discuss_view"
         android:layout_marginTop="20dp"
         android:background="@color/split_line" />
 </RelativeLayout>
