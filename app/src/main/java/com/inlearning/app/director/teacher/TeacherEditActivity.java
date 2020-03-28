@@ -15,10 +15,13 @@ import android.widget.Toast;
 
 import com.inlearning.app.R;
 import com.inlearning.app.common.bean.Teacher;
+import com.inlearning.app.common.bean.TeacherCourse;
 import com.inlearning.app.common.util.PixeUtil;
 import com.inlearning.app.common.util.StatusBar;
 import com.inlearning.app.common.util.ThreadMgr;
 import com.inlearning.app.common.widget.EditItemView;
+
+import java.util.List;
 
 import static android.view.Gravity.CENTER;
 
@@ -35,6 +38,7 @@ public class TeacherEditActivity extends AppCompatActivity {
     private EditItemView mNameEditView;
     private EditItemView mJonNumberEditView;
     private EditItemView mTitleEditView;
+    private TeaAddCoursePresenter mTeaAddCoursePresenter;
     private TextView mSaveView;
     private Teacher mTeacher;
 
@@ -47,8 +51,24 @@ public class TeacherEditActivity extends AppCompatActivity {
         getIntentData();
         initView();
         initSaveButton();
+        initData();
     }
 
+    private void initData() {
+        TeacherModel.getTeacherCourse(new TeacherModel.Callback<List<TeacherCourse>>() {
+            @Override
+            public void onResult(boolean suc, final List<TeacherCourse> teacherCourses) {
+                ThreadMgr.getInstance().postToUIThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        for (TeacherCourse courses : teacherCourses) {
+                            mTeaAddCoursePresenter.addCourse(courses.getCourse2());
+                        }
+                    }
+                });
+            }
+        });
+    }
 
     private void getIntentData() {
         Intent intent = getIntent();
@@ -78,6 +98,8 @@ public class TeacherEditActivity extends AppCompatActivity {
         mRootView.addView(mJonNumberEditView);
         mRootView.addView(mNameEditView);
         mRootView.addView(mTitleEditView);
+        mTeaAddCoursePresenter = new TeaAddCoursePresenter(this);
+        mRootView.addView(mTeaAddCoursePresenter.getEditView());
     }
 
     private void initSaveButton() {
@@ -100,16 +122,16 @@ public class TeacherEditActivity extends AppCompatActivity {
                 mTeacher.setJobNumber(mJonNumberEditView.getContent())
                         .setTitle(mTitleEditView.getContent())
                         .setName(mNameEditView.getContent());
-                TeacherModel.updateTeacher(mTeacher, new TeacherModel.Callback<Teacher>() {
-                    @Override
-                    public void onResult(boolean suc, Teacher teacher) {
-                        if (suc) {
-                            showToast("更新成功");
-                            finish();
-
-                        }
-                    }
-                });
+                TeacherModel.updateTeacher(mTeacher, mTeaAddCoursePresenter.getCourse2s(),
+                        new TeacherModel.Callback<Teacher>() {
+                            @Override
+                            public void onResult(boolean suc, Teacher teacher) {
+                                if (suc) {
+                                    showToast("更新成功");
+                                    finish();
+                                }
+                            }
+                        });
             }
         });
     }
