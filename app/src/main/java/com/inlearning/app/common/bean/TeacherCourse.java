@@ -2,6 +2,8 @@ package com.inlearning.app.common.bean;
 
 import cn.bmob.v3.BmobObject;
 
+//一个老师可以教多门课
+//一门课可以被多个老师教
 public class TeacherCourse extends BmobObject {
 
     private Teacher mTeacher;
