@@ -8,8 +8,8 @@ import cn.bmob.v3.datatype.BmobPointer;
 //一个章节对应一门课，一门课下有多个章节
 
 public class CourseChapter extends BmobObject {
-    private BmobPointer mTeacher;
-    private BmobPointer mCourse2;
+    private Teacher mTeacher;
+    private Course2 mCourse2;
     private int mChapterNum;
     private String mChapterName;
     private BmobFile mVideoFile;
@@ -52,19 +52,11 @@ public class CourseChapter extends BmobObject {
         mDeadLine = deadLine;
     }
 
-    public BmobPointer getTeacher() {
-        return mTeacher;
-    }
-
-    public void setTeacher(BmobPointer teacher) {
+    public void setTeacher(Teacher teacher) {
         mTeacher = teacher;
     }
 
-    public BmobPointer getCourse2() {
-        return mCourse2;
-    }
-
-    public void setCourse2(BmobPointer course2) {
+    public void setCourse2(Course2 course2) {
         mCourse2 = course2;
     }
 

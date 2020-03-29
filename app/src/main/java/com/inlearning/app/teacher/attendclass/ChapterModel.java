@@ -14,7 +14,7 @@ import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
 
-public class CourseModel {
+public class ChapterModel {
 
     public interface Callback<T> {
         void onResult(T t);

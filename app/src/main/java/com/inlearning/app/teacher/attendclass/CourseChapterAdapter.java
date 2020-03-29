@@ -38,7 +38,7 @@ public class CourseChapterAdapter extends RecyclerView.Adapter<CourseChapterAdap
 
         void onExerciseClick();
 
-        void onMatirailClick();
+        void onMaterialClick();
 
         void onHomeworkClick();
 
@@ -106,7 +106,7 @@ public class CourseChapterAdapter extends RecyclerView.Adapter<CourseChapterAdap
             @Override
             public void onClick() {
                 if (mOnClickListener != null) {
-                    mOnClickListener.onMatirailClick();
+                    mOnClickListener.onMaterialClick();
                 }
             }
         });
@@ -189,10 +189,15 @@ public class CourseChapterAdapter extends RecyclerView.Adapter<CourseChapterAdap
             mChapterNameView = itemView.findViewById(R.id.tv_chapter_name);
             mVideoView = itemView.findViewById(R.id.imv_video_play);
             mTimeFuncView = itemView.findViewById(R.id.func_time_view);
+            mTimeFuncView.setText("时间");
             mMaterialFuncView = itemView.findViewById(R.id.func_material_view);
+            mMaterialFuncView.setText("资料");
             mExerciseFuncView = itemView.findViewById(R.id.func_exercise_view);
+            mExerciseFuncView.setText("练习");
             mHomeworkFuncView = itemView.findViewById(R.id.func_homework_view);
+            mHomeworkFuncView.setText("作业");
             mDiscussFuncView = itemView.findViewById(R.id.func_discuss_view);
+            mDiscussFuncView.setText("讨论");
         }
     }
 }
