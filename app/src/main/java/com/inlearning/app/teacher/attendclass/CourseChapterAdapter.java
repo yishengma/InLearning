@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -15,11 +16,13 @@ import com.inlearning.app.common.bean.CourseChapter;
 
 import java.util.List;
 
-public class CourseChapterAdapter extends RecyclerView.Adapter<CourseChapterAdapter.ViewHolder> {
-    private List<CourseChapter> mCourseChapters;
+import cn.bmob.v3.util.V;
 
-    public CourseChapterAdapter(List<CourseChapter> lessonTasks) {
-        mCourseChapters = lessonTasks;
+public class CourseChapterAdapter extends RecyclerView.Adapter<CourseChapterAdapter.ViewHolder> {
+    private List<ChapterProxy> mCourseChapters;
+
+    public CourseChapterAdapter(List<ChapterProxy> chapterProxies) {
+        mCourseChapters = chapterProxies;
     }
 
     private OnClickListener mOnClickListener;
@@ -32,7 +35,7 @@ public class CourseChapterAdapter extends RecyclerView.Adapter<CourseChapterAdap
 
         void onTitleClick();
 
-        void onVideoClick();
+        void onVideoClick(CourseChapter chapter);
 
         void onTimeClick();
 
@@ -55,7 +58,8 @@ public class CourseChapterAdapter extends RecyclerView.Adapter<CourseChapterAdap
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        final CourseChapter chapter = mCourseChapters.get(i);
+        ChapterProxy proxy = mCourseChapters.get(i);
+        final CourseChapter chapter = proxy.getChapter();
         viewHolder.mChapterNumView.setText(String.format("第%s节", chapter.getChapterNum()));
         viewHolder.mChapterNameView.setText(chapter.getChapterName());
         viewHolder.mChapterNameView.setOnClickListener(new View.OnClickListener() {
@@ -67,12 +71,17 @@ public class CourseChapterAdapter extends RecyclerView.Adapter<CourseChapterAdap
             }
         });
         viewHolder.mVideoView.setImageResource(R.drawable.imv_play);
-
+        if (proxy.getProgress() == 0) {
+            viewHolder.mProgressBar.setVisibility(View.GONE);
+        } else {
+            viewHolder.mProgressBar.setVisibility(View.VISIBLE);
+            viewHolder.mProgressBar.setProgress(proxy.getProgress());
+        }
         viewHolder.mVideoView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mOnClickListener != null) {
-                    mOnClickListener.onVideoClick();
+                    mOnClickListener.onVideoClick(chapter);
                 }
             }
         });
@@ -182,12 +191,14 @@ public class CourseChapterAdapter extends RecyclerView.Adapter<CourseChapterAdap
         private ChapterFuncItemView mExerciseFuncView;
         private ChapterFuncItemView mHomeworkFuncView;
         private ChapterFuncItemView mDiscussFuncView;
+        private ProgressBar mProgressBar;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             mChapterNumView = itemView.findViewById(R.id.tv_chapter_num);
             mChapterNameView = itemView.findViewById(R.id.tv_chapter_name);
             mVideoView = itemView.findViewById(R.id.imv_video_play);
+            mProgressBar = itemView.findViewById(R.id.view_progress);
             mTimeFuncView = itemView.findViewById(R.id.func_time_view);
             mTimeFuncView.setText("时间");
             mMaterialFuncView = itemView.findViewById(R.id.func_material_view);

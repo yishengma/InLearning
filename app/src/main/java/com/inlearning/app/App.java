@@ -3,7 +3,11 @@ package com.inlearning.app;
 import android.app.Application;
 import android.content.Context;
 
+import com.dueeeke.videoplayer.ijk.IjkPlayerFactory;
+import com.dueeeke.videoplayer.player.VideoViewConfig;
+import com.dueeeke.videoplayer.player.VideoViewManager;
 import com.inlearning.app.director.DirectorAppRuntime;
+import com.inlearning.app.teacher.TeacherRuntime;
 
 import cn.bmob.v3.Bmob;
 
@@ -35,6 +39,15 @@ public class App extends Application {
         //Bmob.initialize(config);
         mContext = this;
         DirectorAppRuntime.setApplicationContext(this);
+        TeacherRuntime.setApplicationContext(this);
+        VideoViewManager.setConfig(VideoViewConfig.newBuilder()
+                //使用使用IjkPlayer解码
+                .setPlayerFactory(IjkPlayerFactory.create())
+                //使用ExoPlayer解码
+                //.setPlayerFactory(ExoMediaPlayerFactory.create())
+                //使用MediaPlayer解码
+                //.setPlayerFactory(AndroidMediaPlayerFactory.create())
+                .build());
     }
 
     public static Context getGlobalContext() {

@@ -33,8 +33,23 @@
         android:layout_height="24dp"
         android:layout_alignTop="@+id/tv_chapter_name"
         android:layout_alignParentEnd="true"
-        android:layout_marginRight="24dp"
+        android:layout_marginRight="42dp"
         android:src="@drawable/imv_play" />
+
+
+    <ProgressBar
+        android:id="@+id/view_progress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="60dp"
+        android:layout_height="3dp"
+        android:layout_below="@id/imv_video_play"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="24dp"
+        android:max="100"
+        android:progress="10"
+        android:progressDrawable="@drawable/bg_lesson_progress" />
+
 
     <View
         android:id="@+id/split_line"

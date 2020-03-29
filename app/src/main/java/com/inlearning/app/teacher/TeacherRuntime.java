@@ -1,5 +1,7 @@
 package com.inlearning.app.teacher;
 
+import android.content.Context;
+
 import com.inlearning.app.common.bean.ClassSchedule;
 import com.inlearning.app.common.bean.Teacher;
 
@@ -10,6 +12,7 @@ public class TeacherRuntime {
 
     private static List<ClassSchedule> mSchedules;
     private static Teacher mCurrentTeacher;
+    private static Context sContext;
 
     public static List<ClassSchedule> getSchedules() {
         if (mSchedules == null) {
@@ -29,5 +32,10 @@ public class TeacherRuntime {
 
     public static void setCurrentTeacher(Teacher mCurrentTeacher) {
         TeacherRuntime.mCurrentTeacher = mCurrentTeacher;
+    }
+
+
+    public static void setApplicationContext(Context mContext) {
+        sContext = mContext;
     }
 }

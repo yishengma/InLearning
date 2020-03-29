@@ -16,17 +16,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.inlearning.app.R;
+import com.inlearning.app.common.bean.Course;
 import com.inlearning.app.common.bean.Course2;
 import com.inlearning.app.common.bean.CourseChapter;
 import com.inlearning.app.common.util.StatusBar;
 import com.inlearning.app.common.util.ThreadMgr;
+import com.inlearning.app.teacher.attendclass.func.ChapterFunctionActivity;
+import com.inlearning.app.teacher.attendclass.func.video.VideoUploadMgr;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.datatype.BmobPointer;
 
-public class CourseChapterActivity extends AppCompatActivity implements View.OnClickListener {
+public class CourseChapterActivity extends AppCompatActivity implements View.OnClickListener, VideoUploadMgr.UploadListener {
 
     public static void startActivity(Context context, Course2 course2) {
         Intent intent = new Intent(context, CourseChapterActivity.class);
@@ -40,7 +44,7 @@ public class CourseChapterActivity extends AppCompatActivity implements View.OnC
     private Course2 mCourse2;
     private RecyclerView mRvChapter;
     private CourseChapterAdapter mChapterAdapter;
-    private List<CourseChapter> mChapters;
+    private List<ChapterProxy> mChapters;
     private Dialog mChapterDialog;
 
     @Override
@@ -51,6 +55,7 @@ public class CourseChapterActivity extends AppCompatActivity implements View.OnC
         setContentView(R.layout.activity_course_chapter);
         getIntentData();
         initView();
+        VideoUploadMgr.getInstance().addListener(this);
     }
 
     @Override
@@ -86,37 +91,38 @@ public class CourseChapterActivity extends AppCompatActivity implements View.OnC
         mChapterAdapter.setOnClickListener(new CourseChapterAdapter.OnClickListener() {
             @Override
             public void onTitleClick() {
-                Log.e("ethan","onTitleClick");
+                Log.e("ethan", "onTitleClick");
             }
 
             @Override
-            public void onVideoClick() {
-                Log.e("ethan","onVideoClick");
+            public void onVideoClick(CourseChapter chapter) {
+                Log.e("ethan", "onVideoClick");
+                ChapterFunctionActivity.startActivity(CourseChapterActivity.this, chapter, ChapterFunctionActivity.FLAG.VIDEO_FUNCTION);
             }
 
             @Override
             public void onTimeClick() {
-                Log.e("ethan","onTimeClick");
+                Log.e("ethan", "onTimeClick");
             }
 
             @Override
             public void onExerciseClick() {
-                Log.e("ethan","onExerciseClick");
+                Log.e("ethan", "onExerciseClick");
             }
 
             @Override
             public void onMaterialClick() {
-                Log.e("ethan","onMaterialClick");
+                Log.e("ethan", "onMaterialClick");
             }
 
             @Override
             public void onHomeworkClick() {
-                Log.e("ethan","onHomeworkClick");
+                Log.e("ethan", "onHomeworkClick");
             }
 
             @Override
             public void onDiscussClick() {
-                Log.e("ethan","onDiscussClick");
+                Log.e("ethan", "onDiscussClick");
             }
         });
     }
@@ -139,7 +145,7 @@ public class CourseChapterActivity extends AppCompatActivity implements View.OnC
             @Override
             public void run() {
                 mChapters.clear();
-                mChapters.addAll(courseChapters);
+                mChapters.addAll(ChapterProxy.transfer(courseChapters));
                 mChapterAdapter.notifyDataSetChanged();
             }
         });
@@ -186,7 +192,7 @@ public class CourseChapterActivity extends AppCompatActivity implements View.OnC
             @Override
             public void run() {
                 if (chapter != null) {
-                    mChapters.add(chapter);
+                    mChapters.add(new ChapterProxy(chapter, 0));
                     mChapterAdapter.notifyDataSetChanged();
                     mChapterDialog.dismiss();
                     return;
@@ -195,5 +201,35 @@ public class CourseChapterActivity extends AppCompatActivity implements View.OnC
 
             }
         });
+    }
+
+    @Override
+    public void onProgress(final CourseChapter chapter, final int progress) {
+        ThreadMgr.getInstance().postToUIThread(new Runnable() {
+            @Override
+            public void run() {
+                ChapterProxy proxy = ChapterProxy.getChapterProxy(mChapters, chapter);
+                if (chapter.getChapterNum() <= mChapters.size() && proxy != null) {
+                    proxy.setProgress(progress);
+                }
+                mChapterAdapter.notifyItemChanged(chapter.getChapterNum() - 1);
+            }
+        });
+    }
+
+    @Override
+    public void onUploadDone(final CourseChapter chapter, BmobFile file) {
+        ThreadMgr.getInstance().postToUIThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(CourseChapterActivity.this, chapter.getChapterName() + "上传成功", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        VideoUploadMgr.getInstance().removeListener(this);
     }
 }
