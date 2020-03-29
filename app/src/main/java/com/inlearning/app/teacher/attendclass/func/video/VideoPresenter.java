@@ -26,7 +26,6 @@ public class VideoPresenter implements VideoUploadMgr.UploadListener {
 
     private Activity mContext;
     private VideoFunctionView mVideoFunctionView;
-    private Uri mVideoUri;
     private String mPath;
     private CourseChapter mChapter;
 
@@ -63,6 +62,15 @@ public class VideoPresenter implements VideoUploadMgr.UploadListener {
         mChapter = chapter;
     }
 
+    public void show() {
+        mVideoFunctionView.setVisibility(View.VISIBLE);
+        if (!TextUtils.isEmpty(mChapter.getVideoFile().getFileUrl())) {
+            mVideoFunctionView.setVideoUrl(mChapter.getVideoFile().getFileUrl());
+        }
+        mVideoFunctionView.setTitle(mChapter.getChapterName());
+
+    }
+
     private void pickVideo(Activity context) {
         Intent intent = new Intent();
         if (Build.VERSION.SDK_INT < 19) {
@@ -83,7 +91,6 @@ public class VideoPresenter implements VideoUploadMgr.UploadListener {
         }
 
         mVideoFunctionView.setVideoUrl(uri.toString());
-        mVideoUri = uri;
         mPath = FileUtil.getChooseFileResultPath(mContext, uri);
         Log.e("ethan", "get video uri:" + mPath);
     }

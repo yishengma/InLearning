@@ -3,6 +3,9 @@
     <color name="colorBackground">#f1f0f6</color>
     <color name="colorDefault">#ffffff</color>
     <color name="colorText">#9b9b9b</color>
+    <color name="dkplayer_background_color">#4D000000</color>
+    <color name="dkplayer_theme_color">#2196f3</color>
+    <color name="dkplayer_theme_color_translucent">#992196f3</color>
     <declare-styleable name="Search_View">
         <attr name="textSizeSearch" format="dimension" />
         <attr name="textColorSearch" format="color" />

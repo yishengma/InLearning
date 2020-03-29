@@ -80,6 +80,12 @@ public class ChapterFunctionActivity extends AppCompatActivity {
         mRootView = findViewById(R.id.root_view);
         mVideoPresenter = new VideoPresenter(this, mRootView);
         mVideoPresenter.setChapter(mChapter);
+        switch (mFunctionFlag) {
+            case FLAG.VIDEO_FUNCTION:
+                mVideoPresenter.show();
+                break;
+        }
+
     }
 
     @Override

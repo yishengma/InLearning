@@ -70,10 +70,15 @@ public class CourseChapterAdapter extends RecyclerView.Adapter<CourseChapterAdap
                 }
             }
         });
-        viewHolder.mVideoView.setImageResource(R.drawable.imv_play);
-        if (proxy.getProgress() == 0) {
+        if (TextUtils.isEmpty(chapter.getVideoFile().getFileUrl())) {
+            viewHolder.mVideoView.setImageResource(R.drawable.icon_play_gray);
             viewHolder.mProgressBar.setVisibility(View.GONE);
         } else {
+            viewHolder.mVideoView.setImageResource(R.drawable.icon_play_blue);
+            viewHolder.mProgressBar.setVisibility(View.VISIBLE);
+            viewHolder.mProgressBar.setProgress(100);
+        }
+        if (proxy.getProgress() != 0 && proxy.getProgress() != 100) {
             viewHolder.mProgressBar.setVisibility(View.VISIBLE);
             viewHolder.mProgressBar.setProgress(proxy.getProgress());
         }

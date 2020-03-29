@@ -29,12 +29,12 @@
 
     <ImageView
         android:id="@+id/imv_video_play"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignTop="@+id/tv_chapter_name"
         android:layout_alignParentEnd="true"
         android:layout_marginRight="42dp"
-        android:src="@drawable/imv_play" />
+        android:src="@drawable/icon_play_gray" />
 
 
     <ProgressBar

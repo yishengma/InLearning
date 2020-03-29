@@ -45,6 +45,7 @@ public class VideoFunctionView extends LinearLayout implements View.OnClickListe
 
     private ImageView mBackView;
     private TextView mTitleView;
+    private TextView mFinishView;
     private VideoView mVideoView;
     private TextView mSelectView;
     private TextView mUploadView;
@@ -56,7 +57,8 @@ public class VideoFunctionView extends LinearLayout implements View.OnClickListe
         mVideoView = view.findViewById(R.id.view_video);
         mSelectView = view.findViewById(R.id.tv_select);
         mUploadView = view.findViewById(R.id.tv_upload);
-
+        mFinishView = view.findViewById(R.id.tv_bar_finish);
+        mFinishView.setOnClickListener(this);
         mBackView.setOnClickListener(this);
         mSelectView.setOnClickListener(this);
         mUploadView.setOnClickListener(this);
