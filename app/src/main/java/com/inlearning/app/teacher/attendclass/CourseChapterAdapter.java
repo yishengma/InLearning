@@ -3,6 +3,7 @@ package com.inlearning.app.teacher.attendclass;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,9 @@ import android.widget.TextView;
 import com.inlearning.app.R;
 import com.inlearning.app.common.bean.CourseChapter;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import cn.bmob.v3.util.V;
@@ -37,7 +41,7 @@ public class CourseChapterAdapter extends RecyclerView.Adapter<CourseChapterAdap
 
         void onVideoClick(CourseChapter chapter);
 
-        void onTimeClick();
+        void onTimeClick(CourseChapter chapter);
 
         void onExerciseClick();
 
@@ -91,9 +95,12 @@ public class CourseChapterAdapter extends RecyclerView.Adapter<CourseChapterAdap
             }
         });
         if (!TextUtils.isEmpty(chapter.getDeadLine())) {
+            Date date = new Date(Long.valueOf(chapter.getDeadLine()));
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            String time = dateFormat.format(date);
             viewHolder.mTimeFuncView.setTextColor(R.color.app_global_blue);
             viewHolder.mTimeFuncView.setIcon(R.drawable.icon_time_blue);
-            viewHolder.mTimeFuncView.setContent(chapter.getDeadLine());
+            viewHolder.mTimeFuncView.setContent(time);
         } else {
             viewHolder.mTimeFuncView.setTextColor(R.color.app_global_gray);
             viewHolder.mTimeFuncView.setIcon(R.drawable.icon_time_gray);
@@ -103,7 +110,7 @@ public class CourseChapterAdapter extends RecyclerView.Adapter<CourseChapterAdap
             @Override
             public void onClick() {
                 if (mOnClickListener != null) {
-                    mOnClickListener.onTimeClick();
+                    mOnClickListener.onTimeClick(chapter);
                 }
             }
         });

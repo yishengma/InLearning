@@ -11,9 +11,7 @@ import android.view.View;
 import com.inlearning.app.R;
 import com.inlearning.app.common.bean.CourseChapter;
 import com.inlearning.app.common.util.StatusBar;
-import com.inlearning.app.teacher.attendclass.func.video.VideoFunctionView;
 import com.inlearning.app.teacher.attendclass.func.video.VideoPresenter;
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -85,7 +83,6 @@ public class ChapterFunctionActivity extends AppCompatActivity {
                 mVideoPresenter.show();
                 break;
         }
-
     }
 
     @Override
@@ -93,4 +90,6 @@ public class ChapterFunctionActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         mVideoPresenter.onActivityResult(requestCode, resultCode, data);
     }
+
+
 }

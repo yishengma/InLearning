@@ -3,6 +3,7 @@ package com.inlearning.app.teacher.attendclass;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
@@ -15,16 +16,24 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bigkoo.pickerview.builder.TimePickerBuilder;
+import com.bigkoo.pickerview.listener.OnDismissListener;
+import com.bigkoo.pickerview.listener.OnTimeSelectListener;
+import com.bigkoo.pickerview.view.TimePickerView;
 import com.inlearning.app.R;
 import com.inlearning.app.common.bean.Course;
 import com.inlearning.app.common.bean.Course2;
 import com.inlearning.app.common.bean.CourseChapter;
 import com.inlearning.app.common.util.StatusBar;
 import com.inlearning.app.common.util.ThreadMgr;
+import com.inlearning.app.director.course.CourseModel;
 import com.inlearning.app.teacher.attendclass.func.ChapterFunctionActivity;
 import com.inlearning.app.teacher.attendclass.func.video.VideoUploadMgr;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import cn.bmob.v3.datatype.BmobFile;
@@ -46,6 +55,8 @@ public class CourseChapterActivity extends AppCompatActivity implements View.OnC
     private CourseChapterAdapter mChapterAdapter;
     private List<ChapterProxy> mChapters;
     private Dialog mChapterDialog;
+    private TimePickerView mTimePickerView;
+    private CourseChapter mCurrentChapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +66,7 @@ public class CourseChapterActivity extends AppCompatActivity implements View.OnC
         setContentView(R.layout.activity_course_chapter);
         getIntentData();
         initView();
+        initPickerView();
         VideoUploadMgr.getInstance().addListener(this);
     }
 
@@ -101,8 +113,10 @@ public class CourseChapterActivity extends AppCompatActivity implements View.OnC
             }
 
             @Override
-            public void onTimeClick() {
+            public void onTimeClick(CourseChapter chapter) {
                 Log.e("ethan", "onTimeClick");
+                mCurrentChapter = chapter;
+                mTimePickerView.show();
             }
 
             @Override
@@ -231,5 +245,50 @@ public class CourseChapterActivity extends AppCompatActivity implements View.OnC
     protected void onDestroy() {
         super.onDestroy();
         VideoUploadMgr.getInstance().removeListener(this);
+    }
+
+    public void initPickerView() {
+        mTimePickerView = new TimePickerBuilder(CourseChapterActivity.this, new OnTimeSelectListener() {
+            @Override
+            public void onTimeSelect(Date date, View v) {
+                updateTime(date.getTime());
+
+            }
+        }).setType(new boolean[]{true, true, true, true, true, false})
+                .setCancelText("取消")
+                .setSubmitText("确认")
+                .setSubCalSize(14)
+                .setContentTextSize(18)
+                .setTitleSize(16)
+                .setTitleText("截止时间")
+                .setOutSideCancelable(true)
+                .isCyclic(true)
+                .setTitleColor(Color.BLACK)
+                .setSubmitColor(Color.parseColor("#FF2196F3"))
+                .setCancelColor(Color.parseColor("#777777"))
+                .setTitleBgColor(Color.WHITE)//标题背景颜色 Night mode
+                .setDividerColor(Color.WHITE)
+                .setBgColor(Color.WHITE)//滚轮背景颜色 Night mode
+                .setLabel("年", "月", "日", "时", "分", "秒")//默认设置为年月日时分秒
+                .isDialog(true)//是否显示为对话框样式
+                .build();
+    }
+
+    private void updateTime(long deadline) {
+        if (mCurrentChapter == null) {
+            return;
+        }
+        mCurrentChapter.setDeadLine(String.valueOf(deadline));
+        ChapterModel.updateCourseChapter(mCurrentChapter, new ChapterModel.Callback<CourseChapter>() {
+            @Override
+            public void onResult(final CourseChapter chapter) {
+                ThreadMgr.getInstance().postToUIThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mChapterAdapter.notifyItemChanged(chapter.getChapterNum() - 1);
+                    }
+                });
+            }
+        });
     }
 }
