@@ -14,4 +14,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <com.inlearning.app.teacher.attendclass.func.material.MaterialView
+        android:id="@+id/view_material_func"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </RelativeLayout>

@@ -116,7 +116,7 @@ public class CourseSearchActivity extends BaseSearchActivity {
 
     private void showDialog(final Course2 course2) {
         final Dialog dialog = new Dialog(CourseSearchActivity.this, R.style.SimpleDialog);//SimpleDialog
-        dialog.setContentView(R.layout.dialog_excel_import);
+        dialog.setContentView(R.layout.dialog_delete);
         TextView titleView = dialog.findViewById(R.id.tv_title);
         titleView.setText("删除");
         TextView infoView = dialog.findViewById(R.id.tv_content);

@@ -110,7 +110,7 @@ public class SpecialityInfoFragment extends BaseFragment {
 
     private void showDialog(final ClassInfo classInfo) {
         final Dialog dialog = new Dialog(getContext(), R.style.SimpleDialog);//SimpleDialog
-        dialog.setContentView(R.layout.dialog_excel_import);
+        dialog.setContentView(R.layout.dialog_delete);
         TextView titleView = dialog.findViewById(R.id.tv_title);
         titleView.setText("删除");
         TextView infoView = dialog.findViewById(R.id.tv_content);

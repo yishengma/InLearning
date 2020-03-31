@@ -96,7 +96,7 @@ public abstract class BaseExcelImportActivity extends AppCompatActivity implemen
 
     private void showUploadDialog() {
         final Dialog dialog = new Dialog(this, R.style.SimpleDialog);//SimpleDialog
-        dialog.setContentView(R.layout.dialog_excel_import);
+        dialog.setContentView(R.layout.dialog_delete);
         TextView titleView = dialog.findViewById(R.id.tv_title);
         titleView.setText(getTitleMsg());
         TextView infoView = dialog.findViewById(R.id.tv_content);

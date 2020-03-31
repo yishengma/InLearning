@@ -45,7 +45,7 @@ public class CourseChapterAdapter extends RecyclerView.Adapter<CourseChapterAdap
 
         void onExerciseClick();
 
-        void onMaterialClick();
+        void onMaterialClick(CourseChapter chapter);
 
         void onHomeworkClick();
 
@@ -127,7 +127,7 @@ public class CourseChapterAdapter extends RecyclerView.Adapter<CourseChapterAdap
             @Override
             public void onClick() {
                 if (mOnClickListener != null) {
-                    mOnClickListener.onMaterialClick();
+                    mOnClickListener.onMaterialClick(chapter);
                 }
             }
         });

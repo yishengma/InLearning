@@ -125,8 +125,10 @@ public class CourseChapterActivity extends AppCompatActivity implements View.OnC
             }
 
             @Override
-            public void onMaterialClick() {
+            public void onMaterialClick(CourseChapter chapter) {
                 Log.e("ethan", "onMaterialClick");
+                ChapterFunctionActivity.startActivity(CourseChapterActivity.this, chapter, ChapterFunctionActivity.FLAG.MATERIAL_FUNCTION);
+
             }
 
             @Override

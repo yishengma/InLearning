@@ -188,7 +188,7 @@ public class ClassInfoActivity extends AppCompatActivity implements View.OnClick
 
     private void showDialog(final Student student) {
         final Dialog dialog = new Dialog(this, R.style.SimpleDialog);//SimpleDialog
-        dialog.setContentView(R.layout.dialog_excel_import);
+        dialog.setContentView(R.layout.dialog_delete);
         TextView titleView = dialog.findViewById(R.id.tv_title);
         titleView.setText("删除");
         TextView infoView = dialog.findViewById(R.id.tv_content);

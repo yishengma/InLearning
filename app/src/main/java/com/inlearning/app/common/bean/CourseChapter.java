@@ -14,10 +14,10 @@ public class CourseChapter extends BmobObject {
     private String mChapterName;
     private BmobFile mVideoFile;
     private String mDeadLine;
-    private int mMaterialCount;
-    private int mExerciseCount;
-    private int mHomeworkCount;
-    private int mDiscussCount;
+    private Integer mMaterialCount;
+    private Integer mExerciseCount;
+    private Integer mHomeworkCount;
+    private Integer mDiscussCount;
 
 
     public int getChapterNum() {

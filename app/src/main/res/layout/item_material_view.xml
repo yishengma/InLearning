@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="68dp"
+    android:background="@drawable/bg_item_click">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imv_material_icon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="12dp"
+        android:layout_toRightOf="@+id/btn_select"
+        android:src="@drawable/viewpage_guide_3" />
+
+    <TextView
+        android:id="@+id/tv_material_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/imv_material_icon"
+        android:ellipsize="end"
+        android:maxWidth="200dp"
+        android:maxLines="2"
+        android:text=""
+        android:textColor="@color/textBlack"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_material_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="24dp"
+        android:gravity="center"
+        android:text="删除"
+        android:textColor="@color/app_global_blue"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tv_material_upload"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="24dp"
+        android:layout_toLeftOf="@+id/tv_material_delete"
+        android:gravity="center"
+        android:text="上传"
+        android:textColor="@color/app_global_blue"
+        android:textSize="14sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="62dp"
+        android:background="@color/app_global_item_divide" />
+</RelativeLayout>

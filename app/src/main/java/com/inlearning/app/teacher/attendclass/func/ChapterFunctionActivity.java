@@ -11,7 +11,9 @@ import android.view.View;
 import com.inlearning.app.R;
 import com.inlearning.app.common.bean.CourseChapter;
 import com.inlearning.app.common.util.StatusBar;
+import com.inlearning.app.teacher.attendclass.func.material.MaterialPresenter;
 import com.inlearning.app.teacher.attendclass.func.video.VideoPresenter;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -19,7 +21,7 @@ import java.lang.annotation.Target;
 
 public class ChapterFunctionActivity extends AppCompatActivity {
 
-    @IntDef({FLAG.VIDEO_FUNCTION})
+    @IntDef({FLAG.VIDEO_FUNCTION, FLAG.MATERIAL_FUNCTION})
     @Retention(RetentionPolicy.SOURCE)
     @Target({ElementType.FIELD, ElementType.LOCAL_VARIABLE, ElementType.PARAMETER})
     public @interface FLAG {
@@ -37,6 +39,7 @@ public class ChapterFunctionActivity extends AppCompatActivity {
     }
 
     private VideoPresenter mVideoPresenter;
+    private MaterialPresenter mMaterialPresenter;
     private View mRootView;
     private int mFunctionFlag = -1;
     private CourseChapter mChapter;
@@ -78,9 +81,13 @@ public class ChapterFunctionActivity extends AppCompatActivity {
         mRootView = findViewById(R.id.root_view);
         mVideoPresenter = new VideoPresenter(this, mRootView);
         mVideoPresenter.setChapter(mChapter);
+        mMaterialPresenter = new MaterialPresenter(this, mChapter);
         switch (mFunctionFlag) {
             case FLAG.VIDEO_FUNCTION:
                 mVideoPresenter.show();
+                break;
+            case FLAG.MATERIAL_FUNCTION:
+                mMaterialPresenter.showMaterialView();
                 break;
         }
     }
@@ -88,7 +95,14 @@ public class ChapterFunctionActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        mVideoPresenter.onActivityResult(requestCode, resultCode, data);
+        switch (mFunctionFlag) {
+            case FLAG.VIDEO_FUNCTION:
+                mVideoPresenter.onActivityResult(requestCode, resultCode, data);
+                break;
+            case FLAG.MATERIAL_FUNCTION:
+                mMaterialPresenter.onActivityResult(requestCode, resultCode, data);
+                break;
+        }
     }
 
 
