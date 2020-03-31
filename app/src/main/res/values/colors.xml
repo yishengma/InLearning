@@ -44,5 +44,6 @@
     <color name="app_global_button_gray">#FF03101B</color>
     <color name="app_global_white">#FFFFFF</color>
     <color name="app_global_item_divide">#DDDDDD</color>
+    <color name="app_global_hint">#C5C3C3</color>
 
 </resources>

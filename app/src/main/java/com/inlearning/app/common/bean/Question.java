@@ -35,7 +35,7 @@ public class Question extends BmobObject {
         int G = 6;
     }
 
-    private BmobPointer mCourseChapter;
+    private CourseChapter mCourseChapter;
     private int mNum;
     private String mQuestionTitle;
     private BmobObject mQuestionImage;
@@ -44,11 +44,11 @@ public class Question extends BmobObject {
     private List<Integer> mChoiceAnswers;
 
 
-    public BmobPointer getCourseChapter() {
+    public CourseChapter getCourseChapter() {
         return mCourseChapter;
     }
 
-    public void setCourseChapter(BmobPointer courseChapter) {
+    public void setCourseChapter(CourseChapter courseChapter) {
         mCourseChapter = courseChapter;
     }
 
