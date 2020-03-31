@@ -32,6 +32,7 @@ import static com.inlearning.app.director.BaseExcelImportActivity.EXCEL_OPEN_REQ
 public class MaterialPresenter {
 
     private MaterialView mMaterialView;
+    private MaterialTbsView mMaterialTbsView;
     private MaterialAdapter mMaterialAdapter;
     private Activity mActivity;
     private List<Materials> mMaterials;
@@ -43,11 +44,14 @@ public class MaterialPresenter {
         mChapter = chapter;
         mMaterials = new ArrayList<>();
         mMaterialView = mActivity.findViewById(R.id.view_material_func);
+        mMaterialTbsView = mActivity.findViewById(R.id.view_material_tbs_view);
         mMaterialAdapter = new MaterialAdapter(mMaterials);
         mMaterialAdapter.setClickListener(new MaterialAdapter.ClickListener() {
             @Override
             public void onClick(Materials materials) {
-
+                mMaterialView.setVisibility(View.GONE);
+                mMaterialTbsView.setVisibility(View.VISIBLE);
+                mMaterialTbsView.openFile(materials.getMaterialName(),materials.getMaterialFile().getFileUrl());
             }
 
             @Override
@@ -63,6 +67,14 @@ public class MaterialPresenter {
             @Override
             public void onDelete(Materials materials) {
                 showDialog(materials);
+            }
+        });
+        mMaterialTbsView.setClickListener(new MaterialTbsView.ClickListener() {
+            @Override
+            public void onBack() {
+                mMaterialView.setVisibility(View.VISIBLE);
+                mMaterialTbsView.setVisibility(View.GONE);
+
             }
         });
         mMaterialView.setClickListener(new MaterialView.ClickListener() {
@@ -212,5 +224,9 @@ public class MaterialPresenter {
                 });
             }
         });
+    }
+
+    public void onDestory() {
+        mMaterialTbsView.onDestroy();
     }
 }

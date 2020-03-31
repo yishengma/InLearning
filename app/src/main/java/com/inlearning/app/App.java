@@ -2,18 +2,27 @@ package com.inlearning.app;
 
 import android.app.Application;
 import android.content.Context;
+import android.util.Log;
 
 import com.dueeeke.videoplayer.ijk.IjkPlayerFactory;
 import com.dueeeke.videoplayer.player.VideoViewConfig;
 import com.dueeeke.videoplayer.player.VideoViewManager;
+import com.inlearning.app.common.util.ThreadMgr;
 import com.inlearning.app.director.DirectorAppRuntime;
 import com.inlearning.app.teacher.TeacherRuntime;
+import com.tencent.smtt.export.external.TbsCoreSettings;
+import com.tencent.smtt.sdk.QbSdk;
+import com.tencent.smtt.sdk.TbsListener;
+
+
+import java.util.HashMap;
 
 import cn.bmob.v3.Bmob;
 
 public class App extends Application {
 
     private static Context mContext;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -48,6 +57,49 @@ public class App extends Application {
                 //使用MediaPlayer解码
                 //.setPlayerFactory(AndroidMediaPlayerFactory.create())
                 .build());
+
+        final QbSdk.PreInitCallback cb = new QbSdk.PreInitCallback() {
+
+            @Override
+            public void onViewInitFinished(boolean arg0) {
+                // TODO Auto-generated method stub
+                Log.e("ethan", " onViewInitFinished is " + arg0);
+            }
+
+            @Override
+            public void onCoreInitFinished() {
+                // TODO Auto-generated method stub
+
+            }
+        };
+        QbSdk.setTbsListener(new TbsListener() {
+            @Override
+            public void onDownloadFinish(int i) {
+                Log.d("ethan", "onDownloadFinish");
+            }
+
+            @Override
+            public void onInstallFinish(int i) {
+                Log.d("ethan", "onInstallFinish");
+            }
+
+            @Override
+            public void onDownloadProgress(int i) {
+                Log.d("ethan", "onDownloadProgress:" + i);
+            }
+        });
+
+        //60101755 修复
+        ThreadMgr.getInstance().postToSubThread(new Runnable() {
+            @Override
+            public void run() {
+                HashMap<String, Object> map = new HashMap<String, Object>();
+                map.put(TbsCoreSettings.TBS_SETTINGS_USE_SPEEDY_CLASSLOADER, true);
+                QbSdk.initTbsSettings(map);
+                QbSdk.initX5Environment(getApplicationContext(), cb);
+                //QbSdk.preInit(context, cb);
+            }
+        });
     }
 
     public static Context getGlobalContext() {

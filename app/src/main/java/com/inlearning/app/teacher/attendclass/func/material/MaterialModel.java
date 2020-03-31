@@ -1,6 +1,6 @@
 package com.inlearning.app.teacher.attendclass.func.material;
 
-import android.util.Log;
+
 
 import com.inlearning.app.common.bean.CourseChapter;
 import com.inlearning.app.common.bean.Materials;
@@ -8,7 +8,6 @@ import com.inlearning.app.common.bean.Materials;
 import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
-import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;

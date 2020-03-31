@@ -75,6 +75,7 @@ public class ChapterFunctionActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         mVideoPresenter.onDestroy();
+        mMaterialPresenter.onDestory();
     }
 
     private void initPresenter() {
