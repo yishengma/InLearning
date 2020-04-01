@@ -37,19 +37,19 @@ public class CourseChapterAdapter extends RecyclerView.Adapter<CourseChapterAdap
 
     public interface OnClickListener {
 
-        void onTitleClick();
+        void onTitleClick(CourseChapter chapter);
 
         void onVideoClick(CourseChapter chapter);
 
         void onTimeClick(CourseChapter chapter);
 
-        void onExerciseClick();
+        void onExerciseClick(CourseChapter chapter);
 
         void onMaterialClick(CourseChapter chapter);
 
-        void onHomeworkClick();
+        void onHomeworkClick(CourseChapter chapter);
 
-        void onDiscussClick();
+        void onDiscussClick(CourseChapter chapter);
     }
 
 
@@ -70,7 +70,7 @@ public class CourseChapterAdapter extends RecyclerView.Adapter<CourseChapterAdap
             @Override
             public void onClick(View v) {
                 if (mOnClickListener != null) {
-                    mOnClickListener.onTitleClick();
+                    mOnClickListener.onTitleClick(chapter);
                 }
             }
         });
@@ -145,7 +145,7 @@ public class CourseChapterAdapter extends RecyclerView.Adapter<CourseChapterAdap
             @Override
             public void onClick() {
                 if (mOnClickListener != null) {
-                    mOnClickListener.onExerciseClick();
+                    mOnClickListener.onExerciseClick(chapter);
                 }
             }
         });
@@ -162,7 +162,7 @@ public class CourseChapterAdapter extends RecyclerView.Adapter<CourseChapterAdap
             @Override
             public void onClick() {
                 if (mOnClickListener != null) {
-                    mOnClickListener.onHomeworkClick();
+                    mOnClickListener.onHomeworkClick(chapter);
                 }
             }
         });
@@ -179,7 +179,7 @@ public class CourseChapterAdapter extends RecyclerView.Adapter<CourseChapterAdap
             @Override
             public void onClick() {
                 if (mOnClickListener != null) {
-                    mOnClickListener.onDiscussClick();
+                    mOnClickListener.onDiscussClick(chapter);
                 }
             }
         });

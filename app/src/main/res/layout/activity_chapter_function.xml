@@ -25,4 +25,14 @@
         android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
+    <com.inlearning.app.teacher.attendclass.func.homework.ResponseQuesView
+        android:id="@+id/view_res_ques_homework_func"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <com.inlearning.app.teacher.attendclass.func.homework.ChooseQuesView
+        android:id="@+id/view_choose_ques_homework_func"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </RelativeLayout>

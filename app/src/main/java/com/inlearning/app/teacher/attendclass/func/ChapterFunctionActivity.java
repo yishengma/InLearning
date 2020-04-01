@@ -3,6 +3,7 @@ package com.inlearning.app.teacher.attendclass.func;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.IntDef;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,7 +11,9 @@ import android.view.View;
 
 import com.inlearning.app.R;
 import com.inlearning.app.common.bean.CourseChapter;
+import com.inlearning.app.common.bean.Question;
 import com.inlearning.app.common.util.StatusBar;
+import com.inlearning.app.teacher.attendclass.func.homework.HomeworkPresenter;
 import com.inlearning.app.teacher.attendclass.func.material.MaterialPresenter;
 import com.inlearning.app.teacher.attendclass.func.video.VideoPresenter;
 
@@ -40,6 +43,7 @@ public class ChapterFunctionActivity extends AppCompatActivity {
 
     private VideoPresenter mVideoPresenter;
     private MaterialPresenter mMaterialPresenter;
+    private HomeworkPresenter mHomeworkPresenter;
     private View mRootView;
     private int mFunctionFlag = -1;
     private CourseChapter mChapter;
@@ -83,12 +87,16 @@ public class ChapterFunctionActivity extends AppCompatActivity {
         mVideoPresenter = new VideoPresenter(this, mRootView);
         mVideoPresenter.setChapter(mChapter);
         mMaterialPresenter = new MaterialPresenter(this, mChapter);
+        mHomeworkPresenter = new HomeworkPresenter(this, mRootView);
         switch (mFunctionFlag) {
             case FLAG.VIDEO_FUNCTION:
                 mVideoPresenter.show();
                 break;
             case FLAG.MATERIAL_FUNCTION:
                 mMaterialPresenter.showMaterialView();
+                break;
+            case FLAG.HOMEWORK_FUNCTION:
+                mHomeworkPresenter.show(Question.Type.CHOICE_QUESTION);
                 break;
         }
     }
@@ -103,8 +111,19 @@ public class ChapterFunctionActivity extends AppCompatActivity {
             case FLAG.MATERIAL_FUNCTION:
                 mMaterialPresenter.onActivityResult(requestCode, resultCode, data);
                 break;
+            case FLAG.HOMEWORK_FUNCTION:
+                mHomeworkPresenter.onActivityResult(requestCode, resultCode, data);
+                break;
         }
     }
 
-
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (mFunctionFlag) {
+            case FLAG.HOMEWORK_FUNCTION:
+                mHomeworkPresenter.onRequestPermissionsResult(requestCode, permissions, grantResults);
+                break;
+        }
+    }
 }

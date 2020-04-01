@@ -16,7 +16,7 @@ public class NetViewHolder implements ViewHolder<NetViewHolder.Banner> {
 
     @Override
     public void onBind(View itemView, Banner data, int position, int size) {
-        Glide.with(itemView).load(data.drawable).into((ImageView) itemView.findViewById(R.id.banner_image));
+        //Glide.with(itemView).load(data.drawable).into((ImageView) itemView.findViewById(R.id.banner_image));
     }
 
    public static class Banner {

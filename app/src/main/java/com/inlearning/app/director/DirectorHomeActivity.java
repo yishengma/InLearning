@@ -89,7 +89,7 @@ public class DirectorHomeActivity extends AppCompatActivity implements View.OnCl
         mBottomTab.getTabAt(2).setText("教师");
         mBottomTab.getTabAt(3).setText("我的");
         mSelectedTab = mBottomTab.getTabAt(0);
-        mBottomTab.addOnTabSelectedListener(new TabLayout.BaseOnTabSelectedListener() {
+        mBottomTab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 onTabSelect(tab);

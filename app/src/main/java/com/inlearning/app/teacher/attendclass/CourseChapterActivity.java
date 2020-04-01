@@ -102,7 +102,7 @@ public class CourseChapterActivity extends AppCompatActivity implements View.OnC
         mRvChapter.setAdapter(mChapterAdapter);
         mChapterAdapter.setOnClickListener(new CourseChapterAdapter.OnClickListener() {
             @Override
-            public void onTitleClick() {
+            public void onTitleClick(CourseChapter chapter) {
                 Log.e("ethan", "onTitleClick");
             }
 
@@ -120,7 +120,7 @@ public class CourseChapterActivity extends AppCompatActivity implements View.OnC
             }
 
             @Override
-            public void onExerciseClick() {
+            public void onExerciseClick(CourseChapter chapter) {
                 Log.e("ethan", "onExerciseClick");
             }
 
@@ -132,12 +132,13 @@ public class CourseChapterActivity extends AppCompatActivity implements View.OnC
             }
 
             @Override
-            public void onHomeworkClick() {
+            public void onHomeworkClick(CourseChapter chapter) {
                 Log.e("ethan", "onHomeworkClick");
+                ChapterFunctionActivity.startActivity(CourseChapterActivity.this, chapter, ChapterFunctionActivity.FLAG.HOMEWORK_FUNCTION);
             }
 
             @Override
-            public void onDiscussClick() {
+            public void onDiscussClick(CourseChapter chapter) {
                 Log.e("ethan", "onDiscussClick");
             }
         });
