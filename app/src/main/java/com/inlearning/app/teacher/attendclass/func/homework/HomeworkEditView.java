@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.design.widget.TextInputEditText;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,21 +26,23 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChooseQuesView extends BaseQuesFunc implements View.OnClickListener {
+import cn.bmob.v3.util.V;
 
-    public ChooseQuesView(Context context) {
+public class HomeworkEditView extends BaseQuesFunc implements View.OnClickListener {
+
+
+    public HomeworkEditView(Context context) {
         this(context, null);
     }
 
-    public ChooseQuesView(Context context, AttributeSet attrs) {
+    public HomeworkEditView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public ChooseQuesView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public HomeworkEditView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initView();
     }
-
 
     private TextInputEditText mInputEditText;
     private TextView mAddView;
@@ -51,16 +54,16 @@ public class ChooseQuesView extends BaseQuesFunc implements View.OnClickListener
     private ImageView mBackView;
     private TextView mTitleView;
     private LinearLayout mCheckBoxLayout;
-
+    private Question mQuestion;
 
     private void initView() {
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.view_homework_choose_question, this);
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.view_homework_question_edit, this);
         mInputEditText = view.findViewById(R.id.et_question_input);
         mAddView = view.findViewById(R.id.tv_add_image);
         mQuesImageView = view.findViewById(R.id.imv_question_image);
         mQuesDeleteView = view.findViewById(R.id.imv_image_delete);
         mQuesImageLayout = view.findViewById(R.id.view_question_image);
-        mUploadView = view.findViewById(R.id.tv_upload);
+        mUploadView = view.findViewById(R.id.tv_update);
         mBackView = view.findViewById(R.id.imv_bar_back);
         mTitleView = view.findViewById(R.id.tv_bar_title);
         mCheckBoxLayout = view.findViewById(R.id.view_checkbox);
@@ -70,12 +73,6 @@ public class ChooseQuesView extends BaseQuesFunc implements View.OnClickListener
         mUploadView.setOnClickListener(this);
         mBackView.setOnClickListener(this);
     }
-
-    @Override
-    Activity initActivity() {
-        return (Activity) getContext();
-    }
-
 
     @Override
     public void onClick(View v) {
@@ -88,7 +85,7 @@ public class ChooseQuesView extends BaseQuesFunc implements View.OnClickListener
                 setQuesImageVisible(false);
                 mImageFilePath = "";
                 break;
-            case R.id.tv_upload:
+            case R.id.tv_update:
                 if (mClickListener == null) {
                     return;
                 }
@@ -96,7 +93,7 @@ public class ChooseQuesView extends BaseQuesFunc implements View.OnClickListener
                 if (question == null) {
                     return;
                 }
-                mClickListener.onUpload(question);
+                mClickListener.onUpdate(question);
                 break;
             case R.id.imv_bar_back:
                 if (mClickListener != null) {
@@ -111,9 +108,13 @@ public class ChooseQuesView extends BaseQuesFunc implements View.OnClickListener
         mQuesImageLayout.setVisibility(VISIBLE);
         Glide.with(getContext()).load(fileCropUri).into(mQuesImageView);
         mImageFilePath = fileCropUri.getPath();
-        Log.e("ethan", "" + fileCropUri.exists());
-        mQuesImageView.setImageBitmap(BitmapFactory.decodeFile(fileCropUri.getPath()));
         mAddView.setVisibility(GONE);
+    }
+
+    void setQuesImage(String path) {
+        mQuesImageLayout.setVisibility(VISIBLE);
+        Glide.with(getContext()).load(path).into(mQuesImageView);
+        mImageFilePath = path;
     }
 
     @Override
@@ -155,6 +156,11 @@ public class ChooseQuesView extends BaseQuesFunc implements View.OnClickListener
         return list;
     }
 
+    @Override
+    Activity initActivity() {
+        return (Activity) getContext();
+    }
+
     private Question createQuestion() {
         String questionTitle = mInputEditText.getText().toString();
         if (TextUtils.isEmpty(questionTitle) && TextUtils.isEmpty(mImageFilePath)) {
@@ -162,15 +168,50 @@ public class ChooseQuesView extends BaseQuesFunc implements View.OnClickListener
             return null;
         }
         List<String> answerList = getCheckBoxAnswer();
-        if (answerList.isEmpty()) {
+        if (answerList.isEmpty() && mQuestion.getType() == Question.Type.CHOICE_QUESTION) {
             Toast.makeText(getContext(), "请输入答案", Toast.LENGTH_SHORT).show();
             return null;
         }
-        Question question = new Question();
-        question.setChoiceAnswers(answerList);
-        question.setType(Question.Type.CHOICE_QUESTION);
-        question.setQuestionImage(mImageFilePath);
-        return question;
+        mQuestion.setChoiceAnswers(answerList);
+        mQuestion.setType(Question.Type.CHOICE_QUESTION);
+        mQuestion.setQuestionImage(mImageFilePath);
+        return mQuestion;
     }
 
+    public void show(Question question) {
+        mQuestion = question;
+        Log.e("ethan", "title" + question.getQuestionTitle());
+        if (TextUtils.isEmpty(question.getQuestionTitle())) {
+            mInputEditText.setText("如图");
+        } else {
+            mInputEditText.setText(question.getQuestionTitle());
+        }
+        setTitleMsg(question.getType() == Question.Type.CHOICE_QUESTION ? "选择题" : "简答题");
+        if (!TextUtils.isEmpty(question.getQuestionImage())) {
+            setQuesImage(question.getQuestionImage());
+            mAddView.setVisibility(GONE);
+        } else {
+            mAddView.setVisibility(VISIBLE);
+        }
+        if (question.getType() == Question.Type.CHOICE_QUESTION) {
+            mCheckBoxLayout.setVisibility(VISIBLE);
+            List<String> list = question.getChoiceAnswers();
+            for (int i = 0; i < mCheckBoxLayout.getChildCount(); i++) {
+                CheckBox box = (CheckBox) mCheckBoxLayout.getChildAt(i);
+                box.setChecked(list.contains(box.getText()));
+            }
+        } else {
+            mCheckBoxLayout.setVisibility(GONE);
+        }
+
+        setVisibility(VISIBLE);
+
+    }
+
+    public void hide() {
+        mImageFilePath = "";
+        mInputEditText.setText("");
+        mQuestion = null;
+        setVisibility(GONE);
+    }
 }

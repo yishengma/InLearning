@@ -87,7 +87,7 @@ public class ChapterFunctionActivity extends AppCompatActivity {
         mVideoPresenter = new VideoPresenter(this, mRootView);
         mVideoPresenter.setChapter(mChapter);
         mMaterialPresenter = new MaterialPresenter(this, mChapter);
-        mHomeworkPresenter = new HomeworkPresenter(this, mRootView);
+        mHomeworkPresenter = new HomeworkPresenter(this, mRootView, mChapter);
         switch (mFunctionFlag) {
             case FLAG.VIDEO_FUNCTION:
                 mVideoPresenter.show();
@@ -96,7 +96,7 @@ public class ChapterFunctionActivity extends AppCompatActivity {
                 mMaterialPresenter.showMaterialView();
                 break;
             case FLAG.HOMEWORK_FUNCTION:
-                mHomeworkPresenter.show(Question.Type.CHOICE_QUESTION);
+                mHomeworkPresenter.show();
                 break;
         }
     }

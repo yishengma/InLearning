@@ -1,6 +1,7 @@
 package com.inlearning.app.common.bean;
 
 import android.support.annotation.IntDef;
+import android.support.annotation.StringDef;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -9,6 +10,7 @@ import java.lang.annotation.Target;
 import java.util.List;
 
 import cn.bmob.v3.BmobObject;
+import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.datatype.BmobPointer;
 
 
@@ -18,30 +20,31 @@ public class Question extends BmobObject {
     @Retention(RetentionPolicy.SOURCE)
     @Target({ElementType.FIELD, ElementType.LOCAL_VARIABLE, ElementType.METHOD, ElementType.PARAMETER})
     public @interface Type {
-        int CHOICE_QUESTION = 0;
-        int RESPONSE_QUESTION = 1;
+        int CHOICE_QUESTION = 2;
+        int RESPONSE_QUESTION = 3;
     }
 
-    @IntDef({ChoiceAnswer.A, ChoiceAnswer.B, ChoiceAnswer.C, ChoiceAnswer.D, ChoiceAnswer.E, ChoiceAnswer.F, ChoiceAnswer.G})
+    @StringDef({ChoiceAnswer.A, ChoiceAnswer.B, ChoiceAnswer.C, ChoiceAnswer.D, ChoiceAnswer.E, ChoiceAnswer.F, ChoiceAnswer.G})
     @Retention(RetentionPolicy.SOURCE)
     @Target({ElementType.FIELD, ElementType.LOCAL_VARIABLE, ElementType.METHOD, ElementType.PARAMETER})
     public @interface ChoiceAnswer {
-        int A = 0;
-        int B = 1;
-        int C = 2;
-        int D = 3;
-        int E = 4;
-        int F = 5;
-        int G = 6;
+        String A = "A";
+        String B = "B";
+        String C = "C";
+        String D = "D";
+        String E = "E";
+        String F = "F";
+        String G = "G";
+
     }
 
     private CourseChapter mCourseChapter;
     private int mNum;
     private String mQuestionTitle;
-    private BmobObject mQuestionImage;
+    private String mQuestionImage;
     @Type
     private int mType;
-    private List<Integer> mChoiceAnswers;
+    private List<String> mChoiceAnswers;
 
 
     public CourseChapter getCourseChapter() {
@@ -68,11 +71,11 @@ public class Question extends BmobObject {
         mQuestionTitle = questionTitle;
     }
 
-    public BmobObject getQuestionImage() {
+    public String getQuestionImage() {
         return mQuestionImage;
     }
 
-    public void setQuestionImage(BmobObject questionImage) {
+    public void setQuestionImage(String questionImage) {
         mQuestionImage = questionImage;
     }
 
@@ -84,11 +87,11 @@ public class Question extends BmobObject {
         mType = type;
     }
 
-    public List<Integer> getChoiceAnswers() {
+    public List<String> getChoiceAnswers() {
         return mChoiceAnswers;
     }
 
-    public void setChoiceAnswers(List<Integer> choiceAnswers) {
+    public void setChoiceAnswers(List<String> choiceAnswers) {
         mChoiceAnswers = choiceAnswers;
     }
 }

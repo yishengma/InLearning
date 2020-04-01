@@ -10,29 +10,25 @@
 
     <com.inlearning.app.teacher.attendclass.func.video.VideoFunctionView
         android:id="@+id/view_video_func"
-        android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 
     <com.inlearning.app.teacher.attendclass.func.material.MaterialView
         android:id="@+id/view_material_func"
-        android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 
     <com.inlearning.app.teacher.attendclass.func.material.MaterialTbsView
         android:id="@+id/view_material_tbs_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+    <com.inlearning.app.teacher.attendclass.func.homework.HomeworkFuncView
+        android:id="@+id/view_homework_func"
         android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
-    <com.inlearning.app.teacher.attendclass.func.homework.ResponseQuesView
-        android:id="@+id/view_res_ques_homework_func"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
-    <com.inlearning.app.teacher.attendclass.func.homework.ChooseQuesView
-        android:id="@+id/view_choose_ques_homework_func"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 </RelativeLayout>
