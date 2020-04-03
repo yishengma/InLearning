@@ -4,6 +4,7 @@ import com.inlearning.app.common.bean.ClassSchedule;
 import com.inlearning.app.common.bean.Course2;
 import com.inlearning.app.common.bean.CourseChapter;
 import com.inlearning.app.common.bean.Teacher;
+import com.inlearning.app.common.bean.TeacherCourse;
 import com.inlearning.app.teacher.TeacherRuntime;
 
 import java.util.List;
@@ -20,17 +21,15 @@ public class ChapterModel {
         void onResult(T t);
     }
 
-    public static void getClassSchedule(final Callback<List<ClassSchedule>> callback) {
-        //todo
+    public static void getTeacherSchedule(final Callback<List<TeacherCourse>> callback) {
         Teacher teacher = new Teacher();
         teacher.setObjectId("7746c34330");
-        BmobQuery<ClassSchedule> scheduleBmobQuery = new BmobQuery<>();
-        scheduleBmobQuery.include("mClassInfo");
-        scheduleBmobQuery.include("mCourse2");
-        scheduleBmobQuery.addWhereEqualTo("mTeacher", teacher);
-        scheduleBmobQuery.findObjects(new FindListener<ClassSchedule>() {
+        BmobQuery<TeacherCourse> teacherCourseQuery = new BmobQuery<>();
+        teacherCourseQuery.include("mCourse2");
+        teacherCourseQuery.addWhereEqualTo("mTeacher", teacher);
+        teacherCourseQuery.findObjects(new FindListener<TeacherCourse>() {
             @Override
-            public void done(List<ClassSchedule> list, BmobException e) {
+            public void done(List<TeacherCourse> list, BmobException e) {
                 if (e == null) {
                     callback.onResult(list);
                 }

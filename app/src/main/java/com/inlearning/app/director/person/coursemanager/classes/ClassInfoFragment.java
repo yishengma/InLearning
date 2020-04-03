@@ -36,13 +36,13 @@ public class ClassInfoFragment extends BaseFragment {
 
     private void initView(View view) {
         mRvSpecialityClass = view.findViewById(R.id.rv_content);
-        mRvSpecialityClass.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
+        mRvSpecialityClass.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         mSpecialityInfoAdapter = new SpecialityInfoAdapter(mClassList);
         mRvSpecialityClass.setAdapter(mSpecialityInfoAdapter);
         mSpecialityInfoAdapter.setClickListener(new SpecialityInfoAdapter.ClickListener() {
             @Override
             public void onClick(ClassInfo classInfo) {
-
+                ClassCourseActivity.startActivity(getContext(), classInfo);
             }
 
             @Override

@@ -2,9 +2,11 @@ package com.inlearning.app.director.person.coursemanager.classes;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.inlearning.app.R;
 import com.inlearning.app.common.bean.Speciality;
@@ -22,12 +24,20 @@ public class ClassListActivity extends AppCompatActivity {
 
     private View mParentView;
     private ClassListPresenter mClassListPresenter;
+    private ImageView mBackView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_class_list2);
         mParentView = findViewById(R.id.root_view);
+        mBackView = findViewById(R.id.imv_bar_back);
+        mBackView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         initPresenter();
         initData();
     }

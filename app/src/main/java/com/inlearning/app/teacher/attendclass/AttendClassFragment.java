@@ -12,6 +12,7 @@ import com.inlearning.app.R;
 import com.inlearning.app.common.BaseFragment;
 import com.inlearning.app.common.bean.ClassSchedule;
 import com.inlearning.app.common.bean.Course2;
+import com.inlearning.app.common.bean.TeacherCourse;
 import com.inlearning.app.common.util.ThreadMgr;
 import com.inlearning.app.student.course.CourseInfoAdapter;
 import com.inlearning.app.teacher.TeacherRuntime;
@@ -50,12 +51,12 @@ public class AttendClassFragment extends BaseFragment {
     }
 
     private void initData() {
-        ChapterModel.getClassSchedule(new ChapterModel.Callback<List<ClassSchedule>>() {
+        ChapterModel.getTeacherSchedule(new ChapterModel.Callback<List<TeacherCourse>>() {
             @Override
-            public void onResult(List<ClassSchedule> classSchedules) {
+            public void onResult(List<TeacherCourse> classSchedules) {
                 TeacherRuntime.setSchedules(classSchedules);
                 List<Course2> course2s = new ArrayList<>();
-                for (ClassSchedule s : classSchedules) {
+                for (TeacherCourse s : classSchedules) {
                     course2s.add(s.getCourse2());
                 }
                 updateData(course2s);
