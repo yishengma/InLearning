@@ -50,18 +50,7 @@ public class HomeworkPresenter implements BaseQuesFunc.ClickListener {
         });
         mQuestions = new ArrayList<>();
         mHomeworkAdapter = new HomeworkAdapter(mQuestions, context);
-        mHomeworkAdapter.setClickListener(new HomeworkAdapter.ClickListener() {
-            @Override
-            public void onDeleteClick(Question question) {
-                showDeleteDialog(question);
-            }
 
-            @Override
-            public void onEditClick(Question question) {
-                mHomeworkFuncView.hideFuncView();
-                mHomeworkEditView.show(question);
-            }
-        });
         mHomeworkFuncView.getRvHomework().setAdapter(mHomeworkAdapter);
         mResponseQuesView = mHomeworkFuncView.getResponseQuesView();
         mChooseQuesView = mHomeworkFuncView.getChooseQuesView();
@@ -80,6 +69,19 @@ public class HomeworkPresenter implements BaseQuesFunc.ClickListener {
         });
         mHomeworkEditView = mHomeworkFuncView.getHomeworkEditView();
         mHomeworkEditView.setClickListener(this);
+        mHomeworkFuncView.getDeleteView().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDeleteDialog(mQuestions.get(mHomeworkFuncView.getCurrentPosition()));
+            }
+        });
+        mHomeworkFuncView.getEditQuesView().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mHomeworkFuncView.hideFuncView();
+                mHomeworkEditView.show(mQuestions.get(mHomeworkFuncView.getCurrentPosition()));
+            }
+        });
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -89,6 +91,9 @@ public class HomeworkPresenter implements BaseQuesFunc.ClickListener {
         if (mChooseQuesView.getVisibility() == View.VISIBLE) {
             mChooseQuesView.onActivityResult(requestCode, resultCode, data);
         }
+        if (mHomeworkEditView.getVisibility() == View.VISIBLE) {
+            mHomeworkEditView.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -97,6 +102,9 @@ public class HomeworkPresenter implements BaseQuesFunc.ClickListener {
         }
         if (mChooseQuesView.getVisibility() == View.VISIBLE) {
             mChooseQuesView.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+        if (mHomeworkEditView.getVisibility() == View.VISIBLE) {
+            mHomeworkEditView.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
 
     }
@@ -118,8 +126,9 @@ public class HomeworkPresenter implements BaseQuesFunc.ClickListener {
                 mQuestions.add(question);
                 mHomeworkAdapter.notifyDataSetChanged();
                 mHomeworkFuncView.refreshUI(!mQuestions.isEmpty());
-
-                onBack();
+                mChooseQuesView.setVisibility(View.GONE);
+                mResponseQuesView.setVisibility(View.GONE);
+                mHomeworkEditView.hide();
             }
         });
     }
@@ -169,6 +178,8 @@ public class HomeworkPresenter implements BaseQuesFunc.ClickListener {
         QuestionModel.updateQuestion(question, new QuestionModel.Callback<Question>() {
             @Override
             public void onResult(Question question) {
+                mHomeworkFuncView.refreshUI(true);
+                mHomeworkEditView.hide();
                 mHomeworkAdapter.notifyDataSetChanged();
             }
         });

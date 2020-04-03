@@ -44,13 +44,23 @@ public class QuestionModel {
         });
     }
 
-    public static void deleteQuestion(Question question, final Callback<Boolean> callback) {
+    public static void deleteQuestion(final Question question, final Callback<Boolean> callback) {
         question.delete(new UpdateListener() {
             @Override
             public void done(BmobException e) {
-                if (e == null) {
-                    callback.onResult(true);
-                }
+                question.getCourseChapter().increment("mHomeworkCount", -1);
+                question.getCourseChapter().update(new UpdateListener() {
+                    @Override
+                    public void done(BmobException e) {
+
+                    }
+                });
+                ThreadMgr.getInstance().postToUIThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        callback.onResult(true);
+                    }
+                });
             }
         });
     }
@@ -62,12 +72,14 @@ public class QuestionModel {
                 @Override
                 public void done(String s, BmobException e) {
                     question.setObjectId(s);
-                    ThreadMgr.getInstance().postToUIThread(new Runnable() {
+                    question.getCourseChapter().increment("mHomeworkCount", 1);
+                    question.getCourseChapter().update(new UpdateListener() {
                         @Override
-                        public void run() {
-                            callback.onResult(question);
+                        public void done(BmobException e) {
+
                         }
                     });
+
                 }
             });
             return;
@@ -94,6 +106,13 @@ public class QuestionModel {
                                     });
                                 }
                             });
+                            question.getCourseChapter().increment("mHomeworkCount", 1);
+                            question.getCourseChapter().update(new UpdateListener() {
+                                @Override
+                                public void done(BmobException e) {
+
+                                }
+                            });
                         }
                     }
 
@@ -114,17 +133,58 @@ public class QuestionModel {
     }
 
     public static void updateQuestion(final Question question, final Callback<Question> callback) {
-        question.update(new UpdateListener() {
-            @Override
-            public void done(BmobException e) {
-                if (e == null) {
-                    ThreadMgr.getInstance().postToUIThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            callback.onResult(question);
-                        }
-                    });
+        if (question.getQuestionImage().startsWith("http") || TextUtils.isEmpty(question.getQuestionImage())) {
+            question.update(new UpdateListener() {
+                @Override
+                public void done(BmobException e) {
+                    if (e == null) {
+                        ThreadMgr.getInstance().postToUIThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                callback.onResult(question);
+                            }
+                        });
+                    }
                 }
+            });
+            return;
+        }
+        final BmobFile bmobFile = new BmobFile(new File(question.getQuestionImage()));
+        ThreadMgr.getInstance().postToSubThread(new Runnable() {
+            @Override
+            public void run() {
+                bmobFile.uploadblock(new UploadFileListener() {
+                    @Override
+                    public void done(BmobException e) {
+                        if (e == null) {
+                            Log.e("ethan", "done");
+                            question.setQuestionImage(bmobFile.getFileUrl());
+                            question.update(new UpdateListener() {
+                                @Override
+                                public void done(BmobException e) {
+                                    ThreadMgr.getInstance().postToUIThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            callback.onResult(question);
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    }
+
+                    @Override
+                    public void onProgress(Integer value) {
+                        super.onProgress(value);
+                        Log.e("ethan", "" + value);
+                    }
+
+                    @Override
+                    public void doneError(int code, String msg) {
+                        super.doneError(code, msg);
+                        Log.e("ethan", msg);
+                    }
+                });
             }
         });
     }

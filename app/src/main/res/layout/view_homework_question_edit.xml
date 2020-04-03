@@ -22,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="问答题"
+            android:text="修改题目"
             android:textColor="@color/textBlack"
             android:textSize="18sp" />
 

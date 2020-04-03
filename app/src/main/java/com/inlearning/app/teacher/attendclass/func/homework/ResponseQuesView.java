@@ -145,6 +145,7 @@ public class ResponseQuesView extends BaseQuesFunc implements View.OnClickListen
             return null;
         }
         Question question = new Question();
+        question.setQuestionTitle(questionTitle);
         question.setType(Question.Type.RESPONSE_QUESTION);
         question.setQuestionImage(mImageFilePath);
         return question;

@@ -30,17 +30,6 @@ public class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.ViewHo
         mContext = context;
     }
 
-    public interface ClickListener {
-        void onDeleteClick(Question question);
-
-        void onEditClick(Question question);
-    }
-
-    private ClickListener mClickListener;
-
-    public void setClickListener(ClickListener clickListener) {
-        mClickListener = clickListener;
-    }
 
     @NonNull
     @Override
@@ -55,6 +44,7 @@ public class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.ViewHo
         viewHolder.mQuesInputLayout.setHint("题目");
         String questionTitle = question.getQuestionTitle();
         viewHolder.mQuesEditText.setText(TextUtils.isEmpty(questionTitle) ? "如图" : questionTitle);
+        viewHolder.mQuesEditText.setEnabled(false);
         String questionImage = question.getQuestionImage();
         if (TextUtils.isEmpty(questionImage)) {
             viewHolder.mImageTipsView.setVisibility(View.GONE);
@@ -71,22 +61,6 @@ public class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.ViewHo
         } else {
             viewHolder.mAnswerView.setVisibility(View.GONE);
         }
-        viewHolder.mEditQuesView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mClickListener != null) {
-                    mClickListener.onEditClick(question);
-                }
-            }
-        });
-        viewHolder.mDeleteView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mClickListener != null) {
-                    mClickListener.onDeleteClick(question);
-                }
-            }
-        });
 
     }
 
@@ -102,8 +76,6 @@ public class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.ViewHo
         private TextView mImageTipsView;
         private ImageView mQuesImageView;
         private TextView mAnswerView;
-        private TextView mEditQuesView;
-        private TextView mDeleteView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -112,8 +84,7 @@ public class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.ViewHo
             mImageTipsView = itemView.findViewById(R.id.tv_image_tips);
             mQuesImageView = itemView.findViewById(R.id.imv_question_image);
             mAnswerView = itemView.findViewById(R.id.tv_answer);
-            mEditQuesView = itemView.findViewById(R.id.tv_edit_ques);
-            mDeleteView = itemView.findViewById(R.id.tv_delete);
+
         }
     }
 }

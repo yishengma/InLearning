@@ -167,6 +167,7 @@ public class ChooseQuesView extends BaseQuesFunc implements View.OnClickListener
             return null;
         }
         Question question = new Question();
+        question.setQuestionTitle(questionTitle);
         question.setChoiceAnswers(answerList);
         question.setType(Question.Type.CHOICE_QUESTION);
         question.setQuestionImage(mImageFilePath);

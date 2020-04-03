@@ -152,7 +152,7 @@ public class CourseChapterAdapter extends RecyclerView.Adapter<CourseChapterAdap
         if (chapter.getHomeworkCount() != 0) {
             viewHolder.mHomeworkFuncView.setTextColor(R.color.app_global_blue);
             viewHolder.mHomeworkFuncView.setIcon(R.drawable.icon_homework_blue);
-            viewHolder.mHomeworkFuncView.setContent(chapter.getMaterialCount() + "个题目");
+            viewHolder.mHomeworkFuncView.setContent(chapter.getHomeworkCount() + "个题目");
         } else {
             viewHolder.mHomeworkFuncView.setTextColor(R.color.app_global_gray);
             viewHolder.mHomeworkFuncView.setIcon(R.drawable.icon_homework_gray);

@@ -41,6 +41,11 @@ public class HomeworkFuncView extends LinearLayout implements View.OnClickListen
     private TextView mAddView;
     private TextView mEmptyView;
     private FrameLayout mTitleBar;
+    private LinearLayout mBottomBarView;
+    private TextView mEditQuesView;
+    private TextView mDeleteView;
+    private LinearLayoutManager mLayoutManager;
+    private int mCuttentPosition = 0;
 
     public interface ClickListener {
         void onBack();
@@ -63,8 +68,14 @@ public class HomeworkFuncView extends LinearLayout implements View.OnClickListen
         mBackView = view.findViewById(R.id.imv_bar_back);
         mTitleView = view.findViewById(R.id.tv_bar_title);
         mRvHomework = view.findViewById(R.id.rv_homework);
-        mRvHomework.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        PagerSnapHelper snapHelper = new PagerSnapHelper();
+        mRvHomework.setLayoutManager(mLayoutManager  = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        PagerSnapHelper snapHelper = new PagerSnapHelper(){
+            @Override
+            public int findTargetSnapPosition(RecyclerView.LayoutManager layoutManager, int velocityX, int velocityY) {
+                mCuttentPosition =  super.findTargetSnapPosition(layoutManager, velocityX, velocityY);
+                return mCuttentPosition;
+            }
+        };
         snapHelper.attachToRecyclerView(mRvHomework);
         mBackView.setOnClickListener(this);
         mAddView = view.findViewById(R.id.tv_bar_add);
@@ -72,6 +83,10 @@ public class HomeworkFuncView extends LinearLayout implements View.OnClickListen
         mEmptyView = view.findViewById(R.id.tv_empty);
         mTitleBar = view.findViewById(R.id.fl_title_bar);
         mHomeworkEditView = view.findViewById(R.id.view_homework_edit);
+        mBottomBarView = view.findViewById(R.id.view_bottom_bar);
+        mEditQuesView = view.findViewById(R.id.tv_edit_ques);
+        mDeleteView = view.findViewById(R.id.tv_delete);
+
     }
 
 
@@ -135,6 +150,7 @@ public class HomeworkFuncView extends LinearLayout implements View.OnClickListen
     public void refreshUI(boolean hasData) {
         mRvHomework.setVisibility(hasData ? VISIBLE : GONE);
         mEmptyView.setVisibility(hasData ? GONE : VISIBLE);
+        mBottomBarView.setVisibility(hasData ? VISIBLE : GONE);
     }
 
     public void hideFuncView() {
@@ -142,6 +158,7 @@ public class HomeworkFuncView extends LinearLayout implements View.OnClickListen
         findViewById(R.id.split_line).setVisibility(GONE);
         mRvHomework.setVisibility(GONE);
         mEmptyView.setVisibility(GONE);
+        mBottomBarView.setVisibility(GONE);
     }
 
     public void showFuncView() {
@@ -149,10 +166,27 @@ public class HomeworkFuncView extends LinearLayout implements View.OnClickListen
         findViewById(R.id.split_line).setVisibility(VISIBLE);
         mRvHomework.setVisibility(VISIBLE);
         mEmptyView.setVisibility(VISIBLE);
+        mBottomBarView.setVisibility(VISIBLE);
     }
 
     public HomeworkEditView getHomeworkEditView() {
         return mHomeworkEditView;
+    }
+
+    public TextView getEditQuesView() {
+        return mEditQuesView;
+    }
+
+    public TextView getDeleteView() {
+        return mDeleteView;
+    }
+
+    public LinearLayout getBottomBarView() {
+        return mBottomBarView;
+    }
+
+    public int getCurrentPosition() {
+        return mCuttentPosition;
     }
 }
 

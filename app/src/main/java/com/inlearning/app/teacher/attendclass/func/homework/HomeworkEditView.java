@@ -172,8 +172,9 @@ public class HomeworkEditView extends BaseQuesFunc implements View.OnClickListen
             Toast.makeText(getContext(), "请输入答案", Toast.LENGTH_SHORT).show();
             return null;
         }
+        mQuestion.setQuestionTitle(questionTitle);
         mQuestion.setChoiceAnswers(answerList);
-        mQuestion.setType(Question.Type.CHOICE_QUESTION);
+        mQuestion.setType(mQuestion.getType());
         mQuestion.setQuestionImage(mImageFilePath);
         return mQuestion;
     }
@@ -186,7 +187,6 @@ public class HomeworkEditView extends BaseQuesFunc implements View.OnClickListen
         } else {
             mInputEditText.setText(question.getQuestionTitle());
         }
-        setTitleMsg(question.getType() == Question.Type.CHOICE_QUESTION ? "选择题" : "简答题");
         if (!TextUtils.isEmpty(question.getQuestionImage())) {
             setQuesImage(question.getQuestionImage());
             mAddView.setVisibility(GONE);
