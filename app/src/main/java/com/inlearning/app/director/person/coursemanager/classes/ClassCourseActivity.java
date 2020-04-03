@@ -41,6 +41,7 @@ public class ClassCourseActivity extends AppCompatActivity implements View.OnCli
     private List<Course2> mCourse2s;
     private ClassInfo mClassInfo;
     private OrganizeCoursePresenter mPresenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,7 +67,6 @@ public class ClassCourseActivity extends AppCompatActivity implements View.OnCli
 
             }
         });
-        mPresenter = new OrganizeCoursePresenter(this);
         mAddView.setOnClickListener(this);
         mBackView.setOnClickListener(this);
     }
@@ -74,6 +74,13 @@ public class ClassCourseActivity extends AppCompatActivity implements View.OnCli
 
     private void getIntentData() {
         mClassInfo = (ClassInfo) getIntent().getSerializableExtra("classinfo");
+        mPresenter = new OrganizeCoursePresenter(this, mClassInfo);
+        mPresenter.setClickListener(new OrganizeCoursePresenter.ClickListener() {
+            @Override
+            public void onAdd(ClassSchedule schedule) {
+                    updateClassCourse(schedule);
+            }
+        });
     }
 
     @Override
@@ -83,7 +90,7 @@ public class ClassCourseActivity extends AppCompatActivity implements View.OnCli
                 finish();
                 break;
             case R.id.tv_bar_add:
-                mPresenter.showOrganizeDialog();
+                mPresenter.showDialog();
                 break;
         }
     }
@@ -101,12 +108,14 @@ public class ClassCourseActivity extends AppCompatActivity implements View.OnCli
                 for (SpecialitySchedule schedule : specialitySchedules) {
                     mCourse2s.add(schedule.getCourse2());
                 }
+                updateCourses();
             }
         });
         TeacherModel.getTeacherList(new TeacherModel.Callback<List<Teacher>>() {
             @Override
             public void onResult(boolean suc, List<Teacher> teachers) {
                 mTeachers.addAll(teachers);
+                updateTeacher();
             }
         });
     }
@@ -120,6 +129,34 @@ public class ClassCourseActivity extends AppCompatActivity implements View.OnCli
                 mClassTeaAdapter.notifyDataSetChanged();
             }
         });
+    }
 
+
+    private void updateClassCourse(final ClassSchedule classSchedule) {
+        ThreadMgr.getInstance().postToUIThread(new Runnable() {
+            @Override
+            public void run() {
+                mClassSchedules.add(classSchedule);
+                mClassTeaAdapter.notifyDataSetChanged();
+            }
+        });
+    }
+
+    private void updateCourses() {
+        ThreadMgr.getInstance().postToUIThread(new Runnable() {
+            @Override
+            public void run() {
+                mPresenter.setCourseList(mCourse2s);
+            }
+        });
+    }
+
+    private void updateTeacher() {
+        ThreadMgr.getInstance().postToUIThread(new Runnable() {
+            @Override
+            public void run() {
+                mPresenter.setTeaList(mTeachers);
+            }
+        });
     }
 }

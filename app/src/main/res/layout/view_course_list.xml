@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/app_global_white"
     android:fitsSystemWindows="true"
-    android:orientation="vertical"
-    tools:context=".director.person.coursemanager.speciality.SpecialityScheduleActivity">
-
+    android:orientation="vertical">
 
     <FrameLayout
         android:id="@+id/fl_title_bar"
@@ -36,33 +34,15 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end|center_vertical"
             android:layout_marginRight="24dp"
-            android:text="排课"
+            android:text="添加"
             android:textColor="@color/textBlack"
             android:textSize="16sp"
-            android:visibility="visible" />
+            android:visibility="gone" />
     </FrameLayout>
 
-    <View
-        android:id="@+id/line_divide"
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_below="@+id/fl_title_bar"
-        android:background="@color/app_global_item_divide" />
-
     <android.support.v7.widget.RecyclerView
-        android:layout_below="@+id/line_divide"
-        android:id="@+id/rv_course"
+        android:id="@+id/rv_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-    <com.inlearning.app.director.person.coursemanager.classes.organize.TeacherListView
-        android:visibility="gone"
-        android:id="@+id/view_tea_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-    <com.inlearning.app.director.person.coursemanager.classes.organize.CourseListView
-        android:visibility="gone"
-        android:id="@+id/view_course_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-</RelativeLayout>
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp" />
+</LinearLayout>
