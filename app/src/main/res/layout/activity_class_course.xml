@@ -54,15 +54,4 @@
         android:id="@+id/rv_course"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
-    <com.inlearning.app.director.person.coursemanager.classes.organize.TeacherListView
-        android:visibility="gone"
-        android:id="@+id/view_tea_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-    <com.inlearning.app.director.person.coursemanager.classes.organize.CourseListView
-        android:visibility="gone"
-        android:id="@+id/view_course_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
 </RelativeLayout>

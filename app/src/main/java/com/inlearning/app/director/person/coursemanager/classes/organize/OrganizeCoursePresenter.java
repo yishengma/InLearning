@@ -3,12 +3,14 @@ package com.inlearning.app.director.person.coursemanager.classes.organize;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import com.google.android.exoplayer2.C;
 import com.inlearning.app.R;
 import com.inlearning.app.common.bean.ClassInfo;
 import com.inlearning.app.common.bean.ClassSchedule;
@@ -34,8 +36,7 @@ public class OrganizeCoursePresenter {
     private TextView mCancelView;
     private TextView mConfirmView;
 
-    private TeacherListView mTeacherListView;
-    private CourseListView mCourseListView;
+
     private Teacher mTeacher;
     private Course2 mCourse2;
     private ClassInfo mClassInfo;
@@ -53,24 +54,6 @@ public class OrganizeCoursePresenter {
 
     public OrganizeCoursePresenter(Activity context, ClassInfo classInfo) {
         mContext = context;
-        mTeacherListView = context.findViewById(R.id.view_tea_list);
-        mCourseListView = context.findViewById(R.id.view_course_list);
-        mCourseListView.setClickListener(new CourseListView.ClickListener() {
-            @Override
-            public void onClick(Course2 course) {
-                mCourse2 = course;
-                setCourseView(course);
-                updateConfirmView();
-            }
-        });
-        mTeacherListView.setClickListener(new TeacherListView.ClickListener() {
-            @Override
-            public void onClick(Teacher teacher) {
-                mTeacher = teacher;
-                setTeacherView(teacher);
-                updateConfirmView();
-            }
-        });
         mClassInfo = classInfo;
         initDialog();
     }
@@ -105,14 +88,14 @@ public class OrganizeCoursePresenter {
         mSelectTeaView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mTeacherListView.setVisibility(View.VISIBLE);
+                OrganizeListActivity.startActivity(mContext, mClassInfo, OrganizeListActivity.FLAG.TEACHER_LIST);
             }
         });
 
         mSelectCourseView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mSelectCourseView.setVisibility(View.VISIBLE);
+                OrganizeListActivity.startActivity(mContext, mClassInfo, OrganizeListActivity.FLAG.COURSE_LIST);
             }
         });
     }
@@ -125,6 +108,7 @@ public class OrganizeCoursePresenter {
 
 
     private void setTeacherView(Teacher teacher) {
+        mTeacher = teacher;
         mSelectTeaView.setVisibility(View.GONE);
         mTeaIconView.setVisibility(View.VISIBLE);
         mTeaNameView.setVisibility(View.VISIBLE);
@@ -143,6 +127,7 @@ public class OrganizeCoursePresenter {
     }
 
     private void setCourseView(Course2 course) {
+        mCourse2 = course;
         mSelectCourseView.setVisibility(View.GONE);
         mCourseNameView.setVisibility(View.VISIBLE);
         mCourseInfoView.setVisibility(View.VISIBLE);
@@ -157,14 +142,6 @@ public class OrganizeCoursePresenter {
         mCourseInfoView.setVisibility(View.GONE);
     }
 
-    public void setCourseList(List<Course2> list) {
-        mCourseListView.updateList(list);
-    }
-
-    public void setTeaList(List<Teacher> list) {
-        mTeacherListView.updateList(list);
-    }
-
     private void updateConfirmView() {
         if (mTeacher == null || mCourse2 == null) {
             mConfirmView.setEnabled(false);
@@ -175,9 +152,15 @@ public class OrganizeCoursePresenter {
 
     private void uploadClassSchedule() {
         ClassSchedule classSchedule = new ClassSchedule();
-        classSchedule.setClassInfo(mClassInfo);
-        classSchedule.setCourse2(mCourse2);
-        classSchedule.setTeacher(mTeacher);
+        ClassInfo classInfo = new ClassInfo();
+        classInfo.setObjectId(mClassInfo.getObjectId());
+        Course2 course2 = new Course2();
+        course2.setObjectId(mCourse2.getObjectId());
+        Teacher teacher = new Teacher();
+        teacher.setObjectId(mTeacher.getObjectId());
+        classSchedule.setClassInfo(classInfo);
+        classSchedule.setCourse2(course2);
+        classSchedule.setTeacher(teacher);
         ClassCourseModel.addClassCourse(classSchedule, new ClassCourseModel.Callback<ClassSchedule>() {
             @Override
             public void onResult(boolean suc, ClassSchedule schedule) {
@@ -198,5 +181,17 @@ public class OrganizeCoursePresenter {
                 resetTeacherView();
             }
         });
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case OrganizeListActivity.FLAG.COURSE_LIST:
+                setCourseView((Course2) data.getSerializableExtra("course"));
+
+                break;
+            case OrganizeListActivity.FLAG.TEACHER_LIST:
+                setTeacherView((Teacher) data.getSerializableExtra("teacher"));
+                break;
+        }
     }
 }

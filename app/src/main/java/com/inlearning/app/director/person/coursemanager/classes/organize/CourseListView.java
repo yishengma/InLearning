@@ -38,6 +38,7 @@ public class CourseListView extends RelativeLayout {
 
     public interface ClickListener {
         void onClick(Course2 course);
+        void onBack();
     }
 
     private ClickListener mClickListener;
@@ -69,7 +70,9 @@ public class CourseListView extends RelativeLayout {
         mBackView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                setVisibility(GONE);
+                if (mClickListener != null) {
+                    mClickListener.onBack();
+                }
             }
         });
     }

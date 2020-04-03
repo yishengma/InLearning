@@ -2,6 +2,7 @@ package com.inlearning.app.director.person.coursemanager.classes;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,7 @@ import java.util.List;
 
 public class ClassTeaAdapter extends RecyclerView.Adapter<ClassTeaAdapter.ViewHolder> {
 
-    private List<ClassSchedule> mCourseTeaProxies;
+    private List<ClassSchedule> mClassSchedules;
 
     public interface ClickListener {
         void onClick(ClassSchedule schedule);
@@ -31,7 +32,7 @@ public class ClassTeaAdapter extends RecyclerView.Adapter<ClassTeaAdapter.ViewHo
     }
 
     public ClassTeaAdapter(List<ClassSchedule> courseTeaProxies) {
-        mCourseTeaProxies = courseTeaProxies;
+        mClassSchedules = courseTeaProxies;
     }
 
     @NonNull
@@ -42,8 +43,9 @@ public class ClassTeaAdapter extends RecyclerView.Adapter<ClassTeaAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
-        ClassSchedule bean = mCourseTeaProxies.get(i);
+        ClassSchedule bean = mClassSchedules.get(i);
         final Course2 course = bean.getCourse2();
+        Log.e("ethan",course.getName());
         viewHolder.mCourseName.setText(course.getName());
         viewHolder.mCourseTime.setText(course.getTime());
         viewHolder.mCourseScore.setText(course.getScore());
@@ -57,7 +59,7 @@ public class ClassTeaAdapter extends RecyclerView.Adapter<ClassTeaAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return mCourseTeaProxies.size();
+        return mClassSchedules.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

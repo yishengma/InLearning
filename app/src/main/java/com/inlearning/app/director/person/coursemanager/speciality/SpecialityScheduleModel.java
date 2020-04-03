@@ -33,8 +33,7 @@ public class SpecialityScheduleModel {
     public static void getSpecialitySchedule(Speciality speciality, final Callback<List<SpecialitySchedule>> callback) {
         BmobQuery<SpecialitySchedule> query = new BmobQuery<>();
         query.addWhereEqualTo("mSpeciality", speciality);
-        query.include("mSpeciality");
-        query.include("mCourse2");
+        query.include("mSpeciality,mCourse2");
         query.findObjects(new FindListener<SpecialitySchedule>() {
             @Override
             public void done(List<SpecialitySchedule> list, BmobException e) {

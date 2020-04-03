@@ -131,8 +131,7 @@ public class TeacherModel {
 
     public static void getTeacherCourse(final Callback<List<TeacherCourse>> callback) {
         BmobQuery<TeacherCourse> query = new BmobQuery<>();
-        query.include("mTeacher");
-        query.include("mCourse2");
+        query.include("mTeacher,mCourse2");
         query.findObjects(new FindListener<TeacherCourse>() {
             @Override
             public void done(List<TeacherCourse> list, BmobException e) {

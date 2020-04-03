@@ -23,8 +23,7 @@ public class ClassCourseModel {
 
     public static void getClassCourse(ClassInfo classInfo, final Callback<List<ClassSchedule>> callback) {
         BmobQuery<ClassSchedule> query = new BmobQuery<>();
-        query.include("mCourse2");
-        query.include("mTeacher");
+        query.include("mCourse2,mTeacher");
         query.addWhereEqualTo("mClassInfo", classInfo);
         query.findObjects(new FindListener<ClassSchedule>() {
             @Override
