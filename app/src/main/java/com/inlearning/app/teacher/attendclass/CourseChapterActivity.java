@@ -17,27 +17,22 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
-import com.bigkoo.pickerview.listener.OnDismissListener;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.TimePickerView;
 import com.inlearning.app.R;
-import com.inlearning.app.common.bean.Course;
 import com.inlearning.app.common.bean.Course2;
 import com.inlearning.app.common.bean.CourseChapter;
 import com.inlearning.app.common.util.StatusBar;
 import com.inlearning.app.common.util.ThreadMgr;
-import com.inlearning.app.director.course.CourseModel;
+
 import com.inlearning.app.teacher.attendclass.func.ChapterFunctionActivity;
 import com.inlearning.app.teacher.attendclass.func.video.VideoUploadMgr;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import cn.bmob.v3.datatype.BmobFile;
-import cn.bmob.v3.datatype.BmobPointer;
 
 public class CourseChapterActivity extends AppCompatActivity implements View.OnClickListener, VideoUploadMgr.UploadListener {
 

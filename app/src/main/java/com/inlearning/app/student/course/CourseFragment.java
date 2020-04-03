@@ -1,4 +1,4 @@
-package com.inlearning.app.teacher.attendclass;
+package com.inlearning.app.student.course;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,16 +10,13 @@ import android.view.ViewGroup;
 
 import com.inlearning.app.R;
 import com.inlearning.app.common.BaseFragment;
-import com.inlearning.app.common.bean.ClassSchedule;
 import com.inlearning.app.common.bean.Course2;
 import com.inlearning.app.common.util.ThreadMgr;
-import com.inlearning.app.student.course.CourseInfoAdapter;
-import com.inlearning.app.teacher.TeacherRuntime;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AttendClassFragment extends BaseFragment {
+public class CourseFragment extends BaseFragment {
 
     private RecyclerView mRvCourse;
     private CourseInfoAdapter mCourseInfoAdapter;
@@ -28,14 +25,14 @@ public class AttendClassFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_teacher_attend_class, container, false);
+        View view = inflater.inflate(R.layout.fragment_stu_course_list, container, false);
         initView(view);
         initData();
         return view;
     }
 
     private void initView(View rootView) {
-        mRvCourse = rootView.findViewById(R.id.rv_tea_course);
+        mRvCourse = rootView.findViewById(R.id.rv_stu_course);
         mRvCourse.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         mCourse2s = new ArrayList<>();
         mCourseInfoAdapter = new CourseInfoAdapter(mCourse2s);
@@ -44,23 +41,13 @@ public class AttendClassFragment extends BaseFragment {
         mCourseInfoAdapter.setClickListener(new CourseInfoAdapter.ClickListener() {
             @Override
             public void onClick(Course2 course) {
-                CourseChapterActivity.startActivity(getContext(), course);
+
             }
         });
     }
 
     private void initData() {
-        ChapterModel.getClassSchedule(new ChapterModel.Callback<List<ClassSchedule>>() {
-            @Override
-            public void onResult(List<ClassSchedule> classSchedules) {
-                TeacherRuntime.setSchedules(classSchedules);
-                List<Course2> course2s = new ArrayList<>();
-                for (ClassSchedule s : classSchedules) {
-                    course2s.add(s.getCourse2());
-                }
-                updateData(course2s);
-            }
-        });
+
     }
 
     public void updateData(final List<Course2> course2s) {
@@ -73,6 +60,5 @@ public class AttendClassFragment extends BaseFragment {
             }
         });
     }
-
-
 }
+

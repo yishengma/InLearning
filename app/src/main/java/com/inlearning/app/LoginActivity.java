@@ -14,12 +14,11 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
-import com.inlearning.app.common.bean.Student;
 import com.inlearning.app.common.bean.User;
 import com.inlearning.app.common.model.UserModel;
 import com.inlearning.app.common.util.StatusBar;
 import com.inlearning.app.director.DirectorHomeActivity;
-import com.inlearning.app.student.ui.StudentHomeActivity;
+import com.inlearning.app.student.StudentHomeActivity;
 import com.inlearning.app.teacher.TeacherHomeActivity;
 
 public class LoginActivity extends AppCompatActivity {

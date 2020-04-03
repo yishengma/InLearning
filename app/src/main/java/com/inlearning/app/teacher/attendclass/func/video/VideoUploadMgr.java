@@ -1,7 +1,6 @@
 package com.inlearning.app.teacher.attendclass.func.video;
 
 
-import com.inlearning.app.common.bean.Course;
 import com.inlearning.app.common.bean.CourseChapter;
 import com.inlearning.app.teacher.attendclass.ChapterModel;
 
