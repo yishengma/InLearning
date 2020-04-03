@@ -11,7 +11,6 @@ import android.view.View;
 
 import com.inlearning.app.R;
 import com.inlearning.app.common.bean.CourseChapter;
-import com.inlearning.app.common.bean.Question;
 import com.inlearning.app.common.util.StatusBar;
 import com.inlearning.app.teacher.attendclass.func.homework.HomeworkPresenter;
 import com.inlearning.app.teacher.attendclass.func.material.MaterialPresenter;
@@ -24,13 +23,13 @@ import java.lang.annotation.Target;
 
 public class ChapterFunctionActivity extends AppCompatActivity {
 
-    @IntDef({FLAG.VIDEO_FUNCTION, FLAG.MATERIAL_FUNCTION})
+    @IntDef({FLAG.VIDEO_FUNCTION, FLAG.MATERIAL_FUNCTION, FLAG.HOMEWORK_FUNCTION})
     @Retention(RetentionPolicy.SOURCE)
     @Target({ElementType.FIELD, ElementType.LOCAL_VARIABLE, ElementType.PARAMETER})
     public @interface FLAG {
         int VIDEO_FUNCTION = 0;
         int MATERIAL_FUNCTION = 1;
-        int EXERCISE_FUNCTION = 2;
+        //        int EXERCISE_FUNCTION = 2;
         int HOMEWORK_FUNCTION = 3;
     }
 

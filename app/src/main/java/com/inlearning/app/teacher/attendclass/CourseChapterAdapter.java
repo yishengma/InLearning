@@ -43,6 +43,7 @@ public class CourseChapterAdapter extends RecyclerView.Adapter<CourseChapterAdap
 
         void onTimeClick(CourseChapter chapter);
 
+        @Deprecated
         void onExerciseClick(CourseChapter chapter);
 
         void onMaterialClick(CourseChapter chapter);
@@ -131,24 +132,24 @@ public class CourseChapterAdapter extends RecyclerView.Adapter<CourseChapterAdap
                 }
             }
         });
-
-        if (chapter.getExerciseCount() != 0) {
-            viewHolder.mExerciseFuncView.setTextColor(R.color.app_global_blue);
-            viewHolder.mExerciseFuncView.setIcon(R.drawable.icon_exercise_blue);
-            viewHolder.mExerciseFuncView.setContent(chapter.getMaterialCount() + "个题目");
-        } else {
-            viewHolder.mExerciseFuncView.setTextColor(R.color.app_global_gray);
-            viewHolder.mExerciseFuncView.setIcon(R.drawable.icon_exercise_gray);
-            viewHolder.mExerciseFuncView.setContent("暂未上传");
-        }
-        viewHolder.mExerciseFuncView.setClickListener(new ChapterFuncItemView.ClickListener() {
-            @Override
-            public void onClick() {
-                if (mOnClickListener != null) {
-                    mOnClickListener.onExerciseClick(chapter);
-                }
-            }
-        });
+//
+//        if (chapter.getExerciseCount() != 0) {
+//            viewHolder.mExerciseFuncView.setTextColor(R.color.app_global_blue);
+//            viewHolder.mExerciseFuncView.setIcon(R.drawable.icon_exercise_blue);
+//            viewHolder.mExerciseFuncView.setContent(chapter.getMaterialCount() + "个题目");
+//        } else {
+//            viewHolder.mExerciseFuncView.setTextColor(R.color.app_global_gray);
+//            viewHolder.mExerciseFuncView.setIcon(R.drawable.icon_exercise_gray);
+//            viewHolder.mExerciseFuncView.setContent("暂未上传");
+//        }
+//        viewHolder.mExerciseFuncView.setClickListener(new ChapterFuncItemView.ClickListener() {
+//            @Override
+//            public void onClick() {
+//                if (mOnClickListener != null) {
+//                    mOnClickListener.onExerciseClick(chapter);
+//                }
+//            }
+//        });
         if (chapter.getHomeworkCount() != 0) {
             viewHolder.mHomeworkFuncView.setTextColor(R.color.app_global_blue);
             viewHolder.mHomeworkFuncView.setIcon(R.drawable.icon_homework_blue);
@@ -200,7 +201,7 @@ public class CourseChapterAdapter extends RecyclerView.Adapter<CourseChapterAdap
         private ImageView mVideoView;
         private ChapterFuncItemView mTimeFuncView;
         private ChapterFuncItemView mMaterialFuncView;
-        private ChapterFuncItemView mExerciseFuncView;
+//        private ChapterFuncItemView mExerciseFuncView;
         private ChapterFuncItemView mHomeworkFuncView;
         private ChapterFuncItemView mDiscussFuncView;
         private ProgressBar mProgressBar;
@@ -215,8 +216,8 @@ public class CourseChapterAdapter extends RecyclerView.Adapter<CourseChapterAdap
             mTimeFuncView.setText("时间");
             mMaterialFuncView = itemView.findViewById(R.id.func_material_view);
             mMaterialFuncView.setText("资料");
-            mExerciseFuncView = itemView.findViewById(R.id.func_exercise_view);
-            mExerciseFuncView.setText("练习");
+//            mExerciseFuncView = itemView.findViewById(R.id.func_exercise_view);
+//            mExerciseFuncView.setText("练习");
             mHomeworkFuncView = itemView.findViewById(R.id.func_homework_view);
             mHomeworkFuncView.setText("作业");
             mDiscussFuncView = itemView.findViewById(R.id.func_discuss_view);
