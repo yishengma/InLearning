@@ -24,10 +24,6 @@ public class MaterialAdapter extends RecyclerView.Adapter<MaterialAdapter.ViewHo
 
     public interface ClickListener {
         void onClick(Materials materials);
-
-        void onUpload(Materials materials);
-
-        void onDelete(Materials materials);
     }
 
     private ClickListener mClickListener;
@@ -47,7 +43,6 @@ public class MaterialAdapter extends RecyclerView.Adapter<MaterialAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         final Materials materials = mMaterials.get(i);
         viewHolder.setIconView(Materials.getType(materials.getMaterialName()));
-        Log.e("ethan",""+Materials.getType(materials.getMaterialName()));
         viewHolder.mNameView.setText(materials.getMaterialName());
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,29 +52,8 @@ public class MaterialAdapter extends RecyclerView.Adapter<MaterialAdapter.ViewHo
                 }
             }
         });
-        if (materials.getMaterialFile() == null || TextUtils.isEmpty(materials.getMaterialFile().getFileUrl())) {
-            viewHolder.mUploadView.setText("上传");
-            viewHolder.mUploadView.setEnabled(true);
-        } else {
-            viewHolder.mUploadView.setText("已上传");
-            viewHolder.mUploadView.setEnabled(false);
-        }
-        viewHolder.mUploadView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mClickListener != null) {
-                    mClickListener.onUpload(materials);
-                }
-            }
-        });
-        viewHolder.mDeleteView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mClickListener != null) {
-                    mClickListener.onDelete(materials);
-                }
-            }
-        });
+        viewHolder.mDeleteView.setVisibility(View.GONE);
+        viewHolder.mUploadView.setVisibility(View.GONE);
     }
 
     @Override

@@ -28,7 +28,6 @@ public class ChapterFunctionActivity extends AppCompatActivity {
     public @interface FLAG {
         int VIDEO_FUNCTION = 0;
         int MATERIAL_FUNCTION = 1;
-        //        int EXERCISE_FUNCTION = 2;
         int HOMEWORK_FUNCTION = 3;
     }
 
@@ -96,11 +95,6 @@ public class ChapterFunctionActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (mFunctionFlag) {
-            case FLAG.VIDEO_FUNCTION:
-                break;
-            case FLAG.MATERIAL_FUNCTION:
-                mMaterialPresenter.onActivityResult(requestCode, resultCode, data);
-                break;
             case FLAG.HOMEWORK_FUNCTION:
                 mHomeworkPresenter.onActivityResult(requestCode, resultCode, data);
                 break;

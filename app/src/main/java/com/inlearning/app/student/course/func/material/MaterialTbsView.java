@@ -78,6 +78,7 @@ public class MaterialTbsView extends RelativeLayout implements View.OnClickListe
         mTbsView.addView(mTbsReaderView, new LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT));
+        mBackView.setOnClickListener(this);
     }
 
     @Override

@@ -29,7 +29,7 @@
             android:maxLines="1"
             android:ellipsize="end"
             android:textColor="@color/textBlack"
-            android:textSize="18sp" />
+            android:textSize="14sp" />
     </FrameLayout>
 
     <View

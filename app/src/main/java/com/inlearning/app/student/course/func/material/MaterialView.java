@@ -35,8 +35,6 @@ public class MaterialView extends RelativeLayout implements View.OnClickListener
 
     public interface ClickListener {
         void onBack();
-
-        void onAdd();
     }
 
     private ClickListener mClickListener;
@@ -55,6 +53,7 @@ public class MaterialView extends RelativeLayout implements View.OnClickListener
         mEmptyView = view.findViewById(R.id.tv_empty);
         mBackView.setOnClickListener(this);
         mAddView.setOnClickListener(this);
+        mAddView.setVisibility(GONE);
     }
 
     @Override
@@ -63,11 +62,6 @@ public class MaterialView extends RelativeLayout implements View.OnClickListener
             case R.id.imv_bar_back:
                 if (mClickListener != null) {
                     mClickListener.onBack();
-                }
-                break;
-            case R.id.tv_bar_add:
-                if (mClickListener != null) {
-                    mClickListener.onAdd();
                 }
                 break;
         }
