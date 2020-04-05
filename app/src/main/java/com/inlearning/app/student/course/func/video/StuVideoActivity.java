@@ -4,6 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+
+import com.dueeeke.videoplayer.player.ProgressManager;
 import com.dueeeke.videoplayer.player.VideoView;
 import com.inlearning.app.R;
 import com.inlearning.app.common.bean.ChapterProgress;
@@ -46,15 +49,24 @@ public class StuVideoActivity extends AppCompatActivity {
         mStuVideoController = new StuVideoController(StuVideoActivity.this);
         mStuVideoController.addDefaultControlComponent(mChapter.getChapterName(), false);
         mVideoView.setVideoController(mStuVideoController); //设置控制器
+        mVideoView.startFullScreen();
+        mStuVideoController.setCanChangePosition(false);
         mStuVideoController.getStuVodControlView().setSeekBarEnable(false);
         mVideoView.setUrl(mChapter.getVideoFile().getUrl());
+        mStuVideoController.getStuVodControlView().setListener(new StuVodControlView.ProgressListener() {
+            @Override
+            public void onProgress(int progress, int duration) {
+                ChapterProgressModel.updateStudyProgress(mChapterProgress, progress, duration);
+            }
+        });
     }
 
     private void initStudyProgress() {
         ChapterProgressModel.getVideoStudyProgress(mChapter, StudentRuntime.getStudent(), new ChapterProgressModel.Callback<ChapterProgress>() {
             @Override
             public void onResult(ChapterProgress chapterProgress) {
-
+                mChapterProgress = chapterProgress;
+                playVideo(chapterProgress.isDone());
             }
         });
     }
@@ -64,19 +76,38 @@ public class StuVideoActivity extends AppCompatActivity {
             @Override
             public void run() {
                 mStuVideoController.setCanChangePosition(changePosition);
+                mStuVideoController.getStuVodControlView().setSeekBarEnable(changePosition);
+                if (!changePosition) {
+                    mVideoView.seekTo(mChapterProgress.getStudyDuration());
+                }
                 mVideoView.start();
-                mVideoView.addOnStateChangeListener(new VideoView.OnStateChangeListener() {
-                    @Override
-                    public void onPlayerStateChanged(int playerState) {
-
-                    }
-
-                    @Override
-                    public void onPlayStateChanged(int playState) {
-
-                    }
-                });
             }
         });
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mVideoView.pause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mVideoView.resume();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mVideoView.release();
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        if (!mVideoView.onBackPressed()) {
+            super.onBackPressed();
+        }
     }
 }

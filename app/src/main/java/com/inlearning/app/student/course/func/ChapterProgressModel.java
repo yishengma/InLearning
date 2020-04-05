@@ -12,6 +12,7 @@ import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
+import cn.bmob.v3.listener.UpdateListener;
 
 public class ChapterProgressModel {
 
@@ -33,6 +34,7 @@ public class ChapterProgressModel {
                     progress.setStudent(student);
                     progress.setChapter(chapter);
                     progress.setVideoUrl(chapter.getVideoFile().getFileUrl());
+                    progress.setDone(false);
                     progress.save(new SaveListener<String>() {
                         @Override
                         public void done(String s, BmobException e) {
@@ -49,4 +51,22 @@ public class ChapterProgressModel {
             }
         });
     }
+
+    public static void updateStudyProgress(ChapterProgress progress, long currentDuration, long duration) {
+        if (progress.isDone()) {
+            return;
+        }
+        Log.e("ethan", "updateStudyProgress: "+currentDuration );
+        Log.e("ethan", "updateStudyProgress: ."+duration );
+        progress.setStudyDuration(currentDuration);
+        progress.setDone(Math.abs(duration-currentDuration) <= 1000);
+        progress.update(new UpdateListener() {
+            @Override
+            public void done(BmobException e) {
+
+            }
+        });
+    }
+
+
 }

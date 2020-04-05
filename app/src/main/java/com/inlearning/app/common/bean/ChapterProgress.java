@@ -6,17 +6,9 @@ public class ChapterProgress extends BmobObject {
 
     private CourseChapter mChapter;
     private Student mStudent;
-    private long mVideoDuration;
     private long mStudyDuration;
     private String mVideoUrl;
-
-    public long getVideoDuration() {
-        return mVideoDuration;
-    }
-
-    public void setVideoDuration(long videoDuration) {
-        mVideoDuration = videoDuration;
-    }
+    private boolean mDone;
 
     public long getStudyDuration() {
         return mStudyDuration;
@@ -48,5 +40,13 @@ public class ChapterProgress extends BmobObject {
 
     public void setVideoUrl(String videoUrl) {
         mVideoUrl = videoUrl;
+    }
+
+    public boolean isDone() {
+        return mDone;
+    }
+
+    public void setDone(boolean done) {
+        mDone = done;
     }
 }

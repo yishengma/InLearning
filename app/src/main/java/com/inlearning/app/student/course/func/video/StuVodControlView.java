@@ -224,6 +224,10 @@ public class StuVodControlView extends FrameLayout implements IControlComponent,
             mTotalTime.setText(stringForTime(duration));
         if (mCurrTime != null)
             mCurrTime.setText(stringForTime(position));
+
+        if (mListener != null) {
+            mListener.onProgress(position, duration);
+        }
     }
 
     @Override
@@ -280,6 +284,16 @@ public class StuVodControlView extends FrameLayout implements IControlComponent,
 
     public void setSeekBarEnable(boolean enable) {
         mIsShowSeekBar = enable;
-        mVideoProgress.setOnSeekBarChangeListener(enable ? this:null);
+        mVideoProgress.setOnSeekBarChangeListener(enable ? this : null);
+    }
+
+    public interface ProgressListener {
+        void onProgress(int progress, int duration);
+    }
+
+    private ProgressListener mListener;
+
+    public void setListener(ProgressListener listener) {
+        mListener = listener;
     }
 }
