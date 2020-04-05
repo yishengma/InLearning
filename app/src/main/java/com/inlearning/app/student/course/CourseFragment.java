@@ -10,8 +10,10 @@ import android.view.ViewGroup;
 
 import com.inlearning.app.R;
 import com.inlearning.app.common.BaseFragment;
+import com.inlearning.app.common.bean.ClassSchedule;
 import com.inlearning.app.common.bean.Course2;
 import com.inlearning.app.common.util.ThreadMgr;
+import com.inlearning.app.student.StudentRuntime;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +22,7 @@ public class CourseFragment extends BaseFragment {
 
     private RecyclerView mRvCourse;
     private CourseInfoAdapter mCourseInfoAdapter;
-    private List<Course2> mCourse2s;
+    private List<ClassSchedule> mCourse2s;
 
     @Nullable
     @Override
@@ -47,15 +49,20 @@ public class CourseFragment extends BaseFragment {
     }
 
     private void initData() {
-
+        CourseModel.getCourse(StudentRuntime.getClassInfo(), new CourseModel.Callback<List<ClassSchedule>>() {
+            @Override
+            public void onResult(List<ClassSchedule> classSchedules) {
+                updateData(classSchedules);
+            }
+        });
     }
 
-    public void updateData(final List<Course2> course2s) {
+    public void updateData(final List<ClassSchedule> classSchedules) {
         ThreadMgr.getInstance().postToUIThread(new Runnable() {
             @Override
             public void run() {
                 mCourse2s.clear();
-                mCourse2s.addAll(course2s);
+                mCourse2s.addAll(classSchedules);
                 mCourseInfoAdapter.notifyDataSetChanged();
             }
         });

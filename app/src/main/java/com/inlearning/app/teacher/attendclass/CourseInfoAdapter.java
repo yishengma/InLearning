@@ -1,4 +1,4 @@
-package com.inlearning.app.student.course;
+package com.inlearning.app.teacher.attendclass;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -10,16 +10,15 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.inlearning.app.R;
-import com.inlearning.app.common.bean.ClassSchedule;
 import com.inlearning.app.common.bean.Course2;
 
 import java.util.List;
 
 public class CourseInfoAdapter extends  RecyclerView.Adapter<CourseInfoAdapter.ViewHolder>{
-    private List<ClassSchedule> mCourseList;
+    private List<Course2> mCourseList;
     private boolean mIsImport;
 
-    public CourseInfoAdapter(List<ClassSchedule> courseList) {
+    public CourseInfoAdapter(List<Course2> courseList) {
         mCourseList = courseList;
     }
 
@@ -29,7 +28,7 @@ public class CourseInfoAdapter extends  RecyclerView.Adapter<CourseInfoAdapter.V
     }
 
     public interface ClickListener {
-        void onClick(Course2 course2);
+        void onClick(Course2 course);
     }
 
     private ClickListener mClickListener;
@@ -48,7 +47,7 @@ public class CourseInfoAdapter extends  RecyclerView.Adapter<CourseInfoAdapter.V
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        final Course2 course = mCourseList.get(i).getCourse2();
+        final Course2 course = mCourseList.get(i);
         viewHolder.mSelectView.setVisibility(mIsImport?View.VISIBLE:View.GONE);
         viewHolder.mSelectView.setChecked(course.isSelected());
         viewHolder.mSelectView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

@@ -14,7 +14,6 @@ import com.inlearning.app.common.bean.ClassSchedule;
 import com.inlearning.app.common.bean.Course2;
 import com.inlearning.app.common.bean.TeacherCourse;
 import com.inlearning.app.common.util.ThreadMgr;
-import com.inlearning.app.student.course.CourseInfoAdapter;
 import com.inlearning.app.teacher.TeacherRuntime;
 
 import java.util.ArrayList;

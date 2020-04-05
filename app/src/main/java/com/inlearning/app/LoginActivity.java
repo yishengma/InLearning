@@ -14,11 +14,14 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import com.inlearning.app.common.bean.Student;
 import com.inlearning.app.common.bean.User;
 import com.inlearning.app.common.model.UserModel;
 import com.inlearning.app.common.util.StatusBar;
 import com.inlearning.app.director.DirectorHomeActivity;
+import com.inlearning.app.student.LoginModel;
 import com.inlearning.app.student.StudentHomeActivity;
+import com.inlearning.app.student.StudentRuntime;
 import com.inlearning.app.teacher.TeacherHomeActivity;
 
 public class LoginActivity extends AppCompatActivity {
@@ -104,7 +107,13 @@ public class LoginActivity extends AppCompatActivity {
         @User.Type int type = User.Type.STUDENT;
         if (mStudentView.isChecked()) {
             type = User.Type.STUDENT;
-            StudentHomeActivity.startHomePageActivity(LoginActivity.this);
+            LoginModel.login(new LoginModel.Callback<Student>() {
+                @Override
+                public void onResult(Student student) {
+                    StudentRuntime.setStudent(student);
+                    StudentHomeActivity.startHomePageActivity(LoginActivity.this);
+                }
+            });
         } else if (mTeacherView.isChecked()) {
             type = User.Type.TEACHER;
             TeacherHomeActivity.startHomePageActivity(LoginActivity.this);
