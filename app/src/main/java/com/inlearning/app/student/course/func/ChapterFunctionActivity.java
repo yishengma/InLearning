@@ -50,7 +50,7 @@ public class ChapterFunctionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chapter_function);
+        setContentView(R.layout.activity_student_chapter_function);
         StatusBar.setStatusBarTranslucent(this);
         StatusBar.setStatusBarDarkMode(this, true);
         getIntentData();

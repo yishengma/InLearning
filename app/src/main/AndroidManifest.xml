@@ -68,6 +68,7 @@
 
         <activity android:name=".student.StudentHomeActivity" />
         <activity android:name=".student.course.CourseChapterActivity" />
+        <activity android:name=".student.course.func.ChapterFunctionActivity" />
 
         <provider
             android:name="cn.bmob.v3.util.BmobContentProvider"

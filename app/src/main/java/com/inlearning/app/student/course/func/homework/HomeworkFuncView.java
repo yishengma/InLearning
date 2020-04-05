@@ -62,7 +62,7 @@ public class HomeworkFuncView extends LinearLayout implements View.OnClickListen
     }
 
     private void initView() {
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.view_homework_function, this);
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.view_student_homework_function, this);
         mResponseQuesView = view.findViewById(R.id.view_response_ques);
         mChooseQuesView = view.findViewById(R.id.view_choose_ques);
         mBackView = view.findViewById(R.id.imv_bar_back);
