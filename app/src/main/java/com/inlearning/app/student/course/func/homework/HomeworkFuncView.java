@@ -32,27 +32,17 @@ public class HomeworkFuncView extends LinearLayout implements View.OnClickListen
         initView();
     }
 
-    private ResponseQuesView mResponseQuesView;
-    private ChooseQuesView mChooseQuesView;
-    private HomeworkEditView mHomeworkEditView;
     private ImageView mBackView;
     private TextView mTitleView;
     private RecyclerView mRvHomework;
     private TextView mAddView;
     private TextView mEmptyView;
     private FrameLayout mTitleBar;
-    private LinearLayout mBottomBarView;
-    private TextView mEditQuesView;
-    private TextView mDeleteView;
     private LinearLayoutManager mLayoutManager;
     private int mCuttentPosition = 0;
 
     public interface ClickListener {
         void onBack();
-
-        void onAddChoiceQues();
-
-        void onAddResponseQues();
     }
 
     private ClickListener mClickListener;
@@ -63,8 +53,6 @@ public class HomeworkFuncView extends LinearLayout implements View.OnClickListen
 
     private void initView() {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.view_student_homework_function, this);
-        mResponseQuesView = view.findViewById(R.id.view_response_ques);
-        mChooseQuesView = view.findViewById(R.id.view_choose_ques);
         mBackView = view.findViewById(R.id.imv_bar_back);
         mTitleView = view.findViewById(R.id.tv_bar_title);
         mRvHomework = view.findViewById(R.id.rv_homework);
@@ -82,11 +70,6 @@ public class HomeworkFuncView extends LinearLayout implements View.OnClickListen
         mAddView.setOnClickListener(this);
         mEmptyView = view.findViewById(R.id.tv_empty);
         mTitleBar = view.findViewById(R.id.fl_title_bar);
-        mHomeworkEditView = view.findViewById(R.id.view_homework_edit);
-        mBottomBarView = view.findViewById(R.id.view_bottom_bar);
-        mEditQuesView = view.findViewById(R.id.tv_edit_ques);
-        mDeleteView = view.findViewById(R.id.tv_delete);
-
     }
 
 
@@ -97,9 +80,6 @@ public class HomeworkFuncView extends LinearLayout implements View.OnClickListen
                 if (mClickListener != null) {
                     mClickListener.onBack();
                 }
-                break;
-            case R.id.tv_bar_add:
-                showDialog();
                 break;
         }
     }
@@ -112,45 +92,9 @@ public class HomeworkFuncView extends LinearLayout implements View.OnClickListen
         mTitleView.setText(msg);
     }
 
-    private void showDialog() {
-        final Dialog dialog = new Dialog(getContext(), R.style.SimpleDialog);//SimpleDialog
-        dialog.setContentView(R.layout.dialog_add_question);
-        dialog.setCanceledOnTouchOutside(true);
-        TextView choiceView = dialog.findViewById(R.id.tv_choice_question);
-        TextView responseView = dialog.findViewById(R.id.tv_response_question);
-        choiceView.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mClickListener != null) {
-                    mClickListener.onAddChoiceQues();
-                }
-                dialog.dismiss();
-            }
-        });
-        responseView.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (mClickListener != null) {
-                    mClickListener.onAddResponseQues();
-                }
-                dialog.dismiss();
-            }
-        });
-        dialog.show();
-    }
-
-    public ResponseQuesView getResponseQuesView() {
-        return mResponseQuesView;
-    }
-
-    public ChooseQuesView getChooseQuesView() {
-        return mChooseQuesView;
-    }
-
     public void refreshUI(boolean hasData) {
         mRvHomework.setVisibility(hasData ? VISIBLE : GONE);
         mEmptyView.setVisibility(hasData ? GONE : VISIBLE);
-        mBottomBarView.setVisibility(hasData ? VISIBLE : GONE);
     }
 
     public void hideFuncView() {
@@ -158,7 +102,6 @@ public class HomeworkFuncView extends LinearLayout implements View.OnClickListen
         findViewById(R.id.split_line).setVisibility(GONE);
         mRvHomework.setVisibility(GONE);
         mEmptyView.setVisibility(GONE);
-        mBottomBarView.setVisibility(GONE);
     }
 
     public void showFuncView() {
@@ -166,23 +109,6 @@ public class HomeworkFuncView extends LinearLayout implements View.OnClickListen
         findViewById(R.id.split_line).setVisibility(VISIBLE);
         mRvHomework.setVisibility(VISIBLE);
         mEmptyView.setVisibility(VISIBLE);
-        mBottomBarView.setVisibility(VISIBLE);
-    }
-
-    public HomeworkEditView getHomeworkEditView() {
-        return mHomeworkEditView;
-    }
-
-    public TextView getEditQuesView() {
-        return mEditQuesView;
-    }
-
-    public TextView getDeleteView() {
-        return mDeleteView;
-    }
-
-    public LinearLayout getBottomBarView() {
-        return mBottomBarView;
     }
 
     public int getCurrentPosition() {

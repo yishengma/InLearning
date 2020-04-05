@@ -8,6 +8,8 @@ public class Answer extends BmobObject {
     private List<String> mChoiceAnswers;
     private String mImageUrl;
     private Question mQuestion;
+    private Student mStudent;
+    private CourseChapter mChapter;
 
     public List<String> getChoiceAnswers() {
         return mChoiceAnswers;
@@ -31,5 +33,21 @@ public class Answer extends BmobObject {
 
     public void setQuestion(Question question) {
         mQuestion = question;
+    }
+
+    public Student getStudent() {
+        return mStudent;
+    }
+
+    public void setStudent(Student student) {
+        mStudent = student;
+    }
+
+    public CourseChapter getChapter() {
+        return mChapter;
+    }
+
+    public void setChapter(CourseChapter chapter) {
+        mChapter = chapter;
     }
 }

@@ -10,8 +10,10 @@ import java.lang.annotation.Target;
 import java.util.List;
 
 import cn.bmob.v3.BmobObject;
+import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.datatype.BmobPointer;
+import cn.bmob.v3.datatype.BmobRelation;
 
 
 public class Question extends BmobObject {
@@ -45,7 +47,6 @@ public class Question extends BmobObject {
     @Type
     private int mType;
     private List<String> mChoiceAnswers;
-
 
     public CourseChapter getCourseChapter() {
         return mCourseChapter;
@@ -94,4 +95,5 @@ public class Question extends BmobObject {
     public void setChoiceAnswers(List<String> choiceAnswers) {
         mChoiceAnswers = choiceAnswers;
     }
+
 }

@@ -19,7 +19,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.inlearning.app.R;
-import com.inlearning.app.common.bean.Question;
 import com.inlearning.app.common.util.FileUtil;
 import com.inlearning.app.common.util.PhotoUtils;
 import com.inlearning.app.common.util.TakePhotoUtil;
@@ -28,25 +27,23 @@ import java.io.File;
 
 import static android.app.Activity.RESULT_OK;
 
-public abstract class BaseQuesFunc extends RelativeLayout {
+public abstract class BaseAnswerFunc extends RelativeLayout {
 
-    public BaseQuesFunc(Context context) {
+    public BaseAnswerFunc(Context context) {
         this(context, null);
     }
 
-    public BaseQuesFunc(Context context, AttributeSet attrs) {
+    public BaseAnswerFunc(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public BaseQuesFunc(Context context, AttributeSet attrs, int defStyleAttr) {
+    public BaseAnswerFunc(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         mActivity = initActivity();
     }
 
     public interface ClickListener {
         void onBack();
-        void onUpload(Question question);
-        void onUpdate(Question question);
     }
 
     ClickListener mClickListener;
