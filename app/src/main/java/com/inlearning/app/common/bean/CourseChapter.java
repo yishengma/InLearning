@@ -13,6 +13,7 @@ public class CourseChapter extends BmobObject {
     private int mChapterNum;
     private String mChapterName;
     private BmobFile mVideoFile;
+    private long mVideoDuration;
     private String mDeadLine;
     private Integer mMaterialCount;
     private Integer mExerciseCount;
@@ -90,5 +91,13 @@ public class CourseChapter extends BmobObject {
 
     public void setDiscussCount(int discussCount) {
         mDiscussCount = discussCount;
+    }
+
+    public long getVideoDuration() {
+        return mVideoDuration;
+    }
+
+    public void setVideoDuration(long videoDuration) {
+        mVideoDuration = videoDuration;
     }
 }

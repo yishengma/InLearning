@@ -18,6 +18,7 @@ import com.inlearning.app.common.bean.CourseChapter;
 import com.inlearning.app.common.util.StatusBar;
 import com.inlearning.app.common.util.ThreadMgr;
 import com.inlearning.app.student.course.func.ChapterFunctionActivity;
+import com.inlearning.app.student.course.func.video.StuVideoActivity;
 import com.inlearning.app.teacher.attendclass.ChapterModel;
 
 
@@ -91,7 +92,7 @@ public class CourseChapterActivity extends AppCompatActivity implements View.OnC
             @Override
             public void onVideoClick(CourseChapter chapter) {
                 Log.e("ethan", "onVideoClick");
-                ChapterFunctionActivity.startActivity(CourseChapterActivity.this, chapter, ChapterFunctionActivity.FLAG.VIDEO_FUNCTION);
+                StuVideoActivity.startActivity(CourseChapterActivity.this, chapter);
             }
 
             @Override
@@ -132,7 +133,7 @@ public class CourseChapterActivity extends AppCompatActivity implements View.OnC
         CourseModel.getCourseChapter(mClassSchedule, new ChapterModel.Callback<List<CourseChapter>>() {
             @Override
             public void onResult(List<CourseChapter> courseChapters) {
-                Log.e("ethan",""+courseChapters.size());
+                Log.e("ethan", "" + courseChapters.size());
                 updateChapters(courseChapters);
             }
         });

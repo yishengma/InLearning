@@ -8,12 +8,6 @@
     android:orientation="vertical"
     tools:context=".student.course.CourseChapterActivity">
 
-    <com.inlearning.app.student.course.func.video.VideoFunctionView
-        android:id="@+id/view_video_func"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone" />
-
     <com.inlearning.app.student.course.func.material.MaterialView
         android:id="@+id/view_material_func"
         android:layout_width="match_parent"

@@ -14,7 +14,6 @@ import com.inlearning.app.common.bean.CourseChapter;
 import com.inlearning.app.common.util.StatusBar;
 import com.inlearning.app.student.course.func.homework.HomeworkPresenter;
 import com.inlearning.app.student.course.func.material.MaterialPresenter;
-import com.inlearning.app.student.course.func.video.VideoPresenter;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -40,7 +39,6 @@ public class ChapterFunctionActivity extends AppCompatActivity {
         context.startActivity(intent);
     }
 
-    private VideoPresenter mVideoPresenter;
     private MaterialPresenter mMaterialPresenter;
     private HomeworkPresenter mHomeworkPresenter;
     private View mRootView;
@@ -65,31 +63,25 @@ public class ChapterFunctionActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        mVideoPresenter.onResume();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        mVideoPresenter.onPause();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mVideoPresenter.onDestroy();
         mMaterialPresenter.onDestory();
     }
 
     private void initPresenter() {
         mRootView = findViewById(R.id.root_view);
-        mVideoPresenter = new VideoPresenter(this, mRootView);
-        mVideoPresenter.setChapter(mChapter);
         mMaterialPresenter = new MaterialPresenter(this, mChapter);
         mHomeworkPresenter = new HomeworkPresenter(this, mRootView, mChapter);
         switch (mFunctionFlag) {
             case FLAG.VIDEO_FUNCTION:
-                mVideoPresenter.show();
                 break;
             case FLAG.MATERIAL_FUNCTION:
                 mMaterialPresenter.showMaterialView();
@@ -105,7 +97,6 @@ public class ChapterFunctionActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         switch (mFunctionFlag) {
             case FLAG.VIDEO_FUNCTION:
-                mVideoPresenter.onActivityResult(requestCode, resultCode, data);
                 break;
             case FLAG.MATERIAL_FUNCTION:
                 mMaterialPresenter.onActivityResult(requestCode, resultCode, data);
