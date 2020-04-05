@@ -28,7 +28,6 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".director.person.coursemanager.classes.organize.OrganizeListActivity"></activity>
-        <activity android:name=".student.StudentHomeActivity" />
         <activity android:name=".director.person.coursemanager.classes.ClassCourseActivity" />
         <activity android:name=".director.person.coursemanager.classes.ClassListActivity" />
         <activity android:name=".director.person.coursemanager.speciality.CourseActivity" />
@@ -66,6 +65,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".student.StudentHomeActivity" />
+        <activity android:name=".student.course.CourseChapterActivity" />
 
         <provider
             android:name="cn.bmob.v3.util.BmobContentProvider"

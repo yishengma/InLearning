@@ -25,6 +25,7 @@ import com.inlearning.app.common.bean.CourseChapter;
 import com.inlearning.app.common.util.StatusBar;
 import com.inlearning.app.common.util.ThreadMgr;
 
+import com.inlearning.app.teacher.TeacherRuntime;
 import com.inlearning.app.teacher.attendclass.func.ChapterFunctionActivity;
 import com.inlearning.app.teacher.attendclass.func.video.VideoUploadMgr;
 
@@ -185,6 +186,7 @@ public class CourseChapterActivity extends AppCompatActivity implements View.OnC
                     return;
                 }
                 CourseChapter courseChapter = new CourseChapter();
+                courseChapter.setTeacher(TeacherRuntime.getCurrentTeacher());
                 courseChapter.setCourse2(mCourse2);
                 courseChapter.setChapterNum(mChapters.size() + 1);
                 courseChapter.setChapterName(chapterName);

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,12 +39,12 @@ public class CourseFragment extends BaseFragment {
         mRvCourse.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         mCourse2s = new ArrayList<>();
         mCourseInfoAdapter = new CourseInfoAdapter(mCourse2s);
-        mCourseInfoAdapter.setImport(false);
         mRvCourse.setAdapter(mCourseInfoAdapter);
         mCourseInfoAdapter.setClickListener(new CourseInfoAdapter.ClickListener() {
             @Override
-            public void onClick(Course2 course) {
-
+            public void onClick(ClassSchedule schedule) {
+                Log.e("ethan",schedule.getCourse2().getObjectId()+"teacher:"+schedule.getTeacher().getObjectId());
+                CourseChapterActivity.startActivity(getContext(), schedule);
             }
         });
     }

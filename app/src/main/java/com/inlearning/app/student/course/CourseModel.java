@@ -4,6 +4,11 @@ import android.util.Log;
 
 import com.inlearning.app.common.bean.ClassInfo;
 import com.inlearning.app.common.bean.ClassSchedule;
+import com.inlearning.app.common.bean.Course2;
+import com.inlearning.app.common.bean.CourseChapter;
+import com.inlearning.app.common.bean.Teacher;
+import com.inlearning.app.teacher.TeacherRuntime;
+import com.inlearning.app.teacher.attendclass.ChapterModel;
 
 import java.util.List;
 
@@ -19,12 +24,27 @@ public class CourseModel {
 
     public static void getCourse(final ClassInfo classInfo, final Callback<List<ClassSchedule>> callback) {
         BmobQuery<ClassSchedule> schedule = new BmobQuery<>();
-        schedule.addWhereEqualTo("mClassInfo", classInfo.getObjectId());
+        schedule.addWhereEqualTo("mClassInfo", classInfo);
         schedule.include("mCourse2,mTeacher");
         schedule.findObjects(new FindListener<ClassSchedule>() {
             @Override
             public void done(List<ClassSchedule> list, BmobException e) {
-                Log.e("ethan",list+""+e+""+classInfo);
+                Log.e("ethan", list + "" + e + "" + classInfo);
+                if (e == null) {
+                    callback.onResult(list);
+                }
+            }
+        });
+    }
+
+
+    public static void getCourseChapter(ClassSchedule schedule, final ChapterModel.Callback<List<CourseChapter>> callback) {
+        BmobQuery<CourseChapter> query = new BmobQuery<>();
+        query.addWhereEqualTo("mTeacher", schedule.getTeacher());
+        query.addWhereEqualTo("mCourse2", schedule.getCourse2());
+        query.findObjects(new FindListener<CourseChapter>() {
+            @Override
+            public void done(List<CourseChapter> list, BmobException e) {
                 if (e == null) {
                     callback.onResult(list);
                 }

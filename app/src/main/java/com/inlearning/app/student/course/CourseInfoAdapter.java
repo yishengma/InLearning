@@ -7,29 +7,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.inlearning.app.R;
 import com.inlearning.app.common.bean.ClassSchedule;
 import com.inlearning.app.common.bean.Course2;
+import com.inlearning.app.common.bean.Teacher;
 
 import java.util.List;
 
-public class CourseInfoAdapter extends  RecyclerView.Adapter<CourseInfoAdapter.ViewHolder>{
-    private List<ClassSchedule> mCourseList;
-    private boolean mIsImport;
+public class CourseInfoAdapter extends RecyclerView.Adapter<CourseInfoAdapter.ViewHolder> {
+    private List<ClassSchedule> mClassSchedules;
 
-    public CourseInfoAdapter(List<ClassSchedule> courseList) {
-        mCourseList = courseList;
-    }
-
-    public CourseInfoAdapter setImport(boolean isImport) {
-        mIsImport = isImport;
-        return this;
+    public CourseInfoAdapter(List<ClassSchedule> classSchedules) {
+        mClassSchedules = classSchedules;
     }
 
     public interface ClickListener {
-        void onClick(Course2 course2);
+        void onClick(ClassSchedule schedule);
     }
 
     private ClickListener mClickListener;
@@ -42,30 +38,25 @@ public class CourseInfoAdapter extends  RecyclerView.Adapter<CourseInfoAdapter.V
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_director_course_info,viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_student_course_info, viewGroup, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        final Course2 course = mCourseList.get(i).getCourse2();
-        viewHolder.mSelectView.setVisibility(mIsImport?View.VISIBLE:View.GONE);
-        viewHolder.mSelectView.setChecked(course.isSelected());
-        viewHolder.mSelectView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                course.setSelected(b);
-            }
-        });
-        viewHolder.mCourseName.setText(course.getName());
-        viewHolder.mCourseTime.setText(course.getTime());
-        viewHolder.mCourseScore.setText(course.getScore());
-        viewHolder.mCourseType.setText(course.getType());
+        final ClassSchedule schedule = mClassSchedules.get(i);
+        Course2 course = schedule.getCourse2();
+        Teacher teacher = schedule.getTeacher();
+        viewHolder.mCourseNameView.setText(course.getName());
+        viewHolder.mCourseTimeView.setText(course.getTime());
+        viewHolder.mCourseTypeView.setText(course.getType());
+        viewHolder.mTeaNameView.setText(teacher.getName());
+        viewHolder.mTeaTitleView.setText(teacher.getTitle());
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 if (mClickListener != null) {
-                    mClickListener.onClick(course);
+                    mClickListener.onClick(schedule);
                 }
             }
         });
@@ -73,22 +64,30 @@ public class CourseInfoAdapter extends  RecyclerView.Adapter<CourseInfoAdapter.V
 
     @Override
     public int getItemCount() {
-        return mCourseList.size();
+        return mClassSchedules.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView mCourseTime;
-        private TextView mCourseName;
-        private TextView mCourseType;
-        private TextView mCourseScore;
-        private CheckBox mSelectView;
+        private TextView mCourseNameView;
+        private TextView mCourseTimeView;
+        private TextView mCourseTypeView;
+        private ImageView mTeaIconView;
+        private TextView mTeaNameView;
+        private TextView mTeaTitleView;
+        private TextView mStuCountView;
+        private ImageView mCourseIconView;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            mCourseName = itemView.findViewById(R.id.tv_course_name);
-            mCourseTime = itemView.findViewById(R.id.tv_course_time);
-            mCourseType = itemView.findViewById(R.id.tv_course_type);
-            mCourseScore = itemView.findViewById(R.id.tv_course_score);
-            mSelectView = itemView.findViewById(R.id.btn_select);
+            mCourseNameView = itemView.findViewById(R.id.tv_course_name);
+            mCourseTimeView = itemView.findViewById(R.id.tv_course_time);
+            mCourseTypeView = itemView.findViewById(R.id.tv_course_type);
+            mTeaIconView = itemView.findViewById(R.id.imv_teacher_icon);
+            mTeaNameView = itemView.findViewById(R.id.tv_teacher_name);
+            mTeaTitleView = itemView.findViewById(R.id.tv_teacher_title);
+            mStuCountView = itemView.findViewById(R.id.tv_student_count);
+            mCourseIconView = itemView.findViewById(R.id.imv_course_icon);
+
         }
     }
 }
