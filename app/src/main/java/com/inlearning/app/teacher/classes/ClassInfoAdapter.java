@@ -14,7 +14,7 @@ import java.util.List;
 
 public class ClassInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<ClassInfo> mClassInfoList;
+    private List<ClassScheduleProxy> mProxies;
     private ClickListener mClickListener;
 
     public ClassInfoAdapter setClickListener(ClickListener clickListener) {
@@ -23,10 +23,11 @@ public class ClassInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     public interface ClickListener {
-        void onClick(ClassInfo classInfo);
+        void onClick(ClassScheduleProxy proxy);
     }
-    public ClassInfoAdapter(List<ClassInfo> classInfoList) {
-        mClassInfoList = classInfoList;
+
+    public ClassInfoAdapter(List<ClassScheduleProxy> proxies) {
+        mProxies = proxies;
     }
 
     @NonNull
@@ -34,10 +35,10 @@ public class ClassInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view;
         switch (i) {
-            case ClassInfo.ITEM_CLASS_INFO:
-                view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_director_speciality_info, viewGroup, false);
+            case ClassScheduleProxy.ITEM_CLASS_INFO:
+                view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_teacher_class_info, viewGroup, false);
                 return new InfoViewHolder(view);
-            case ClassInfo.ITEM_SEPARATE:
+            case ClassScheduleProxy.ITEM_SEPARATE:
                 view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_separate, viewGroup, false);
                 return new SeparateViewHolder(view);
         }
@@ -46,33 +47,33 @@ public class ClassInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-        final ClassInfo classInfo = mClassInfoList.get(i);
+        final ClassScheduleProxy proxy = mProxies.get(i);
         if (viewHolder instanceof InfoViewHolder) {
+            final ClassInfo classInfo = proxy.getSchedule().getClassInfo();
             ((InfoViewHolder) viewHolder).mClassInfo.setText(classInfo.getName());
             ((InfoViewHolder) viewHolder).mClassCount.setText(String.valueOf(classInfo.getCount()));
             viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if (mClickListener != null) {
-                        mClickListener.onClick(classInfo);
+                        mClickListener.onClick(proxy);
                     }
                 }
             });
-
         }
         if (viewHolder instanceof SeparateViewHolder) {
-            ((SeparateViewHolder) viewHolder).mInfo.setText(classInfo.getSpeciality().getShortName());
+            ((SeparateViewHolder) viewHolder).mInfo.setText(proxy.getCourse());
         }
     }
 
     @Override
     public int getItemViewType(int position) {
-        return mClassInfoList.get(position).getType();
+        return mProxies.get(position).getType();
     }
 
     @Override
     public int getItemCount() {
-        return mClassInfoList.size();
+        return mProxies.size();
     }
 
     class InfoViewHolder extends RecyclerView.ViewHolder {
