@@ -65,6 +65,7 @@ public class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.ViewHo
             answer.setQuestion(question);
             answer.setChapter(question.getCourseChapter());
             answer.setStudent(StudentRuntime.getStudent());
+            answer.setClassInfo(StudentRuntime.getClassInfo());
             homework.setAnswer(answer);
         }
         if (!TextUtils.isEmpty(question.getQuestionTitle())) {

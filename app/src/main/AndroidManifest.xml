@@ -27,7 +27,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-
+        <activity android:name=".teacher.classes.coursetask.CourseTaskActivity"></activity>
+        <activity android:name=".teacher.classes.coursetask.ChapterActivity" />
         <activity android:name=".director.person.coursemanager.classes.organize.OrganizeListActivity" />
         <activity android:name=".director.person.coursemanager.classes.ClassCourseActivity" />
         <activity android:name=".director.person.coursemanager.classes.ClassListActivity" />
@@ -69,10 +70,10 @@
         <activity android:name=".student.StudentHomeActivity" />
         <activity android:name=".student.course.CourseChapterActivity" />
         <activity android:name=".student.course.func.ChapterFunctionActivity" />
-        <activity android:name=".student.course.func.video.StuVideoActivity"
+        <activity
+            android:name=".student.course.func.video.StuVideoActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:screenOrientation="landscape" >
-        </activity>
+            android:screenOrientation="landscape" />
 
         <provider
             android:name="cn.bmob.v3.util.BmobContentProvider"

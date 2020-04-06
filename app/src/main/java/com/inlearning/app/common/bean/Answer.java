@@ -10,6 +10,7 @@ public class Answer extends BmobObject {
     private Question mQuestion;
     private Student mStudent;
     private CourseChapter mChapter;
+    private ClassInfo mClassInfo;
 
     public List<String> getChoiceAnswers() {
         return mChoiceAnswers;
@@ -49,5 +50,14 @@ public class Answer extends BmobObject {
 
     public void setChapter(CourseChapter chapter) {
         mChapter = chapter;
+    }
+
+    public ClassInfo getClassInfo() {
+        return mClassInfo;
+    }
+
+    public Answer setClassInfo(ClassInfo classInfo) {
+        mClassInfo = classInfo;
+        return this;
     }
 }

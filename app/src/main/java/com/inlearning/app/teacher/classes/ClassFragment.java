@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.inlearning.app.R;
 import com.inlearning.app.common.BaseFragment;
 import com.inlearning.app.common.util.ThreadMgr;
+import com.inlearning.app.teacher.classes.coursetask.ChapterActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +39,7 @@ public class ClassFragment extends BaseFragment {
         mClassInfoAdapter.setClickListener(new ClassInfoAdapter.ClickListener() {
             @Override
             public void onClick(ClassScheduleProxy proxy) {
-
+                ChapterActivity.startActivity(getContext(),proxy.getSchedule());
             }
         });
     }
