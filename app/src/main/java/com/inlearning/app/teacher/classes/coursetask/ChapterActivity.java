@@ -52,6 +52,12 @@ public class ChapterActivity extends AppCompatActivity {
         mRvChapter = findViewById(R.id.rv_chapter);
         mChapters = new ArrayList<>();
         mAdapter = new ChapterAdapter(mChapters);
+        mAdapter.setListener(new ChapterAdapter.ClickListener() {
+            @Override
+            public void onClick(CourseChapter courseChapter) {
+                CourseTaskActivity.startActivity(ChapterActivity.this, mSchedule, courseChapter);
+            }
+        });
         mRvChapter.setAdapter(mAdapter);
         mRvChapter.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mBackView.setOnClickListener(new View.OnClickListener() {
