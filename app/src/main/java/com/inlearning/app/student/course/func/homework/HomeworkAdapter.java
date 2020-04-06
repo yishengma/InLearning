@@ -2,29 +2,26 @@ package com.inlearning.app.student.course.func.homework;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.design.widget.TextInputEditText;
-import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.inlearning.app.R;
 import com.inlearning.app.common.bean.Answer;
 import com.inlearning.app.common.bean.Question;
-import com.inlearning.app.common.bean.Teacher;
+import com.inlearning.app.student.StudentRuntime;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
-
-import cn.bmob.v3.util.V;
 
 public class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.ViewHolder> {
 
@@ -37,10 +34,19 @@ public class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.ViewHo
     }
 
     public interface ClickListener {
+        void onAddImage(Homework homework);
 
-        void onAddImage();
+        void onDeleteImage(Homework homework);
+
+        void onSaveAnswer(Homework homework);
     }
 
+    private ClickListener mClickListener;
+
+    public HomeworkAdapter setClickListener(ClickListener clickListener) {
+        mClickListener = clickListener;
+        return this;
+    }
 
     @NonNull
     @Override
@@ -50,10 +56,17 @@ public class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
         final Homework homework = mHomeworkList.get(i);
-        Question question = homework.getQuestion();
+        final Question question = homework.getQuestion();
         Answer answer = homework.getAnswer();
+        if (answer == null) {
+            answer = new Answer();
+            answer.setQuestion(question);
+            answer.setChapter(question.getCourseChapter());
+            answer.setStudent(StudentRuntime.getStudent());
+            homework.setAnswer(answer);
+        }
         if (!TextUtils.isEmpty(question.getQuestionTitle())) {
             viewHolder.mQuesView.setText(question.getQuestionTitle());
             viewHolder.mQuesHintView.setVisibility(View.VISIBLE);
@@ -76,21 +89,84 @@ public class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.ViewHo
             viewHolder.mImageDeleteView.setVisibility(View.GONE);
             viewHolder.mAddView.setVisibility(View.GONE);
             viewHolder.mCheckBoxView.setVisibility(View.VISIBLE);
+            if (answer.getChoiceAnswers() != null) {
+                setCheckBox(viewHolder.mCheckBoxView, answer.getChoiceAnswers());
+            }
         } else {
-            if (answer != null && !TextUtils.isEmpty(answer.getImageUrl())) {
+            if (!TextUtils.isEmpty(answer.getImageUrl())) {
                 viewHolder.mViewAnswer.setVisibility(View.VISIBLE);
                 viewHolder.mAnswerImageView.setVisibility(View.VISIBLE);
                 viewHolder.mImageDeleteView.setVisibility(View.VISIBLE);
                 Glide.with(viewHolder.itemView.getContext()).load(answer.getImageUrl()).into(viewHolder.mAnswerImageView);
                 viewHolder.mAddView.setVisibility(View.GONE);
+                viewHolder.mImageDeleteView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (mClickListener != null) {
+                            mClickListener.onDeleteImage(homework);
+                        }
+                    }
+                });
             } else {
                 viewHolder.mViewAnswer.setVisibility(View.GONE);
                 viewHolder.mAnswerImageView.setVisibility(View.GONE);
                 viewHolder.mImageDeleteView.setVisibility(View.GONE);
                 viewHolder.mAddView.setVisibility(View.VISIBLE);
+                viewHolder.mAddView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (mClickListener != null) {
+                            mClickListener.onAddImage(homework);
+                        }
+                    }
+                });
             }
             viewHolder.mCheckBoxView.setVisibility(View.GONE);
+            setCheckBox(viewHolder.mCheckBoxView, new ArrayList<String>());
         }
+        final Answer finalAnswer = answer;
+        final Answer finalAnswer1 = answer;
+        if (!TextUtils.isEmpty(answer.getObjectId())) {
+            viewHolder.mUploadView.setText("已提交");
+            viewHolder.mUploadView.setBackground(mContext.getDrawable(R.drawable.bg_edit_gray_shape));
+            viewHolder.mUploadView.setEnabled(false);
+            viewHolder.mImageDeleteView.setEnabled(false);
+            viewHolder.mImageDeleteView.setVisibility(View.GONE);
+            viewHolder.mCheckBoxView.setEnabled(false);
+            setCheckBox(viewHolder.mCheckBoxView,false);
+        }else {
+            viewHolder.mImageDeleteView.setVisibility(View.VISIBLE);
+            viewHolder.mImageDeleteView.setEnabled(true);
+            viewHolder.mCheckBoxView.setEnabled(true);
+            viewHolder.mUploadView.setEnabled(true);
+            viewHolder.mUploadView.setBackground(mContext.getDrawable(R.drawable.bg_edit_blue_shape));
+            setCheckBox(viewHolder.mCheckBoxView,true);
+        }
+
+        viewHolder.mUploadView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (question.getType() == Question.Type.CHOICE_QUESTION) {
+                    List<String> answerList = getCheckBoxAnswer(viewHolder.mCheckBoxView);
+                    if (answerList.isEmpty()) {
+                        Toast.makeText(mContext, "请输入答案", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    finalAnswer.setChoiceAnswers(answerList);
+                }
+                if (question.getType() == Question.Type.RESPONSE_QUESTION) {
+                    if (TextUtils.isEmpty(finalAnswer.getImageUrl())) {
+                        Toast.makeText(mContext, "请上传答案", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                }
+                if (mClickListener != null) {
+                    homework.setQuestion(question);
+                    homework.setAnswer(finalAnswer1);
+                    mClickListener.onSaveAnswer(homework);
+                }
+            }
+        });
     }
 
     @Override
@@ -98,6 +174,34 @@ public class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.ViewHo
         return mHomeworkList.size();
     }
 
+    private List<String> getCheckBoxAnswer(LinearLayout linearLayout) {
+        ArrayList<String> list = new ArrayList<>();
+        for (int i = 0; i < linearLayout.getChildCount(); i++) {
+            CheckBox box = (CheckBox) linearLayout.getChildAt(i);
+            if (box.isChecked()) {
+                list.add(box.getText().toString());
+            }
+        }
+        return list;
+    }
+
+    private void setCheckBox(LinearLayout layout, List<String> list) {
+        for (int i = 0; i < layout.getChildCount(); i++) {
+            CheckBox box = (CheckBox) layout.getChildAt(i);
+            if (list.contains(box.getText().toString())) {
+                box.setChecked(true);
+            }else {
+                box.setChecked(false);
+            }
+        }
+    }
+
+    private void setCheckBox(LinearLayout layout,boolean enable) {
+        for (int i = 0; i < layout.getChildCount(); i++) {
+            CheckBox box = (CheckBox) layout.getChildAt(i);
+            box.setEnabled(enable);
+        }
+    }
 
     class ViewHolder extends RecyclerView.ViewHolder {
         private TextView mQuesHintView;

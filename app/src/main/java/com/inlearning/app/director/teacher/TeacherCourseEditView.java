@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
+import android.support.annotation.Nullable;
 
 import com.inlearning.app.R;
 
