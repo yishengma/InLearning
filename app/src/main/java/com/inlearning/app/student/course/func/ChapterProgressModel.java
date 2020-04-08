@@ -34,6 +34,7 @@ public class ChapterProgressModel {
                     progress.setStudent(student);
                     progress.setChapter(chapter);
                     progress.setVideoUrl(chapter.getVideoFile().getFileUrl());
+                    progress.setClassInfo(student.getClassInfo());
                     progress.setDone(false);
                     progress.save(new SaveListener<String>() {
                         @Override

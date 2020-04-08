@@ -21,7 +21,7 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ViewHold
     }
 
     public interface ClickListener {
-        void onClick(CourseChapter courseChapter);
+        void onClick(CourseChapter courseChapter, int position);
     }
 
     private ClickListener mListener;
@@ -38,15 +38,15 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull final ViewHolder viewHolder,final int i) {
         final CourseChapter chapter = mChapters.get(i);
         viewHolder.mChapterNameView.setText(String.format("第%s节 %s", i + 1, chapter.getChapterName()));
-        viewHolder.mChapterInfoView.setText(String.format("时间 %s", chapter.getCreatedAt().substring(0,11)));
+        viewHolder.mChapterInfoView.setText(String.format("时间 %s", chapter.getCreatedAt().substring(0, 11)));
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (mListener != null) {
-                    mListener.onClick(chapter);
+                    mListener.onClick(chapter,i+1);
                 }
             }
         });

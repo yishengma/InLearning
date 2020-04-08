@@ -11,22 +11,29 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.inlearning.app.R;
+import com.inlearning.app.common.bean.ChapterProgress;
 import com.inlearning.app.common.bean.ClassInfo;
 import com.inlearning.app.common.bean.ClassSchedule;
 import com.inlearning.app.common.bean.CourseChapter;
 import com.inlearning.app.common.util.StatusBar;
+import com.inlearning.app.common.util.ThreadMgr;
+import com.inlearning.app.teacher.classes.coursetask.task.LearnTimeView;
+
+import java.util.List;
 
 public class CourseTaskActivity extends AppCompatActivity implements View.OnClickListener {
 
-    public static void startActivity(Context context, ClassSchedule schedule, CourseChapter chapter) {
+    public static void startActivity(Context context, ClassSchedule schedule, CourseChapter chapter, int num) {
         Intent intent = new Intent(context, CourseTaskActivity.class);
         intent.putExtra("classschedule", schedule);
         intent.putExtra("coursechapter", chapter);
+        intent.putExtra("chapternum", num);
         context.startActivity(intent);
     }
 
     private ClassSchedule mSchedule;
     private CourseChapter mChapter;
+    private int mChapterNum;
     private ImageView mBackView;
     private TextView mTitleView;
     private LinearLayout mLayout;
@@ -35,20 +42,23 @@ public class CourseTaskActivity extends AppCompatActivity implements View.OnClic
     private TextView mClassView;
     private TextView mCourseView;
     private TextView mChapterView;
+    private LearnTimeView mLearnTimeView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_class_course_task);
         StatusBar.setStatusBarTranslucent(this);
-        StatusBar.setStatusBarDarkMode(this,true);
+        StatusBar.setStatusBarDarkMode(this, true);
         getIntentData();
         initView();
+        initData();
     }
 
     private void getIntentData() {
         mSchedule = (ClassSchedule) getIntent().getSerializableExtra("classschedule");
         mChapter = (CourseChapter) getIntent().getSerializableExtra("coursechapter");
+        mChapterNum = getIntent().getIntExtra("chapternum", 0);
     }
 
     @SuppressLint("DefaultLocale")
@@ -65,10 +75,11 @@ public class CourseTaskActivity extends AppCompatActivity implements View.OnClic
         mHomeworkView.setOnClickListener(this);
         mClassView.setOnClickListener(this);
         mLayout = findViewById(R.id.tab_view);
-        mChapterView.setText(mChapter.getChapterName());
+        mChapterView.setText(String.format("第%s节:%s", mChapterNum, mChapter.getChapterName()));
         mCourseView.setText(mSchedule.getCourse2().getName());
         ClassInfo classInfo = mSchedule.getClassInfo();
         mTitleView.setText(String.format("%s/%d人", classInfo.getName(), classInfo.getCount()));
+        mLearnTimeView = findViewById(R.id.view_learn_time);
     }
 
     @Override
@@ -78,6 +89,7 @@ public class CourseTaskActivity extends AppCompatActivity implements View.OnClic
                 finish();
                 break;
             case R.id.tv_time:
+                mLearnTimeView.setVisibility(View.VISIBLE);
                 changeTabViewState(mTimeView);
                 break;
             case R.id.tv_homework:
@@ -101,5 +113,22 @@ public class CourseTaskActivity extends AppCompatActivity implements View.OnClic
             textView.setTextColor(getColor(R.color.textBlack));
             textView.setCompoundDrawablesWithIntrinsicBounds(null, null, null, getDrawable(R.drawable.bg_indicator_off));
         }
+    }
+
+    private void initData() {
+        CourseTaskModel.getVideoStudyProgress(mChapter, mSchedule.getClassInfo(), new CourseTaskModel.Callback<List<ChapterProgress>>() {
+            @Override
+            public void onResult(final List<ChapterProgress> chapterProgresses) {
+                if (chapterProgresses == null) {
+                    return;
+                }
+                ThreadMgr.getInstance().postToUIThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mLearnTimeView.setData(chapterProgresses);
+                    }
+                });
+            }
+        });
     }
 }

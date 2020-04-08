@@ -54,8 +54,8 @@ public class ChapterActivity extends AppCompatActivity {
         mAdapter = new ChapterAdapter(mChapters);
         mAdapter.setListener(new ChapterAdapter.ClickListener() {
             @Override
-            public void onClick(CourseChapter courseChapter) {
-                CourseTaskActivity.startActivity(ChapterActivity.this, mSchedule, courseChapter);
+            public void onClick(CourseChapter courseChapter, int position) {
+                CourseTaskActivity.startActivity(ChapterActivity.this, mSchedule, courseChapter,position);
             }
         });
         mRvChapter.setAdapter(mAdapter);

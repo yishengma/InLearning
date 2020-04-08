@@ -86,7 +86,7 @@
                 android:layout_weight="1"
                 android:drawableBottom="@drawable/bg_indicator_on"
                 android:gravity="center"
-                android:text="时长"
+                android:text="视频"
                 android:textColor="@color/app_global_blue"
                 android:textSize="15sp" />
 
@@ -112,5 +112,10 @@
                 android:textColor="@color/textBlack"
                 android:textSize="15sp" />
         </LinearLayout>
+
+        <com.inlearning.app.teacher.classes.coursetask.task.LearnTimeView
+            android:id="@+id/view_learn_time"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
     </LinearLayout>
 </LinearLayout>

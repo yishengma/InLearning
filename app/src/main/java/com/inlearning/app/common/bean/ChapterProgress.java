@@ -9,44 +9,58 @@ public class ChapterProgress extends BmobObject {
     private long mStudyDuration;
     private String mVideoUrl;
     private boolean mDone;
+    private ClassInfo mClassInfo;
 
     public long getStudyDuration() {
         return mStudyDuration;
     }
 
-    public void setStudyDuration(long studyDuration) {
+    public ChapterProgress setStudyDuration(long studyDuration) {
         mStudyDuration = studyDuration;
+        return this;
     }
 
     public CourseChapter getChapter() {
         return mChapter;
     }
 
-    public void setChapter(CourseChapter chapter) {
+    public ChapterProgress setChapter(CourseChapter chapter) {
         mChapter = chapter;
+        return this;
     }
 
     public Student getStudent() {
         return mStudent;
     }
 
-    public void setStudent(Student student) {
+    public ChapterProgress setStudent(Student student) {
         mStudent = student;
+        return this;
     }
 
     public String getVideoUrl() {
         return mVideoUrl;
     }
 
-    public void setVideoUrl(String videoUrl) {
+    public ChapterProgress setVideoUrl(String videoUrl) {
         mVideoUrl = videoUrl;
+        return this;
     }
 
     public boolean isDone() {
         return mDone;
     }
 
-    public void setDone(boolean done) {
+    public ChapterProgress setDone(boolean done) {
         mDone = done;
+        return this;
+    }
+
+    public ClassInfo getClassInfo() {
+        return mClassInfo;
+    }
+
+    public void setClassInfo(ClassInfo classInfo) {
+        mClassInfo = classInfo;
     }
 }
