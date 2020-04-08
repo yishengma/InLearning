@@ -145,6 +145,7 @@ public class CourseChapterActivity extends AppCompatActivity implements View.OnC
     }
 
     private void initData() {
+
         ChapterModel.getCourseChapter(mCourse2, new ChapterModel.Callback<List<CourseChapter>>() {
             @Override
             public void onResult(List<CourseChapter> courseChapters) {

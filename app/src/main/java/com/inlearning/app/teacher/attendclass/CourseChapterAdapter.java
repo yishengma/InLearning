@@ -96,7 +96,7 @@ public class CourseChapterAdapter extends RecyclerView.Adapter<CourseChapterAdap
             }
         });
         if (!TextUtils.isEmpty(chapter.getDeadLine())) {
-            Date date = new Date(Long.valueOf(chapter.getDeadLine()));
+            Date date = new Date(Long.valueOf(chapter.getDeadLine().trim()));
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
             String time = dateFormat.format(date);
             viewHolder.mTimeFuncView.setTextColor(R.color.app_global_blue);

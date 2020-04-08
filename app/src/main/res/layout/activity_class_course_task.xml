@@ -113,9 +113,21 @@
                 android:textSize="15sp" />
         </LinearLayout>
 
-        <com.inlearning.app.teacher.classes.coursetask.task.LearnTimeView
-            android:id="@+id/view_learn_time"
+        <FrameLayout
+            android:id="@+id/layout_task"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
+
+            <com.inlearning.app.teacher.classes.coursetask.task.LearnTimeView
+                android:id="@+id/view_learn_time"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <com.inlearning.app.teacher.classes.coursetask.task.HomeworkView
+                android:id="@+id/view_homework_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone" />
+        </FrameLayout>
     </LinearLayout>
 </LinearLayout>

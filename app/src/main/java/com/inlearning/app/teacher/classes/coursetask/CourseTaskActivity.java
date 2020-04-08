@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -15,8 +16,11 @@ import com.inlearning.app.common.bean.ChapterProgress;
 import com.inlearning.app.common.bean.ClassInfo;
 import com.inlearning.app.common.bean.ClassSchedule;
 import com.inlearning.app.common.bean.CourseChapter;
+import com.inlearning.app.common.bean.Question;
 import com.inlearning.app.common.util.StatusBar;
 import com.inlearning.app.common.util.ThreadMgr;
+import com.inlearning.app.teacher.classes.coursetask.task.HomeworkModel;
+import com.inlearning.app.teacher.classes.coursetask.task.HomeworkView;
 import com.inlearning.app.teacher.classes.coursetask.task.LearnTimeView;
 
 import java.util.List;
@@ -43,6 +47,8 @@ public class CourseTaskActivity extends AppCompatActivity implements View.OnClic
     private TextView mCourseView;
     private TextView mChapterView;
     private LearnTimeView mLearnTimeView;
+    private HomeworkView mHomeworkTaskView;
+    private FrameLayout mTaskLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +86,9 @@ public class CourseTaskActivity extends AppCompatActivity implements View.OnClic
         ClassInfo classInfo = mSchedule.getClassInfo();
         mTitleView.setText(String.format("%s/%d人", classInfo.getName(), classInfo.getCount()));
         mLearnTimeView = findViewById(R.id.view_learn_time);
+        mTaskLayout = findViewById(R.id.layout_task);
+        mHomeworkTaskView = findViewById(R.id.view_homework_view);
+
     }
 
     @Override
@@ -89,11 +98,12 @@ public class CourseTaskActivity extends AppCompatActivity implements View.OnClic
                 finish();
                 break;
             case R.id.tv_time:
-                mLearnTimeView.setVisibility(View.VISIBLE);
+                changeTaskView(mLearnTimeView);
                 changeTabViewState(mTimeView);
                 break;
             case R.id.tv_homework:
                 changeTabViewState(mHomeworkView);
+                changeTaskView(mHomeworkTaskView);
                 break;
             case R.id.tv_class:
                 changeTabViewState(mClassView);
@@ -115,6 +125,17 @@ public class CourseTaskActivity extends AppCompatActivity implements View.OnClic
         }
     }
 
+    private void changeTaskView(View targetView) {
+        for (int i = 0; i < mTaskLayout.getChildCount(); i++) {
+            View view = mTaskLayout.getChildAt(i);
+            if (view == targetView) {
+                view.setVisibility(View.VISIBLE);
+                continue;
+            }
+            view.setVisibility(View.GONE);
+        }
+    }
+
     private void initData() {
         CourseTaskModel.getVideoStudyProgress(mChapter, mSchedule.getClassInfo(), new CourseTaskModel.Callback<List<ChapterProgress>>() {
             @Override
@@ -126,6 +147,18 @@ public class CourseTaskActivity extends AppCompatActivity implements View.OnClic
                     @Override
                     public void run() {
                         mLearnTimeView.setData(chapterProgresses);
+                    }
+                });
+            }
+        });
+        HomeworkModel.getHomeworkProgress(mChapter, mSchedule.getClassInfo(), new HomeworkModel.Callback<List<Question>, List<Integer>>() {
+            @Override
+            public void callback(List<Question> questions, List<Integer> integers) {
+                ThreadMgr.getInstance().postToUIThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mHomeworkTaskView.setQustionData(questions);
+                        mHomeworkTaskView.setPieChartData(questions.size(), integers);
                     }
                 });
             }

@@ -13,10 +13,8 @@ import androidx.annotation.Nullable;
 
 import com.inlearning.app.R;
 import com.inlearning.app.common.bean.ChapterProgress;
-import com.inlearning.app.common.bean.Student;
 import com.openxu.cview.chart.ProgressPieChart;
 import com.openxu.cview.chart.barchart.BarHorizontalChart;
-import com.openxu.cview.chart.bean.BarBean;
 import com.openxu.cview.chart.bean.ChartLable;
 import com.openxu.cview.chart.bean.TimeBarBean;
 import com.openxu.utils.DensityUtil;
@@ -97,12 +95,12 @@ public class LearnTimeView extends LinearLayout {
     }
 
     public void setData(List<ChapterProgress> progresses) {
-        List<ChapterProgress> progresses1 = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            progresses1.add(new ChapterProgress().setDone(i%2==0).setStudyDuration(58000+i*10000).setStudent((Student) new Student().setName("马小"+i)));
-        }
-        setBarChartData(progresses1);
-        setPieChartData(progresses1);
+//        List<ChapterProgress> progresses1 = new ArrayList<>();
+//        for (int i = 0; i < 20; i++) {
+//            progresses1.add(new ChapterProgress().setDone(i%2==0).setStudyDuration(58000+i*10000).setStudent((Student) new Student().setName("马小"+i)));
+//        }
+        setBarChartData(progresses);
+        setPieChartData(progresses);
     }
 
 }
