@@ -6,7 +6,10 @@ import com.inlearning.app.common.bean.Answer;
 import com.inlearning.app.common.bean.ClassInfo;
 import com.inlearning.app.common.bean.CourseChapter;
 import com.inlearning.app.common.bean.Question;
+import com.inlearning.app.common.bean.Student;
 import com.inlearning.app.common.util.ThreadMgr;
+import com.inlearning.app.student.StudentRuntime;
+import com.inlearning.app.student.course.func.homework.Homework;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -93,6 +96,56 @@ public class HomeworkModel {
                     callback.callback(list);
                 }
                 Log.e("ethan", "" + list.size());
+            }
+        });
+    }
+
+    public static void getHomework(final CourseChapter chapter, Student student, final Callback2<List<Homework>> callback) {
+        BmobQuery<Question> query = new BmobQuery<>();
+        query.addWhereEqualTo("mCourseChapter", chapter);
+        query.findObjects(new FindListener<Question>() {
+            @Override
+            public void done(final List<Question> list, BmobException e) {
+                if (e == null) {
+                    getAnswerList(chapter, student, list, callback);
+
+                }
+            }
+        });
+    }
+
+    private static void getAnswerList(CourseChapter chapter, Student student, final List<Question> questions, Callback2<List<Homework>> callback) {
+        BmobQuery<Answer> query = new BmobQuery<>();
+        query.include("mQuestion");
+        query.addWhereEqualTo("mChapter", chapter);
+        query.addWhereEqualTo("mStudent", student);
+        query.findObjects(new FindListener<Answer>() {
+            @Override
+            public void done(List<Answer> answers, BmobException e) {
+                if (e != null) {
+                    return;
+                }
+                final List<Homework> homeworkList = new ArrayList<>();
+                boolean has = false;
+                for (Question q : questions) {
+                    has = false;
+                    for (Answer a : answers) {
+                        if (q.getObjectId().equals(a.getQuestion().getObjectId())) {
+                            has = true;
+                            homeworkList.add(new Homework().setAnswer(a).setQuestion(q));
+                            break;
+                        }
+                    }
+                    if (!has) {
+                        homeworkList.add(new Homework().setQuestion(q));
+                    }
+                }
+                ThreadMgr.getInstance().postToUIThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        callback.callback(homeworkList);
+                    }
+                });
             }
         });
     }

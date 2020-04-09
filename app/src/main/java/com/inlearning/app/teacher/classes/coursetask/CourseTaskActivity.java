@@ -17,12 +17,16 @@ import com.inlearning.app.common.bean.ClassInfo;
 import com.inlearning.app.common.bean.ClassSchedule;
 import com.inlearning.app.common.bean.CourseChapter;
 import com.inlearning.app.common.bean.Question;
+import com.inlearning.app.common.bean.Student;
 import com.inlearning.app.common.util.StatusBar;
 import com.inlearning.app.common.util.ThreadMgr;
+import com.inlearning.app.director.speciality.classinfo.ClassInfoModel;
+import com.inlearning.app.teacher.classes.ClassModel;
 import com.inlearning.app.teacher.classes.coursetask.task.HomeworkDetailActivity;
 import com.inlearning.app.teacher.classes.coursetask.task.HomeworkModel;
 import com.inlearning.app.teacher.classes.coursetask.task.HomeworkView;
 import com.inlearning.app.teacher.classes.coursetask.task.LearnTimeView;
+import com.inlearning.app.teacher.classes.coursetask.task.StuListView;
 
 import java.util.List;
 
@@ -49,6 +53,7 @@ public class CourseTaskActivity extends AppCompatActivity implements View.OnClic
     private TextView mChapterView;
     private LearnTimeView mLearnTimeView;
     private HomeworkView mHomeworkTaskView;
+    private StuListView mStuListView;
     private FrameLayout mTaskLayout;
 
     @Override
@@ -101,6 +106,8 @@ public class CourseTaskActivity extends AppCompatActivity implements View.OnClic
             }
 
         });
+        mStuListView = findViewById(R.id.view_stu_list);
+        mStuListView.setCourseAdapter(mChapter);
     }
 
     @Override
@@ -119,6 +126,7 @@ public class CourseTaskActivity extends AppCompatActivity implements View.OnClic
                 break;
             case R.id.tv_class:
                 changeTabViewState(mClassView);
+                changeTaskView(mStuListView);
                 break;
         }
     }
@@ -171,6 +179,17 @@ public class CourseTaskActivity extends AppCompatActivity implements View.OnClic
                     public void run() {
                         mHomeworkTaskView.setQuestionData(questions);
                         mHomeworkTaskView.setPieChartData(questions.size(), integers);
+                    }
+                });
+            }
+        });
+        ClassInfoModel.getStudents(mSchedule.getClassInfo(), new ClassInfoModel.Callback<List<Student>>() {
+            @Override
+            public void onResult(boolean suc, List<Student> students) {
+                ThreadMgr.getInstance().postToUIThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mStuListView.setStudents(students);
                     }
                 });
             }

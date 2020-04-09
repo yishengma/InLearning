@@ -128,6 +128,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:visibility="gone" />
+
+            <com.inlearning.app.teacher.classes.coursetask.task.StuListView
+                android:id="@+id/view_stu_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone" />
         </FrameLayout>
     </LinearLayout>
 </LinearLayout>

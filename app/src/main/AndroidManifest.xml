@@ -27,7 +27,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".teacher.classes.coursetask.task.HomeworkDetailActivity"></activity>
+        <activity android:name=".teacher.classes.coursetask.task.StuHomeworkActivity"></activity>
+        <activity android:name=".teacher.classes.coursetask.task.HomeworkDetailActivity" />
         <activity android:name=".teacher.classes.coursetask.CourseTaskActivity" />
         <activity android:name=".teacher.classes.coursetask.ChapterActivity" />
         <activity android:name=".director.person.coursemanager.classes.organize.OrganizeListActivity" />
