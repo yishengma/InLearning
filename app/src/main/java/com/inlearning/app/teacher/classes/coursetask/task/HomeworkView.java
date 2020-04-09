@@ -48,7 +48,7 @@ public class HomeworkView extends LinearLayout {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.view_tea_course_task_homework, this);
         mPieChart = view.findViewById(R.id.pie_chart_view);
         mRvHomeWork = view.findViewById(R.id.rv_homework);
-        mRvHomeWork.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
+        mRvHomeWork.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         mQuestions = new ArrayList<>();
         mHomeworkAdapter = new HomeworkAdapter(mQuestions);
         mRvHomeWork.setAdapter(mHomeworkAdapter);
@@ -76,13 +76,17 @@ public class HomeworkView extends LinearLayout {
     }
 
 
-    public void setQustionData(List<Question> questions) {
+    public void setQuestionData(List<Question> questions) {
         mQuestions.clear();
         mQuestions.addAll(questions);
         mHomeworkAdapter.notifyDataSetChanged();
     }
 
-    static class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.ViewHolder> {
+    public HomeworkAdapter getHomeworkAdapter() {
+        return mHomeworkAdapter;
+    }
+
+    public static class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.ViewHolder> {
 
         private List<Question> mAdapterQuestions;
 
@@ -91,7 +95,9 @@ public class HomeworkView extends LinearLayout {
         }
 
         public interface ClickListener {
-            void onClick(Question question);
+            void onAnalysis(int position, Question question);
+
+            void onDetail(int position, Question question);
         }
 
         private ClickListener mClickListener;
@@ -109,15 +115,29 @@ public class HomeworkView extends LinearLayout {
         @Override
         public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
             Question question = mAdapterQuestions.get(i);
-            viewHolder.mInfoView.setText(String.format("第%s道 : %s", i + 1, TextUtils.isEmpty(question.getQuestionTitle()) ? "[图片]" : question.getQuestionTitle()));
-            viewHolder.itemView.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (mClickListener != null) {
-                        mClickListener.onClick(question);
+            viewHolder.mInfoView.setText(String.format("第%s道 [%s]: %s", i + 1, question.getType() == Question.Type.CHOICE_QUESTION ? "选择题" : "问答题", TextUtils.isEmpty(question.getQuestionTitle()) ? "[图片]" : question.getQuestionTitle()));
+            if (question.getType() == Question.Type.CHOICE_QUESTION) {
+                viewHolder.mDetailView.setText("详情");
+                viewHolder.mDetailView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (mClickListener != null) {
+                            mClickListener.onAnalysis(i + 1, question);
+                        }
                     }
-                }
-            });
+                });
+            }
+            if (question.getType() == Question.Type.RESPONSE_QUESTION) {
+                viewHolder.mDetailView.setText("详情");
+                viewHolder.mDetailView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (mClickListener != null) {
+                            mClickListener.onDetail(i + 1, question);
+                        }
+                    }
+                });
+            }
         }
 
         @Override
@@ -127,10 +147,13 @@ public class HomeworkView extends LinearLayout {
 
         class ViewHolder extends RecyclerView.ViewHolder {
             private TextView mInfoView;
+            private TextView mDetailView;
 
             public ViewHolder(@NonNull View itemView) {
                 super(itemView);
                 mInfoView = itemView.findViewById(R.id.tv_question_info);
+                mDetailView = itemView.findViewById(R.id.tv_detail);
+
             }
         }
     }

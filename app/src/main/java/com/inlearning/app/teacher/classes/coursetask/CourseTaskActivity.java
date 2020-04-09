@@ -19,6 +19,7 @@ import com.inlearning.app.common.bean.CourseChapter;
 import com.inlearning.app.common.bean.Question;
 import com.inlearning.app.common.util.StatusBar;
 import com.inlearning.app.common.util.ThreadMgr;
+import com.inlearning.app.teacher.classes.coursetask.task.HomeworkDetailActivity;
 import com.inlearning.app.teacher.classes.coursetask.task.HomeworkModel;
 import com.inlearning.app.teacher.classes.coursetask.task.HomeworkView;
 import com.inlearning.app.teacher.classes.coursetask.task.LearnTimeView;
@@ -88,7 +89,18 @@ public class CourseTaskActivity extends AppCompatActivity implements View.OnClic
         mLearnTimeView = findViewById(R.id.view_learn_time);
         mTaskLayout = findViewById(R.id.layout_task);
         mHomeworkTaskView = findViewById(R.id.view_homework_view);
+        mHomeworkTaskView.getHomeworkAdapter().setClickListener(new HomeworkView.HomeworkAdapter.ClickListener() {
+            @Override
+            public void onAnalysis(int pos, Question question) {
+                HomeworkDetailActivity.startActivity(CourseTaskActivity.this, question, pos, mSchedule.getClassInfo(), mChapter, HomeworkDetailActivity.HOMEWORK_ANALYSIS);
+            }
 
+            @Override
+            public void onDetail(int pos, Question question) {
+                HomeworkDetailActivity.startActivity(CourseTaskActivity.this, question, pos, mSchedule.getClassInfo(), mChapter, HomeworkDetailActivity.HOMEWORK_DETAIL);
+            }
+
+        });
     }
 
     @Override
@@ -157,7 +169,7 @@ public class CourseTaskActivity extends AppCompatActivity implements View.OnClic
                 ThreadMgr.getInstance().postToUIThread(new Runnable() {
                     @Override
                     public void run() {
-                        mHomeworkTaskView.setQustionData(questions);
+                        mHomeworkTaskView.setQuestionData(questions);
                         mHomeworkTaskView.setPieChartData(questions.size(), integers);
                     }
                 });

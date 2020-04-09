@@ -29,6 +29,10 @@ public class HomeworkModel {
         void callback(K k, T t);
     }
 
+    public interface Callback2<T> {
+        void callback(T t);
+    }
+
 
     public static void getHomeworkProgress(CourseChapter chapter, ClassInfo classInfo, Callback<List<Question>, List<Integer>> callback) {
         ArrayList<Question> questions = new ArrayList<>();
@@ -72,7 +76,23 @@ public class HomeworkModel {
 
                 }
                 callback.callback(questions, progress);
-                Log.e("ethan",questions.toString()+progress.toString());
+                Log.e("ethan", questions.toString() + progress.toString());
+            }
+        });
+    }
+
+    public static void getAnswerByClassInfo(ClassInfo classInfo, Question question, Callback2<List<Answer>> callback) {
+        BmobQuery<Answer> query = new BmobQuery<>();
+        query.include("mStudent,mChapter");
+        query.addWhereEqualTo("mClassInfo", classInfo);
+        query.addWhereEqualTo("mQuestion", question);
+        query.findObjects(new FindListener<Answer>() {
+            @Override
+            public void done(List<Answer> list, BmobException e) {
+                if (e == null) {
+                    callback.callback(list);
+                }
+                Log.e("ethan", "" + list.size());
             }
         });
     }
