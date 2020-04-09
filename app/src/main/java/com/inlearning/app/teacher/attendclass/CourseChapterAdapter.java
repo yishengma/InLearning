@@ -75,7 +75,7 @@ public class CourseChapterAdapter extends RecyclerView.Adapter<CourseChapterAdap
                 }
             }
         });
-        if (TextUtils.isEmpty(chapter.getVideoFile().getFileUrl())) {
+        if (chapter.getVideoFile() == null || TextUtils.isEmpty(chapter.getVideoFile().getFileUrl())) {
             viewHolder.mVideoView.setImageResource(R.drawable.icon_play_gray);
             viewHolder.mProgressBar.setVisibility(View.GONE);
         } else {
@@ -95,7 +95,7 @@ public class CourseChapterAdapter extends RecyclerView.Adapter<CourseChapterAdap
                 }
             }
         });
-        if (!TextUtils.isEmpty(chapter.getDeadLine().trim())) {
+        if (!TextUtils.isEmpty(chapter.getDeadLine())) {
             Date date = new Date(Long.valueOf(chapter.getDeadLine().trim()));
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
             String time = dateFormat.format(date);

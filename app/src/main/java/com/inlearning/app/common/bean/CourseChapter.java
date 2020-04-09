@@ -62,7 +62,7 @@ public class CourseChapter extends BmobObject {
     }
 
     public int getMaterialCount() {
-        return mMaterialCount;
+        return mMaterialCount == null ? 0 : mMaterialCount;
     }
 
     public void setMaterialCount(int materialCount) {
@@ -70,7 +70,7 @@ public class CourseChapter extends BmobObject {
     }
 
     public int getExerciseCount() {
-        return mExerciseCount;
+        return mExerciseCount == null ? 0 : mExerciseCount;
     }
 
     public void setExerciseCount(int exercisCount) {
@@ -78,7 +78,7 @@ public class CourseChapter extends BmobObject {
     }
 
     public int getHomeworkCount() {
-        return mHomeworkCount;
+        return mHomeworkCount == null ? 0 : mHomeworkCount;
     }
 
     public void setHomeworkCount(int homeworkCount) {
@@ -86,7 +86,7 @@ public class CourseChapter extends BmobObject {
     }
 
     public int getDiscussCount() {
-        return mDiscussCount;
+        return mDiscussCount == null ? 0 : mDiscussCount;
     }
 
     public void setDiscussCount(int discussCount) {

@@ -22,13 +22,14 @@ import java.lang.annotation.Target;
 
 public class ChapterFunctionActivity extends AppCompatActivity {
 
-    @IntDef({FLAG.VIDEO_FUNCTION, FLAG.MATERIAL_FUNCTION, FLAG.HOMEWORK_FUNCTION})
+    @IntDef({FLAG.VIDEO_FUNCTION, FLAG.MATERIAL_FUNCTION, FLAG.HOMEWORK_FUNCTION, FLAG.DISCUSS_FUNCTION})
     @Retention(RetentionPolicy.SOURCE)
     @Target({ElementType.FIELD, ElementType.LOCAL_VARIABLE, ElementType.PARAMETER})
     public @interface FLAG {
         int VIDEO_FUNCTION = 0;
         int MATERIAL_FUNCTION = 1;
         int HOMEWORK_FUNCTION = 3;
+        int DISCUSS_FUNCTION = 4;
     }
 
     public static void startActivity(Context context, CourseChapter chapter, @FLAG int flag) {
@@ -88,6 +89,7 @@ public class ChapterFunctionActivity extends AppCompatActivity {
             case FLAG.HOMEWORK_FUNCTION:
                 mHomeworkPresenter.show();
                 break;
+                case FLAG.DISCUSS_FUNCTION: break;
         }
     }
 
