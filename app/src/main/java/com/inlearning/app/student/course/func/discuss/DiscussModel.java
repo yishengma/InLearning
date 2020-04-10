@@ -2,6 +2,7 @@ package com.inlearning.app.student.course.func.discuss;
 
 import android.text.TextUtils;
 
+import com.inlearning.app.common.bean.Comment;
 import com.inlearning.app.common.bean.CourseChapter;
 import com.inlearning.app.common.bean.Post;
 import com.inlearning.app.common.bean.Student;
@@ -72,6 +73,17 @@ public class DiscussModel {
                 if (e == null) {
                     callback.onResult(post);
                 }
+            }
+        });
+    }
+
+    public static void getComment(Post post, Callback<List<Comment>> callback) {
+        BmobQuery<Comment> query = new BmobQuery<>();
+        query.addWhereEqualTo("mPost", post);
+        query.findObjects(new FindListener<Comment>() {
+            @Override
+            public void done(List<Comment> list, BmobException e) {
+                    callback.onResult(list);
             }
         });
     }

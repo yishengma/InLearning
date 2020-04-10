@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -85,6 +86,7 @@ public class DiscussFuncView extends RelativeLayout implements View.OnClickListe
     }
 
     public void setPosts(List<Post> posts) {
+        Log.e("ethan",posts.size()+"");
         mPosts.clear();
         mPosts.addAll(posts);
         mPostAdapter.notifyDataSetChanged();
@@ -122,7 +124,7 @@ public class DiscussFuncView extends RelativeLayout implements View.OnClickListe
             viewHolder.itemView.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    DiscussDetailActivity.startActivity(viewHolder.itemView.getContext(), post);
                 }
             });
         }
