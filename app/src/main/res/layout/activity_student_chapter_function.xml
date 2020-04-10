@@ -22,7 +22,19 @@
 
     <com.inlearning.app.student.course.func.homework.HomeworkFuncView
         android:id="@+id/view_homework_func"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+    <com.inlearning.app.student.course.func.discuss.DiscussFuncView
+        android:id="@+id/view_discuss_func"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+    <com.inlearning.app.student.course.func.discuss.SendPostView
+        android:id="@+id/view_send_post"
         android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"/>
 </RelativeLayout>

@@ -12,6 +12,7 @@ import android.view.View;
 import com.inlearning.app.R;
 import com.inlearning.app.common.bean.CourseChapter;
 import com.inlearning.app.common.util.StatusBar;
+import com.inlearning.app.student.course.func.discuss.DiscussPresenter;
 import com.inlearning.app.student.course.func.homework.HomeworkPresenter;
 import com.inlearning.app.student.course.func.material.MaterialPresenter;
 
@@ -41,6 +42,7 @@ public class ChapterFunctionActivity extends AppCompatActivity {
 
     private MaterialPresenter mMaterialPresenter;
     private HomeworkPresenter mHomeworkPresenter;
+    private DiscussPresenter mDiscussPresenter;
     private View mRootView;
     private int mFunctionFlag = -1;
     private CourseChapter mChapter;
@@ -80,6 +82,7 @@ public class ChapterFunctionActivity extends AppCompatActivity {
         mRootView = findViewById(R.id.root_view);
         mMaterialPresenter = new MaterialPresenter(this, mChapter);
         mHomeworkPresenter = new HomeworkPresenter(this, mRootView, mChapter);
+        mDiscussPresenter = new DiscussPresenter(this, mChapter);
         switch (mFunctionFlag) {
             case FLAG.VIDEO_FUNCTION:
                 break;
@@ -89,7 +92,9 @@ public class ChapterFunctionActivity extends AppCompatActivity {
             case FLAG.HOMEWORK_FUNCTION:
                 mHomeworkPresenter.show();
                 break;
-                case FLAG.DISCUSS_FUNCTION: break;
+            case FLAG.DISCUSS_FUNCTION:
+                mDiscussPresenter.show();
+                break;
         }
     }
 
@@ -100,6 +105,9 @@ public class ChapterFunctionActivity extends AppCompatActivity {
             case FLAG.HOMEWORK_FUNCTION:
                 mHomeworkPresenter.onActivityResult(requestCode, resultCode, data);
                 break;
+            case FLAG.DISCUSS_FUNCTION:
+                mDiscussPresenter.onActivityResult(requestCode, resultCode, data);
+                break;
         }
     }
 
@@ -109,6 +117,9 @@ public class ChapterFunctionActivity extends AppCompatActivity {
         switch (mFunctionFlag) {
             case FLAG.HOMEWORK_FUNCTION:
                 mHomeworkPresenter.onRequestPermissionsResult(requestCode, permissions, grantResults);
+                break;
+            case FLAG.DISCUSS_FUNCTION:
+                mDiscussPresenter.onRequestPermissionsResult(requestCode, permissions, grantResults);
                 break;
         }
     }

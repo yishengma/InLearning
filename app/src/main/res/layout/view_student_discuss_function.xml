@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
 
     <FrameLayout
         android:id="@+id/fl_title_bar"
@@ -28,6 +27,14 @@
             android:textColor="@color/textBlack"
             android:textSize="16sp" />
 
+        <ImageView
+            android:id="@+id/imv_bar_edit"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginRight="24dp"
+            android:src="@drawable/imv_edit_post"
+            android:visibility="visible" />
     </FrameLayout>
 
     <View
@@ -40,6 +47,10 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_post"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_below="@+id/line_divide" />
 
-</LinearLayout>
+
+
+
+</RelativeLayout>
