@@ -17,34 +17,40 @@
         android:id="@+id/tv_user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imv_user_image"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="5dp" />
+        android:layout_alignTop="@+id/imv_user_image"
+        android:layout_marginLeft="12dp"
+        android:layout_toRightOf="@+id/imv_user_image"
+        android:text="隋东风"
+        android:textColor="@color/app_global_blue"
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/tv_comment_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/imv_user_image"
+        android:layout_below="@+id/tv_user_name"
         android:layout_marginLeft="12dp"
+        android:layout_marginTop="5dp"
         android:layout_marginRight="24dp"
         android:layout_toRightOf="@+id/imv_user_image"
         android:ellipsize="end"
         android:maxLines="3"
-        android:text="问本阿斯科利大家分开了啊上课大家分开了酸辣看到肌肤阿斯顿可激发快乐阿迪书法考级阿里看到肌肤"
+        android:text="佳品隋东风阿斯顿风口浪尖了健康疗法；看来发动机阿克琉斯；打飞机克拉克的；解放啦圣诞快乐肌肤"
         android:textColor="@color/textBlack"
         android:textSize="16sp" />
 
     <ImageView
         android:id="@+id/imv_content_image"
-        android:layout_width="match_parent"
+        android:layout_width="120dp"
         android:layout_height="120dp"
-        android:layout_below="@+id/tv_post_title"
-        android:layout_alignLeft="@+id/tv_post_title"
+        android:layout_below="@+id/tv_comment_content"
+        android:layout_marginLeft="12dp"
         android:layout_marginTop="5dp"
         android:layout_marginRight="24dp"
+        android:layout_toRightOf="@+id/imv_user_image"
+        android:scaleType="centerCrop"
         android:src="@drawable/viewpage_guide_3"
-        android:visibility="gone" />
+        android:visibility="visible" />
 
     <View
         android:layout_width="match_parent"

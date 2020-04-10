@@ -1,10 +1,11 @@
 package com.inlearning.app.common.bean;
 
+import androidx.annotation.NonNull;
+
 public class Student extends User {
     private ClassInfo mClassInfo;
     private String mSex;
     private boolean mIsSelected;
-
     public ClassInfo getClassInfo() {
         return mClassInfo;
     }
@@ -31,5 +32,6 @@ public class Student extends User {
         mIsSelected = selected;
         return this;
     }
+
 }
 

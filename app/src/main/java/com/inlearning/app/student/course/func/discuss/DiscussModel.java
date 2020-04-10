@@ -1,5 +1,6 @@
 package com.inlearning.app.student.course.func.discuss;
 
+import android.content.Context;
 import android.text.TextUtils;
 
 import com.inlearning.app.common.bean.Comment;
@@ -80,13 +81,44 @@ public class DiscussModel {
     public static void getComment(Post post, Callback<List<Comment>> callback) {
         BmobQuery<Comment> query = new BmobQuery<>();
         query.addWhereEqualTo("mPost", post);
+        query.include("mStudent,mTeacher");
         query.findObjects(new FindListener<Comment>() {
             @Override
             public void done(List<Comment> list, BmobException e) {
-                    callback.onResult(list);
+                callback.onResult(list);
             }
         });
     }
 
+
+    public static void sendComment(Comment comment, Callback<Comment> callback) {
+        if (!TextUtils.isEmpty(comment.getImageUrl())) {
+            BmobFile bmobFile = new BmobFile(new File(comment.getImageUrl()));
+            bmobFile.uploadblock(new UploadFileListener() {
+                @Override
+                public void done(BmobException e) {
+                    if (e != null) {
+                        return;
+                    }
+                    comment.setImageUrl(bmobFile.getUrl());
+                    comment.save(new SaveListener<String>() {
+                        @Override
+                        public void done(String s, BmobException e) {
+                            comment.setObjectId(s);
+                            callback.onResult(comment);
+                        }
+                    });
+                }
+            });
+        } else {
+            comment.save(new SaveListener<String>() {
+                @Override
+                public void done(String s, BmobException e) {
+                    comment.setObjectId(s);
+                    callback.onResult(comment);
+                }
+            });
+        }
+    }
 
 }
