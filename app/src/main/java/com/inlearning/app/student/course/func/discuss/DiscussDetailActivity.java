@@ -115,6 +115,11 @@ public class DiscussDetailActivity extends AppCompatActivity implements View.OnC
                 mFullImageView.setVisibility(VISIBLE);
                 Glide.with(DiscussDetailActivity.this).load(path).into(mFullImageView);
             }
+
+            @Override
+            public void onDelete(Comment comment) {
+                showDialog(comment);
+            }
         });
         mBackView.setOnClickListener(this);
         mStudentNameView.setText(mPost.getStudent().getName());
@@ -136,6 +141,46 @@ public class DiscussDetailActivity extends AppCompatActivity implements View.OnC
                     public void run() {
                         mComments.clear();
                         mComments.addAll(comments);
+                        mCommentAdapter.notifyDataSetChanged();
+                    }
+                });
+            }
+        });
+    }
+
+    private void showDialog(final Comment comment) {
+        final Dialog dialog = new Dialog(this, R.style.SimpleDialog);//SimpleDialog
+        dialog.setContentView(R.layout.dialog_delete);
+        TextView titleView = dialog.findViewById(R.id.tv_title);
+        titleView.setText("删除");
+        TextView infoView = dialog.findViewById(R.id.tv_content);
+        infoView.setText("确定删除该评论？删除之后不可恢复！");
+        TextView cancelView = dialog.findViewById(R.id.tv_cancel);
+        TextView confirmView = dialog.findViewById(R.id.tv_confirm);
+        cancelView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        confirmView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteComment(comment);
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
+
+    private void deleteComment(Comment comment) {
+        DiscussModel.deleteComment(comment, new DiscussModel.Callback<Comment>() {
+            @Override
+            public void onResult(Comment comment) {
+                ThreadMgr.getInstance().postToUIThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mComments.remove(comment);
                         mCommentAdapter.notifyDataSetChanged();
                     }
                 });
@@ -166,6 +211,8 @@ public class DiscussDetailActivity extends AppCompatActivity implements View.OnC
 
         public interface ClickListener {
             void onClick(String path);
+
+            void onDelete(Comment comment);
         }
 
         private ClickListener mClickListener;
@@ -173,6 +220,7 @@ public class DiscussDetailActivity extends AppCompatActivity implements View.OnC
         public void setClickListener(ClickListener clickListener) {
             mClickListener = clickListener;
         }
+
 
         @NonNull
         @Override
@@ -183,14 +231,36 @@ public class DiscussDetailActivity extends AppCompatActivity implements View.OnC
         @Override
         public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
             Comment comment = mComments.get(i);
+
             if (comment.getStudent() != null) {
                 Log.e("ethan", comment.getStudent().getName());
                 viewHolder.mUserNameView.setText(comment.getStudent().getName());
+                if (comment.getStudent().getObjectId() != null && comment.getStudent().getObjectId().equals(StudentRuntime.getStudent().getObjectId())) {
+                    viewHolder.mDeleteView.setVisibility(VISIBLE);
+
+                } else {
+                    viewHolder.mDeleteView.setVisibility(GONE);
+                }
             }
             if (comment.getTeacher() != null) {
                 Log.e("ethan", comment.getTeacher().getName());
                 viewHolder.mUserNameView.setText(comment.getTeacher().getName());
+                if (comment.getStudent().getObjectId() != null && comment.getStudent().getObjectId().equals(TeacherRuntime.getCurrentTeacher().getObjectId())) {
+                    viewHolder.mDeleteView.setVisibility(VISIBLE);
+                } else {
+                    viewHolder.mDeleteView.setVisibility(GONE);
+                }
+
             }
+            viewHolder.mDeleteView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mClickListener != null) {
+                        mClickListener.onDelete(comment);
+                    }
+                }
+            });
+
             if (!TextUtils.isEmpty(comment.getImageUrl())) {
                 viewHolder.mContentImageView.setVisibility(VISIBLE);
                 Glide.with(viewHolder.itemView.getContext()).load(comment.getImageUrl()).into(viewHolder.mContentImageView);
@@ -205,7 +275,6 @@ public class DiscussDetailActivity extends AppCompatActivity implements View.OnC
             } else {
                 viewHolder.mContentImageView.setVisibility(GONE);
             }
-
             if (!TextUtils.isEmpty(comment.getContent())) {
                 viewHolder.mCommentTextView.setText(comment.getContent());
                 viewHolder.mCommentTextView.setVisibility(VISIBLE);
@@ -225,6 +294,7 @@ public class DiscussDetailActivity extends AppCompatActivity implements View.OnC
             private TextView mUserNameView;
             private TextView mCommentTextView;
             private ImageView mContentImageView;
+            private TextView mDeleteView;
 
             public ViewHolder(@NonNull View itemView) {
                 super(itemView);
@@ -232,6 +302,7 @@ public class DiscussDetailActivity extends AppCompatActivity implements View.OnC
                 mUserImageView = itemView.findViewById(R.id.imv_user_image);
                 mCommentTextView = itemView.findViewById(R.id.tv_comment_content);
                 mContentImageView = itemView.findViewById(R.id.imv_content_image);
+                mDeleteView = itemView.findViewById(R.id.tv_delete);
             }
         }
     }

@@ -121,4 +121,15 @@ public class DiscussModel {
         }
     }
 
+    public static void deleteComment(Comment comment, Callback<Comment> callback) {
+        comment.delete(new UpdateListener() {
+            @Override
+            public void done(BmobException e) {
+                if (e == null) {
+                    callback.onResult(comment);
+                }
+            }
+        });
+    }
+
 }
