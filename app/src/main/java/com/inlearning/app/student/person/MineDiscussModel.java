@@ -35,6 +35,7 @@ public class MineDiscussModel {
             @Override
             public void done(BmobException e) {
                 callback.onResult(e == null);
+                post.getChapter().increment("mDiscussCount", -1);
             }
         });
     }

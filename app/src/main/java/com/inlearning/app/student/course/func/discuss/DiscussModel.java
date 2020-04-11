@@ -54,6 +54,7 @@ public class DiscussModel {
                             callback.onResult(post);
                         }
                     });
+                    post.getChapter().increment("mDiscussCount", 1);
                 }
             });
         } else {
@@ -62,6 +63,7 @@ public class DiscussModel {
                 public void done(String s, BmobException e) {
                     post.setObjectId(s);
                     callback.onResult(post);
+                    post.getChapter().increment("mDiscussCount", 1);
                 }
             });
         }
