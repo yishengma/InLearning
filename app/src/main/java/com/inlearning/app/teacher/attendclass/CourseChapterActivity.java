@@ -136,6 +136,7 @@ public class CourseChapterActivity extends AppCompatActivity implements View.OnC
             @Override
             public void onDiscussClick(CourseChapter chapter) {
                 Log.e("ethan", "onDiscussClick");
+                ChapterFunctionActivity.startActivity(CourseChapterActivity.this, chapter, ChapterFunctionActivity.FLAG.DISCUSS_FUNCTION);
             }
         });
     }

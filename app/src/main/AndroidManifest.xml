@@ -77,6 +77,7 @@
             android:name=".student.course.func.video.StuVideoActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="landscape" />
+        <activity android:name=".teacher.attendclass.func.discuss.DiscussDetailActivity" />
 
         <provider
             android:name="cn.bmob.v3.util.BmobContentProvider"

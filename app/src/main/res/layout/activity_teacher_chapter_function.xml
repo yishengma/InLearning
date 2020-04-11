@@ -28,7 +28,13 @@
 
     <com.inlearning.app.teacher.attendclass.func.homework.HomeworkFuncView
         android:id="@+id/view_homework_func"
-        android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+    <com.inlearning.app.teacher.attendclass.func.discuss.DiscussFuncView
+        android:id="@+id/view_discuss_func"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 </RelativeLayout>

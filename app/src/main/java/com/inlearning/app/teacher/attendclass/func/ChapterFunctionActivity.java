@@ -12,6 +12,7 @@ import android.view.View;
 import com.inlearning.app.R;
 import com.inlearning.app.common.bean.CourseChapter;
 import com.inlearning.app.common.util.StatusBar;
+import com.inlearning.app.teacher.attendclass.func.discuss.DiscussPresenter;
 import com.inlearning.app.teacher.attendclass.func.homework.HomeworkPresenter;
 import com.inlearning.app.teacher.attendclass.func.material.MaterialPresenter;
 import com.inlearning.app.teacher.attendclass.func.video.VideoPresenter;
@@ -23,7 +24,7 @@ import java.lang.annotation.Target;
 
 public class ChapterFunctionActivity extends AppCompatActivity {
 
-    @IntDef({FLAG.VIDEO_FUNCTION, FLAG.MATERIAL_FUNCTION, FLAG.HOMEWORK_FUNCTION})
+    @IntDef({FLAG.VIDEO_FUNCTION, FLAG.MATERIAL_FUNCTION, FLAG.HOMEWORK_FUNCTION,FLAG.DISCUSS_FUNCTION})
     @Retention(RetentionPolicy.SOURCE)
     @Target({ElementType.FIELD, ElementType.LOCAL_VARIABLE, ElementType.PARAMETER})
     public @interface FLAG {
@@ -31,6 +32,7 @@ public class ChapterFunctionActivity extends AppCompatActivity {
         int MATERIAL_FUNCTION = 1;
         //        int EXERCISE_FUNCTION = 2;
         int HOMEWORK_FUNCTION = 3;
+        int DISCUSS_FUNCTION = 4;
     }
 
     public static void startActivity(Context context, CourseChapter chapter, @FLAG int flag) {
@@ -43,6 +45,7 @@ public class ChapterFunctionActivity extends AppCompatActivity {
     private VideoPresenter mVideoPresenter;
     private MaterialPresenter mMaterialPresenter;
     private HomeworkPresenter mHomeworkPresenter;
+    private DiscussPresenter mDiscussPresenter;
     private View mRootView;
     private int mFunctionFlag = -1;
     private CourseChapter mChapter;
@@ -87,6 +90,7 @@ public class ChapterFunctionActivity extends AppCompatActivity {
         mVideoPresenter.setChapter(mChapter);
         mMaterialPresenter = new MaterialPresenter(this, mChapter);
         mHomeworkPresenter = new HomeworkPresenter(this, mRootView, mChapter);
+        mDiscussPresenter = new DiscussPresenter(this, mChapter);
         switch (mFunctionFlag) {
             case FLAG.VIDEO_FUNCTION:
                 mVideoPresenter.show();
@@ -96,6 +100,8 @@ public class ChapterFunctionActivity extends AppCompatActivity {
                 break;
             case FLAG.HOMEWORK_FUNCTION:
                 mHomeworkPresenter.show();
+            case FLAG.DISCUSS_FUNCTION:
+                mDiscussPresenter.show();
                 break;
         }
     }
@@ -113,6 +119,7 @@ public class ChapterFunctionActivity extends AppCompatActivity {
             case FLAG.HOMEWORK_FUNCTION:
                 mHomeworkPresenter.onActivityResult(requestCode, resultCode, data);
                 break;
+
         }
     }
 
@@ -123,6 +130,16 @@ public class ChapterFunctionActivity extends AppCompatActivity {
             case FLAG.HOMEWORK_FUNCTION:
                 mHomeworkPresenter.onRequestPermissionsResult(requestCode, permissions, grantResults);
                 break;
+            case FLAG.DISCUSS_FUNCTION:
+                break;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mDiscussPresenter.onBackPressed()) {
+            return;
+        }
+        super.onBackPressed();
     }
 }
