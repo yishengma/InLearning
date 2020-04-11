@@ -2,18 +2,22 @@ package com.inlearning.app.director.person;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.inlearning.app.R;
 import com.inlearning.app.common.BaseFragment;
 import com.inlearning.app.common.model.UserModel;
 import com.inlearning.app.director.DirectorAppRuntime;
 import com.inlearning.app.director.person.coursemanager.CourseManagerActivity;
 import com.inlearning.app.director.person.specialitymanager.SpecialityManagerActivity;
+import com.inlearning.app.student.StudentRuntime;
+import com.inlearning.app.teacher.TeacherRuntime;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -33,6 +37,17 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        mNameView.setText(DirectorAppRuntime.getsDirector().mName);
+        mInfoView.setText("管理员");
+        if (TextUtils.isEmpty(DirectorAppRuntime.getsDirector().getProfilePhotoUrl())) {
+            return;
+        }
+        Glide.with(this).load(DirectorAppRuntime.getsDirector().getProfilePhotoUrl()).into(mProfilePhotoView);
+    }
+
     private void initView(View view) {
         mProfilePhotoView = view.findViewById(R.id.cv_profile_photo);
         mNameView = view.findViewById(R.id.tv_name);
@@ -40,7 +55,7 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
         mSpecialityManagerView = view.findViewById(R.id.rl_speciality_manager);
         mCourseManagerView = view.findViewById(R.id.rl_course_manager);
 //        Glide.with(this).load(UserModel.getDirector().getProfilePhotoUrl()).into(mProfilePhotoView);
-        mNameView.setText(UserModel.getDirector().getName());
+        mNameView.setText(DirectorAppRuntime.getsDirector().getName());
         mInfoView.setText("管理员");
         mSpecialityManagerView.setOnClickListener(this);
         mCourseManagerView.setOnClickListener(this);

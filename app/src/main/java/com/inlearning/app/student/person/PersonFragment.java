@@ -2,16 +2,19 @@ package com.inlearning.app.student.person;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.inlearning.app.R;
 import com.inlearning.app.common.BaseFragment;
 import com.inlearning.app.common.model.UserModel;
 import com.inlearning.app.student.StudentRuntime;
+import com.inlearning.app.teacher.TeacherRuntime;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -29,6 +32,17 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
         View view = inflater.inflate(R.layout.fragment_student_person, container, false);
         initView(view);
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mNameView.setText(StudentRuntime.getStudent().getName());
+        mInfoView.setText(StudentRuntime.getStudent().getClassInfo().getName());
+        if (TextUtils.isEmpty(StudentRuntime.getStudent().getProfilePhotoUrl())) {
+            return;
+        }
+        Glide.with(this).load(StudentRuntime.getStudent().getProfilePhotoUrl()).into(mProfilePhotoView);
     }
 
     private void initView(View view) {

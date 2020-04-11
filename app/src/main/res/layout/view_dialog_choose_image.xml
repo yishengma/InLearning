@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    android:background="@drawable/bg_white_panel"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/view_person_image"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_marginTop="10dp"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/imv_person_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/viewpage_guide_3"
+            android:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/imv_image_delete"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="end"
+            android:layout_marginTop="34dp"
+            android:layout_marginRight="24dp"
+            android:src="@drawable/button_clearing" />
+    </FrameLayout>
+
+
+    <TextView
+        android:id="@+id/tv_add_image"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="24dp"
+        android:gravity="center"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="+" />
+
+    <TextView
+        android:id="@+id/tv_update_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/bg_edit_gray_shape"
+        android:gravity="center"
+        android:text="更新"
+        android:textColor="@color/White"
+        android:textSize="14sp" />
+</LinearLayout>

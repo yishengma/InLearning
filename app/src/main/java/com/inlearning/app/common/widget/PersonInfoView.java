@@ -4,6 +4,7 @@ import android.content.Context;
 import android.media.Image;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -29,16 +30,35 @@ public class PersonInfoView extends RelativeLayout {
         initView();
     }
 
+    public interface ClickListener {
+        void onClick();
+    }
+    private ClickListener mClickListener;
+
+    public void setClickListener(ClickListener clickListener) {
+        mClickListener = clickListener;
+    }
 
     private TextView mPersonTitleView;
     private TextView mPersonContentView;
     private ImageView mPersonImageView;
+    private View mRootView;
 
     private void initView() {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.view_person_info, this);
+        mRootView = view.findViewById(R.id.root_view);
         mPersonTitleView = view.findViewById(R.id.tv_person_title);
         mPersonContentView = view.findViewById(R.id.tv_person_content);
         mPersonImageView = view.findViewById(R.id.imv_person_image);
+        mRootView.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                if (mClickListener != null) {
+                    mClickListener.onClick();
+                }
+            }
+        });
+
     }
 
     public void setTitleText(String msg) {
@@ -47,6 +67,7 @@ public class PersonInfoView extends RelativeLayout {
     }
 
     public void setPersonImageView(String path) {
+        Log.e("ethan",""+path);
         mPersonContentView.setVisibility(GONE);
         mPersonImageView.setVisibility(VISIBLE);
         if (TextUtils.isEmpty(path)) {
