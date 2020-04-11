@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.inlearning.app.R;
 import com.tencent.smtt.sdk.TbsReaderView;
@@ -160,6 +161,7 @@ public class MaterialTbsView extends RelativeLayout implements View.OnClickListe
 
 
     private void displayFile() {
+        Toast.makeText(getContext(),"已下载到/Download/文件夹",Toast.LENGTH_SHORT).show();
         mProgressBar.setVisibility(GONE);
         mDownloadTextView.setVisibility(GONE);
         mTbsReaderView.setVisibility(VISIBLE);
