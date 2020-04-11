@@ -125,4 +125,11 @@
         android:text="评论"
         android:textColor="@color/White"
         android:textSize="14sp" />
+
+    <ImageView
+        android:visibility="gone"
+        android:id="@+id/imv_full_image"
+        android:background="@color/textBlack"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </RelativeLayout>

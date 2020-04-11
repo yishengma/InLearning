@@ -50,7 +50,10 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/line_divide" />
 
-
-
-
+    <ImageView
+        android:id="@+id/imv_full_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/textBlack"
+        android:visibility="gone" />
 </RelativeLayout>

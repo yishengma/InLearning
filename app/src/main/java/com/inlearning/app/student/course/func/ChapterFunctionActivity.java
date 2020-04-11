@@ -123,4 +123,12 @@ public class ChapterFunctionActivity extends AppCompatActivity {
                 break;
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        if (mDiscussPresenter.onBackPressed()) {
+            return;
+        }
+        super.onBackPressed();
+    }
 }

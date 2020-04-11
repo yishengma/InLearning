@@ -92,4 +92,8 @@ public class DiscussPresenter {
         mSendPostView.onActivityResult(requestCode, resultCode, data);
     }
 
+    public boolean onBackPressed() {
+        return mDiscussFuncView.onBackPressed();
+    }
+
 }

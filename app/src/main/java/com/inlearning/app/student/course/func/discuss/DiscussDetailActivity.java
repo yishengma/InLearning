@@ -71,6 +71,7 @@ public class DiscussDetailActivity extends AppCompatActivity implements View.OnC
     private CommentAdapter mCommentAdapter;
     private List<Comment> mComments;
     private TextView mCommentView;
+    private ImageView mFullImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,11 +98,24 @@ public class DiscussDetailActivity extends AppCompatActivity implements View.OnC
         mPostImageView = findViewById(R.id.imv_post_image);
         mRvComment = findViewById(R.id.rv_comment);
         mCommentView = findViewById(R.id.tv_comment);
+        mFullImageView = findViewById(R.id.imv_full_image);
+        mFullImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mFullImageView.setVisibility(GONE);
+            }
+        });
         mComments = new ArrayList<>();
         mCommentAdapter = new CommentAdapter(mComments);
         mRvComment.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mRvComment.setAdapter(mCommentAdapter);
-
+        mCommentAdapter.setClickListener(new CommentAdapter.ClickListener() {
+            @Override
+            public void onClick(String path) {
+                mFullImageView.setVisibility(VISIBLE);
+                Glide.with(DiscussDetailActivity.this).load(path).into(mFullImageView);
+            }
+        });
         mBackView.setOnClickListener(this);
         mStudentNameView.setText(mPost.getStudent().getName());
         mPostTitleView.setText(mPost.getTitle());
@@ -142,12 +156,22 @@ public class DiscussDetailActivity extends AppCompatActivity implements View.OnC
     }
 
 
-    class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHolder> {
+    static class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHolder> {
 
         private List<Comment> mComments;
 
         public CommentAdapter(List<Comment> comments) {
             mComments = comments;
+        }
+
+        public interface ClickListener {
+            void onClick(String path);
+        }
+
+        private ClickListener mClickListener;
+
+        public void setClickListener(ClickListener clickListener) {
+            mClickListener = clickListener;
         }
 
         @NonNull
@@ -160,16 +184,24 @@ public class DiscussDetailActivity extends AppCompatActivity implements View.OnC
         public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
             Comment comment = mComments.get(i);
             if (comment.getStudent() != null) {
-                Log.e("ethan",comment.getStudent().getName());
+                Log.e("ethan", comment.getStudent().getName());
                 viewHolder.mUserNameView.setText(comment.getStudent().getName());
             }
             if (comment.getTeacher() != null) {
-                Log.e("ethan",comment.getTeacher().getName());
+                Log.e("ethan", comment.getTeacher().getName());
                 viewHolder.mUserNameView.setText(comment.getTeacher().getName());
             }
             if (!TextUtils.isEmpty(comment.getImageUrl())) {
                 viewHolder.mContentImageView.setVisibility(VISIBLE);
                 Glide.with(viewHolder.itemView.getContext()).load(comment.getImageUrl()).into(viewHolder.mContentImageView);
+                viewHolder.mContentImageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (mClickListener != null) {
+                            mClickListener.onClick(comment.getImageUrl());
+                        }
+                    }
+                });
             } else {
                 viewHolder.mContentImageView.setVisibility(GONE);
             }
@@ -408,4 +440,12 @@ public class DiscussDetailActivity extends AppCompatActivity implements View.OnC
         mImageAddView.setVisibility(GONE);
     }
 
+    @Override
+    public void onBackPressed() {
+        if (mFullImageView.getVisibility() == VISIBLE) {
+            mFullImageView.setVisibility(GONE);
+            return;
+        }
+        super.onBackPressed();
+    }
 }
