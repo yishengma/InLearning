@@ -27,7 +27,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".student.person.MineDiscussActivity"></activity>
+        <activity android:name=".teacher.person.PersonActivity"></activity>
+        <activity android:name=".student.person.MineDiscussActivity" />
         <activity android:name=".student.course.func.discuss.DiscussDetailActivity" />
         <activity android:name=".teacher.classes.coursetask.task.StuHomeworkActivity" />
         <activity android:name=".teacher.classes.coursetask.task.HomeworkDetailActivity" />
@@ -79,6 +80,8 @@
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="landscape" />
         <activity android:name=".teacher.attendclass.func.discuss.DiscussDetailActivity" />
+        <activity android:name=".student.person.PersonActivity" />
+        <activity android:name=".director.person.PersonActivity" />
 
         <provider
             android:name="cn.bmob.v3.util.BmobContentProvider"

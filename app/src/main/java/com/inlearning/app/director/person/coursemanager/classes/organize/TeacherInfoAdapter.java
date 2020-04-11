@@ -59,7 +59,7 @@ public class TeacherInfoAdapter extends RecyclerView.Adapter<TeacherInfoAdapter.
         viewHolder.mSelectView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                teacher.setSeleted(b);
+                teacher.setSelected(b);
             }
         });
         viewHolder.mTeaName.setText(teacher.getName());

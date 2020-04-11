@@ -65,7 +65,7 @@ public class TeacherExcelImportActivity extends BaseExcelImportActivity {
     @Override
     protected void chooseAll(boolean is) {
         for (Teacher teacher : mTeacherList) {
-            teacher.setSeleted(is);
+            teacher.setSelected(is);
         }
         mInfoAdapter.notifyDataSetChanged();
     }

@@ -8,6 +8,7 @@
     <RelativeLayout
         android:background="@drawable/bg_item_click"
         android:clickable="true"
+        android:id="@+id/view_person_info"
         android:layout_width="match_parent"
         android:layout_height="150dp">
 

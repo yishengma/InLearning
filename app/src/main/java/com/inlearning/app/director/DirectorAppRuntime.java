@@ -1,8 +1,10 @@
 package com.inlearning.app.director;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.inlearning.app.common.bean.Course2;
+import com.inlearning.app.common.bean.Director;
 import com.inlearning.app.common.bean.Speciality;
 import com.inlearning.app.common.bean.Teacher;
 
@@ -14,6 +16,7 @@ public class DirectorAppRuntime {
     private static List<Speciality> sSpecialities;
     private static List<Teacher> sTeachers;
     private static List<Course2> sCourse2s;
+    private static Director sDirector;
 
     public static Context getApplicationContext() {
         return sContext;
@@ -54,5 +57,14 @@ public class DirectorAppRuntime {
 
     public static void setCourse2s(List<Course2> course2s) {
         sCourse2s = course2s;
+    }
+
+    public static Director getsDirector() {
+        return sDirector;
+    }
+
+    public static void setsDirector(Director sDirector) {
+        Log.e("ethan",""+sDirector);
+        DirectorAppRuntime.sDirector = sDirector;
     }
 }

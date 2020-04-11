@@ -17,8 +17,8 @@ public class UserModel {
     private static Student sStudent;
     private static Teacher sTeacher;
 
-    public interface Callback {
-        void onResult(User user);
+    public interface Callback<T> {
+        void onResult(T t);
     }
 
     public static void onLogin(@User.Type int userType, String account, String password, final Callback callback) {
@@ -27,6 +27,7 @@ public class UserModel {
                 BmobQuery<Student> studentBeanBmobQuery = new BmobQuery<>();
                 studentBeanBmobQuery.addWhereEqualTo("mAccount", account);
                 studentBeanBmobQuery.addWhereEqualTo("mPassword", password);
+                studentBeanBmobQuery.include("mClassInfo");
                 studentBeanBmobQuery.findObjects(new FindListener<Student>() {
                     @Override
                     public void done(List<Student> list, BmobException e) {
@@ -34,7 +35,6 @@ public class UserModel {
                             sStudent = null;
                         } else {
                             sStudent = list.get(0);
-                            sStudent.setType(User.Type.STUDENT);
                         }
                         callback.onResult(sStudent);
                     }
@@ -52,7 +52,6 @@ public class UserModel {
                             sTeacher = null;
                         } else {
                             sTeacher = list.get(0);
-                            sTeacher.setType(User.Type.TEACHER);
                         }
                         callback.onResult(sTeacher);
                     }
@@ -70,7 +69,6 @@ public class UserModel {
                             sDirector = null;
                         } else {
                             sDirector = list.get(0);
-                            sDirector.setType(User.Type.DIRECTOR);
                         }
                         callback.onResult(sDirector);
                     }

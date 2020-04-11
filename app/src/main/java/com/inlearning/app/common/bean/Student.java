@@ -2,10 +2,19 @@ package com.inlearning.app.common.bean;
 
 import androidx.annotation.NonNull;
 
-public class Student extends User {
+import cn.bmob.v3.BmobObject;
+import cn.bmob.v3.datatype.BmobFile;
+
+public class Student extends BmobObject {
     private ClassInfo mClassInfo;
     private String mSex;
     private boolean mIsSelected;
+    public String mAccount;
+    public String mPassword;
+    public String mName;
+    public BmobFile mProfilePhoto;
+    private String mProfilePhotoUrl;
+    
     public ClassInfo getClassInfo() {
         return mClassInfo;
     }
@@ -33,5 +42,55 @@ public class Student extends User {
         return this;
     }
 
+    
+    public String getAccount() {
+        return mAccount;
+    }
+
+    
+    public Student setAccount(String account) {
+        mAccount = account;
+        return this;
+    }
+
+    
+    public String getPassword() {
+        return mPassword;
+    }
+
+    
+    public void setPassword(String password) {
+        mPassword = password;
+    }
+
+    
+    public String getName() {
+        return mName;
+    }
+
+    
+    public Student setName(String name) {
+        mName = name;
+        return this;
+    }
+
+    
+    public BmobFile getProfilePhoto() {
+        return mProfilePhoto;
+    }
+
+    
+    public void setProfilePhoto(BmobFile profilePhoto) {
+        mProfilePhoto = profilePhoto;
+    }
+
+    
+    public String getProfilePhotoUrl() {
+        return mProfilePhotoUrl;
+    }
+
+    public void setProfilePhotoUrl(String profilePhotoUrl) {
+        mProfilePhotoUrl = profilePhotoUrl;
+    }
 }
 

@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:background="@drawable/bg_item_click"
+        android:id="@+id/view_person_info"
         android:clickable="true">
 
         <de.hdodenhof.circleimageview.CircleImageView

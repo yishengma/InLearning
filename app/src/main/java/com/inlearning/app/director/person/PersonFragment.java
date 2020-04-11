@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.inlearning.app.R;
 import com.inlearning.app.common.BaseFragment;
 import com.inlearning.app.common.model.UserModel;
+import com.inlearning.app.director.DirectorAppRuntime;
 import com.inlearning.app.director.person.coursemanager.CourseManagerActivity;
 import com.inlearning.app.director.person.specialitymanager.SpecialityManagerActivity;
 
@@ -22,6 +23,7 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
     private TextView mInfoView;
     private RelativeLayout mSpecialityManagerView;
     private RelativeLayout mCourseManagerView;
+    private RelativeLayout mPersonInfoView;
 
     @Nullable
     @Override
@@ -42,6 +44,8 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
         mInfoView.setText("管理员");
         mSpecialityManagerView.setOnClickListener(this);
         mCourseManagerView.setOnClickListener(this);
+        mPersonInfoView = view.findViewById(R.id.view_person_info);
+        mPersonInfoView.setOnClickListener(this);
     }
 
     @Override
@@ -52,6 +56,9 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
                 break;
             case R.id.rl_course_manager:
                 CourseManagerActivity.startActivity(getContext());
+                break;
+            case R.id.view_person_info:
+                PersonActivity.startActivity(getContext(), DirectorAppRuntime.getsDirector());
                 break;
         }
     }

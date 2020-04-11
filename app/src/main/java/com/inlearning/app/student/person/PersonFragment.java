@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import com.inlearning.app.R;
 import com.inlearning.app.common.BaseFragment;
+import com.inlearning.app.common.model.UserModel;
+import com.inlearning.app.student.StudentRuntime;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -19,6 +21,7 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
     private TextView mNameView;
     private TextView mInfoView;
     private RelativeLayout mMineDiscussView;
+    private RelativeLayout mPersonInfoView;
 
     @Nullable
     @Override
@@ -34,9 +37,12 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
         mInfoView = view.findViewById(R.id.tv_info);
 //        Glide.with(this).load(UserModel.getDirector().getProfilePhotoUrl()).into(mProfilePhotoView);
 //        mNameView.setText(UserModel.getDirector().getName());
-        mInfoView.setText("学生");
+        mInfoView.setText(UserModel.getStudent().getClassInfo().getName());
         mMineDiscussView = view.findViewById(R.id.view_mine_discuss);
         mMineDiscussView.setOnClickListener(this);
+
+        mPersonInfoView = view.findViewById(R.id.view_person_info);
+        mPersonInfoView.setOnClickListener(this);
     }
 
     @Override
@@ -44,6 +50,9 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
         switch (view.getId()) {
             case R.id.view_mine_discuss:
                 MineDiscussActivity.startMineDiscussActivity(getContext());
+                break;
+            case R.id.view_person_info:
+                PersonActivity.startActivity(getContext(), StudentRuntime.getStudent());
                 break;
         }
     }

@@ -14,15 +14,21 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import com.inlearning.app.common.bean.Director;
 import com.inlearning.app.common.bean.Student;
+import com.inlearning.app.common.bean.Teacher;
 import com.inlearning.app.common.bean.User;
 import com.inlearning.app.common.model.UserModel;
 import com.inlearning.app.common.util.StatusBar;
+import com.inlearning.app.director.DirectorAppRuntime;
 import com.inlearning.app.director.DirectorHomeActivity;
-import com.inlearning.app.student.LoginModel;
 import com.inlearning.app.student.StudentHomeActivity;
 import com.inlearning.app.student.StudentRuntime;
 import com.inlearning.app.teacher.TeacherHomeActivity;
+import com.inlearning.app.teacher.TeacherRuntime;
+import com.inlearning.app.teacher.classes.coursetask.task.StuHomeworkActivity;
+
+import org.apache.commons.logging.Log;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
@@ -48,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
                     || ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
 
                 //请求授权
-                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE,Manifest.permission.WRITE_EXTERNAL_STORAGE}, 2);
+                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 2);
             } else {
 
             }
@@ -104,10 +110,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void login(String account, String password) {
-        @User.Type int type = User.Type.STUDENT;
         if (mStudentView.isChecked()) {
-            type = User.Type.STUDENT;
-            LoginModel.login(new LoginModel.Callback<Student>() {
+            UserModel.onLogin(User.Type.STUDENT, account, password, new UserModel.Callback<Student>() {
                 @Override
                 public void onResult(Student student) {
                     StudentRuntime.setStudent(student);
@@ -115,31 +119,24 @@ public class LoginActivity extends AppCompatActivity {
                 }
             });
         } else if (mTeacherView.isChecked()) {
-            type = User.Type.TEACHER;
-            TeacherHomeActivity.startHomePageActivity(LoginActivity.this);
-            return;
+
+            UserModel.onLogin(User.Type.TEACHER, account, password, new UserModel.Callback<Teacher>() {
+                @Override
+                public void onResult(Teacher teacher) {
+                    TeacherRuntime.setCurrentTeacher(teacher);
+                    TeacherHomeActivity.startHomePageActivity(LoginActivity.this);
+                }
+            });
         } else if (mDirectorView.isChecked()) {
-            type = User.Type.DIRECTOR;
+            UserModel.onLogin(User.Type.DIRECTOR, account, password, new UserModel.Callback<Director>() {
+                @Override
+                public void onResult(Director director) {
+                    DirectorAppRuntime.setsDirector(director);
+                    DirectorHomeActivity.startHomePageActivity(LoginActivity.this);
+                }
+            });
         }
-        UserModel.onLogin(type, account, password, new UserModel.Callback() {
-            @Override
-            public void onResult(User user) {
-                if (user == null) {
-                    return;
-                }
-                switch (user.getType()) {
-                    case User.Type.STUDENT:
-                        StudentHomeActivity.startHomePageActivity(LoginActivity.this);
-                        break;
-                    case User.Type.TEACHER:
-                        TeacherHomeActivity.startHomePageActivity(LoginActivity.this);
-                        break;
-                    case User.Type.DIRECTOR:
-                        DirectorHomeActivity.startHomePageActivity(LoginActivity.this);
-                        break;
-                }
-            }
-        });
+
     }
 
 }

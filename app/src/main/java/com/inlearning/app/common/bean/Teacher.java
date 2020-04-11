@@ -2,11 +2,16 @@ package com.inlearning.app.common.bean;
 
 import java.util.List;
 
-public class Teacher extends User {
+import cn.bmob.v3.BmobObject;
+import cn.bmob.v3.datatype.BmobFile;
+
+public class Teacher extends BmobObject {
     private String mJobNumber;
     private String mTitle;
     private boolean isSelected;//不做Bmob
-    private List<Course2> mCourse2s;
+    public String mName;
+    public BmobFile mProfilePhoto;
+    private String mProfilePhotoUrl;
 
     public String getTitle() {
         return mTitle == null ? "" : mTitle;
@@ -39,16 +44,23 @@ public class Teacher extends User {
         return isSelected;
     }
 
-    public Teacher setSeleted(boolean seleted) {
-        isSelected = seleted;
-        return this;
+    public void setSelected(boolean selected) {
+        isSelected = selected;
     }
 
-    public List<Course2> getCourse2s() {
-        return mCourse2s;
+    public BmobFile getProfilePhoto() {
+        return mProfilePhoto;
     }
 
-    public void setCourse2s(List<Course2> course2s) {
-        mCourse2s = course2s;
+    public void setProfilePhoto(BmobFile profilePhoto) {
+        mProfilePhoto = profilePhoto;
+    }
+
+    public String getProfilePhotoUrl() {
+        return mProfilePhotoUrl;
+    }
+
+    public void setProfilePhotoUrl(String profilePhotoUrl) {
+        mProfilePhotoUrl = profilePhotoUrl;
     }
 }
