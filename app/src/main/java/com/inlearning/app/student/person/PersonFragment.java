@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.inlearning.app.R;
@@ -17,6 +18,7 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
     private CircleImageView mProfilePhotoView;
     private TextView mNameView;
     private TextView mInfoView;
+    private RelativeLayout mMineDiscussView;
 
     @Nullable
     @Override
@@ -33,11 +35,16 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
 //        Glide.with(this).load(UserModel.getDirector().getProfilePhotoUrl()).into(mProfilePhotoView);
 //        mNameView.setText(UserModel.getDirector().getName());
         mInfoView.setText("学生");
-
+        mMineDiscussView = view.findViewById(R.id.view_mine_discuss);
+        mMineDiscussView.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
-
+        switch (view.getId()) {
+            case R.id.view_mine_discuss:
+                MineDiscussActivity.startMineDiscussActivity(getContext());
+                break;
+        }
     }
 }

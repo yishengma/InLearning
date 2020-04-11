@@ -28,6 +28,17 @@
         android:textSize="16sp" />
 
     <TextView
+        android:id="@+id/tv_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imv_content_image"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="24dp"
+        android:gravity="bottom"
+        android:text="删除"
+        android:textColor="@color/app_global_blue" />
+
+    <TextView
         android:layout_width="44dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/imv_user_image"
@@ -46,17 +57,18 @@
         android:layout_below="@+id/tv_post_title"
         android:layout_alignLeft="@+id/tv_post_title"
         android:layout_marginTop="5dp"
-        android:clickable="true"
         android:layout_marginRight="24dp"
+        android:clickable="true"
         android:scaleType="centerCrop"
         android:src="@drawable/viewpage_guide_3"
-        android:visibility="visible" />
+        android:visibility="gone" />
 
     <View
+        android:id="@+id/split_line"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@+id/imv_content_image"
-        android:layout_marginTop="5dp"
+        android:layout_below="@+id/tv_delete"
+        android:layout_marginTop="12dp"
         android:background="@color/split_line" />
 
 </RelativeLayout>

@@ -27,7 +27,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".student.course.func.discuss.DiscussDetailActivity"></activity>
+        <activity android:name=".student.person.MineDiscussActivity"></activity>
+        <activity android:name=".student.course.func.discuss.DiscussDetailActivity" />
         <activity android:name=".teacher.classes.coursetask.task.StuHomeworkActivity" />
         <activity android:name=".teacher.classes.coursetask.task.HomeworkDetailActivity" />
         <activity android:name=".teacher.classes.coursetask.CourseTaskActivity" />

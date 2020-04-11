@@ -15,7 +15,6 @@ import com.inlearning.app.common.BaseFragment;
 import com.inlearning.app.common.adapter.CommonFragmentStatePagerAdapter;
 import com.inlearning.app.common.util.StatusBar;
 import com.inlearning.app.student.course.CourseFragment;
-import com.inlearning.app.student.classinfo.ClassInfoFragment;
 import com.inlearning.app.student.person.PersonFragment;
 
 import java.util.ArrayList;
@@ -51,7 +50,6 @@ public class StudentHomeActivity extends AppCompatActivity implements View.OnCli
     private void initData() {
         mHomepageFragmentList = new ArrayList<>();
         mHomepageFragmentList.add(new CourseFragment());
-        mHomepageFragmentList.add(new ClassInfoFragment());
         mHomepageFragmentList.add(new PersonFragment());
     }
 
@@ -68,11 +66,9 @@ public class StudentHomeActivity extends AppCompatActivity implements View.OnCli
         mBottomTab.setSmoothScrollingEnabled(true);
         mBottomTab.setupWithViewPager(mViewPager);
         mBottomTab.getTabAt(0).setIcon(R.drawable.tab_selector_attend_class);
-        mBottomTab.getTabAt(1).setIcon(R.drawable.tab_selector_class);
-        mBottomTab.getTabAt(2).setIcon(R.drawable.tab_selector_mine);
+        mBottomTab.getTabAt(1).setIcon(R.drawable.tab_selector_mine);
         mBottomTab.getTabAt(0).setText("上课");
-        mBottomTab.getTabAt(1).setText("班级");
-        mBottomTab.getTabAt(2).setText("我的");
+        mBottomTab.getTabAt(1).setText("我的");
     }
 
     @Override
