@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.inlearning.app.R;
 import com.inlearning.app.common.bean.Course2;
+import com.inlearning.app.common.util.LoadingDialogUtil;
 import com.inlearning.app.common.util.PixeUtil;
 import com.inlearning.app.common.util.ThreadMgr;
 import com.inlearning.app.common.widget.EditItemView;
@@ -124,9 +125,11 @@ public class CourseSingleImportActivity2 extends BaseSingleImportActivity implem
                 .setType(mTypeEditView.getContent())
                 .setTime(mDurationEditView.getContent())
                 .setScore(mScoreEditView.getContent());
+        LoadingDialogUtil.showLoadingDialog(CourseSingleImportActivity2.this,"正在保存..");
         CourseModel.saveCourseInfo(course, new CourseModel.Callback<Course2>() {
             @Override
             public void onResult(boolean suc, Course2 speciality) {
+                LoadingDialogUtil.closeDialog();
                 if (suc) {
                     showToast();
                     finish();

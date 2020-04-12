@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.inlearning.app.R;
 import com.inlearning.app.common.bean.Speciality;
@@ -28,7 +29,7 @@ public class SpecialityManagerActivity extends AppCompatActivity implements View
     private RecyclerView mRvSpecialityView;
     private List<Speciality> mSpecialities;
     private SpecialityManagerAdapter mManagerAdapter;
-
+    private TextView mEmptyView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +53,8 @@ public class SpecialityManagerActivity extends AppCompatActivity implements View
                 SpecialityEditActivity.startActivity(SpecialityManagerActivity.this,speciality);
             }
         });
+        mEmptyView = findViewById(R.id.tv_empty);
+        mEmptyView.setVisibility(mSpecialities.isEmpty()?View.VISIBLE:View.GONE);
     }
 
     @Override
@@ -65,5 +68,6 @@ public class SpecialityManagerActivity extends AppCompatActivity implements View
 
     private void initData() {
         mSpecialities = new ArrayList<>(DirectorAppRuntime.getSpecialities());
+
     }
 }

@@ -17,11 +17,14 @@ import com.inlearning.app.R;
 import com.inlearning.app.common.util.InputMethodUtil;
 import com.inlearning.app.common.util.StatusBar;
 
+import java.util.List;
+
 public abstract class BaseSearchActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView mCancelView;
     private RecyclerView mResultRecyclerView;
     private EditText mEditView;
+    private TextView mEmptyView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +78,7 @@ public abstract class BaseSearchActivity extends AppCompatActivity implements Vi
                 }
             }
         });
+        mEmptyView = findViewById(R.id.tv_empty);
     }
 
 
@@ -96,5 +100,9 @@ public abstract class BaseSearchActivity extends AppCompatActivity implements Vi
     protected abstract void resetList();
 
     protected abstract String editHint();
+
+    protected void setEmptyView(List list) {
+        mEmptyView.setVisibility(list.isEmpty()?View.VISIBLE:View.GONE);
+    }
 
 }

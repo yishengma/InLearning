@@ -47,12 +47,14 @@ public class SpecialityClassSearchActivity extends BaseSearchActivity {
             }
         }
         mInfoAdapter.notifyDataSetChanged();
+        setEmptyView(mClassList);
     }
 
     @Override
     protected void resetList() {
         mClassList.clear();
         mInfoAdapter.notifyDataSetChanged();
+        setEmptyView(mClassList);
     }
 
     @Override

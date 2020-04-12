@@ -2,14 +2,15 @@ package com.inlearning.app.director.person.coursemanager.classes;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.inlearning.app.R;
 import com.inlearning.app.common.bean.Speciality;
+import com.inlearning.app.common.util.StatusBar;
 import com.inlearning.app.common.util.ThreadMgr;
 import com.inlearning.app.director.DirectorAppRuntime;
 import com.inlearning.app.director.speciality.SpecialityModel;
@@ -25,11 +26,13 @@ public class ClassListActivity extends AppCompatActivity {
     private View mParentView;
     private ClassListPresenter mClassListPresenter;
     private ImageView mBackView;
-
+    private TextView mEmptyView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_class_list2);
+        StatusBar.setStatusBarTranslucent(this);
+        StatusBar.setStatusBarDarkMode(this, true);
         mParentView = findViewById(R.id.root_view);
         mBackView = findViewById(R.id.imv_bar_back);
         mBackView.setOnClickListener(new View.OnClickListener() {
@@ -38,6 +41,7 @@ public class ClassListActivity extends AppCompatActivity {
                 finish();
             }
         });
+        mEmptyView = findViewById(R.id.tv_empty);
         initPresenter();
         initData();
     }
@@ -66,6 +70,7 @@ public class ClassListActivity extends AppCompatActivity {
                 for (Speciality s : specialities) {
                     addSpeciality(true, s);
                 }
+                mEmptyView.setVisibility(specialities.isEmpty()?View.VISIBLE:View.GONE);
                 DirectorAppRuntime.setSpecialities(specialities);
             }
         });

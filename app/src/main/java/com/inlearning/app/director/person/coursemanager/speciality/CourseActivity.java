@@ -12,6 +12,7 @@ import com.inlearning.app.R;
 import com.inlearning.app.common.BaseFragment;
 import com.inlearning.app.common.adapter.CommonFragmentStatePagerAdapter;
 import com.inlearning.app.common.bean.Speciality;
+import com.inlearning.app.common.util.StatusBar;
 import com.inlearning.app.director.DirectorAppRuntime;
 
 import java.util.ArrayList;
@@ -42,6 +43,8 @@ public class CourseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course);
+        StatusBar.setStatusBarTranslucent(this);
+        StatusBar.setStatusBarDarkMode(this, true);
         initView();
         initData();
         getIntentData();

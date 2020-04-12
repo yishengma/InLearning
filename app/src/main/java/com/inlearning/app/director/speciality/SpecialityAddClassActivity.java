@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.inlearning.app.R;
 import com.inlearning.app.common.bean.Speciality;
+import com.inlearning.app.common.util.LoadingDialogUtil;
 import com.inlearning.app.common.util.PixeUtil;
 import com.inlearning.app.common.util.ThreadMgr;
 import com.inlearning.app.common.widget.EditItemView;
@@ -123,9 +124,11 @@ public class SpecialityAddClassActivity extends BaseSingleImportActivity impleme
             return;
         }
         int count = Integer.valueOf(mCountEditView.getContent());
+        LoadingDialogUtil.showLoadingDialog(SpecialityAddClassActivity.this,"正在添加..");
         SpecialityModel.addClasses(speciality, count, new SpecialityModel.Callback<Speciality>() {
             @Override
             public void onResult(boolean suc, Speciality speciality) {
+                LoadingDialogUtil.closeDialog();
                 if (suc) {
                     showToast();
                     finish();

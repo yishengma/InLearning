@@ -62,12 +62,14 @@ public class StudentSearchActivity extends BaseSearchActivity {
             }
         }
         mInfoAdapter.notifyDataSetChanged();
+        setEmptyView(mStudentList);
     }
 
     @Override
     protected void resetList() {
         mStudentList.clear();
         mInfoAdapter.notifyDataSetChanged();
+        setEmptyView(mStudentList);
     }
 
     @Override

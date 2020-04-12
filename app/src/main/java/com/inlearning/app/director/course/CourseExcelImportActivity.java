@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.inlearning.app.common.bean.Course2;
 import com.inlearning.app.common.util.FileUtil;
+import com.inlearning.app.common.util.LoadingDialogUtil;
 import com.inlearning.app.director.BaseExcelImportActivity;
 
 import java.util.ArrayList;
@@ -53,9 +54,11 @@ public class CourseExcelImportActivity extends BaseExcelImportActivity {
 
     @Override
     protected void upload() {
+        LoadingDialogUtil.showLoadingDialog(this,"正在上传..");
         CourseModel.addCourseList(mCourseList, new CourseModel.Callback<List<Course2>>() {
             @Override
             public void onResult(boolean suc, List<Course2> course2s) {
+                LoadingDialogUtil.closeDialog();
                 if (suc) {
                     finish();
                 }

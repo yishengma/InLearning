@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.inlearning.app.R;
 import com.inlearning.app.common.bean.Course2;
+import com.inlearning.app.common.util.LoadingDialogUtil;
 import com.inlearning.app.common.util.PixeUtil;
 import com.inlearning.app.common.util.StatusBar;
 import com.inlearning.app.common.util.ThreadMgr;
@@ -106,9 +107,11 @@ public class CourseEditActivity extends AppCompatActivity {
                         .setType(mTypeEditView.getContent())
                         .setTime(mDurationEditView.getContent())
                         .setScore(mScoreEditView.getContent());
+                LoadingDialogUtil.showLoadingDialog(CourseEditActivity.this,"正在更新..");
                 CourseModel.updateCourse(mCourse, new CourseModel.Callback<Course2>() {
                     @Override
                     public void onResult(boolean suc, Course2 course2) {
+                        LoadingDialogUtil.closeDialog();
                         if (suc) {
                             finish();
                             showToast("更新成功");

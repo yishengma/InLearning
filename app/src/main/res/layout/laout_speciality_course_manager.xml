@@ -45,6 +45,13 @@
         android:layout_below="@+id/fl_title_bar"
         android:background="@color/app_global_item_divide" />
 
+    <TextView
+        android:id="@+id/tv_empty"
+        android:text="暂无安排"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_speciality"
         android:layout_width="match_parent"

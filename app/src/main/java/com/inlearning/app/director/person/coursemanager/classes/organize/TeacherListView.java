@@ -8,9 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.inlearning.app.R;
-import com.inlearning.app.common.bean.Course2;
 import com.inlearning.app.common.bean.Teacher;
 import com.inlearning.app.director.teacher.TeacherInfoAdapter;
 
@@ -36,6 +36,7 @@ public class TeacherListView extends RelativeLayout {
     private List<Teacher> mTeacherList;
     private TeacherInfoAdapter mTeacherInfoAdapter;
     private ImageView mBackView;
+    private TextView mEmptyView;
 
     public interface ClickListener {
         void onClick(Teacher teacher);
@@ -76,11 +77,14 @@ public class TeacherListView extends RelativeLayout {
                 }
             }
         });
+        mEmptyView = view.findViewById(R.id.tv_empty);
+
     }
 
     public void updateList(List<Teacher> teachers) {
         mTeacherList.clear();
         mTeacherList.addAll(teachers);
         mTeacherInfoAdapter.notifyDataSetChanged();
+        mEmptyView.setVisibility(mTeacherList.isEmpty()?VISIBLE:GONE);
     }
 }

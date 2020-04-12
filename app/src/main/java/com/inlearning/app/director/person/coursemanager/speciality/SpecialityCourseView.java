@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.inlearning.app.R;
 import com.inlearning.app.common.bean.Speciality;
@@ -37,6 +38,7 @@ public class SpecialityCourseView extends LinearLayout implements View.OnClickLi
     private SpecialityCourseAdapter mSpecialityCourseAdapter;
     private List<Speciality> mSpecialities;
     private ImageView mBackView;
+    private TextView mEmptyView;
 
     public interface ClickListener {
         void onBack();
@@ -65,6 +67,7 @@ public class SpecialityCourseView extends LinearLayout implements View.OnClickLi
                 SpecialityScheduleActivity.startScheduleActivity(getContext(), speciality);
             }
         });
+        mEmptyView = view.findViewById(R.id.tv_empty);
     }
 
     @Override
@@ -81,6 +84,7 @@ public class SpecialityCourseView extends LinearLayout implements View.OnClickLi
         mSpecialities.clear();
         mSpecialities.addAll(DirectorAppRuntime.getSpecialities());
         mSpecialityCourseAdapter.notifyDataSetChanged();
+        mEmptyView.setVisibility(mSpecialities.isEmpty() ? VISIBLE : GONE);
     }
 
     public void hide() {

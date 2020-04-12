@@ -146,6 +146,7 @@ public class CourseInfoFragment extends BaseFragment{
 
 
     private void deleteCourse(final Course2 course2) {
+
         CourseModel.deleteCourse(course2, new CourseModel.Callback<Course2>() {
             @Override
             public void onResult(boolean suc, final Course2 course) {

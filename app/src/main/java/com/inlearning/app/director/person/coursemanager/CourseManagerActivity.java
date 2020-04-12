@@ -63,4 +63,14 @@ public class CourseManagerActivity extends AppCompatActivity implements View.OnC
                 break;
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        if (mSpecialityPresenter.isShow()) {
+            mSpecialityPresenter.hideView();
+            mManagerChooseView.setVisibility(View.VISIBLE);
+            return;
+        }
+        super.onBackPressed();
+    }
 }

@@ -50,7 +50,12 @@
         android:layout_below="@+id/fl_title_bar"
         android:background="@color/app_global_item_divide" />
 
-
+    <TextView
+        android:id="@+id/tv_empty"
+        android:gravity="center"
+        android:text="暂无排课"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
     <android.support.design.widget.TabLayout
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"

@@ -2,6 +2,7 @@ package com.inlearning.app.common.util;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.os.Looper;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,8 +48,20 @@ public class LoadingDialogUtil {
 
 
     public static void closeDialog() {
-        if (sDialog != null && sDialog.isShowing()) {
-            sDialog.dismiss();
+        if (Looper.getMainLooper() != Looper.myLooper()) {
+            ThreadMgr.getInstance().postToUIThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (sDialog != null && sDialog.isShowing()) {
+                        sDialog.dismiss();
+                    }
+                }
+            });
+        }
+        else {
+            if (sDialog != null && sDialog.isShowing()) {
+                sDialog.dismiss();
+            }
         }
     }
 

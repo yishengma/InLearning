@@ -63,12 +63,14 @@ public class CourseSearchActivity extends BaseSearchActivity {
             }
         }
         mInfoAdapter.notifyDataSetChanged();
+        setEmptyView(mCourseList);
     }
 
     @Override
     protected void resetList() {
         mCourseList.clear();
         mInfoAdapter.notifyDataSetChanged();
+        setEmptyView(mCourseList);
     }
 
     @Override
@@ -161,6 +163,7 @@ public class CourseSearchActivity extends BaseSearchActivity {
                                 }
                             }
                             mInfoAdapter.notifyDataSetChanged();
+                            setEmptyView(mCourseList);
                         }
                     });
                 }

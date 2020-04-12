@@ -64,12 +64,14 @@ public class TeacherSearchActivity extends BaseSearchActivity {
             }
         }
         mInfoAdapter.notifyDataSetChanged();
+        setEmptyView(mTeacherList);
     }
 
     @Override
     protected void resetList() {
         mTeacherList.clear();
         mInfoAdapter.notifyDataSetChanged();
+        setEmptyView(mTeacherList);
     }
 
     @Override
@@ -176,6 +178,7 @@ public class TeacherSearchActivity extends BaseSearchActivity {
                     }
                 }
                 mInfoAdapter.notifyDataSetChanged();
+                setEmptyView(mTeacherList);
             }
         });
     }

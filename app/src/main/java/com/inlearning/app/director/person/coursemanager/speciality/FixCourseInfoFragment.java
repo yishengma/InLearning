@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.inlearning.app.R;
 import com.inlearning.app.common.BaseFragment;
@@ -24,6 +25,7 @@ public class FixCourseInfoFragment extends BaseFragment {
     private CourseInfoAdapter mCourseInfoAdapter;
     private String mFragmentTitle;
     private Speciality mSpeciality;
+    private TextView mEmptyView;
 
     @Nullable
     @Override
@@ -52,6 +54,7 @@ public class FixCourseInfoFragment extends BaseFragment {
 
             }
         });
+        mEmptyView = view.findViewById(R.id.tv_empty);
     }
 
     public FixCourseInfoFragment setFragmentTitle(String fragmentTitle) {
@@ -72,6 +75,7 @@ public class FixCourseInfoFragment extends BaseFragment {
         if (mCourseInfoAdapter != null) {
             mCourseInfoAdapter.notifyDataSetChanged();
         }
+        mEmptyView.setVisibility(mCourseList.isEmpty()?View.VISIBLE:View.GONE);
     }
 
 

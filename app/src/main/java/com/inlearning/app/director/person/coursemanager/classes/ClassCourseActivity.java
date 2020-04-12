@@ -15,9 +15,9 @@ import android.widget.TextView;
 import com.inlearning.app.R;
 import com.inlearning.app.common.bean.ClassInfo;
 import com.inlearning.app.common.bean.ClassSchedule;
+import com.inlearning.app.common.util.StatusBar;
 import com.inlearning.app.common.util.ThreadMgr;
 import com.inlearning.app.director.person.coursemanager.classes.organize.OrganizeCoursePresenter;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,11 +38,13 @@ public class ClassCourseActivity extends AppCompatActivity implements View.OnCli
 
     private ClassInfo mClassInfo;
     private OrganizeCoursePresenter mPresenter;
-
+    private TextView mEmptyView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_class_course);
+        StatusBar.setStatusBarTranslucent(this);
+        StatusBar.setStatusBarDarkMode(this, true);
         initView();
         getIntentData();
         initData();
@@ -67,6 +69,7 @@ public class ClassCourseActivity extends AppCompatActivity implements View.OnCli
         mRvCourse.setAdapter(mClassTeaAdapter);
         mAddView.setOnClickListener(this);
         mBackView.setOnClickListener(this);
+        mEmptyView = findViewById(R.id.tv_empty);
     }
 
 
@@ -108,6 +111,7 @@ public class ClassCourseActivity extends AppCompatActivity implements View.OnCli
                 mClassSchedules.clear();
                 mClassSchedules.addAll(classSchedules);
                 mClassTeaAdapter.notifyDataSetChanged();
+        mEmptyView.setVisibility(mClassSchedules.isEmpty() ? View.VISIBLE : View.GONE);
         for (ClassSchedule s:classSchedules) {
             Log.e("ethan",s.getCourse2().getName()+"course");
         }
@@ -121,6 +125,7 @@ public class ClassCourseActivity extends AppCompatActivity implements View.OnCli
             public void run() {
                 mClassSchedules.add(classSchedule);
                 mClassTeaAdapter.notifyDataSetChanged();
+                mEmptyView.setVisibility(mClassSchedules.isEmpty() ? View.VISIBLE : View.GONE);
             }
         });
     }

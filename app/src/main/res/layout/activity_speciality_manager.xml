@@ -48,10 +48,17 @@
         android:layout_height="0.5dp"
         android:layout_below="@+id/fl_title_bar"
         android:background="@color/app_global_item_divide" />
-
+    <TextView
+        android:id="@+id/tv_empty"
+        android:gravity="center"
+        android:text="暂未添加任何专业/班级"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
     <android.support.v7.widget.RecyclerView
         android:layout_marginTop="12dp"
         android:id="@+id/rv_speciality"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+
 </LinearLayout>

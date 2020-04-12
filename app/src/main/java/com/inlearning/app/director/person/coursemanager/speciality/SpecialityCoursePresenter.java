@@ -29,4 +29,12 @@ public class SpecialityCoursePresenter {
         mSpecialityView.show();
     }
 
+    public void hideView() {
+        mSpecialityView.hide();
+    }
+
+    public boolean isShow() {
+        return mSpecialityView.getVisibility() == View.VISIBLE;
+    }
+
 }

@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.inlearning.app.R;
 import com.inlearning.app.common.BaseFragment;
@@ -24,7 +25,7 @@ public class ClassInfoFragment extends BaseFragment {
     private SpecialityInfoAdapter mSpecialityInfoAdapter;
     private Speciality mSpeciality;
     private List<Speciality> mSpecialities = new ArrayList<>();
-
+    private TextView mEmptyView;
 
     @Nullable
     @Override
@@ -50,6 +51,7 @@ public class ClassInfoFragment extends BaseFragment {
 
             }
         });
+        mEmptyView = view.findViewById(R.id.tv_empty);
     }
 
     public ClassInfoFragment setSpeciality(Speciality speciality) {
@@ -61,6 +63,7 @@ public class ClassInfoFragment extends BaseFragment {
         if (mSpecialityInfoAdapter != null) {
             mSpecialityInfoAdapter.notifyDataSetChanged();
         }
+        mEmptyView.setVisibility(mClassList.isEmpty()?View.VISIBLE:View.GONE);
         return this;
     }
 }

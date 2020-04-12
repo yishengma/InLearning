@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.inlearning.app.R;
 import com.inlearning.app.common.bean.Teacher;
+import com.inlearning.app.common.util.LoadingDialogUtil;
 import com.inlearning.app.common.util.PixeUtil;
 import com.inlearning.app.common.util.ThreadMgr;
 import com.inlearning.app.common.widget.EditItemView;
@@ -117,9 +118,11 @@ public class TeacherSingleImportActivity2 extends BaseSingleImportActivity imple
         teacher.setName(mNameEditView.getContent())
                 .setJobNumber(mJonNumberEditView.getContent())
                 .setTitle(mTitleEditView.getContent());
+        LoadingDialogUtil.showLoadingDialog(this,"正在添加.");
         TeacherModel.addTeacher(teacher, new TeacherModel.Callback<Teacher>() {
             @Override
             public void onResult(boolean suc, Teacher teacher) {
+                LoadingDialogUtil.closeDialog();
                 if (suc) {
                     showToast();
                     finish();

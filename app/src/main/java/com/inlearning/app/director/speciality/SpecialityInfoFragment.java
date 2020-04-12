@@ -18,6 +18,7 @@ import com.inlearning.app.R;
 import com.inlearning.app.common.BaseFragment;
 import com.inlearning.app.common.bean.ClassInfo;
 import com.inlearning.app.common.bean.Speciality;
+import com.inlearning.app.common.util.LoadingDialogUtil;
 import com.inlearning.app.common.util.ThreadMgr;
 import com.inlearning.app.director.speciality.classinfo.ClassInfoActivity;
 
@@ -134,9 +135,11 @@ public class SpecialityInfoFragment extends BaseFragment {
     }
 
     private void deleteClass(final ClassInfo classInfo) {
+        LoadingDialogUtil.showLoadingDialog(getContext(), "正在删除");
         SpecialityModel.deleteClass(classInfo, new SpecialityModel.Callback<ClassInfo>() {
             @Override
             public void onResult(boolean suc, ClassInfo c) {
+                LoadingDialogUtil.closeDialog();
                 if (suc) {
                     showToast("删除成功");
                     updateList(classInfo);
