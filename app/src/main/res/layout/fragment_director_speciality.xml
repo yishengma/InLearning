@@ -6,43 +6,51 @@
     android:background="@color/app_global_white"
     android:orientation="vertical">
 
-<!--    <FrameLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="?actionBarSize"-->
-<!--        android:paddingLeft="12dp"-->
-<!--        android:paddingRight="12dp">-->
+    <!--    <FrameLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="?actionBarSize"-->
+    <!--        android:paddingLeft="12dp"-->
+    <!--        android:paddingRight="12dp">-->
 
-<!--        <TextView-->
-<!--            android:textStyle="bold"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center_vertical"-->
-<!--            android:text="马小明"-->
-<!--            android:layout_marginLeft="12dp"-->
-<!--            android:textColor="@color/textBlack"-->
-<!--            android:textSize="20sp" />-->
+    <!--        <TextView-->
+    <!--            android:textStyle="bold"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_gravity="center_vertical"-->
+    <!--            android:text="马小明"-->
+    <!--            android:layout_marginLeft="12dp"-->
+    <!--            android:textColor="@color/textBlack"-->
+    <!--            android:textSize="20sp" />-->
 
-<!--        <ImageView-->
-<!--            android:id="@+id/imv_search"-->
-<!--            android:layout_width="24dp"-->
-<!--            android:layout_height="24dp"-->
-<!--            android:layout_gravity="end|center_vertical"-->
-<!--            android:layout_marginRight="72dp"-->
-<!--            android:src="@drawable/imv_search" />-->
+    <!--        <ImageView-->
+    <!--            android:id="@+id/imv_search"-->
+    <!--            android:layout_width="24dp"-->
+    <!--            android:layout_height="24dp"-->
+    <!--            android:layout_gravity="end|center_vertical"-->
+    <!--            android:layout_marginRight="72dp"-->
+    <!--            android:src="@drawable/imv_search" />-->
 
-<!--        <ImageView-->
-<!--            android:layout_marginRight="12dp"-->
-<!--            android:id="@+id/imv_add"-->
-<!--            android:layout_width="22dp"-->
-<!--            android:layout_height="22dp"-->
-<!--            android:layout_gravity="end|center_vertical"-->
-<!--            android:src="@drawable/imv_add" />-->
-<!--    </FrameLayout>-->
-<!--    <View-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="0.5dp"-->
-<!--        android:layout_alignParentBottom="true"-->
-<!--        android:background="@color/app_global_item_divide" />-->
+    <!--        <ImageView-->
+    <!--            android:layout_marginRight="12dp"-->
+    <!--            android:id="@+id/imv_add"-->
+    <!--            android:layout_width="22dp"-->
+    <!--            android:layout_height="22dp"-->
+    <!--            android:layout_gravity="end|center_vertical"-->
+    <!--            android:src="@drawable/imv_add" />-->
+    <!--    </FrameLayout>-->
+    <!--    <View-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="0.5dp"-->
+    <!--        android:layout_alignParentBottom="true"-->
+    <!--        android:background="@color/app_global_item_divide" />-->
+
+    <TextView
+        android:id="@+id/tv_empty"
+        android:gravity="center"
+        android:text="暂未添加专业信息"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible" />
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tab_layout"
@@ -50,13 +58,12 @@
         android:layout_height="24dp"
         android:layout_marginTop="10dp"
         app:tabBackground="@android:color/transparent"
-        app:tabMode="scrollable"
         app:tabIndicatorColor="@color/transparent"
+        app:tabMode="scrollable"
         app:tabRippleColor="@android:color/transparent"
         app:tabSelectedTextColor="@color/app_global_blue"
         app:tabTextAppearance="@style/TabLayoutTextAppearance"
-        app:tabTextColor="@color/textBlack">
-    </android.support.design.widget.TabLayout>
+        app:tabTextColor="@color/textBlack"></android.support.design.widget.TabLayout>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/vp_recent_course"

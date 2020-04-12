@@ -65,6 +65,11 @@ public class DirectorHomeActivity extends AppCompatActivity implements View.OnCl
         mHomepageFragmentList.add(new PersonFragment());
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mBarTitle.setText(DirectorAppRuntime.getsDirector().mName);
+    }
 
     private void initView() {
         mViewPager = findViewById(R.id.vp_home_page);
