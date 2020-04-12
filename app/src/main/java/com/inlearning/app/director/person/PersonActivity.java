@@ -98,7 +98,7 @@ public class PersonActivity extends AppCompatActivity {
             }
         });
         initDialog();
-        mBackView = findViewById(R.id.imv_bar_back);
+        mBackView = findViewById(R.id.imv_edit_back);
         mBackView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
