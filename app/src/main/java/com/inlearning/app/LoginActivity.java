@@ -22,6 +22,7 @@ import com.inlearning.app.common.bean.Teacher;
 import com.inlearning.app.common.bean.User;
 import com.inlearning.app.common.model.UserModel;
 import com.inlearning.app.common.util.StatusBar;
+import com.inlearning.app.common.util.ToastUtil;
 import com.inlearning.app.director.DirectorAppRuntime;
 import com.inlearning.app.director.DirectorHomeActivity;
 import com.inlearning.app.student.StudentHomeActivity;
@@ -121,6 +122,9 @@ public class LoginActivity extends AppCompatActivity {
             UserModel.onLogin(User.Type.STUDENT, account, password, new UserModel.Callback<Student>() {
                 @Override
                 public void onResult(Student student) {
+                    if (!isLoginSuccess(student)) {
+                        return;
+                    }
                     StudentRuntime.setStudent(student);
                     StudentHomeActivity.startHomePageActivity(LoginActivity.this);
                 }
@@ -130,6 +134,9 @@ public class LoginActivity extends AppCompatActivity {
             UserModel.onLogin(User.Type.TEACHER, account, password, new UserModel.Callback<Teacher>() {
                 @Override
                 public void onResult(Teacher teacher) {
+                    if (!isLoginSuccess(teacher)) {
+                        return;
+                    }
                     TeacherRuntime.setCurrentTeacher(teacher);
                     TeacherHomeActivity.startHomePageActivity(LoginActivity.this);
                 }
@@ -138,12 +145,23 @@ public class LoginActivity extends AppCompatActivity {
             UserModel.onLogin(User.Type.DIRECTOR, account, password, new UserModel.Callback<Director>() {
                 @Override
                 public void onResult(Director director) {
+                    if (!isLoginSuccess(director)) {
+                        return;
+                    }
                     DirectorAppRuntime.setsDirector(director);
                     DirectorHomeActivity.startHomePageActivity(LoginActivity.this);
                 }
             });
         }
 
+    }
+
+    public boolean isLoginSuccess(Object o) {
+        if (o == null) {
+            ToastUtil.showToast("登录失败，该账户不存在！", Toast.LENGTH_SHORT);
+            return false;
+        }
+        return true;
     }
 
 }
