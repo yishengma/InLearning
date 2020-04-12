@@ -224,6 +224,7 @@ public class MineDiscussActivity extends AppCompatActivity implements View.OnCli
             } else {
                 viewHolder.mContentImageView.setVisibility(GONE);
             }
+            viewHolder.mDeleteView.setVisibility(VISIBLE);
             viewHolder.mDeleteView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
