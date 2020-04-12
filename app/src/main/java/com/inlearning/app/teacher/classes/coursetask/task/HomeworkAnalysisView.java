@@ -3,6 +3,7 @@ package com.inlearning.app.teacher.classes.coursetask.task;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
@@ -12,9 +13,6 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
-
-import com.dueeeke.videoplayer.util.L;
 import com.inlearning.app.R;
 import com.inlearning.app.common.bean.Answer;
 import com.inlearning.app.common.bean.Question;

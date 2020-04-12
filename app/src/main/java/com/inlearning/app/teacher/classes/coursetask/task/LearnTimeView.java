@@ -2,14 +2,12 @@ package com.inlearning.app.teacher.classes.coursetask.task;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.text.format.Time;
+import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
-
-import androidx.annotation.Nullable;
 
 import com.inlearning.app.R;
 import com.inlearning.app.common.bean.ChapterProgress;
@@ -18,7 +16,6 @@ import com.openxu.cview.chart.barchart.BarHorizontalChart;
 import com.openxu.cview.chart.bean.ChartLable;
 import com.openxu.cview.chart.bean.TimeBarBean;
 import com.openxu.utils.DensityUtil;
-
 
 import java.util.ArrayList;
 import java.util.Collections;

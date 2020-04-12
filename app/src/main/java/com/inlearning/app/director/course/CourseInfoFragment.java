@@ -29,6 +29,7 @@ public class CourseInfoFragment extends BaseFragment{
     private List<Course2> mCourseList;
     private CourseInfoAdapter mCourseInfoAdapter;
     private String mFragmentTitle;
+    private TextView mEmptyView;
 
     @Nullable
     @Override
@@ -55,6 +56,7 @@ public class CourseInfoFragment extends BaseFragment{
                 showPopWindow(view, x, y, course);
             }
         });
+        mEmptyView = view.findViewById(R.id.tv_empty);
     }
 
 
@@ -69,6 +71,9 @@ public class CourseInfoFragment extends BaseFragment{
                     if (mFragmentTitle.contains(c.getType())) {
                         mCourseList.add(c);
                     }
+                }
+                if (course2s != null && !course2s.isEmpty()) {
+                    mEmptyView.setVisibility(View.GONE);
                 }
                 DirectorAppRuntime.setCourse2s(course2s);
                 mCourseInfoAdapter.notifyDataSetChanged();
@@ -159,6 +164,9 @@ public class CourseInfoFragment extends BaseFragment{
                                     iterator.remove();
                                     break;
                                 }
+                            }
+                            if (mCourseList != null && mCourseList.isEmpty()) {
+                                mEmptyView.setVisibility(View.VISIBLE);
                             }
                             mCourseInfoAdapter.notifyDataSetChanged();
                         }
