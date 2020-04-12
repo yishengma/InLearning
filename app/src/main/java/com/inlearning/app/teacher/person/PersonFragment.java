@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.inlearning.app.R;
 import com.inlearning.app.common.BaseFragment;
+import com.inlearning.app.common.FeedbackActivity;
 import com.inlearning.app.common.bean.Director;
 import com.inlearning.app.common.bean.Teacher;
 import com.inlearning.app.director.DirectorAppRuntime;
@@ -24,6 +25,7 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
     private TextView mNameView;
     private TextView mInfoView;
     private RelativeLayout mInfoLayoutView;
+    private RelativeLayout mFeedbackView;
 
 
     @Nullable
@@ -53,6 +55,8 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
         mInfoView = view.findViewById(R.id.tv_info);
         mInfoLayoutView = view.findViewById(R.id.view_person_info);
         mInfoLayoutView.setOnClickListener(this);
+        mFeedbackView = view.findViewById(R.id.view_feed_back);
+        mFeedbackView.setOnClickListener(this);
     }
 
     @Override
@@ -60,6 +64,9 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
         switch (view.getId()) {
             case R.id.view_person_info:
                 PersonActivity.startActivity(getContext(), TeacherRuntime.getCurrentTeacher());
+                break;
+            case R.id.view_feed_back:
+                FeedbackActivity.startFeedbackActivity(getContext());
                 break;
         }
     }

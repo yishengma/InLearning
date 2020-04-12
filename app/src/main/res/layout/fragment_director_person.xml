@@ -152,6 +152,7 @@
 
 
     <RelativeLayout
+        android:id="@+id/view_feed_back"
         android:layout_height="50dp"
         android:layout_width="match_parent"
         android:background="@drawable/bg_item_click"

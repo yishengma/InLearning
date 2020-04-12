@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.inlearning.app.R;
 import com.inlearning.app.common.BaseFragment;
+import com.inlearning.app.common.FeedbackActivity;
 import com.inlearning.app.common.model.UserModel;
 import com.inlearning.app.director.DirectorAppRuntime;
 import com.inlearning.app.director.person.coursemanager.CourseManagerActivity;
@@ -28,6 +29,7 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
     private RelativeLayout mSpecialityManagerView;
     private RelativeLayout mCourseManagerView;
     private RelativeLayout mPersonInfoView;
+    private RelativeLayout mFeedbackView;
 
     @Nullable
     @Override
@@ -61,6 +63,9 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
         mCourseManagerView.setOnClickListener(this);
         mPersonInfoView = view.findViewById(R.id.view_person_info);
         mPersonInfoView.setOnClickListener(this);
+
+        mFeedbackView = view.findViewById(R.id.view_feed_back);
+        mFeedbackView.setOnClickListener(this);
     }
 
     @Override
@@ -74,6 +79,9 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
                 break;
             case R.id.view_person_info:
                 PersonActivity.startActivity(getContext(), DirectorAppRuntime.getsDirector());
+                break;
+            case R.id.view_feed_back:
+                FeedbackActivity.startFeedbackActivity(getContext());
                 break;
         }
     }
