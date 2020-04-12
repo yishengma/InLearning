@@ -1,5 +1,6 @@
 package com.inlearning.app.teacher.person;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -10,7 +11,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.inlearning.app.LoginActivity;
 import com.inlearning.app.R;
+import com.inlearning.app.common.AboutAppActivity;
 import com.inlearning.app.common.BaseFragment;
 import com.inlearning.app.common.FeedbackActivity;
 import com.inlearning.app.common.bean.Director;
@@ -26,7 +29,8 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
     private TextView mInfoView;
     private RelativeLayout mInfoLayoutView;
     private RelativeLayout mFeedbackView;
-
+    private RelativeLayout mAboutAppView;
+    private RelativeLayout mLoginOutView;
 
     @Nullable
     @Override
@@ -57,6 +61,10 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
         mInfoLayoutView.setOnClickListener(this);
         mFeedbackView = view.findViewById(R.id.view_feed_back);
         mFeedbackView.setOnClickListener(this);
+        mAboutAppView = view.findViewById(R.id.view_about_app);
+        mAboutAppView.setOnClickListener(this);
+        mLoginOutView = view.findViewById(R.id.view_login_out);
+        mLoginOutView.setOnClickListener(this);
     }
 
     @Override
@@ -68,6 +76,34 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
             case R.id.view_feed_back:
                 FeedbackActivity.startFeedbackActivity(getContext());
                 break;
+            case R.id.view_about_app:
+                AboutAppActivity.startAboutActivity(getContext());
+                break;
+            case R.id.view_login_out:
+                showLoginOutDialog();
+                break;
         }
+    }
+
+    private void showLoginOutDialog() {
+        final Dialog dialog = new Dialog(getContext(), R.style.SimpleDialog);//SimpleDialog
+        dialog.setContentView(R.layout.dialog_login_out);
+        TextView cancelView = dialog.findViewById(R.id.tv_cancel);
+        TextView confirmView = dialog.findViewById(R.id.tv_confirm);
+        cancelView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        confirmView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                LoginActivity.startLoginActivity(getContext());
+                getActivity().finish();
+            }
+        });
+        dialog.show();
     }
 }

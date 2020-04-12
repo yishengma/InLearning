@@ -27,7 +27,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".common.FeedbackActivity"></activity>
+        <activity android:name=".common.AboutAppActivity"></activity>
+        <activity android:name=".common.FeedbackActivity" />
         <activity android:name=".teacher.person.PersonActivity" />
         <activity android:name=".student.person.MineDiscussActivity" />
         <activity android:name=".student.course.func.discuss.DiscussDetailActivity" />

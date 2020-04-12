@@ -1,6 +1,8 @@
 package com.inlearning.app;
 
 import android.Manifest;
+import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -38,6 +40,11 @@ public class LoginActivity extends AppCompatActivity {
     private RadioButton mStudentView;
     private RadioButton mTeacherView;
     private RadioButton mDirectorView;
+
+    public static void startLoginActivity(Context context) {
+        Intent intent = new Intent(context, LoginActivity.class);
+        context.startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

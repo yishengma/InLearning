@@ -122,6 +122,7 @@
         android:background="@color/app_global_item_divide" />
 
     <RelativeLayout
+        android:id="@+id/view_about_app"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@drawable/bg_item_click"
@@ -153,6 +154,7 @@
 
 
     <RelativeLayout
+        android:id="@+id/view_login_out"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@drawable/bg_item_click"

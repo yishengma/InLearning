@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/fl_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize">
+
+        <ImageView
+            android:id="@+id/imv_edit_back"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="24dp"
+            android:src="@drawable/toolbar_back" />
+
+        <TextView
+            android:id="@+id/tv_edit_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="关于在学"
+            android:textColor="@color/textBlack"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_edit_manager"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginRight="24dp"
+            android:text="管理"
+            android:textColor="@color/textBlack"
+            android:textSize="16sp"
+            android:visibility="gone" />
+    </FrameLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/split_line" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/debug_settingview"
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/app_icon_view"
+                android:layout_width="95dp"
+                android:layout_height="95dp"
+                android:layout_gravity="center_horizontal"
+                android:scaleType="center"
+                android:src="@drawable/viewpage_guide_3" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:text="@string/app_name"
+                android:textColor="@color/textBlack"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/app_version_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:text="V 1.0.0"
+                android:textColor="@color/textBlack"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="18dp"
+            android:layout_marginBottom="15dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;在学是帮助学校快速开课的录播教学工具。老师可以一键导入学生，老师信息，录入教学信息，安排学生上课。老师可以通过录播视频，上传资料，布置作业，课后讨论等一系列工具，与学生保持流畅丰富的互动。"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;在学是一款在线教育平台，聚合了传统的上课模式和教师的课程资源。在学利用音视频能力，提供流畅、高音质的课程录播效果，改善了中国教育资源分布和发展不均的现状，依托互联网，打破地域的限制，让每个立志学习，有梦想的人，都能接受优秀教师的指导和教学；同时希望给优秀教师一个展示的平台。"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;在学，梦想从不停止！"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>
