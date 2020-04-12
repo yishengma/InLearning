@@ -6,11 +6,11 @@
     android:orientation="vertical">
 
     <RelativeLayout
-        android:background="@drawable/bg_item_click"
-        android:clickable="true"
         android:id="@+id/view_person_info"
         android:layout_width="match_parent"
-        android:layout_height="150dp">
+        android:layout_height="150dp"
+        android:background="@drawable/bg_item_click"
+        android:clickable="true">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/cv_profile_photo"
@@ -59,8 +59,8 @@
 
     <RelativeLayout
         android:id="@+id/rl_speciality_manager"
-        android:layout_height="50dp"
         android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:background="@drawable/bg_item_click"
         android:clickable="true"
         android:orientation="horizontal">
@@ -114,35 +114,11 @@
             android:layout_marginRight="24dp"
             android:src="@drawable/imv_mine_arrow_left" />
     </RelativeLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="16dp"
-        android:layout_marginLeft="24dp"
         android:background="#F5F5F5" />
-    <RelativeLayout
-        android:layout_height="50dp"
-        android:layout_width="match_parent"
-        android:background="@drawable/bg_item_click"
-        android:clickable="true"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="24dp"
-            android:text="清除缓存"
-            android:textColor="@color/textBlack"
-            android:textSize="16sp" />
-
-        <ImageView
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="24dp"
-            android:src="@drawable/imv_mine_arrow_left" />
-    </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
@@ -153,8 +129,8 @@
 
     <RelativeLayout
         android:id="@+id/view_feed_back"
-        android:layout_height="50dp"
         android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:background="@drawable/bg_item_click"
         android:clickable="true"
         android:orientation="horizontal">
@@ -176,6 +152,7 @@
             android:layout_marginRight="24dp"
             android:src="@drawable/imv_mine_arrow_left" />
     </RelativeLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
@@ -183,9 +160,9 @@
         android:background="@color/app_global_item_divide" />
 
     <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@drawable/bg_item_click"
-        android:layout_width="match_parent"
         android:clickable="true"
         android:orientation="horizontal">
 
