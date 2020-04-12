@@ -30,6 +30,7 @@ public class TeacherFragment extends BaseFragment implements View.OnClickListene
     private List<Teacher> mTeacherList;
     private TeacherInfoAdapter mTeacherInfoAdapter;
     private PopupWindow mPopupWindow;
+    private TextView mEmptyView;
 
     @Nullable
     @Override
@@ -58,7 +59,7 @@ public class TeacherFragment extends BaseFragment implements View.OnClickListene
                 showPopWindow(view, x, y, tea);
             }
         });
-
+        mEmptyView = view.findViewById(R.id.tv_empty);
     }
 
     @Override
@@ -100,6 +101,11 @@ public class TeacherFragment extends BaseFragment implements View.OnClickListene
                 mTeacherList.addAll(teachers);
                 mTeacherInfoAdapter.notifyDataSetChanged();
                 DirectorAppRuntime.setTeachers(teachers);
+                if (mTeacherList.isEmpty()) {
+                    mEmptyView.setVisibility(View.VISIBLE);
+                }else {
+                    mEmptyView.setVisibility(View.GONE);
+                }
             }
         });
     }
@@ -200,6 +206,11 @@ public class TeacherFragment extends BaseFragment implements View.OnClickListene
                         iterator.remove();
                         break;
                     }
+                }
+                if (mTeacherList.isEmpty()) {
+                    mEmptyView.setVisibility(View.VISIBLE);
+                }else {
+                    mEmptyView.setVisibility(View.GONE);
                 }
                 mTeacherInfoAdapter.notifyDataSetChanged();
             }
