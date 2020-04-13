@@ -68,7 +68,7 @@ public class DirectorHomeActivity extends AppCompatActivity implements View.OnCl
     @Override
     protected void onResume() {
         super.onResume();
-        mBarTitle.setText(DirectorAppRuntime.getsDirector().mName);
+//        mBarTitle.setText(DirectorAppRuntime.getsDirector().mName);
     }
 
     private void initView() {

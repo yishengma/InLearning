@@ -53,11 +53,11 @@ public class StudentSingleImportActivity extends BaseSingleImportActivity implem
         mNameEditView.setHint("学生姓名");
         mNumberEditView = new EditItemView(this);
         mNumberEditView.setHint("学号");
+        mNumberEditView.setInputType(InputType.TYPE_CLASS_NUMBER);
         mSexEditView = new EditItemView(this);
         mSexEditView.setHint("性别");
         mNameEditView.setTextWatcher(this);
         mNumberEditView.setTextWatcher(this);
-        mNumberEditView.setInputType(InputType.TYPE_CLASS_NUMBER);
         mSexEditView.setTextWatcher(this);
         mRootView.addView(mNumberEditView);
         mRootView.addView(mNameEditView);

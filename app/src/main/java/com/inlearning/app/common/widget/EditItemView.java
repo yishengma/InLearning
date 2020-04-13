@@ -65,4 +65,8 @@ public class EditItemView extends LinearLayout {
     public void setTextWatcher(TextWatcher textWatcher) {
         mTextInputEditText.addTextChangedListener(textWatcher);
     }
+
+    public void setEnableEdit(boolean enableEdit) {
+        mTextInputEditText.setEnabled(enableEdit);
+    }
 }

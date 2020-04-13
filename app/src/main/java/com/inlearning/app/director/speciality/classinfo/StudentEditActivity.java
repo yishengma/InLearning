@@ -6,6 +6,9 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -22,7 +25,7 @@ import com.inlearning.app.common.widget.EditItemView;
 
 import static android.view.Gravity.CENTER;
 
-public class StudentEditActivity extends AppCompatActivity {
+public class StudentEditActivity extends AppCompatActivity implements TextWatcher {
     public static void startActivity(Context context, Student student) {
         Intent intent = new Intent(context, StudentEditActivity.class);
         intent.putExtra("student", student);
@@ -65,6 +68,7 @@ public class StudentEditActivity extends AppCompatActivity {
         mNumberEditView = new EditItemView(this);
         mNumberEditView.setHint("学号");
         mNumberEditView.setText(mStudent.getAccount());
+        mNumberEditView.setEnableEdit(false);
         mSexEditView = new EditItemView(this);
         mSexEditView.setHint("性别");
         mSexEditView.setText(mStudent.getSex());
@@ -81,6 +85,8 @@ public class StudentEditActivity extends AppCompatActivity {
         mRootView.addView(mNumberEditView);
         mRootView.addView(mNameEditView);
         mRootView.addView(mSexEditView);
+        mNameEditView.setTextWatcher(this);
+        mSexEditView.setTextWatcher(this);
     }
 
     private void initSaveButton() {
@@ -116,6 +122,35 @@ public class StudentEditActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+        changeSaveViewStatus();
+    }
+
+    private void changeSaveViewStatus() {
+        if (!TextUtils.isEmpty(mSexEditView.getContent())
+                && !TextUtils.isEmpty(mNumberEditView.getContent())
+                && !TextUtils.isEmpty(mNameEditView.getContent())) {
+            mSaveView.setTextColor(Color.WHITE);
+            mSaveView.setBackgroundResource(R.drawable.bg_edit_blue_shape);
+            mSaveView.setEnabled(true);
+        } else {
+            mSaveView.setBackgroundResource(R.drawable.bg_edit_gray_shape);
+            mSaveView.setEnabled(false);
+            mSaveView.setTextColor(Color.parseColor("#61000000"));
+        }
     }
 
     private void showToast(final String msg) {

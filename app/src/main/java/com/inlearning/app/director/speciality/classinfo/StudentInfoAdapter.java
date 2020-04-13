@@ -1,7 +1,9 @@
 package com.inlearning.app.director.speciality.classinfo;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -10,6 +12,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.inlearning.app.R;
 import com.inlearning.app.common.bean.Student;
 
@@ -21,6 +24,7 @@ public class StudentInfoAdapter extends RecyclerView.Adapter<StudentInfoAdapter.
 
     private List<Student> mStudentList;
     private boolean mIsImport;
+    private Context mContext;
 
     public StudentInfoAdapter(List<Student> studentList) {
         mStudentList = studentList;
@@ -40,6 +44,7 @@ public class StudentInfoAdapter extends RecyclerView.Adapter<StudentInfoAdapter.
 
     private float mX;
     private float mY;
+
     public interface ClickListener {
         void onClick(Student student);
 
@@ -50,6 +55,7 @@ public class StudentInfoAdapter extends RecyclerView.Adapter<StudentInfoAdapter.
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        mContext = viewGroup.getContext();
         return new ViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_director_student_info, viewGroup, false));
     }
 
@@ -91,6 +97,11 @@ public class StudentInfoAdapter extends RecyclerView.Adapter<StudentInfoAdapter.
                 return false;
             }
         });
+        if (!TextUtils.isEmpty(student.getProfilePhotoUrl())) {
+            Glide.with(viewHolder.itemView.getContext()).load(student.getProfilePhotoUrl()).into(viewHolder.mImageView);
+        } else {
+            viewHolder.mImageView.setBackgroundDrawable(mContext.getDrawable(R.drawable.viewpage_guide_3));
+        }
     }
 
     @Override

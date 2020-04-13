@@ -36,6 +36,15 @@ public class ClassInfoModel {
             public void done(List<Student> list, BmobException e) {
                 Log.e("done", "" + e);
                 if (e == null && list != null) {
+                    ClassInfo bmobClassInfo = new ClassInfo();
+                    bmobClassInfo.setObjectId(classInfo.getObjectId());
+                    bmobClassInfo.setCount(list.size());
+                    bmobClassInfo.update(new UpdateListener() {
+                        @Override
+                        public void done(BmobException e) {
+
+                        }
+                    });
                     callback.onResult(true, list);
                 }
             }
