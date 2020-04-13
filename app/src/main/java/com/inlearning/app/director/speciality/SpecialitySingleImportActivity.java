@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +20,7 @@ import com.inlearning.app.common.bean.Speciality;
 import com.inlearning.app.common.util.LoadingDialogUtil;
 import com.inlearning.app.common.util.PixeUtil;
 import com.inlearning.app.common.util.ThreadMgr;
+import com.inlearning.app.common.util.ToastUtil;
 import com.inlearning.app.common.widget.EditItemView;
 import com.inlearning.app.director.BaseSingleImportActivity;
 
@@ -50,7 +52,7 @@ public class SpecialitySingleImportActivity extends BaseSingleImportActivity imp
         mShortEditView.setHint("专业简称（2-3个字符）");
         mCountEditView = new EditItemView(this);
         mCountEditView.setHint("班级数目");
-        mCountEditView.setInputType(InputType.TYPE_CLASS_NUMBER);
+        mCountEditView.setInputType(EditorInfo.TYPE_CLASS_NUMBER);
         mCountEditView.setTextWatcher(this);
         mShortEditView.setTextWatcher(this);
         mNameEditView.setTextWatcher(this);
@@ -116,6 +118,22 @@ public class SpecialitySingleImportActivity extends BaseSingleImportActivity imp
     }
 
     private void addSpeciality() {
+        if (TextUtils.isEmpty(mNameEditView.getContent())) {
+            ToastUtil.showToast("输入专业名称", Toast.LENGTH_SHORT);
+            return;
+        }
+        if (TextUtils.isEmpty(mShortEditView.getContent())) {
+            ToastUtil.showToast("输入专业简称", Toast.LENGTH_SHORT);
+            return;
+        }
+        if (TextUtils.isEmpty(mCountEditView.getContent())) {
+            ToastUtil.showToast("输入合法的数目", Toast.LENGTH_SHORT);
+            return;
+        }
+        if (Integer.valueOf(mCountEditView.getContent()) <= 0) {
+            ToastUtil.showToast("输入合法的数目", Toast.LENGTH_SHORT);
+            return;
+        }
         Speciality speciality = new Speciality();
         speciality.setName(mNameEditView.getContent())
                 .setShortName(mShortEditView.getContent())

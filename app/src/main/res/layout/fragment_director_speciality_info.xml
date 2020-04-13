@@ -7,6 +7,8 @@
     <TextView
         android:id="@+id/tv_empty"
         android:text="暂无班级信息"
+        android:gravity="center"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
     <android.support.v7.widget.RecyclerView

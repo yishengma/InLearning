@@ -8,8 +8,10 @@ import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +21,7 @@ import com.inlearning.app.common.bean.Speciality;
 import com.inlearning.app.common.util.LoadingDialogUtil;
 import com.inlearning.app.common.util.PixeUtil;
 import com.inlearning.app.common.util.ThreadMgr;
+import com.inlearning.app.common.util.ToastUtil;
 import com.inlearning.app.common.widget.EditItemView;
 import com.inlearning.app.director.BaseSingleImportActivity;
 import com.inlearning.app.director.DirectorAppRuntime;
@@ -49,7 +52,7 @@ public class SpecialityAddClassActivity extends BaseSingleImportActivity impleme
         mSpecialityView.setHint("专业名称");
         mCountEditView = new EditItemView(this);
         mCountEditView.setHint("班级数目");
-        mCountEditView.setInputType(InputType.TYPE_CLASS_NUMBER);
+        mCountEditView.setInputType(EditorInfo.TYPE_CLASS_NUMBER);
         mCountEditView.setTextWatcher(this);
         mSpecialityView.setTextWatcher(this);
         mRootView.addView(mSpecialityView);
@@ -114,17 +117,28 @@ public class SpecialityAddClassActivity extends BaseSingleImportActivity impleme
 
     private void addSpeciality() {
         Speciality speciality = null;
+        Log.e("ethan",DirectorAppRuntime.getSpecialities().size()+"");
         for (Speciality s : DirectorAppRuntime.getSpecialities()) {
             if (s.getName().equals(mSpecialityView.getContent())) {
+                Log.e("ethan",s.getName());
                 speciality = s;
                 break;
             }
         }
         if (speciality == null) {
+            ToastUtil.showToast("该专业不存在，请先新增专业", Toast.LENGTH_SHORT);
+            return;
+        }
+        if (TextUtils.isEmpty(mCountEditView.getContent())) {
+            ToastUtil.showToast("输入合法的数目", Toast.LENGTH_SHORT);
             return;
         }
         int count = Integer.valueOf(mCountEditView.getContent());
-        LoadingDialogUtil.showLoadingDialog(SpecialityAddClassActivity.this,"正在添加..");
+        if (count <= 0) {
+            ToastUtil.showToast("输入合法的数目", Toast.LENGTH_SHORT);
+            return;
+        }
+        LoadingDialogUtil.showLoadingDialog(SpecialityAddClassActivity.this, "正在添加..");
         SpecialityModel.addClasses(speciality, count, new SpecialityModel.Callback<Speciality>() {
             @Override
             public void onResult(boolean suc, Speciality speciality) {

@@ -53,4 +53,12 @@ public class SpecialityPresenter {
             mTabLayout.getTabAt(i).setText(mSpecialities.get(i).getShortName());
         }
     }
+
+    public void reset() {
+        mSpecialityFragmentList.clear();
+        mFragmentAdapter.notifyDataSetChanged();
+        mSpecialities.clear();
+        mTabList.clear();
+        mTabLayout.removeAllTabs();
+    }
 }

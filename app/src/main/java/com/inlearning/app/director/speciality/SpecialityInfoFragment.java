@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,9 +32,7 @@ public class SpecialityInfoFragment extends BaseFragment {
     private RecyclerView mRvSpecialityClass;
     private List<ClassInfo> mClassList = new ArrayList<>();
     private SpecialityInfoAdapter mSpecialityInfoAdapter;
-    private Speciality mSpeciality;
-    private List<Speciality> mSpecialities = new ArrayList<>();
-
+    private TextView mEmptyView;
 
     @Nullable
     @Override
@@ -45,13 +44,13 @@ public class SpecialityInfoFragment extends BaseFragment {
 
     private void initView(View view) {
         mRvSpecialityClass = view.findViewById(R.id.rv_content);
-        mRvSpecialityClass.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
+        mRvSpecialityClass.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         mSpecialityInfoAdapter = new SpecialityInfoAdapter(mClassList);
         mRvSpecialityClass.setAdapter(mSpecialityInfoAdapter);
         mSpecialityInfoAdapter.setClickListener(new SpecialityInfoAdapter.ClickListener() {
             @Override
             public void onClick(ClassInfo classInfo) {
-                ClassInfoActivity.startActivity(getContext(),classInfo);
+                ClassInfoActivity.startActivity(getContext(), classInfo);
             }
 
             @Override
@@ -59,25 +58,30 @@ public class SpecialityInfoFragment extends BaseFragment {
                 showPopWindow(view, x, y, classInfo);
             }
         });
+        mEmptyView = view.findViewById(R.id.tv_empty);
     }
 
     public SpecialityInfoFragment setSpeciality(Speciality speciality) {
-        mSpeciality = speciality;
         mClassList.clear();
         for (ClassInfo classInfo : speciality.getClassInfoList()) {
             mClassList.add(classInfo.setType(ClassInfo.ITEM_CLASS_INFO).setSpeciality(speciality));
         }
+        Log.e("ethan", speciality.getClassInfoList().size() + " class ");
         if (mSpecialityInfoAdapter != null) {
             mSpecialityInfoAdapter.notifyDataSetChanged();
         }
+        if (mEmptyView == null) {
+            return this;
+        }
+        mEmptyView.setVisibility(mClassList.isEmpty() ? View.VISIBLE : View.GONE);
         return this;
     }
 
     private PopupWindow mPopupWindow;
 
-    private void showPopWindow(final View view, float x, float y,final ClassInfo classInfo) {
+    private void showPopWindow(final View view, float x, float y, final ClassInfo classInfo) {
         //获取PopWindow宽和高
-        mPopupWindow = new PopupWindow(getLayoutInflater().inflate(R.layout.view_menu_window, null),  300,  100, true);
+        mPopupWindow = new PopupWindow(getLayoutInflater().inflate(R.layout.view_menu_window, null), 300, 100, true);
         mPopupWindow.setOutsideTouchable(true);//设置外部可点击取消
         mPopupWindow.setElevation(5);//设置阴影
         view.setBackgroundColor(getResources().getColor(R.color.app_global_simple_gray));
@@ -174,6 +178,7 @@ public class SpecialityInfoFragment extends BaseFragment {
                     }
                 }
                 mSpecialityInfoAdapter.notifyDataSetChanged();
+                mEmptyView.setVisibility(mClassList.isEmpty() ? View.VISIBLE : View.GONE);
             }
         });
     }

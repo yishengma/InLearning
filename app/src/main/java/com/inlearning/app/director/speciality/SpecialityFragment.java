@@ -29,8 +29,13 @@ public class SpecialityFragment extends BaseFragment implements View.OnClickList
         mParentView = inflater.inflate(R.layout.fragment_director_speciality, container, false);
         initView(mParentView);
         initPresenter();
-        initData();
         return mParentView;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        initData();
     }
 
     private void initView(View view) {
@@ -69,6 +74,7 @@ public class SpecialityFragment extends BaseFragment implements View.OnClickList
         ThreadMgr.getInstance().postToUIThread(new Runnable() {
             @Override
             public void run() {
+                mSpecialityPresenter.reset();
                 for (Speciality s : specialities) {
                     addSpeciality(true, s);
                 }

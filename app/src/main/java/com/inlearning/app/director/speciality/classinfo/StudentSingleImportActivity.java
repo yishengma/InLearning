@@ -5,10 +5,12 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +20,7 @@ import com.inlearning.app.common.bean.ClassInfo;
 import com.inlearning.app.common.bean.Student;
 import com.inlearning.app.common.util.PixeUtil;
 import com.inlearning.app.common.util.ThreadMgr;
+import com.inlearning.app.common.util.ToastUtil;
 import com.inlearning.app.common.widget.EditItemView;
 import com.inlearning.app.director.BaseSingleImportActivity;
 
@@ -54,6 +57,7 @@ public class StudentSingleImportActivity extends BaseSingleImportActivity implem
         mSexEditView.setHint("性别");
         mNameEditView.setTextWatcher(this);
         mNumberEditView.setTextWatcher(this);
+        mNumberEditView.setInputType(InputType.TYPE_CLASS_NUMBER);
         mSexEditView.setTextWatcher(this);
         mRootView.addView(mNumberEditView);
         mRootView.addView(mNameEditView);
@@ -129,22 +133,17 @@ public class StudentSingleImportActivity extends BaseSingleImportActivity implem
                 .setClassInfo(classInfo)
                 .setName(mNameEditView.getContent())
                 .setAccount(mNumberEditView.getContent());
-        ClassInfoModel.saveStudent(student, new ClassInfoModel.Callback<Student>() {
+        ClassInfoModel.saveStudent(student, new ClassInfoModel.Callback2<Student>() {
             @Override
-            public void onResult(boolean suc, Student student) {
-                showToast();
+            public void onResult(boolean suc, int ret, Student student) {
+                if (!suc && ret == 401) {
+                    ToastUtil.showToast("该学号已存在", Toast.LENGTH_SHORT);
+                    return;
+                }
+                ToastUtil.showToast("添加成功", Toast.LENGTH_SHORT);
                 finish();
             }
         });
 
-    }
-
-    private void showToast() {
-        ThreadMgr.getInstance().postToUIThread(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(StudentSingleImportActivity.this, "添加成功", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 }

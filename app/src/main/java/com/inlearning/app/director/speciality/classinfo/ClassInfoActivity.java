@@ -31,9 +31,9 @@ public class ClassInfoActivity extends AppCompatActivity implements View.OnClick
     private ClassInfo mClassInfo;
     private List<Student> mStudentList;
     private TextView mClassInfoView;
-    private ClassInfoPresenter mClassInfoPresenter;
     private ImageView mAddView;
     private ImageView mSearchView;
+    private TextView mEmptyView;
 
     public static void startActivity(Context context,ClassInfo classInfo) {
         Intent intent = new Intent(context, ClassInfoActivity.class);
@@ -79,6 +79,8 @@ public class ClassInfoActivity extends AppCompatActivity implements View.OnClick
                 showPopWindow(view, x, y, student);
             }
         });
+        mEmptyView = findViewById(R.id.tv_empty);
+
     }
 
     private void getIntentData() {
@@ -89,7 +91,6 @@ public class ClassInfoActivity extends AppCompatActivity implements View.OnClick
 
     private void initData() {
         getIntentData();
-        mClassInfoPresenter = new ClassInfoPresenter();
         ClassInfoModel.getStudents(mClassInfo, new ClassInfoModel.Callback<List<Student>>() {
             @Override
             public void onResult(boolean suc, List<Student> students) {
@@ -107,6 +108,7 @@ public class ClassInfoActivity extends AppCompatActivity implements View.OnClick
                 mStudentList.clear();
                 mStudentList.addAll(students);
                 mStudentInfoAdapter.notifyDataSetChanged();
+                mEmptyView.setVisibility(mStudentList.isEmpty()?View.VISIBLE:View.GONE);
             }
         });
     }
@@ -233,6 +235,7 @@ public class ClassInfoActivity extends AppCompatActivity implements View.OnClick
                                 }
                             }
                             mStudentInfoAdapter.notifyDataSetChanged();
+                            mEmptyView.setVisibility(mStudentList.isEmpty()?View.VISIBLE:View.GONE);
                         }
                     });
                 }

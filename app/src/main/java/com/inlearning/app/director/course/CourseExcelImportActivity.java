@@ -76,7 +76,7 @@ public class CourseExcelImportActivity extends BaseExcelImportActivity {
 
     @Override
     protected void doOpenFileResult(String path) {
-        List<Map<String, String>> data = FileUtil.readExcel(path, COURSE_INFO);
+        List<Map<String, String>> data = FileUtil.readExcel(path, COURSE_INFO,null);
         List<Course2> course2s = new ArrayList<>();
         for (Map<String, String> map : data) {
             Course2 course = new Course2();

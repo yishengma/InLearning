@@ -41,34 +41,30 @@
             android:layout_width="?actionBarSize"
             android:layout_height="?actionBarSize"
             android:layout_alignParentEnd="true"
+            android:layout_gravity="end|center_vertical"
             android:background="@drawable/bg_title_bar_tool_selector"
             android:clickable="true"
             android:padding="15dp"
-            android:layout_gravity="end|center_vertical"
             android:src="@drawable/imv_add_normal" />
     </RelativeLayout>
 
-    <!--    <FrameLayout-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent">-->
+
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:layout_alignParentBottom="true"
         android:background="@color/app_global_item_divide" />
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_student_info"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
 
-    <!--        <android.support.design.widget.FloatingActionButton-->
-    <!--            android:id="@+id/imv_add"-->
-    <!--            android:layout_width="40dp"-->
-    <!--            android:layout_height="40dp"-->
-    <!--            android:layout_gravity="end|bottom"-->
-    <!--            android:layout_marginRight="30dp"-->
-    <!--            android:layout_marginBottom="30dp"-->
+    <TextView
+        android:id="@+id/tv_empty"
+        android:gravity="center"
+        android:text="暂无学生信息"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
-    <!--            android:src="@drawable/imv_add" />-->
-    <!--    </FrameLayout>-->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_student_info"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 </LinearLayout>

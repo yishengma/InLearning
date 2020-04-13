@@ -53,7 +53,7 @@ public class SpecialityInfoAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         final ClassInfo classInfo = mClassInfoList.get(i);
         if (viewHolder instanceof InfoViewHolder) {
             ((InfoViewHolder) viewHolder).mClassInfo.setText(classInfo.getName());
-            ((InfoViewHolder) viewHolder).mClassCount.setText(String.valueOf(classInfo.getCount()));
+            ((InfoViewHolder) viewHolder).mClassCount.setText(String.format("%s 个学生",classInfo.getCount()));
             viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

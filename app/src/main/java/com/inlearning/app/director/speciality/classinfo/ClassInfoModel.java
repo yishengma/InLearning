@@ -24,13 +24,17 @@ public class ClassInfoModel {
         void onResult(boolean suc, T t);
     }
 
+    public interface Callback2<T> {
+        void onResult(boolean suc, int ret, T t);
+    }
+
     public static void getStudents(ClassInfo classInfo, final Callback<List<Student>> callback) {
         BmobQuery<Student> query = new BmobQuery<>();
         query.addWhereEqualTo("mClassInfo", classInfo);
         query.findObjects(new FindListener<Student>() {
             @Override
             public void done(List<Student> list, BmobException e) {
-                Log.e("done",""+e);
+                Log.e("done", "" + e);
                 if (e == null && list != null) {
                     callback.onResult(true, list);
                 }
@@ -38,13 +42,15 @@ public class ClassInfoModel {
         });
     }
 
-    public static void saveStudent(final Student student, final Callback<Student> callback) {
+    public static void saveStudent(final Student student, final Callback2<Student> callback) {
         student.save(new SaveListener<String>() {
             @Override
             public void done(String s, BmobException e) {
                 if (e == null) {
                     student.setObjectId(s);
-                    callback.onResult(true, student);
+                    callback.onResult(true,0, student);
+                }else {
+                    callback.onResult(false,e.getErrorCode(),null);
                 }
             }
         });
@@ -73,7 +79,7 @@ public class ClassInfoModel {
         new BmobBatch().insertBatch(list).doBatch(new QueryListListener<BatchResult>() {
             @Override
             public void done(List<BatchResult> list, BmobException e) {
-                Log.e("done",""+e);
+                Log.e("done", "" + e);
                 if (e == null) {
                     callback.onResult(true, null);
                 }
