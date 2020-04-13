@@ -61,6 +61,10 @@ dependencies {
 //    implementation files('libs\\poi-3.12-android-a.jar')
     //  implementation files('libs\\poi-ooxml-schemas-3.12-20150511-a.jar')
     implementation files('libs\\poi-3.17.jar')
+    implementation files('libs\\poi-ooxml-3.17')
     implementation files('libs\\poi-ooxml-schemas-3.17.jar')
+    implementation files('libs\\xmlbeans-3.1.0.jar')
+    implementation files('libs\\rt.jar')
+    implementation files('libs\\commons-collections4-4.1.jar')
     implementation files('libs/tbs_sdk_thirdapp_v4.3.0.1148_43697_sharewithdownloadwithfile_withoutGame_obfs_20190805_175505.jar')
 }
