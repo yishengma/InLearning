@@ -4,11 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Toast;
 
 import com.inlearning.app.common.bean.Course2;
 import com.inlearning.app.common.util.FileUtil;
 import com.inlearning.app.common.util.LoadingDialogUtil;
+import com.inlearning.app.common.util.ToastUtil;
 import com.inlearning.app.director.BaseExcelImportActivity;
+
+import org.apache.poi.ss.usermodel.CellType;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -23,8 +27,8 @@ public class CourseExcelImportActivity extends BaseExcelImportActivity {
 
     private List<Course2> mCourseList;
     private CourseInfoAdapter mInfoAdapter;
-    private static final String[] COURSE_INFO = new String[]{"课程名", "姓名", "学时", "学分"};
-
+    private static final String[] COURSE_INFO = new String[]{"课程名", "类型", "学时", "学分"};
+    private static final CellType[] CELL_TYPES = new CellType[]{CellType.STRING, CellType.STRING, CellType.STRING, CellType.STRING};
 
     @Override
     protected String getTitleMsg() {
@@ -54,7 +58,7 @@ public class CourseExcelImportActivity extends BaseExcelImportActivity {
 
     @Override
     protected void upload() {
-        LoadingDialogUtil.showLoadingDialog(this,"正在上传..");
+        LoadingDialogUtil.showLoadingDialog(this, "正在上传..");
         CourseModel.addCourseList(mCourseList, new CourseModel.Callback<List<Course2>>() {
             @Override
             public void onResult(boolean suc, List<Course2> course2s) {
@@ -76,9 +80,16 @@ public class CourseExcelImportActivity extends BaseExcelImportActivity {
 
     @Override
     protected void doOpenFileResult(String path) {
-        List<Map<String, String>> data = FileUtil.readExcel(path, COURSE_INFO,null);
+        List<Map<String, String>> data = FileUtil.readExcel(path, COURSE_INFO, CELL_TYPES);
+        if (data == null) {
+            ToastUtil.showToast("导入失败，请检查文件格式", Toast.LENGTH_SHORT);
+            return;
+        }
         List<Course2> course2s = new ArrayList<>();
         for (Map<String, String> map : data) {
+            if (!"专业课".equals(map.get("类型")) && !"选修课".equals(map.get("类型"))) {
+                continue;
+            }
             Course2 course = new Course2();
             course.setName(map.get("课程名"))
                     .setType(map.get("类型"))

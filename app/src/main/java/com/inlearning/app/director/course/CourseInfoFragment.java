@@ -125,7 +125,7 @@ public class CourseInfoFragment extends BaseFragment{
         TextView titleView = dialog.findViewById(R.id.tv_title);
         titleView.setText("删除");
         TextView infoView = dialog.findViewById(R.id.tv_content);
-        infoView.setText("确定删除该专业信息？删除之后不可恢复！");
+        infoView.setText("确定删除该课程信息？删除之后不可恢复！");
         TextView cancelView = dialog.findViewById(R.id.tv_cancel);
         TextView confirmView = dialog.findViewById(R.id.tv_confirm);
         cancelView.setOnClickListener(new View.OnClickListener() {

@@ -15,7 +15,7 @@ import com.inlearning.app.common.bean.Course2;
 
 import java.util.List;
 
-public class CourseInfoAdapter extends  RecyclerView.Adapter<CourseInfoAdapter.ViewHolder>{
+public class CourseInfoAdapter extends RecyclerView.Adapter<CourseInfoAdapter.ViewHolder> {
     private List<Course2> mCourseList;
     private boolean mIsImport;
 
@@ -46,14 +46,14 @@ public class CourseInfoAdapter extends  RecyclerView.Adapter<CourseInfoAdapter.V
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_director_course_info,viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_director_course_info, viewGroup, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         final Course2 course = mCourseList.get(i);
-        viewHolder.mSelectView.setVisibility(mIsImport?View.VISIBLE:View.GONE);
+        viewHolder.mSelectView.setVisibility(mIsImport ? View.VISIBLE : View.GONE);
         viewHolder.mSelectView.setChecked(course.isSelected());
         viewHolder.mSelectView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -62,9 +62,9 @@ public class CourseInfoAdapter extends  RecyclerView.Adapter<CourseInfoAdapter.V
             }
         });
         viewHolder.mCourseName.setText(course.getName());
-        viewHolder.mCourseTime.setText(course.getTime());
-        viewHolder.mCourseScore.setText(course.getScore());
-        viewHolder.mCourseType.setText(course.getType());
+        viewHolder.mCourseTime.setText(String.format("学时:%s 课时", course.getTime()));
+        viewHolder.mCourseScore.setText(String.format("学分:%s", course.getScore()));
+        viewHolder.mCourseType.setText(String.format("类型:%s", course.getType()));
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -104,6 +104,7 @@ public class CourseInfoAdapter extends  RecyclerView.Adapter<CourseInfoAdapter.V
         private TextView mCourseType;
         private TextView mCourseScore;
         private CheckBox mSelectView;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             mCourseName = itemView.findViewById(R.id.tv_course_name);

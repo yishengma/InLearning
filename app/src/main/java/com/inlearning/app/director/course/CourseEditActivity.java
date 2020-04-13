@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -19,6 +20,7 @@ import com.inlearning.app.common.util.LoadingDialogUtil;
 import com.inlearning.app.common.util.PixeUtil;
 import com.inlearning.app.common.util.StatusBar;
 import com.inlearning.app.common.util.ThreadMgr;
+import com.inlearning.app.common.util.ToastUtil;
 import com.inlearning.app.common.widget.EditItemView;
 
 import static android.view.Gravity.CENTER;
@@ -61,15 +63,18 @@ public class CourseEditActivity extends AppCompatActivity {
         mNameEditView = new EditItemView(this);
         mNameEditView.setHint("课程名");
         mNameEditView.setText(mCourse.getName());
+        mNameEditView.setEnableEdit(false);
         mTypeEditView = new EditItemView(this);
         mTypeEditView.setHint("课程类型");
         mTypeEditView.setText(mCourse.getType());
         mDurationEditView = new EditItemView(this);
         mDurationEditView.setHint("学时");
         mDurationEditView.setText(mCourse.getTime());
+        mDurationEditView.setInputType(InputType.TYPE_CLASS_NUMBER);
         mScoreEditView = new EditItemView(this);
         mScoreEditView.setHint("学分");
         mScoreEditView.setText(mCourse.getScore());
+        mScoreEditView.setInputType(InputType.TYPE_CLASS_NUMBER);
         mRootView = findViewById(R.id.root_view);
         mBackView = findViewById(R.id.imv_edit_back);
         mTitleView = findViewById(R.id.tv_edit_title);
@@ -103,11 +108,15 @@ public class CourseEditActivity extends AppCompatActivity {
         mSaveView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (!mTypeEditView.getContent().equals("选修课") && !mTypeEditView.getContent().equals("专业课")) {
+                    ToastUtil.showToast("请检查课程类型", Toast.LENGTH_SHORT);
+                    return;
+                }
                 mCourse.setName(mNameEditView.getContent())
                         .setType(mTypeEditView.getContent())
                         .setTime(mDurationEditView.getContent())
                         .setScore(mScoreEditView.getContent());
-                LoadingDialogUtil.showLoadingDialog(CourseEditActivity.this,"正在更新..");
+                LoadingDialogUtil.showLoadingDialog(CourseEditActivity.this, "正在更新..");
                 CourseModel.updateCourse(mCourse, new CourseModel.Callback<Course2>() {
                     @Override
                     public void onResult(boolean suc, Course2 course2) {

@@ -56,10 +56,10 @@
                 android:id="@+id/tv_course_type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_course_name"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
-                android:layout_toRightOf="@+id/tv_course_time"
+                android:layout_below="@+id/tv_course_time"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_toRightOf="@+id/tv_course_score"
                 android:text="专业课"
                 android:textSize="14sp" />
 
@@ -67,7 +67,7 @@
                 android:id="@+id/tv_course_score"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_course_type"
+                android:layout_below="@+id/tv_course_time"
                 android:layout_marginTop="15dp"
                 android:text="1019月第二学期"
                 android:textSize="14sp" />

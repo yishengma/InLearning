@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
@@ -18,8 +19,10 @@ import com.inlearning.app.common.bean.Course2;
 import com.inlearning.app.common.util.LoadingDialogUtil;
 import com.inlearning.app.common.util.PixeUtil;
 import com.inlearning.app.common.util.ThreadMgr;
+import com.inlearning.app.common.util.ToastUtil;
 import com.inlearning.app.common.widget.EditItemView;
 import com.inlearning.app.director.BaseSingleImportActivity;
+import com.inlearning.app.director.DirectorAppRuntime;
 
 import static android.view.Gravity.CENTER;
 
@@ -49,13 +52,15 @@ public class CourseSingleImportActivity2 extends BaseSingleImportActivity implem
         mNameEditView.setHint("课程名");
         mTypeEditView = new EditItemView(this);
         mTypeEditView.setTextWatcher(this);
-        mTypeEditView.setHint("类型");
+        mTypeEditView.setHint("类型（专业课或选修课）");
         mDurationEditView = new EditItemView(this);
-        mDurationEditView.setTextWatcher(this);
         mDurationEditView.setHint("学时");
+        mDurationEditView.setInputType(InputType.TYPE_CLASS_NUMBER);
+        mDurationEditView.setTextWatcher(this);
         mScoreEditView = new EditItemView(this);
-        mScoreEditView.setTextWatcher(this);
         mScoreEditView.setHint("学分");
+        mScoreEditView.setInputType(InputType.TYPE_CLASS_NUMBER);
+        mScoreEditView.setTextWatcher(this);
         mRootView.addView(mNameEditView);
         mRootView.addView(mTypeEditView);
         mRootView.addView(mDurationEditView);
@@ -112,7 +117,7 @@ public class CourseSingleImportActivity2 extends BaseSingleImportActivity implem
             mSaveView.setTextColor(Color.WHITE);
             mSaveView.setBackgroundResource(R.drawable.bg_edit_blue_shape);
             mSaveView.setEnabled(true);
-        } else{
+        } else {
             mSaveView.setBackgroundResource(R.drawable.bg_edit_gray_shape);
             mSaveView.setEnabled(false);
             mSaveView.setTextColor(Color.parseColor("#61000000"));
@@ -121,11 +126,22 @@ public class CourseSingleImportActivity2 extends BaseSingleImportActivity implem
 
     private void addCourse() {
         Course2 course = new Course2();
+        String name = mNameEditView.getContent();
+        for (Course2 c : DirectorAppRuntime.getCourse2s()) {
+            if (c != null && c.getName().equals(name)) {
+                ToastUtil.showToast("该课程已存在", Toast.LENGTH_SHORT);
+                return;
+            }
+        }
+        if (!mTypeEditView.getContent().equals("选修课") && !mTypeEditView.getContent().equals("专业课")) {
+            ToastUtil.showToast("请检查课程类型", Toast.LENGTH_SHORT);
+            return;
+        }
         course.setName(mNameEditView.getContent())
                 .setType(mTypeEditView.getContent())
                 .setTime(mDurationEditView.getContent())
                 .setScore(mScoreEditView.getContent());
-        LoadingDialogUtil.showLoadingDialog(CourseSingleImportActivity2.this,"正在保存..");
+        LoadingDialogUtil.showLoadingDialog(CourseSingleImportActivity2.this, "正在保存..");
         CourseModel.saveCourseInfo(course, new CourseModel.Callback<Course2>() {
             @Override
             public void onResult(boolean suc, Course2 speciality) {
