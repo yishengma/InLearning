@@ -31,6 +31,7 @@ public class ClassInfoModel {
     public static void getStudents(ClassInfo classInfo, final Callback<List<Student>> callback) {
         BmobQuery<Student> query = new BmobQuery<>();
         query.addWhereEqualTo("mClassInfo", classInfo);
+        query.order("mAccount");
         query.findObjects(new FindListener<Student>() {
             @Override
             public void done(List<Student> list, BmobException e) {
