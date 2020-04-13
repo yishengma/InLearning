@@ -9,22 +9,35 @@ import android.os.Build;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFDataFormat;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFCellStyle;
+import org.apache.poi.xssf.usermodel.XSSFDataFormat;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.Closeable;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -45,7 +58,7 @@ public class FileUtil {
         return util;
     }
 
-    public static List<Map<String, String>> readExcel(String path,String columns[]) {
+    public static List<Map<String, String>> readExcel(String path, String columns[], CellType[] cellTypes) {
         File file = new File(path);
         String filePath = file.getAbsolutePath();
         Sheet sheet = null;
@@ -63,8 +76,8 @@ public class FileUtil {
             is = new FileInputStream(filePath);
             if (".xls".equals(extString)) {
                 wb = new HSSFWorkbook(is);
-//            } else if (".xlsx".equals(extString)) {
-//                wb = new XSSFWorkbook(is);
+            } else if (".xlsx".equals(extString)) {
+                wb = new XSSFWorkbook(is);
             } else {
 
                 wb = null;
@@ -81,20 +94,18 @@ public class FileUtil {
                 row = sheet.getRow(0);
                 // 获取最大列数
                 int colnum = row.getPhysicalNumberOfCells();
-                Log.e("ethan","rownum"+ rownum+"colnum"+colnum);
                 for (int i = 1; i < rownum; i++) {
                     Map<String, String> map = new LinkedHashMap<String, String>();
                     row = sheet.getRow(i);
                     if (row != null) {
                         for (int j = 0; j < colnum; j++) {
                             if (columns[j].equals(getCellFormatValue(rowHeader.getCell(j)))) {
-                                cellData = (String) getCellFormatValue(row
-                                        .getCell(j));
+                                Cell cell = row.getCell(j);
+                                cell.setCellType(cellTypes[j]);
+                                cellData = (String) getCellFormatValue(cell);
                                 map.put(columns[j], cellData);
                                 /*DecimalFormat df = new DecimalFormat("#");
                                 System.out.println(    df.format(cellData));*/
-                                Log.e("yy", "cellData=" + cellData);
-                                Log.e("yy", "map=" + map);
                             }
                         }
                     } else {
@@ -104,9 +115,9 @@ public class FileUtil {
                 }
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            return null;
         } catch (IOException e) {
-            e.printStackTrace();
+            return null;
         }
         return list;
     }
@@ -123,7 +134,9 @@ public class FileUtil {
             // 判断cell类型
             switch (cell.getCellType()) {
                 case Cell.CELL_TYPE_NUMERIC: {
-                    cellValue = String.valueOf(cell.getNumericCellValue());
+                    DecimalFormat df = new DecimalFormat("0");
+                    cellValue = df.format(cell.getNumericCellValue());
+                    Log.e("ethan", "number" + cellValue);
                     break;
                 }
                 case Cell.CELL_TYPE_FORMULA: {
@@ -135,12 +148,15 @@ public class FileUtil {
                         // 数字
                         cellValue = String.valueOf(cell.getNumericCellValue());
                     }
+                    Log.e("ethan", "date" + cellValue);
                     break;
                 }
                 case Cell.CELL_TYPE_STRING: {
                     cellValue = cell.getRichStringCellValue().getString();
+                    Log.e("ethan", "string" + cellValue);
                     break;
                 }
+
                 default:
                     cellValue = "";
             }
@@ -150,7 +166,7 @@ public class FileUtil {
         return cellValue;
     }
 
-    public static String getChooseFileResultPath(Context context,Uri uri) {
+    public static String getChooseFileResultPath(Context context, Uri uri) {
         String chooseFilePath = null;
         if ("file".equalsIgnoreCase(uri.getScheme())) {//使用第三方应用打开
             chooseFilePath = uri.getPath();
@@ -158,14 +174,14 @@ public class FileUtil {
             return chooseFilePath;
         }
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {//4.4以后
-            chooseFilePath = getPath(context, uri);
+            chooseFilePath = saveFile2CachePath(context, uri);
         } else {//4.4以下下系统调用方法
-            chooseFilePath = getRealPathFromURI(context,uri);
+            chooseFilePath = getRealPathFromURI(context, uri);
         }
         return chooseFilePath;
     }
 
-    private static String getRealPathFromURI(Context context,Uri contentUri) {
+    private static String getRealPathFromURI(Context context, Uri contentUri) {
         String res = null;
         String[] proj = {MediaStore.Images.Media.DATA};
         Cursor cursor = context.getContentResolver().query(contentUri, proj, null, null, null);
@@ -286,4 +302,96 @@ public class FileUtil {
         return "com.android.providers.media.documents".equals(uri.getAuthority());
     }
 
+    public static String getValidExternalDirectoryPath() {
+        //        Context context = AppRunTime.getInstance().getApplication().getApplicationContext();
+        //        String path = context.getExternalFilesDir(getAppDirectoryName()).getAbsolutePath();
+        String path = getExternalDirectoryPath() + "/Android/data/com.inlearning.app/files/inlearning";
+        File file = new File(path);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+        return path;
+    }
+
+    public static String getExternalDirectoryPath() {
+        return Environment.getExternalStorageDirectory().getPath();
+    }
+
+    public static String saveFile2CachePath(Context context, Uri contentUri) {
+        String fileName = getFileName(contentUri);
+        if (TextUtils.isEmpty(fileName)) {
+            return null;
+        }
+        File copyFile = new File(getValidExternalDirectoryPath() + File.separator + fileName);
+        if (copyFile(context, contentUri, copyFile)) {
+            return copyFile.getAbsolutePath();
+        }
+        return null;
+    }
+
+    private static String getFileName(Uri uri) {
+        String fileName = "";
+        if (uri == null) {
+            return fileName;
+        }
+        String path = uri.getPath();
+        if (path == null) {
+            return fileName;
+        }
+        int cut = path.lastIndexOf('/');
+        if (cut != -1) {
+            fileName = path.substring(cut + 1);
+        }
+        return fileName;
+    }
+
+    private static boolean copyFile(Context context, Uri srcUri, File dstFile) {
+        InputStream inputStream = null;
+        OutputStream outputStream = null;
+        boolean result;
+        try {
+            inputStream = context.getContentResolver().openInputStream(srcUri);
+            if (inputStream == null) {
+                return false;
+            }
+            outputStream = new FileOutputStream(dstFile);
+            result = copyStream(inputStream, outputStream);
+        } catch (Exception e) {
+            result = false;
+        } finally {
+            close(inputStream);
+            close(outputStream);
+        }
+        return result;
+    }
+
+    private static boolean copyStream(InputStream input, OutputStream output) {
+        byte[] buffer = new byte[1024 * 2];
+        boolean result = true;
+        BufferedInputStream in = new BufferedInputStream(input, 1024 * 2);
+        BufferedOutputStream out = new BufferedOutputStream(output, 1024 * 2);
+        int len;
+        try {
+            while ((len = in.read(buffer, 0, 1024 * 2)) != -1) {
+                out.write(buffer, 0, len);
+            }
+            out.flush();
+        } catch (IOException e) {
+            result = false;
+        } finally {
+            close(out);
+            close(in);
+        }
+        return result;
+    }
+
+    private static void close(Closeable closeable) {
+        if (closeable == null) {
+            return;
+        }
+        try {
+            closeable.close();
+        } catch (IOException e) {
+        }
+    }
 }
