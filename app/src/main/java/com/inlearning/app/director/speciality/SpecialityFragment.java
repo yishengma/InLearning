@@ -91,4 +91,5 @@ public class SpecialityFragment extends BaseFragment implements View.OnClickList
             mSpecialityPresenter.addSpeciality(speciality);
         }
     }
+
 }

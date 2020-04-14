@@ -33,13 +33,21 @@ public class SpecialityInfoFragment extends BaseFragment {
     private List<ClassInfo> mClassList = new ArrayList<>();
     private SpecialityInfoAdapter mSpecialityInfoAdapter;
     private TextView mEmptyView;
+    private Speciality mSpeciality;
 
     @Nullable
     @Override
     public View onCreateView(final LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_director_speciality_info, container, false);
         initView(view);
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setSpeciality(mSpeciality);
     }
 
     private void initView(View view) {
@@ -62,11 +70,14 @@ public class SpecialityInfoFragment extends BaseFragment {
     }
 
     public SpecialityInfoFragment setSpeciality(Speciality speciality) {
+        if (speciality == null) {
+            return this;
+        }
+        mSpeciality = speciality;
         mClassList.clear();
         for (ClassInfo classInfo : speciality.getClassInfoList()) {
             mClassList.add(classInfo.setType(ClassInfo.ITEM_CLASS_INFO).setSpeciality(speciality));
         }
-        Log.e("ethan", speciality.getClassInfoList().size() + " class ");
         if (mSpecialityInfoAdapter != null) {
             mSpecialityInfoAdapter.notifyDataSetChanged();
         }
@@ -182,4 +193,6 @@ public class SpecialityInfoFragment extends BaseFragment {
             }
         });
     }
+
+
 }

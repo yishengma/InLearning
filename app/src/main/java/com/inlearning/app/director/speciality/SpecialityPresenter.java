@@ -29,7 +29,7 @@ public class SpecialityPresenter {
         mViewPager = rootView.findViewById(R.id.vp_recent_course);
         mFragmentAdapter = new CommonFragmentStatePagerAdapter<>(manager, mSpecialityFragmentList);
         mViewPager.setAdapter(mFragmentAdapter);
-        mViewPager.setOffscreenPageLimit(3);
+
         mTabLayout.setSmoothScrollingEnabled(true);
         for (TabLayout.Tab tab : mTabList) {
             mTabLayout.addTab(tab);
@@ -49,6 +49,7 @@ public class SpecialityPresenter {
         mTabList.add(tab);
         mTabLayout.setupWithViewPager(mViewPager);
         mSpecialities.add(speciality);
+        mViewPager.setOffscreenPageLimit(mSpecialities.size());
         for (int i = 0; i < mTabList.size(); i++) {
             mTabLayout.getTabAt(i).setText(mSpecialities.get(i).getShortName());
         }

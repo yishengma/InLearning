@@ -1,8 +1,10 @@
 package com.inlearning.app.common.adapter;
 
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.view.ViewGroup;
 
 import java.util.List;
 
@@ -44,4 +46,8 @@ public class CommonFragmentStatePagerAdapter<F extends Fragment> extends Fragmen
         return list == null ? 0 : list.size();
     }
 
+    @Override
+    public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
+
+    }
 }
