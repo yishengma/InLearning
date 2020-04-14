@@ -15,6 +15,8 @@ import cn.bmob.v3.BmobBatch;
 import cn.bmob.v3.BmobObject;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.datatype.BatchResult;
+import cn.bmob.v3.datatype.BmobPointer;
+import cn.bmob.v3.datatype.BmobRelation;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.QueryListListener;
@@ -62,53 +64,50 @@ public class TeacherModel {
         ThreadMgr.getInstance().postToSubThread(new Runnable() {
             @Override
             public void run() {
-                final AtomicInteger integer = new AtomicInteger(0);
-                if (teacher == null) {
-                    return;
-                }
-                teacher.update(new UpdateListener() {
+                BmobQuery<Course2> query = new BmobQuery<Course2>();
+                query.addWhereRelatedTo("mCourses", new BmobPointer(teacher));
+                query.findObjects(new FindListener<Course2>() {
+
                     @Override
-                    public void done(BmobException e) {
-                        if (e == null) {
-                            integer.incrementAndGet();
+                    public void done(List<Course2> object, BmobException e) {
+                        BmobRelation relation = new BmobRelation();
+                        for (Course2 c : object) {
+                            relation.remove(c);
                         }
-                    }
-                });
-                List<TeacherCourse> teacherCourses = new ArrayList<>();
-                for (Course2 course2 : course2s) {
-                    teacherCourses.add(new TeacherCourse(teacher, course2));
-                }
-                if (teacherCourses.isEmpty()) {
-                    integer.incrementAndGet();
-                    while (integer.get() != 2) {
+                        teacher.setCourses(relation);
+                        teacher.update(new UpdateListener() {
+                            @Override
+                            public void done(BmobException e) {
+                                BmobRelation relation = new BmobRelation();
+                                List<BmobPointer> pointers = new ArrayList<>();
+                                for (Course2 c : course2s) {
+                                    pointers.add(new BmobPointer(c));
+                                }
+                                relation.setObjects(pointers);
+                                teacher.setCourses(relation);
+                                teacher.update(new UpdateListener() {
+                                    @Override
+                                    public void done(BmobException e) {
+                                        if (e == null) {
+                                            callback.onResult(true, teacher);
+                                        }
+                                    }
+                                });
+                            }
+                        });
 
                     }
-                    callback.onResult(true, teacher);
-                    return;
-                }
-                List<BmobObject> list = new ArrayList<BmobObject>(teacherCourses);
-                new BmobBatch().insertBatch(list).doBatch(new QueryListListener<BatchResult>() {
-                    @Override
-                    public void done(List<BatchResult> list, BmobException e) {
-                        if (e == null) {
-                            integer.incrementAndGet();
-                        }
-                    }
-                });
-                while (integer.get() != 2) {
 
-                }
-                callback.onResult(true, teacher);
+                });
             }
         });
     }
 
     public static void addTeacherList(List<Teacher> teachers, final Callback<List<Teacher>> callback) {
         List<BmobObject> list = new ArrayList<BmobObject>(teachers);
-        new BmobBatch().updateBatch(list).doBatch(new QueryListListener<BatchResult>() {
+        new BmobBatch().insertBatch(list).doBatch(new QueryListListener<BatchResult>() {
             @Override
             public void done(List<BatchResult> list, BmobException e) {
-                Log.e("done", "" + e);
                 if (e == null) {
                     callback.onResult(true, null);
                 }
@@ -129,17 +128,20 @@ public class TeacherModel {
         });
     }
 
-    public static void getTeacherCourse(final Callback<List<TeacherCourse>> callback) {
-        BmobQuery<TeacherCourse> query = new BmobQuery<>();
-        query.include("mTeacher,mCourse2");
-        query.findObjects(new FindListener<TeacherCourse>() {
+    public static void getTeacherCourse(Teacher teacher, final Callback<List<TeacherCourse>> callback) {
+        BmobQuery<Course2> query = new BmobQuery<Course2>();
+        query.addWhereRelatedTo("mCourses", new BmobPointer(teacher));
+        query.findObjects(new FindListener<Course2>() {
+
             @Override
-            public void done(List<TeacherCourse> list, BmobException e) {
-                if (e == null) {
-                    callback.onResult(true, list);
+            public void done(List<Course2> object, BmobException e) {
+                List<TeacherCourse> teacherCourses = new ArrayList<>();
+                for (Course2 course2 : object) {
+                    teacherCourses.add(new TeacherCourse(teacher, course2));
                 }
-                Log.e(TAG, "getTeacherCourse" + e);
+                callback.onResult(true, teacherCourses);
             }
+
         });
     }
 }

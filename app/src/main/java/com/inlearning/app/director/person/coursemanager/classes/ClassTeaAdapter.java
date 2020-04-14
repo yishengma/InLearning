@@ -54,7 +54,7 @@ public class ClassTeaAdapter extends RecyclerView.Adapter<ClassTeaAdapter.ViewHo
         Teacher teacher = bean.getTeacher();
         viewHolder.mTeaName.setText(teacher.getName());
         viewHolder.mTeaTitle.setText(teacher.getTitle());
-        viewHolder.mTeaJobNumber.setText(teacher.getJobNumber());
+        viewHolder.mTeaJobNumber.setText(teacher.getAccount());
     }
 
     @Override

@@ -4,11 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Toast;
 
 import com.inlearning.app.common.bean.Teacher;
 import com.inlearning.app.common.util.FileUtil;
 import com.inlearning.app.common.util.LoadingDialogUtil;
+import com.inlearning.app.common.util.ToastUtil;
 import com.inlearning.app.director.BaseExcelImportActivity;
+
+import org.apache.poi.ss.usermodel.CellType;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -20,9 +24,11 @@ public class TeacherExcelImportActivity extends BaseExcelImportActivity {
         Intent intent = new Intent(context, TeacherExcelImportActivity.class);
         context.startActivity(intent);
     }
+
     private List<Teacher> mTeacherList;
     private TeacherInfoAdapter mInfoAdapter;
-    private static final String[] TEACHER_INFO = new String[]{"工号","姓名","职称"};
+    private static final String[] TEACHER_INFO = new String[]{"工号", "姓名", "职称"};
+    private static final CellType[] CELL_TYPES = new CellType[]{CellType.STRING,CellType.STRING,CellType.STRING};
 
 
     @Override
@@ -53,7 +59,7 @@ public class TeacherExcelImportActivity extends BaseExcelImportActivity {
 
     @Override
     protected void upload() {
-        LoadingDialogUtil.showLoadingDialog(TeacherExcelImportActivity.this,"正在上传");
+        LoadingDialogUtil.showLoadingDialog(TeacherExcelImportActivity.this, "正在上传");
         TeacherModel.addTeacherList(mTeacherList, new TeacherModel.Callback<List<Teacher>>() {
             @Override
             public void onResult(boolean suc, List<Teacher> teachers) {
@@ -75,11 +81,15 @@ public class TeacherExcelImportActivity extends BaseExcelImportActivity {
 
     @Override
     protected void doOpenFileResult(String path) {
-        List<Map<String, String>> data = FileUtil.readExcel(path, TEACHER_INFO,null);
+        List<Map<String, String>> data = FileUtil.readExcel(path, TEACHER_INFO, CELL_TYPES);
+        if (data == null) {
+            ToastUtil.showToast("导入失败，请检查文件格式", Toast.LENGTH_SHORT);
+            return;
+        }
         List<Teacher> teachers = new ArrayList<>();
         for (Map<String, String> map : data) {
             Teacher teacher = new Teacher();
-            teacher.setJobNumber(map.get("工号"));
+            teacher.setAccount(map.get("工号"));
             teacher.setTitle(map.get("职称"));
             teacher.setName(map.get("姓名"));
             teachers.add(teacher);

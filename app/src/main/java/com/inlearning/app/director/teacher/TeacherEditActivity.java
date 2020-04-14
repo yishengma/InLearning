@@ -56,7 +56,7 @@ public class TeacherEditActivity extends AppCompatActivity {
     }
 
     private void initData() {
-        TeacherModel.getTeacherCourse(new TeacherModel.Callback<List<TeacherCourse>>() {
+        TeacherModel.getTeacherCourse(mTeacher, new TeacherModel.Callback<List<TeacherCourse>>() {
             @Override
             public void onResult(boolean suc, final List<TeacherCourse> teacherCourses) {
                 ThreadMgr.getInstance().postToUIThread(new Runnable() {
@@ -82,7 +82,8 @@ public class TeacherEditActivity extends AppCompatActivity {
         mNameEditView.setText(mTeacher.getName());
         mJonNumberEditView = new EditItemView(this);
         mJonNumberEditView.setHint("工号");
-        mJonNumberEditView.setText(mTeacher.getJobNumber());
+        mJonNumberEditView.setText(mTeacher.getAccount());
+        mJonNumberEditView.setEnableEdit(false);
         mTitleEditView = new EditItemView(this);
         mTitleEditView.setHint("职称");
         mTitleEditView.setText(mTeacher.getTitle());
@@ -120,10 +121,10 @@ public class TeacherEditActivity extends AppCompatActivity {
         mSaveView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mTeacher.setJobNumber(mJonNumberEditView.getContent())
+                mTeacher.setAccount(mJonNumberEditView.getContent())
                         .setTitle(mTitleEditView.getContent())
                         .setName(mNameEditView.getContent());
-                LoadingDialogUtil.showLoadingDialog(TeacherEditActivity.this,"正在更新");
+                LoadingDialogUtil.showLoadingDialog(TeacherEditActivity.this, "正在更新");
                 TeacherModel.updateTeacher(mTeacher, mTeaAddCoursePresenter.getCourse2s(),
                         new TeacherModel.Callback<Teacher>() {
                             @Override

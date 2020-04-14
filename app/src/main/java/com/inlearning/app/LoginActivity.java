@@ -127,6 +127,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                     StudentRuntime.setStudent(student);
                     StudentHomeActivity.startHomePageActivity(LoginActivity.this);
+                    finish();
                 }
             });
         } else if (mTeacherView.isChecked()) {
@@ -139,6 +140,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                     TeacherRuntime.setCurrentTeacher(teacher);
                     TeacherHomeActivity.startHomePageActivity(LoginActivity.this);
+                    finish();
                 }
             });
         } else if (mDirectorView.isChecked()) {
@@ -150,6 +152,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                     DirectorAppRuntime.setsDirector(director);
                     DirectorHomeActivity.startHomePageActivity(LoginActivity.this);
+                    finish();
                 }
             });
         }

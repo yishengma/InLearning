@@ -118,6 +118,8 @@ public class FileUtil {
             return null;
         } catch (IOException e) {
             return null;
+        }catch (Exception e) {
+            return null;
         }
         return list;
     }

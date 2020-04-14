@@ -52,7 +52,7 @@ public class TeaAddCoursePresenter implements CourseItemView.ClickListener {
             @NonNull
             @Override
             public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-                return new ViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_simple_view, viewGroup,false));
+                return new ViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_simple_view, viewGroup, false));
             }
 
             @Override
@@ -62,6 +62,12 @@ public class TeaAddCoursePresenter implements CourseItemView.ClickListener {
                 viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        for (Course2 c : mCourse2s) {
+                            if (course2.getName().equals(c.getName())) {
+                                mSelectCourseDialog.dismiss();
+                                return;
+                            }
+                        }
                         CourseItemView courseItemView = new CourseItemView(mContext);
                         courseItemView.setCourse2(course2);
                         courseItemView.setListener(TeaAddCoursePresenter.this);
@@ -100,6 +106,11 @@ public class TeaAddCoursePresenter implements CourseItemView.ClickListener {
     }
 
     public void addCourse(Course2 course2) {
+        for (Course2 c : mCourse2s) {
+            if (course2.getName().equals(c.getName())) {
+                return;
+            }
+        }
         CourseItemView courseItemView = new CourseItemView(mContext);
         courseItemView.setCourse2(course2);
         courseItemView.setListener(TeaAddCoursePresenter.this);

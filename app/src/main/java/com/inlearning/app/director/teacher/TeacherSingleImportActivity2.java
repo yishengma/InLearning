@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
@@ -18,8 +19,10 @@ import com.inlearning.app.common.bean.Teacher;
 import com.inlearning.app.common.util.LoadingDialogUtil;
 import com.inlearning.app.common.util.PixeUtil;
 import com.inlearning.app.common.util.ThreadMgr;
+import com.inlearning.app.common.util.ToastUtil;
 import com.inlearning.app.common.widget.EditItemView;
 import com.inlearning.app.director.BaseSingleImportActivity;
+import com.inlearning.app.director.DirectorAppRuntime;
 
 import static android.view.Gravity.CENTER;
 
@@ -44,6 +47,7 @@ public class TeacherSingleImportActivity2 extends BaseSingleImportActivity imple
     private void initView() {
         mTitleView.setText("新增教师");
         mJonNumberEditView = new EditItemView(this);
+        mJonNumberEditView.setInputType(InputType.TYPE_CLASS_NUMBER);
         mJonNumberEditView.setTextWatcher(this);
         mJonNumberEditView.setHint("工号");
         mNameEditView = new EditItemView(this);
@@ -51,7 +55,7 @@ public class TeacherSingleImportActivity2 extends BaseSingleImportActivity imple
         mNameEditView.setHint("姓名");
         mTitleEditView = new EditItemView(this);
         mTitleEditView.setTextWatcher(this);
-        mTitleEditView.setHint("头衔");
+        mTitleEditView.setHint("职称（教授/副教授/讲师/教师等）");
         mRootView.addView(mJonNumberEditView);
         mRootView.addView(mNameEditView);
         mRootView.addView(mTitleEditView);
@@ -114,11 +118,18 @@ public class TeacherSingleImportActivity2 extends BaseSingleImportActivity imple
     }
 
     private void addTeacher() {
+        String num = mJonNumberEditView.getContent();
+        for (Teacher teacher : DirectorAppRuntime.getTeachers()) {
+            if (num.equals(teacher.getAccount())) {
+                ToastUtil.showToast("该工号已存在", Toast.LENGTH_SHORT);
+                return;
+            }
+        }
         Teacher teacher = new Teacher();
         teacher.setName(mNameEditView.getContent())
-                .setJobNumber(mJonNumberEditView.getContent())
+                .setAccount(mJonNumberEditView.getContent())
                 .setTitle(mTitleEditView.getContent());
-        LoadingDialogUtil.showLoadingDialog(this,"正在添加.");
+        LoadingDialogUtil.showLoadingDialog(this, "正在添加.");
         TeacherModel.addTeacher(teacher, new TeacherModel.Callback<Teacher>() {
             @Override
             public void onResult(boolean suc, Teacher teacher) {

@@ -87,7 +87,7 @@ public class PersonActivity extends AppCompatActivity {
         mImageView.setClickable(true);
         mJobNumberView = new PersonInfoView(this);
         mJobNumberView.setTitleText("工号");
-        mJobNumberView.setPersonContentView(mTeacher.getJobNumber());
+        mJobNumberView.setPersonContentView(mTeacher.getAccount());
         mNameView = new PersonInfoView(this);
         mNameView.setTitleText("姓名");
         mNameView.setPersonContentView(mTeacher.getName());

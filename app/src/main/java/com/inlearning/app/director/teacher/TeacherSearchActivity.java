@@ -59,7 +59,7 @@ public class TeacherSearchActivity extends BaseSearchActivity {
         mTeacherList.clear();
         List<Teacher> teachers = DirectorAppRuntime.getTeachers();
         for (Teacher tea : teachers) {
-            if (tea.getName().contains(key) || tea.getJobNumber().contains(key)) {
+            if (tea.getName().contains(key) || tea.getAccount().contains(key)) {
                 mTeacherList.add(tea);
             }
         }

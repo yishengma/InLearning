@@ -4,14 +4,17 @@ import java.util.List;
 
 import cn.bmob.v3.BmobObject;
 import cn.bmob.v3.datatype.BmobFile;
+import cn.bmob.v3.datatype.BmobRelation;
 
 public class Teacher extends BmobObject {
-    private String mJobNumber;
+    private String mAccount;
+    private String mPassword;
     private String mTitle;
     private boolean isSelected;//不做Bmob
     public String mName;
     public BmobFile mProfilePhoto;
     private String mProfilePhotoUrl;
+    private BmobRelation mCourses;
 
     public String getTitle() {
         return mTitle == null ? "" : mTitle;
@@ -28,15 +31,6 @@ public class Teacher extends BmobObject {
 
     public Teacher setName(String name) {
         mName = name;
-        return this;
-    }
-
-    public String getJobNumber() {
-        return mJobNumber == null ? "" : mJobNumber;
-    }
-
-    public Teacher setJobNumber(String jobNumber) {
-        mJobNumber = jobNumber;
         return this;
     }
 
@@ -62,5 +56,31 @@ public class Teacher extends BmobObject {
 
     public void setProfilePhotoUrl(String profilePhotoUrl) {
         mProfilePhotoUrl = profilePhotoUrl;
+    }
+
+    public String getAccount() {
+        return mAccount;
+    }
+
+    public Teacher setAccount(String account) {
+        mAccount = account;
+        return this;
+    }
+
+    public String getPassword() {
+        return mPassword;
+    }
+
+    public Teacher setPassword(String password) {
+        mPassword = password;
+        return this;
+    }
+
+    public BmobRelation getCourses() {
+        return mCourses;
+    }
+
+    public void setCourses(BmobRelation courses) {
+        mCourses = courses;
     }
 }

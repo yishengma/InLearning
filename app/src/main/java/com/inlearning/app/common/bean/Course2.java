@@ -1,5 +1,7 @@
 package com.inlearning.app.common.bean;
 
+import androidx.annotation.Nullable;
+
 import cn.bmob.v3.BmobObject;
 
 public class Course2 extends BmobObject {
@@ -63,5 +65,10 @@ public class Course2 extends BmobObject {
                 ", mScore='" + mScore + '\'' +
                 ", isSelected=" + isSelected +
                 '}';
+    }
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        return mName.equals(((Course2)obj).getName());
     }
 }

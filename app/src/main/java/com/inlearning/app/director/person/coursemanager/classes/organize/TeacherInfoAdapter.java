@@ -64,7 +64,7 @@ public class TeacherInfoAdapter extends RecyclerView.Adapter<TeacherInfoAdapter.
         });
         viewHolder.mTeaName.setText(teacher.getName());
         viewHolder.mTeaTitle.setText(teacher.getTitle());
-        viewHolder.mTeaJobNumber.setText(teacher.getJobNumber());
+        viewHolder.mTeaJobNumber.setText(teacher.getAccount());
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

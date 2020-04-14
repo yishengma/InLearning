@@ -115,7 +115,7 @@ public class OrganizeCoursePresenter {
         mTeaJobNumView.setVisibility(View.VISIBLE);
 
         mTeaNameView.setText(teacher.getName());
-        mTeaJobNumView.setText(teacher.getJobNumber());
+        mTeaJobNumView.setText(teacher.getAccount());
     }
 
     private void resetTeacherView() {
