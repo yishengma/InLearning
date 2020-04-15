@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +33,7 @@ public class OrganizeCoursePresenter {
     private TextView mCourseInfoView;
 
     private TextView mSelectTeaView;
+    private RelativeLayout mSelectTeaLayout;
     private ImageView mTeaIconView;
     private TextView mTeaNameView;
     private TextView mTeaJobNumView;
@@ -72,6 +74,7 @@ public class OrganizeCoursePresenter {
         mTeaJobNumView = mDialog.findViewById(R.id.tv_teacher_job_number);
         mCancelView = mDialog.findViewById(R.id.tv_cancel);
         mConfirmView = mDialog.findViewById(R.id.tv_confirm);
+        mSelectTeaLayout = mDialog.findViewById(R.id.view_select_teacher);
         mCancelView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,7 +93,7 @@ public class OrganizeCoursePresenter {
         mSelectTeaView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                OrganizeListActivity.startActivity(mContext, mClassInfo, OrganizeListActivity.FLAG.TEACHER_LIST);
+                OrganizeListActivity.startActivity(mContext, mClassInfo, mCourse2, OrganizeListActivity.FLAG.TEACHER_LIST);
             }
         });
 
@@ -141,6 +144,7 @@ public class OrganizeCoursePresenter {
         mCourseInfoView.setVisibility(View.VISIBLE);
         mCourseNameView.setText(course.getName());
         mCourseInfoView.setText(String.format("学分：%s 学时：%s", course.getScore(), course.getTime()));
+        mSelectTeaLayout.setVisibility(View.VISIBLE);
     }
 
     private void resetCourseView() {
@@ -148,6 +152,7 @@ public class OrganizeCoursePresenter {
         mSelectCourseView.setVisibility(View.VISIBLE);
         mCourseNameView.setVisibility(View.GONE);
         mCourseInfoView.setVisibility(View.GONE);
+        mSelectTeaLayout.setVisibility(View.GONE);
     }
 
     private void updateConfirmView() {
@@ -159,6 +164,10 @@ public class OrganizeCoursePresenter {
     }
 
     private void uploadClassSchedule() {
+        if (mCourse2 == null || mTeacher == null) {
+            ToastUtil.showToast("请先选择课程和教师", Toast.LENGTH_SHORT);
+            return;
+        }
         ClassSchedule classSchedule = new ClassSchedule();
         classSchedule.setClassInfo(mClassInfo);
         classSchedule.setCourse2(mCourse2);
@@ -169,7 +178,7 @@ public class OrganizeCoursePresenter {
                 if (suc && mClickListener != null) {
                     mClickListener.onAdd(schedule);
                     hide();
-                } else {
+                } else if (!suc) {
                     ToastUtil.showToast("请勿重复添加课程", Toast.LENGTH_SHORT);
                 }
 

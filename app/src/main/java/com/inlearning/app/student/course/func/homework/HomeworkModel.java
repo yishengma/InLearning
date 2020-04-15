@@ -48,6 +48,12 @@ public class HomeworkModel {
         query.include("mQuestion");
         query.addWhereEqualTo("mChapter", chapter);
         query.addWhereEqualTo("mStudent", StudentRuntime.getStudent());
+        query.addWhereExists("mQuestion");
+
+        BmobQuery<Question> inQuery = new BmobQuery<>();
+        inQuery.addWhereExists("objectId");
+        query.addWhereMatchesQuery("mQuestion", "Question", inQuery);
+
         query.findObjects(new FindListener<Answer>() {
             @Override
             public void done(List<Answer> answers, BmobException e) {
@@ -88,11 +94,11 @@ public class HomeworkModel {
                         callback.onResult(answer);
                     }
                 });
-            }else {
+            } else {
                 answer.save(new SaveListener<String>() {
                     @Override
                     public void done(String s, BmobException e) {
-                        Log.e("ethan",s+"");
+                        Log.e("ethan", s + "");
                         answer.setObjectId(s);
                         callback.onResult(answer);
                     }
@@ -107,20 +113,20 @@ public class HomeworkModel {
                     bmobFile.uploadblock(new UploadFileListener() {
                         @Override
                         public void done(BmobException e) {
-                            Log.e("ethan",e+"");
+                            Log.e("ethan", e + "");
                             answer.setImageUrl(bmobFile.getUrl());
                             if (!TextUtils.isEmpty(answer.getObjectId())) {
-                                 answer.update(new UpdateListener() {
-                                     @Override
-                                     public void done(BmobException e) {
-                                         callback.onResult(answer);
-                                     }
-                                 });
-                            }else {
+                                answer.update(new UpdateListener() {
+                                    @Override
+                                    public void done(BmobException e) {
+                                        callback.onResult(answer);
+                                    }
+                                });
+                            } else {
                                 answer.save(new SaveListener<String>() {
                                     @Override
                                     public void done(String s, BmobException e) {
-                                        Log.e("ethan",s+"");
+                                        Log.e("ethan", s + "");
                                         answer.setObjectId(s);
                                         callback.onResult(answer);
                                     }

@@ -1,7 +1,9 @@
 package com.inlearning.app.director.person.coursemanager.speciality;
 
+import com.inlearning.app.common.bean.Course2;
 import com.inlearning.app.common.bean.Speciality;
 import com.inlearning.app.common.bean.SpecialitySchedule;
+import com.inlearning.app.common.bean.Teacher;
 
 import java.util.List;
 
@@ -36,6 +38,10 @@ public class SpecialityScheduleModel {
         BmobQuery<SpecialitySchedule> query = new BmobQuery<>();
         query.addWhereEqualTo("mSpeciality", speciality);
         query.include("mSpeciality,mCourse2");
+//        query.addWhereExists("mCourse2");
+        BmobQuery<Course2> inQuery = new BmobQuery<>();
+        inQuery.addWhereExists("objectId");
+        query.addWhereMatchesQuery("mCourse2", "Course2", inQuery);
         query.findObjects(new FindListener<SpecialitySchedule>() {
             @Override
             public void done(List<SpecialitySchedule> list, BmobException e) {

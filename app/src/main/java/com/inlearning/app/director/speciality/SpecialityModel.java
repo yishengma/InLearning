@@ -80,7 +80,7 @@ public class SpecialityModel {
                 Log.i(TAG, "done: %s", e);
                 if (e == null) {
                     callback.onResult(true, speciality);
-                    speciality.increment("mCount", classInfos.size());
+                    speciality.increment("mClassCount", classInfos.size());
                     speciality.update(new UpdateListener() {
                         @Override
                         public void done(BmobException e) {
@@ -159,7 +159,7 @@ public class SpecialityModel {
                 if (e == null) {
                     callback.onResult(true, null);
                 }
-                classInfo.getSpeciality().increment("mCount", -1);
+                classInfo.getSpeciality().increment("mClassCount", -1);
                 classInfo.getSpeciality().update(new UpdateListener() {
                     @Override
                     public void done(BmobException e) {

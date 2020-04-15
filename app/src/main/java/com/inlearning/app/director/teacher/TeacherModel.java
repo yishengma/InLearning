@@ -144,4 +144,20 @@ public class TeacherModel {
 
         });
     }
+
+    public static void getCourseTeacher(Course2 course2, Callback<List<Teacher>> callback) {
+        BmobQuery<Teacher> query = new BmobQuery<>();
+        BmobQuery<Course2> inquery = new BmobQuery<>();
+        inquery.addWhereEqualTo("objectId",course2.getObjectId());
+        query.addWhereMatchesQuery("mCourses", "Course2", inquery);
+        query.findObjects(new FindListener<Teacher>() {
+            @Override
+            public void done(List<Teacher> list, BmobException e) {
+                if (e == null) {
+                    callback.onResult(true, list);
+                }
+            }
+        });
+
+    }
 }

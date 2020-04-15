@@ -24,10 +24,16 @@ public class CourseTaskModel {
         query.addWhereEqualTo("mChapter", chapter);
 //        query.addWhereEqualTo("mClassInfo",);
         query.include("mStudent");
+        query.addWhereExists("mStudent");
+
+        BmobQuery<Student> inQuery = new BmobQuery<>();
+        inQuery.addWhereExists("objectId");
+        query.addWhereMatchesQuery("mStudent", "Student", inQuery);
+
         query.findObjects(new FindListener<ChapterProgress>() {
             @Override
             public void done(List<ChapterProgress> list, BmobException e) {
-                Log.e("ethan",e+""+list.size());
+                Log.e("ethan", e + "" + list.size());
                 if (e == null) {
                     callback.onResult(list);
                 }

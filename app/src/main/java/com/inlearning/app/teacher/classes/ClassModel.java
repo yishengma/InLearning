@@ -1,6 +1,8 @@
 package com.inlearning.app.teacher.classes;
 
+import com.inlearning.app.common.bean.ClassInfo;
 import com.inlearning.app.common.bean.ClassSchedule;
+import com.inlearning.app.common.bean.Course2;
 import com.inlearning.app.teacher.TeacherRuntime;
 
 import java.util.ArrayList;
@@ -20,7 +22,19 @@ public class ClassModel {
     public static void getClassSchedule(final Callback<List<ClassScheduleProxy>> callback) {
         BmobQuery<ClassSchedule> query = new BmobQuery<>();
         query.include("mClassInfo,mCourse2");
+        query.addWhereExists("mClassInfo");
+        query.addWhereExists("mCourse2");
         query.addWhereEqualTo("mTeacher", TeacherRuntime.getCurrentTeacher());
+
+        BmobQuery<ClassInfo> inClassQuery = new BmobQuery<>();
+        inClassQuery.addWhereExists("objectId");
+        query.addWhereMatchesQuery("mClassInfo", "ClassInfo", inClassQuery);
+
+        BmobQuery<Course2> inCourseQuery = new BmobQuery<>();
+        inCourseQuery.addWhereExists("objectId");
+        query.addWhereMatchesQuery("mCourse2", "Course2", inCourseQuery);
+
+
         query.findObjects(new FindListener<ClassSchedule>() {
             @Override
             public void done(List<ClassSchedule> list, BmobException e) {

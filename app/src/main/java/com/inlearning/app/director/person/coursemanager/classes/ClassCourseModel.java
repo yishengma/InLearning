@@ -26,6 +26,15 @@ public class ClassCourseModel {
         BmobQuery<ClassSchedule> query = new BmobQuery<>();
         query.include("mCourse2,mTeacher");
         query.addWhereEqualTo("mClassInfo", classInfo);
+
+        BmobQuery<Teacher> inTeacherQuery = new BmobQuery<>();
+        inTeacherQuery.addWhereExists("objectId");
+        query.addWhereMatchesQuery("mTeacher", "Teacher", inTeacherQuery);
+
+        BmobQuery<Course2> inCourseQuery = new BmobQuery<>();
+        inCourseQuery.addWhereExists("objectId");
+        query.addWhereMatchesQuery("mCourse2", "mCourse2", inCourseQuery);
+
         query.findObjects(new FindListener<ClassSchedule>() {
             @Override
             public void done(final List<ClassSchedule> list, final BmobException e) {
@@ -69,7 +78,7 @@ public class ClassCourseModel {
                             schedule.setObjectId(s);
                             callback.onResult(true, schedule);
                         } else {
-                            callback.onResult(false,null);
+                            callback.onResult(false, null);
                         }
 
                     }

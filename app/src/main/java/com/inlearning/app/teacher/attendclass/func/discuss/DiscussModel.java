@@ -5,6 +5,8 @@ import android.text.TextUtils;
 import com.inlearning.app.common.bean.Comment;
 import com.inlearning.app.common.bean.CourseChapter;
 import com.inlearning.app.common.bean.Post;
+import com.inlearning.app.common.bean.Student;
+import com.inlearning.app.common.bean.Teacher;
 
 import java.io.File;
 import java.util.List;
@@ -80,6 +82,17 @@ public class DiscussModel {
         BmobQuery<Comment> query = new BmobQuery<>();
         query.addWhereEqualTo("mPost", post);
         query.include("mStudent,mTeacher");
+        query.addWhereExists("mTeacher");
+        query.addWhereExists("mStudent");
+
+        BmobQuery<Student> inStuQuery = new BmobQuery<>();
+        inStuQuery.addWhereExists("objectId");
+        query.addWhereMatchesQuery("mStudent", "Student", inStuQuery);
+
+        BmobQuery<Teacher> inTeaQuery = new BmobQuery<>();
+        inTeaQuery.addWhereExists("objectId");
+        query.addWhereMatchesQuery("Teacher", "mTeacher", inTeaQuery);
+
         query.findObjects(new FindListener<Comment>() {
             @Override
             public void done(List<Comment> list, BmobException e) {

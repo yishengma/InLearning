@@ -14,6 +14,7 @@ import com.inlearning.app.common.bean.Course2;
 import com.inlearning.app.common.bean.CourseChapter;
 import com.inlearning.app.common.bean.SpecialitySchedule;
 import com.inlearning.app.common.bean.Teacher;
+import com.inlearning.app.common.bean.TeacherCourse;
 import com.inlearning.app.common.util.StatusBar;
 import com.inlearning.app.common.util.ThreadMgr;
 import com.inlearning.app.director.person.coursemanager.classes.ClassCourseActivity;
@@ -45,11 +46,21 @@ public class OrganizeListActivity extends AppCompatActivity {
         context.startActivityForResult(intent, flag);
     }
 
+
+    public static void startActivity(Activity context, ClassInfo classInfo,Course2 course, @OrganizeListActivity.FLAG int flag) {
+        Intent intent = new Intent(context, OrganizeListActivity.class);
+        intent.putExtra("flag", flag);
+        intent.putExtra("classinfo", classInfo);
+        intent.putExtra("course", course);
+        context.startActivityForResult(intent, flag);
+    }
+
     private TeacherListView mTeacherListView;
     private CourseListView mCourseListView;
     private List<Teacher> mTeachers;
     private List<Course2> mCourse2s;
     private ClassInfo mClassInfo;
+    private Course2 mCourse2;
     private int mFlag;
 
     @Override
@@ -96,6 +107,7 @@ public class OrganizeListActivity extends AppCompatActivity {
         mCourse2s = new ArrayList<>();
         mClassInfo = (ClassInfo) getIntent().getSerializableExtra("classinfo");
         mFlag = (int) getIntent().getSerializableExtra("flag");
+        mCourse2 = (Course2) getIntent().getSerializableExtra("course");
         if (mFlag == FLAG.COURSE_LIST) {
             mCourseListView.setVisibility(View.VISIBLE);
         }
@@ -116,7 +128,10 @@ public class OrganizeListActivity extends AppCompatActivity {
                 });
             }
         });
-        TeacherModel.getTeacherList(new TeacherModel.Callback<List<Teacher>>() {
+        if (mCourse2 == null) {
+            return;
+        }
+        TeacherModel.getCourseTeacher(mCourse2,new TeacherModel.Callback<List<Teacher>>() {
             @Override
             public void onResult(boolean suc, List<Teacher> teachers) {
                 mTeachers.addAll(teachers);

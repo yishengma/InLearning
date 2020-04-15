@@ -1,15 +1,19 @@
 package com.inlearning.app.director.person.coursemanager.classes.organize;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.inlearning.app.R;
 import com.inlearning.app.common.bean.Teacher;
 
@@ -18,7 +22,7 @@ import java.util.List;
 public class TeacherInfoAdapter extends RecyclerView.Adapter<TeacherInfoAdapter.ViewHolder> {
     private List<Teacher> mTeacherList;
     private boolean isImport = false;
-
+    private Context mContext;
     public TeacherInfoAdapter(List<Teacher> teacherList) {
         mTeacherList = teacherList;
     }
@@ -47,6 +51,7 @@ public class TeacherInfoAdapter extends RecyclerView.Adapter<TeacherInfoAdapter.
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        mContext = viewGroup.getContext();
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_director_teacher_info,viewGroup, false);
         return new ViewHolder(view);
     }
@@ -90,6 +95,12 @@ public class TeacherInfoAdapter extends RecyclerView.Adapter<TeacherInfoAdapter.
                 return false;
             }
         });
+        if (TextUtils.isEmpty(teacher.getProfilePhotoUrl())) {
+            viewHolder.mTeaIcon.setBackgroundDrawable(mContext.getDrawable(R.drawable.viewpage_guide_2));
+        } else {
+            Glide.with(viewHolder.itemView.getContext()).load(teacher.getProfilePhotoUrl()).into(viewHolder.mTeaIcon);
+        }
+
     }
 
     @Override
@@ -102,6 +113,7 @@ public class TeacherInfoAdapter extends RecyclerView.Adapter<TeacherInfoAdapter.
         private TextView mTeaTitle;
         private TextView mTeaJobNumber;
         private CheckBox mSelectView;
+        private ImageView mTeaIcon;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -109,6 +121,7 @@ public class TeacherInfoAdapter extends RecyclerView.Adapter<TeacherInfoAdapter.
             mTeaName = itemView.findViewById(R.id.director_teacher_name);
             mTeaTitle = itemView.findViewById(R.id.director_teacher_title);
             mTeaJobNumber = itemView.findViewById(R.id.director_teacher_job_number);
+            mTeaIcon = itemView.findViewById(R.id.course_teacher_icon);
         }
     }
 }

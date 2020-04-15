@@ -119,6 +119,11 @@ public class HomeworkModel {
         query.include("mQuestion");
         query.addWhereEqualTo("mChapter", chapter);
         query.addWhereEqualTo("mStudent", student);
+        query.addWhereExists("mQuestion");
+
+        BmobQuery<Question> inQuery = new BmobQuery<>();
+        inQuery.addWhereExists("objectId");
+        query.addWhereMatchesQuery("mQuestion", "Question", inQuery);
         query.findObjects(new FindListener<Answer>() {
             @Override
             public void done(List<Answer> answers, BmobException e) {

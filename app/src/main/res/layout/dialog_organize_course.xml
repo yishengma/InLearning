@@ -78,6 +78,7 @@
     <RelativeLayout
         android:id="@+id/view_select_teacher"
         android:layout_width="match_parent"
+        android:visibility="gone"
         android:layout_height="80dp"
         android:layout_below="@+id/select_course_layout"
         android:layout_marginLeft="24dp"

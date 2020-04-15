@@ -6,6 +6,7 @@ import com.inlearning.app.common.bean.ClassInfo;
 import com.inlearning.app.common.bean.ClassSchedule;
 import com.inlearning.app.common.bean.Course2;
 import com.inlearning.app.common.bean.CourseChapter;
+import com.inlearning.app.common.bean.Student;
 import com.inlearning.app.common.bean.Teacher;
 import com.inlearning.app.teacher.TeacherRuntime;
 import com.inlearning.app.teacher.attendclass.ChapterModel;
@@ -26,6 +27,18 @@ public class CourseModel {
         BmobQuery<ClassSchedule> schedule = new BmobQuery<>();
         schedule.addWhereEqualTo("mClassInfo", classInfo);
         schedule.include("mCourse2,mTeacher");
+        schedule.addWhereExists("mCourse2");
+        schedule.addWhereExists("mTeacher");
+
+
+        BmobQuery<Course2> inStuQuery = new BmobQuery<>();
+        inStuQuery.addWhereExists("objectId");
+        schedule.addWhereMatchesQuery("mCourse2", "Course2", inStuQuery);
+
+        BmobQuery<Teacher> inTeaQuery = new BmobQuery<>();
+        inTeaQuery.addWhereExists("objectId");
+        schedule.addWhereMatchesQuery("Teacher", "mTeacher", inTeaQuery);
+
         schedule.findObjects(new FindListener<ClassSchedule>() {
             @Override
             public void done(List<ClassSchedule> list, BmobException e) {
