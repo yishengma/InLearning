@@ -3,12 +3,14 @@ package com.inlearning.app.director;
 import android.content.Context;
 import android.util.Log;
 
+import com.inlearning.app.common.bean.ClassInfo;
 import com.inlearning.app.common.bean.Course2;
 import com.inlearning.app.common.bean.Director;
 import com.inlearning.app.common.bean.Speciality;
 import com.inlearning.app.common.bean.Teacher;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class DirectorAppRuntime {
@@ -16,6 +18,7 @@ public class DirectorAppRuntime {
     private static List<Speciality> sSpecialities;
     private static List<Teacher> sTeachers;
     private static List<Course2> sCourse2s;
+    private static HashMap<Speciality, List<ClassInfo>> sClassInfo = new HashMap<>();
     private static Director sDirector;
 
     public static Context getApplicationContext() {
@@ -64,7 +67,18 @@ public class DirectorAppRuntime {
     }
 
     public static void setsDirector(Director sDirector) {
-        Log.e("ethan",""+sDirector);
         DirectorAppRuntime.sDirector = sDirector;
+    }
+
+    public static synchronized List<ClassInfo> getsClassInfo() {
+        List<ClassInfo> classInfos = new ArrayList<>();
+        for (Speciality s : sClassInfo.keySet()) {
+            classInfos.addAll(sClassInfo.get(s));
+        }
+        return classInfos;
+    }
+
+    public static synchronized void setsClassInfo(Speciality speciality, List<ClassInfo> classInfos) {
+        sClassInfo.put(speciality, classInfos);
     }
 }

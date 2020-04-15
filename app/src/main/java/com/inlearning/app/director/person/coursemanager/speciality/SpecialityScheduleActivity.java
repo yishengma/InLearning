@@ -20,8 +20,10 @@ import com.inlearning.app.common.adapter.CommonFragmentStatePagerAdapter;
 import com.inlearning.app.common.bean.Course2;
 import com.inlearning.app.common.bean.Speciality;
 import com.inlearning.app.common.bean.SpecialitySchedule;
+import com.inlearning.app.common.util.LoadingDialogUtil;
 import com.inlearning.app.common.util.StatusBar;
 import com.inlearning.app.common.util.ThreadMgr;
+import com.inlearning.app.director.speciality.SpecialityModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +48,10 @@ public class SpecialityScheduleActivity extends AppCompatActivity implements Vie
     private CourseInfoFragment mSpecialityFragment;
     private CourseInfoFragment mAdaptiveFragment;
     private List<SpecialitySchedule> mSchedules;
+    private TextView mTotalInfoView;
+    private TextView mSpecialityView;
+    private TextView mChooseView;
+    private TextView mTitleView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,16 +83,23 @@ public class SpecialityScheduleActivity extends AppCompatActivity implements Vie
         mBackView.setOnClickListener(this);
         mSpecialityFragment.setClickListener(this);
         mAdaptiveFragment.setClickListener(this);
+        mTotalInfoView = findViewById(R.id.tv_course_total);
+        mSpecialityView = findViewById(R.id.tv_course_speciality);
+        mChooseView = findViewById(R.id.tv_course_choose);
+        mTitleView = findViewById(R.id.tv_edit_title);
     }
 
     private void getIntentData() {
         mSpeciality = (Speciality) getIntent().getSerializableExtra("speciality");
+        mTitleView.setText(String.format("%s/专业排课", mSpeciality.getShortName()));
     }
 
     private void initData() {
+        LoadingDialogUtil.showLoadingDialog(this,"正在加载...");
         SpecialityScheduleModel.getSpecialitySchedule(mSpeciality, new SpecialityScheduleModel.Callback<List<SpecialitySchedule>>() {
             @Override
             public void onResult(List<SpecialitySchedule> specialitySchedules) {
+                LoadingDialogUtil.closeDialog();
                 List<Course2> course2s = new ArrayList<>();
                 for (SpecialitySchedule s : specialitySchedules) {
                     course2s.add(s.getCourse2());
@@ -94,6 +107,26 @@ public class SpecialityScheduleActivity extends AppCompatActivity implements Vie
                 mAdaptiveFragment.setCourseList(course2s);
                 mSpecialityFragment.setCourseList(course2s);
                 mSchedules = specialitySchedules;
+                int totalScore = 0;
+                int specialityCount = 0;
+                int specialityScore = 0;
+                int chooseScore = 0;
+                int chooseCount = 0;
+
+
+                for (Course2 c : course2s) {
+                    if (c.getType().equals("专业课")) {
+                        specialityCount++;
+                        specialityScore += Integer.valueOf(c.getScore());
+                    } else {
+                        c.getType().equals("选修课");
+                        chooseScore++;
+                        chooseCount += Integer.valueOf(c.getScore());
+                    }
+                }
+                mTotalInfoView.setText(String.format("%s 门课，共 %s 学分", course2s.size(), totalScore));
+                mSpecialityView.setText(String.format("专业课 %s 门 ， 共 %s 学分", specialityCount, specialityScore));
+                mChooseView.setText(String.format("选修课 %s 门 ， 共 %s 学分", chooseCount, chooseScore));
             }
         });
     }
@@ -127,6 +160,31 @@ public class SpecialityScheduleActivity extends AppCompatActivity implements Vie
                     mSchedules = specialitySchedules;
                     mAdaptiveFragment.setCourseList(course2s);
                     mSpecialityFragment.setCourseList(course2s);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            int totalScore = 0;
+                            int specialityCount = 0;
+                            int specialityScore = 0;
+                            int chooseScore = 0;
+                            int chooseCount = 0;
+
+
+                            for (Course2 c : course2s) {
+                                if (c.getType().equals("专业课")) {
+                                    specialityCount++;
+                                    specialityScore += Integer.valueOf(c.getScore());
+                                } else {
+                                    c.getType().equals("选修课");
+                                    chooseScore++;
+                                    chooseCount += Integer.valueOf(c.getScore());
+                                }
+                            }
+                            mTotalInfoView.setText(String.format("%s 门课，共 %s 学分", course2s.size(), totalScore));
+                            mSpecialityView.setText(String.format("专业课 %s 门 ， 共 %s 学分", specialityCount, specialityScore));
+                            mChooseView.setText(String.format("选修课 %s 门 ， 共 %s 学分", chooseCount, chooseScore));
+                        }
+                    });
                 }
             });
         }

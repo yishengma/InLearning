@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.inlearning.app.R;
 import com.inlearning.app.common.BaseFragment;
@@ -38,6 +40,7 @@ public class CourseActivity extends AppCompatActivity {
     private FixCourseInfoFragment mSpecialityFragment;
     private FixCourseInfoFragment mAdaptiveFragment;
     private Speciality mSpeciality;
+    private ImageView mBackView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +66,13 @@ public class CourseActivity extends AppCompatActivity {
         mTabLayout.setupWithViewPager(mViewPager);
         mTabLayout.getTabAt(0).setText("专业课");
         mTabLayout.getTabAt(1).setText("选修课");
+        mBackView = findViewById(R.id.imv_bar_back);
+        mBackView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
 

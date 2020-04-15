@@ -12,8 +12,11 @@ import android.widget.TextView;
 
 import com.inlearning.app.R;
 import com.inlearning.app.common.bean.Speciality;
+import com.inlearning.app.common.util.LoadingDialogUtil;
 import com.inlearning.app.common.util.StatusBar;
+import com.inlearning.app.common.util.ThreadMgr;
 import com.inlearning.app.director.DirectorAppRuntime;
+import com.inlearning.app.director.speciality.SpecialityModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,17 +30,18 @@ public class SpecialityManagerActivity extends AppCompatActivity implements View
 
     private ImageView mBackView;
     private RecyclerView mRvSpecialityView;
-    private List<Speciality> mSpecialities;
+    private List<Speciality> mSpecialities = new ArrayList<>();
     private SpecialityManagerAdapter mManagerAdapter;
     private TextView mEmptyView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_speciality_manager);
         StatusBar.setStatusBarTranslucent(this);
         StatusBar.setStatusBarDarkMode(this, true);
-        initData();
         initView();
+        initData();
     }
 
     private void initView() {
@@ -54,7 +58,7 @@ public class SpecialityManagerActivity extends AppCompatActivity implements View
             }
         });
         mEmptyView = findViewById(R.id.tv_empty);
-        mEmptyView.setVisibility(mSpecialities.isEmpty()?View.VISIBLE:View.GONE);
+
     }
 
     @Override
@@ -67,7 +71,21 @@ public class SpecialityManagerActivity extends AppCompatActivity implements View
     }
 
     private void initData() {
-        mSpecialities = new ArrayList<>(DirectorAppRuntime.getSpecialities());
-
+        LoadingDialogUtil.showLoadingDialog(this,"加载数据中...");
+        SpecialityModel.getSpeciality(new SpecialityModel.Callback<List<Speciality>>() {
+            @Override
+            public void onResult(boolean suc, List<Speciality> specialities) {
+                ThreadMgr.getInstance().postToUIThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        LoadingDialogUtil.closeDialog();
+                        mSpecialities.clear();
+                        mSpecialities.addAll(specialities);
+                        mManagerAdapter.notifyDataSetChanged();
+                        mEmptyView.setVisibility(mSpecialities.isEmpty()?View.VISIBLE:View.GONE);
+                    }
+                });
+            }
+        });
     }
 }

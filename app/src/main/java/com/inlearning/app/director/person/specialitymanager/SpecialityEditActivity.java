@@ -7,6 +7,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -15,12 +17,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.inlearning.app.R;
+import com.inlearning.app.common.bean.Director;
 import com.inlearning.app.common.bean.Speciality;
 import com.inlearning.app.common.util.LoadingDialogUtil;
 import com.inlearning.app.common.util.PixeUtil;
 import com.inlearning.app.common.util.StatusBar;
 import com.inlearning.app.common.util.ThreadMgr;
+import com.inlearning.app.common.util.ToastUtil;
 import com.inlearning.app.common.widget.EditItemView;
+import com.inlearning.app.director.DirectorAppRuntime;
 import com.inlearning.app.director.speciality.SpecialityModel;
 
 import static android.view.Gravity.CENTER;
@@ -102,9 +107,21 @@ public class SpecialityEditActivity extends AppCompatActivity {
         mSaveView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (TextUtils.isEmpty(mSpecialityView.getContent()) || TextUtils.isEmpty(mShortNameView.getContent())) {
+                    ToastUtil.showToast("信息不能为空", Toast.LENGTH_SHORT);
+                    return;
+                }
+                if (!mSpecialityView.getContent().equals(mSpeciality.getName())) {
+                    for (Speciality speciality : DirectorAppRuntime.getSpecialities()) {
+                        if (speciality.getName().equals(mSpeciality.getName())) {
+                            ToastUtil.showToast("该专业名已存在", Toast.LENGTH_SHORT);
+                            return;
+                        }
+                    }
+                }
                 mSpeciality.setName(mSpecialityView.getContent())
                         .setShortName(mShortNameView.getContent());
-                LoadingDialogUtil.showLoadingDialog(SpecialityEditActivity.this,"正在更新..");
+                LoadingDialogUtil.showLoadingDialog(SpecialityEditActivity.this, "正在更新..");
                 SpecialityModel.updateSpeciality(mSpeciality, new SpecialityModel.Callback<Speciality>() {
                     @Override
                     public void onResult(boolean suc, Speciality speciality) {
@@ -144,7 +161,7 @@ public class SpecialityEditActivity extends AppCompatActivity {
 
 
     private void deleteSpeciality() {
-        LoadingDialogUtil.showLoadingDialog(SpecialityEditActivity.this,"正在删除..");
+        LoadingDialogUtil.showLoadingDialog(SpecialityEditActivity.this, "正在删除..");
         SpecialityModel.deleteSpeciality(mSpeciality, new SpecialityModel.Callback<Speciality>() {
             @Override
             public void onResult(boolean suc, Speciality speciality) {

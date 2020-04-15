@@ -2,6 +2,7 @@ package com.inlearning.app.common.bean;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import cn.bmob.v3.BmobObject;
 
@@ -9,7 +10,6 @@ public class Speciality extends BmobObject {
     private String mName;
     private String mShortName;
     private int mClassCount;
-    private List<ClassInfo> mClassInfoList;
 
     public String getName() {
         return mName == null ? "" : mName;
@@ -29,23 +29,6 @@ public class Speciality extends BmobObject {
         return this;
     }
 
-    public List<ClassInfo> getClassInfoList() {
-        if (mClassInfoList == null) {
-            return new ArrayList<>();
-        }
-        return mClassInfoList;
-    }
-
-    public Speciality setClassInfoList(List<ClassInfo> classInfoList) {
-        mClassInfoList = classInfoList;
-        return this;
-    }
-
-    public Speciality addClassInfoList(List<ClassInfo> classInfoList) {
-        mClassInfoList.addAll(classInfoList);
-        return this;
-    }
-
     public int getClassCount() {
         return mClassCount;
     }
@@ -53,5 +36,20 @@ public class Speciality extends BmobObject {
     public Speciality setClassCount(int classCount) {
         mClassCount = classCount;
         return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Speciality that = (Speciality) o;
+        return mClassCount == that.mClassCount &&
+                Objects.equals(mName, that.mName) &&
+                Objects.equals(mShortName, that.mShortName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(mName, mShortName, mClassCount);
     }
 }

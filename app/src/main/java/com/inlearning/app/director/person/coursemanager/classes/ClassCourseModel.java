@@ -4,6 +4,7 @@ package com.inlearning.app.director.person.coursemanager.classes;
 import com.inlearning.app.common.bean.ClassInfo;
 import com.inlearning.app.common.bean.ClassSchedule;
 import com.inlearning.app.common.bean.Course2;
+import com.inlearning.app.common.bean.Speciality;
 import com.inlearning.app.common.bean.Teacher;
 import com.inlearning.app.common.util.ThreadMgr;
 
@@ -60,13 +61,34 @@ public class ClassCourseModel {
         schedule.save(new SaveListener<String>() {
             @Override
             public void done(final String s, BmobException e) {
+
                 ThreadMgr.getInstance().postToUIThread(new Runnable() {
                     @Override
                     public void run() {
-                        schedule.setObjectId(s);
-                        callback.onResult(true, schedule);
+                        if (e == null) {
+                            schedule.setObjectId(s);
+                            callback.onResult(true, schedule);
+                        } else {
+                            callback.onResult(false,null);
+                        }
+
                     }
                 });
+
+            }
+        });
+    }
+
+    public static void getClassInfo(Speciality speciality, Callback<List<ClassInfo>> callback) {
+        BmobQuery<ClassInfo> query = new BmobQuery<>();
+        query.addWhereEqualTo("mSpeciality", speciality);
+        query.include("mSpeciality");
+        query.findObjects(new FindListener<ClassInfo>() {
+            @Override
+            public void done(List<ClassInfo> list, BmobException e) {
+                if (e == null) {
+                    callback.onResult(true, list);
+                }
             }
         });
     }

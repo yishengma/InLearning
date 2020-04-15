@@ -24,6 +24,8 @@ public class SpecialityScheduleModel {
                 if (e == null) {
                     schedule.setObjectId(s);
                     callback.onResult(schedule);
+                } else {
+                    callback.onResult(null);
                 }
             }
         });

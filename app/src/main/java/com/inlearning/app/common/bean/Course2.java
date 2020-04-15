@@ -2,6 +2,8 @@ package com.inlearning.app.common.bean;
 
 import androidx.annotation.Nullable;
 
+import java.util.Objects;
+
 import cn.bmob.v3.BmobObject;
 
 public class Course2 extends BmobObject {
@@ -68,7 +70,19 @@ public class Course2 extends BmobObject {
     }
 
     @Override
-    public boolean equals(@Nullable Object obj) {
-        return mName.equals(((Course2)obj).getName());
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Course2 course2 = (Course2) o;
+        return isSelected == course2.isSelected &&
+                Objects.equals(mName, course2.mName) &&
+                Objects.equals(mType, course2.mType) &&
+                Objects.equals(mTime, course2.mTime) &&
+                Objects.equals(mScore, course2.mScore);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(mName, mType, mTime, mScore, isSelected);
     }
 }

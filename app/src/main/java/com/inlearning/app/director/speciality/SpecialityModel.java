@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.inlearning.app.common.bean.ClassInfo;
 import com.inlearning.app.common.bean.Speciality;
+import com.inlearning.app.director.DirectorAppRuntime;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +26,7 @@ public class SpecialityModel {
         void onResult(boolean suc, T t);
     }
 
-    public static void addSpeciality(final Speciality speciality,final Callback<Speciality> callback) {
+    public static void addSpeciality(final Speciality speciality, final Callback<Speciality> callback) {
         speciality.save(new SaveListener<String>() {
             @Override
             public void done(String objectId, BmobException e) {
@@ -52,7 +53,6 @@ public class SpecialityModel {
             public void done(List<BatchResult> results, BmobException e) {
                 Log.i(TAG, "done: %s", e);
                 if (e == null) {
-                    speciality.setClassInfoList(classInfos);
                     callback.onResult(true, speciality);
                 }
             }
@@ -79,8 +79,14 @@ public class SpecialityModel {
             public void done(List<BatchResult> results, BmobException e) {
                 Log.i(TAG, "done: %s", e);
                 if (e == null) {
-                    speciality.addClassInfoList(classInfos);
                     callback.onResult(true, speciality);
+                    speciality.increment("mCount", classInfos.size());
+                    speciality.update(new UpdateListener() {
+                        @Override
+                        public void done(BmobException e) {
+                            speciality.setClassCount(speciality.getClassCount()+classInfos.size());
+                        }
+                    });
                 }
             }
         });
@@ -104,7 +110,7 @@ public class SpecialityModel {
         update.setName(speciality.getName())
                 .setShortName(speciality.getShortName())
                 .setClassCount(speciality.getClassCount());
-        update.update(speciality.getObjectId(),new UpdateListener() {
+        update.update(speciality.getObjectId(), new UpdateListener() {
             @Override
             public void done(BmobException e) {
                 Log.i(TAG, "done: %s", e);
@@ -125,21 +131,21 @@ public class SpecialityModel {
             public void done(final List<Speciality> list, BmobException e) {
                 Log.i(TAG, "getSpeciality done: list " + (list == null ? 0 : list.size()));
                 if (e != null) {
-                    Log.i(TAG, "getSpeciality done: list "+e );
+                    Log.i(TAG, "getSpeciality done: list " + e);
                     return;
                 }
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        for (Speciality s:list) {
+                        for (Speciality s : list) {
 
                             BmobQuery<ClassInfo> classInfoBmobQuery = new BmobQuery<>();
-                            classInfoBmobQuery.addWhereEqualTo("mSpeciality",s);
+                            classInfoBmobQuery.addWhereEqualTo("mSpeciality", s);
                             List<ClassInfo> classInfos = classInfoBmobQuery.findObjectsSync(ClassInfo.class);
-                            Log.i(TAG, "ClassInfo done: list "+classInfos.size()+s.getObjectId());
-                            s.setClassInfoList(classInfos);
+                            Log.i(TAG, "ClassInfo done: list " + classInfos.size() + s.getObjectId());
+                            DirectorAppRuntime.setsClassInfo(s,classInfos);
                         }
-                        callback.onResult(true,list);
+                        callback.onResult(true, list);
                     }
                 }).start();
             }
@@ -153,6 +159,16 @@ public class SpecialityModel {
                 if (e == null) {
                     callback.onResult(true, null);
                 }
+                classInfo.getSpeciality().increment("mCount", -1);
+                classInfo.getSpeciality().update(new UpdateListener() {
+                    @Override
+                    public void done(BmobException e) {
+                        if (e == null) {
+                            classInfo.getSpeciality().setClassCount(classInfo.getSpeciality().getClassCount() - 1);
+                            Log.e("ethan",""+classInfo.getSpeciality().getClassCount());
+                        }
+                    }
+                });
             }
         });
     }

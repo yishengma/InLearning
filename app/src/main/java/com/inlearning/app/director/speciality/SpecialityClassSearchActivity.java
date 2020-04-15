@@ -28,9 +28,8 @@ public class SpecialityClassSearchActivity extends BaseSearchActivity {
         mTotalClassList = new ArrayList<>();
         mClassList = new ArrayList<>();
         mInfoAdapter = new SpecialityInfoAdapter(mClassList);
-        for (Speciality s : DirectorAppRuntime.getSpecialities()) {
-            mTotalClassList.addAll(s.getClassInfoList());
-        }
+        mTotalClassList.addAll(DirectorAppRuntime.getsClassInfo());
+
     }
 
     @Override
@@ -41,7 +40,7 @@ public class SpecialityClassSearchActivity extends BaseSearchActivity {
     @Override
     protected void doSearch(String key) {
         mClassList.clear();
-        for (ClassInfo classInfo: mTotalClassList) {
+        for (ClassInfo classInfo : mTotalClassList) {
             if (classInfo.getName().contains(key)) {
                 mClassList.add(classInfo);
             }

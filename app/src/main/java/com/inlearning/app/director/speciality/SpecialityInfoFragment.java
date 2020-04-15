@@ -21,6 +21,7 @@ import com.inlearning.app.common.bean.ClassInfo;
 import com.inlearning.app.common.bean.Speciality;
 import com.inlearning.app.common.util.LoadingDialogUtil;
 import com.inlearning.app.common.util.ThreadMgr;
+import com.inlearning.app.director.person.coursemanager.classes.ClassCourseModel;
 import com.inlearning.app.director.speciality.classinfo.ClassInfoActivity;
 
 import java.util.ArrayList;
@@ -47,7 +48,7 @@ public class SpecialityInfoFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        setSpeciality(mSpeciality);
+        initData();
     }
 
     private void initView(View view) {
@@ -74,17 +75,7 @@ public class SpecialityInfoFragment extends BaseFragment {
             return this;
         }
         mSpeciality = speciality;
-        mClassList.clear();
-        for (ClassInfo classInfo : speciality.getClassInfoList()) {
-            mClassList.add(classInfo.setType(ClassInfo.ITEM_CLASS_INFO).setSpeciality(speciality));
-        }
-        if (mSpecialityInfoAdapter != null) {
-            mSpecialityInfoAdapter.notifyDataSetChanged();
-        }
-        if (mEmptyView == null) {
-            return this;
-        }
-        mEmptyView.setVisibility(mClassList.isEmpty() ? View.VISIBLE : View.GONE);
+        initData();
         return this;
     }
 
@@ -190,6 +181,32 @@ public class SpecialityInfoFragment extends BaseFragment {
                 }
                 mSpecialityInfoAdapter.notifyDataSetChanged();
                 mEmptyView.setVisibility(mClassList.isEmpty() ? View.VISIBLE : View.GONE);
+            }
+        });
+    }
+
+    private void initData() {
+        if (mSpeciality == null) {
+            return;
+        }
+        ClassCourseModel.getClassInfo(mSpeciality, new ClassCourseModel.Callback<List<ClassInfo>>() {
+            @Override
+            public void onResult(boolean suc, List<ClassInfo> classInfos) {
+                ThreadMgr.getInstance().postToUIThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mClassList.clear();
+                        for (ClassInfo classInfo : classInfos) {
+                            mClassList.add(classInfo.setType(ClassInfo.ITEM_CLASS_INFO));
+                        }
+                        if (mSpecialityInfoAdapter != null) {
+                            mSpecialityInfoAdapter.notifyDataSetChanged();
+                        }
+                        if (mEmptyView != null) {
+                            mEmptyView.setVisibility(mClassList.isEmpty() ? View.VISIBLE : View.GONE);
+                        }
+                    }
+                });
             }
         });
     }

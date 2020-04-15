@@ -13,7 +13,10 @@ import com.inlearning.app.R;
 import com.inlearning.app.common.BaseFragment;
 import com.inlearning.app.common.bean.ClassInfo;
 import com.inlearning.app.common.bean.Speciality;
+import com.inlearning.app.common.util.ThreadMgr;
 import com.inlearning.app.director.speciality.SpecialityInfoAdapter;
+import com.inlearning.app.director.speciality.SpecialityModel;
+import com.inlearning.app.director.speciality.classinfo.ClassInfoModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +27,6 @@ public class ClassInfoFragment extends BaseFragment {
     private List<ClassInfo> mClassList = new ArrayList<>();
     private SpecialityInfoAdapter mSpecialityInfoAdapter;
     private Speciality mSpeciality;
-    private List<Speciality> mSpecialities = new ArrayList<>();
     private TextView mEmptyView;
 
     @Nullable
@@ -33,6 +35,12 @@ public class ClassInfoFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_director_speciality_info, container, false);
         initView(view);
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        initData();
     }
 
     private void initView(View view) {
@@ -57,13 +65,33 @@ public class ClassInfoFragment extends BaseFragment {
     public ClassInfoFragment setSpeciality(Speciality speciality) {
         mSpeciality = speciality;
         mClassList.clear();
-        for (ClassInfo classInfo : speciality.getClassInfoList()) {
-            mClassList.add(classInfo.setType(ClassInfo.ITEM_CLASS_INFO).setSpeciality(speciality));
-        }
-        if (mSpecialityInfoAdapter != null) {
-            mSpecialityInfoAdapter.notifyDataSetChanged();
-        }
-        mEmptyView.setVisibility(mClassList.isEmpty()?View.VISIBLE:View.GONE);
+        initData();
         return this;
+    }
+
+    private void initData() {
+        if (mSpeciality == null) {
+            return;
+        }
+        ClassCourseModel.getClassInfo(mSpeciality, new ClassCourseModel.Callback<List<ClassInfo>>() {
+            @Override
+            public void onResult(boolean suc, List<ClassInfo> classInfos) {
+                ThreadMgr.getInstance().postToUIThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mClassList.clear();
+                        for (ClassInfo classInfo : classInfos) {
+                            mClassList.add(classInfo.setType(ClassInfo.ITEM_CLASS_INFO));
+                        }
+                        if (mSpecialityInfoAdapter != null) {
+                            mSpecialityInfoAdapter.notifyDataSetChanged();
+                        }
+                        if (mEmptyView != null) {
+                            mEmptyView.setVisibility(mClassList.isEmpty() ? View.VISIBLE : View.GONE);
+                        }
+                    }
+                });
+            }
+        });
     }
 }

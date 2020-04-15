@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.google.android.exoplayer2.C;
@@ -17,6 +18,7 @@ import com.inlearning.app.common.bean.ClassSchedule;
 import com.inlearning.app.common.bean.Course2;
 import com.inlearning.app.common.bean.Teacher;
 import com.inlearning.app.common.util.ThreadMgr;
+import com.inlearning.app.common.util.ToastUtil;
 import com.inlearning.app.director.person.coursemanager.classes.ClassCourseModel;
 
 import java.util.List;
@@ -108,6 +110,9 @@ public class OrganizeCoursePresenter {
 
 
     private void setTeacherView(Teacher teacher) {
+        if (teacher == null) {
+            return;
+        }
         mTeacher = teacher;
         mSelectTeaView.setVisibility(View.GONE);
         mTeaIconView.setVisibility(View.VISIBLE);
@@ -127,6 +132,9 @@ public class OrganizeCoursePresenter {
     }
 
     private void setCourseView(Course2 course) {
+        if (course == null) {
+            return;
+        }
         mCourse2 = course;
         mSelectCourseView.setVisibility(View.GONE);
         mCourseNameView.setVisibility(View.VISIBLE);
@@ -152,22 +160,19 @@ public class OrganizeCoursePresenter {
 
     private void uploadClassSchedule() {
         ClassSchedule classSchedule = new ClassSchedule();
-        ClassInfo classInfo = new ClassInfo();
-        classInfo.setObjectId(mClassInfo.getObjectId());
-        Course2 course2 = new Course2();
-        course2.setObjectId(mCourse2.getObjectId());
-        Teacher teacher = new Teacher();
-        teacher.setObjectId(mTeacher.getObjectId());
-        classSchedule.setClassInfo(classInfo);
-        classSchedule.setCourse2(course2);
-        classSchedule.setTeacher(teacher);
+        classSchedule.setClassInfo(mClassInfo);
+        classSchedule.setCourse2(mCourse2);
+        classSchedule.setTeacher(mTeacher);
         ClassCourseModel.addClassCourse(classSchedule, new ClassCourseModel.Callback<ClassSchedule>() {
             @Override
             public void onResult(boolean suc, ClassSchedule schedule) {
-                if (mClickListener != null) {
+                if (suc && mClickListener != null) {
                     mClickListener.onAdd(schedule);
+                    hide();
+                } else {
+                    ToastUtil.showToast("请勿重复添加课程", Toast.LENGTH_SHORT);
                 }
-                hide();
+
             }
         });
     }
@@ -184,6 +189,9 @@ public class OrganizeCoursePresenter {
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode != Activity.RESULT_OK) {
+            return;
+        }
         switch (requestCode) {
             case OrganizeListActivity.FLAG.COURSE_LIST:
                 setCourseView((Course2) data.getSerializableExtra("course"));
