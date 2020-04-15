@@ -45,6 +45,8 @@ public class OrganizeCoursePresenter {
     private Course2 mCourse2;
     private ClassInfo mClassInfo;
 
+    private List<ClassSchedule> mSchedules;
+
 
     public interface ClickListener {
         void onAdd(ClassSchedule schedule);
@@ -56,9 +58,10 @@ public class OrganizeCoursePresenter {
         mClickListener = clickListener;
     }
 
-    public OrganizeCoursePresenter(Activity context, ClassInfo classInfo) {
+    public OrganizeCoursePresenter(Activity context, ClassInfo classInfo,List<ClassSchedule> schedules) {
         mContext = context;
         mClassInfo = classInfo;
+        mSchedules = schedules;
         initDialog();
     }
 
@@ -168,6 +171,12 @@ public class OrganizeCoursePresenter {
             ToastUtil.showToast("请先选择课程和教师", Toast.LENGTH_SHORT);
             return;
         }
+        for (ClassSchedule schedule:mSchedules) {
+            if (schedule.getCourse2().equals(mCourse2.getName())) {
+                ToastUtil.showToast("请勿重复添加课程", Toast.LENGTH_SHORT);
+                return;
+            }
+        }
         ClassSchedule classSchedule = new ClassSchedule();
         classSchedule.setClassInfo(mClassInfo);
         classSchedule.setCourse2(mCourse2);
@@ -178,8 +187,6 @@ public class OrganizeCoursePresenter {
                 if (suc && mClickListener != null) {
                     mClickListener.onAdd(schedule);
                     hide();
-                } else if (!suc) {
-                    ToastUtil.showToast("请勿重复添加课程", Toast.LENGTH_SHORT);
                 }
 
             }

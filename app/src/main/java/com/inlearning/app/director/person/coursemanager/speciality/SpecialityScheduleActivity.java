@@ -124,6 +124,7 @@ public class SpecialityScheduleActivity extends AppCompatActivity implements Vie
                         chooseCount += Integer.valueOf(c.getScore());
                     }
                 }
+                totalScore = specialityScore + chooseScore;
                 mTotalInfoView.setText(String.format("%s 门课，共 %s 学分", course2s.size(), totalScore));
                 mSpecialityView.setText(String.format("专业课 %s 门 ， 共 %s 学分", specialityCount, specialityScore));
                 mChooseView.setText(String.format("选修课 %s 门 ， 共 %s 学分", chooseCount, chooseScore));
@@ -180,6 +181,7 @@ public class SpecialityScheduleActivity extends AppCompatActivity implements Vie
                                     chooseCount += Integer.valueOf(c.getScore());
                                 }
                             }
+                            totalScore = specialityScore + chooseScore;
                             mTotalInfoView.setText(String.format("%s 门课，共 %s 学分", course2s.size(), totalScore));
                             mSpecialityView.setText(String.format("专业课 %s 门 ， 共 %s 学分", specialityCount, specialityScore));
                             mChooseView.setText(String.format("选修课 %s 门 ， 共 %s 学分", chooseCount, chooseScore));

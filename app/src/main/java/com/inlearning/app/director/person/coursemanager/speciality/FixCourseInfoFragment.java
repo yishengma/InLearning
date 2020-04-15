@@ -17,6 +17,7 @@ import com.inlearning.app.common.bean.Course2;
 import com.inlearning.app.common.bean.Speciality;
 import com.inlearning.app.common.bean.SpecialitySchedule;
 import com.inlearning.app.common.util.ToastUtil;
+import com.inlearning.app.director.DirectorAppRuntime;
 import com.inlearning.app.director.course.CourseInfoAdapter;
 
 import java.util.ArrayList;
@@ -130,13 +131,18 @@ public class FixCourseInfoFragment extends BaseFragment {
         Speciality speciality = new Speciality();
         speciality.setObjectId(mSpeciality.getObjectId());
         specialitySchedule.setSpeciality(speciality);
+        List<SpecialitySchedule> schedules = DirectorAppRuntime.getsSchedule(mSpeciality);
+        if (schedules.contains(specialitySchedule)) {
+            ToastUtil.showToast("该排课已存在", Toast.LENGTH_SHORT);
+            return;
+        }
         SpecialityScheduleModel.addSpecialitySchedule(specialitySchedule, new SpecialityScheduleModel.Callback<SpecialitySchedule>() {
             @Override
             public void onResult(SpecialitySchedule schedule) {
-                if (schedule !=null && getActivity() != null) {
+                if (schedule != null && getActivity() != null) {
                     getActivity().finish();
                 }
-                ToastUtil.showToast("该排课已存在", Toast.LENGTH_SHORT);
+
             }
         });
     }

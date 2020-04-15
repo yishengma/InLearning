@@ -79,7 +79,7 @@ public class ClassCourseActivity extends AppCompatActivity implements View.OnCli
 
     private void getIntentData() {
         mClassInfo = (ClassInfo) getIntent().getSerializableExtra("classinfo");
-        mPresenter = new OrganizeCoursePresenter(this, mClassInfo);
+        mPresenter = new OrganizeCoursePresenter(this, mClassInfo, mClassSchedules);
         mPresenter.setClickListener(new OrganizeCoursePresenter.ClickListener() {
             @Override
             public void onAdd(ClassSchedule schedule) {

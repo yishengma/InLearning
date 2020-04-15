@@ -4,6 +4,7 @@ import com.inlearning.app.common.bean.Course2;
 import com.inlearning.app.common.bean.Speciality;
 import com.inlearning.app.common.bean.SpecialitySchedule;
 import com.inlearning.app.common.bean.Teacher;
+import com.inlearning.app.director.DirectorAppRuntime;
 
 import java.util.List;
 
@@ -26,6 +27,7 @@ public class SpecialityScheduleModel {
                 if (e == null) {
                     schedule.setObjectId(s);
                     callback.onResult(schedule);
+                    DirectorAppRuntime.getsSchedule(schedule.getSpeciality()).add(schedule);
                 } else {
                     callback.onResult(null);
                 }
@@ -47,7 +49,9 @@ public class SpecialityScheduleModel {
             public void done(List<SpecialitySchedule> list, BmobException e) {
                 if (e == null) {
                     callback.onResult(list);
+                    DirectorAppRuntime.setsSchedule(speciality,list);
                 }
+
             }
         });
     }
@@ -58,6 +62,7 @@ public class SpecialityScheduleModel {
             public void done(BmobException e) {
                 if (e == null) {
                     callback.onResult(schedule);
+                    DirectorAppRuntime.getsSchedule(schedule.getSpeciality()).remove(schedule);
                 }
             }
         });
