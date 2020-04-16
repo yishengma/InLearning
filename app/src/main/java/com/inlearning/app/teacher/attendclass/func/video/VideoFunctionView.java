@@ -35,6 +35,8 @@ public class VideoFunctionView extends LinearLayout implements View.OnClickListe
         void onSelect();
 
         void onUpload();
+
+        void finish();
     }
 
     private ClickListener mClickListener;
@@ -75,6 +77,9 @@ public class VideoFunctionView extends LinearLayout implements View.OnClickListe
                 break;
             case R.id.tv_upload:
                 mClickListener.onUpload();
+                break;
+            case R.id.tv_bar_finish:
+                mClickListener.finish();
                 break;
         }
     }

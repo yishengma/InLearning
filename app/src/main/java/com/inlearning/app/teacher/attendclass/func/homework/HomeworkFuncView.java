@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PagerSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -67,11 +68,15 @@ public class HomeworkFuncView extends LinearLayout implements View.OnClickListen
         mBackView = view.findViewById(R.id.imv_bar_back);
         mTitleView = view.findViewById(R.id.tv_bar_title);
         mRvHomework = view.findViewById(R.id.rv_homework);
-        mRvHomework.setLayoutManager(mLayoutManager  = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        PagerSnapHelper snapHelper = new PagerSnapHelper(){
+        mRvHomework.setLayoutManager(mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        PagerSnapHelper snapHelper = new PagerSnapHelper() {
             @Override
             public int findTargetSnapPosition(RecyclerView.LayoutManager layoutManager, int velocityX, int velocityY) {
-                mCuttentPosition =  super.findTargetSnapPosition(layoutManager, velocityX, velocityY);
+                int position = super.findTargetSnapPosition(layoutManager, velocityX, velocityY);
+                if (position >= mRvHomework.getAdapter().getItemCount()) {
+                    return position;
+                }
+                mCuttentPosition = position;
                 return mCuttentPosition;
             }
         };
@@ -147,6 +152,7 @@ public class HomeworkFuncView extends LinearLayout implements View.OnClickListen
     }
 
     public void refreshUI(boolean hasData) {
+        mTitleBar.setVisibility(VISIBLE);
         mRvHomework.setVisibility(hasData ? VISIBLE : GONE);
         mEmptyView.setVisibility(hasData ? GONE : VISIBLE);
         mBottomBarView.setVisibility(hasData ? VISIBLE : GONE);
@@ -185,6 +191,7 @@ public class HomeworkFuncView extends LinearLayout implements View.OnClickListen
     }
 
     public int getCurrentPosition() {
+        Log.e("ethan", "getCurrentPosition:" + mCuttentPosition);
         return mCuttentPosition;
     }
 }

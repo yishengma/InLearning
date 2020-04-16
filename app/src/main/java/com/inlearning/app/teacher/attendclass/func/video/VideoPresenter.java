@@ -14,6 +14,9 @@ import com.inlearning.app.R;
 import com.inlearning.app.common.bean.CourseChapter;
 import com.inlearning.app.common.util.FileUtil;
 import com.inlearning.app.common.util.ThreadMgr;
+import com.inlearning.app.common.util.ToastUtil;
+
+import org.apache.xmlbeans.impl.soap.Text;
 
 import java.io.File;
 
@@ -46,6 +49,9 @@ public class VideoPresenter implements VideoUploadMgr.UploadListener {
 
             @Override
             public void onUpload() {
+                if (TextUtils.isEmpty(mPath)) {
+                    return;
+                }
                 Toast.makeText(mContext, "正在后台上传", Toast.LENGTH_LONG).show();
                 ThreadMgr.getInstance().postToSubThread(new Runnable() {
                     @Override
@@ -53,6 +59,11 @@ public class VideoPresenter implements VideoUploadMgr.UploadListener {
                         uploadFile(mChapter, mPath);
                     }
                 });
+            }
+
+            @Override
+            public void finish() {
+                mContext.finish();
             }
         });
         VideoUploadMgr.getInstance().addListener(this);
@@ -64,7 +75,7 @@ public class VideoPresenter implements VideoUploadMgr.UploadListener {
 
     public void show() {
         mVideoFunctionView.setVisibility(View.VISIBLE);
-        if (!TextUtils.isEmpty(mChapter.getVideoFile().getFileUrl())) {
+        if (mChapter.getVideoFile() != null && !TextUtils.isEmpty(mChapter.getVideoFile().getFileUrl())) {
             mVideoFunctionView.setVideoUrl(mChapter.getVideoFile().getFileUrl());
         }
         mVideoFunctionView.setTitle(mChapter.getChapterName());

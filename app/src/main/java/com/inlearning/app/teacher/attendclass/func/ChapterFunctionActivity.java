@@ -100,6 +100,7 @@ public class ChapterFunctionActivity extends AppCompatActivity {
                 break;
             case FLAG.HOMEWORK_FUNCTION:
                 mHomeworkPresenter.show();
+                break;
             case FLAG.DISCUSS_FUNCTION:
                 mDiscussPresenter.show();
                 break;

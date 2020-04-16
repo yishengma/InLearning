@@ -53,6 +53,7 @@ public class CourseChapterActivity extends AppCompatActivity implements View.OnC
     private Dialog mChapterDialog;
     private TimePickerView mTimePickerView;
     private CourseChapter mCurrentChapter;
+    private TextView mEmptyView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +93,7 @@ public class CourseChapterActivity extends AppCompatActivity implements View.OnC
         mAddView.setOnClickListener(this);
         mTitleView.setText(mCourse2.getName());
         mRvChapter = findViewById(R.id.rv_chapter);
+        mEmptyView = findViewById(R.id.tv_empty);
         mChapters = new ArrayList<>();
         mChapterAdapter = new CourseChapterAdapter(mChapters);
         mRvChapter.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
@@ -162,6 +164,7 @@ public class CourseChapterActivity extends AppCompatActivity implements View.OnC
                 mChapters.clear();
                 mChapters.addAll(ChapterProxy.transfer(courseChapters));
                 mChapterAdapter.notifyDataSetChanged();
+                mEmptyView.setVisibility(mChapters.isEmpty() ? View.VISIBLE : View.GONE);
             }
         });
     }
@@ -192,6 +195,10 @@ public class CourseChapterActivity extends AppCompatActivity implements View.OnC
                 courseChapter.setCourse2(mCourse2);
                 courseChapter.setChapterNum(mChapters.size() + 1);
                 courseChapter.setChapterName(chapterName);
+                courseChapter.setMaterialCount(0);
+                courseChapter.setExerciseCount(0);
+                courseChapter.setHomeworkCount(0);
+                courseChapter.setDiscussCount(0);
                 ChapterModel.addCourseChapter(courseChapter, new ChapterModel.Callback<CourseChapter>() {
                     @Override
                     public void onResult(CourseChapter chapter) {
@@ -210,6 +217,7 @@ public class CourseChapterActivity extends AppCompatActivity implements View.OnC
                 if (chapter != null) {
                     mChapters.add(new ChapterProxy(chapter, 0));
                     mChapterAdapter.notifyDataSetChanged();
+                    mEmptyView.setVisibility(mChapters.isEmpty() ? View.VISIBLE : View.GONE);
                     mChapterDialog.dismiss();
                     return;
                 }
@@ -229,6 +237,8 @@ public class CourseChapterActivity extends AppCompatActivity implements View.OnC
                     proxy.setProgress(progress);
                 }
                 mChapterAdapter.notifyItemChanged(chapter.getChapterNum() - 1);
+                mEmptyView.setVisibility(mChapters.isEmpty() ? View.VISIBLE : View.GONE);
+
             }
         });
     }
@@ -239,6 +249,7 @@ public class CourseChapterActivity extends AppCompatActivity implements View.OnC
             @Override
             public void run() {
                 Toast.makeText(CourseChapterActivity.this, chapter.getChapterName() + "上传成功", Toast.LENGTH_SHORT).show();
+                mChapterAdapter.notifyDataSetChanged();
             }
         });
     }

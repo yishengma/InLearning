@@ -48,6 +48,13 @@
         android:layout_below="@+id/fl_title_bar"
         android:background="@color/app_global_item_divide" />
 
+    <TextView
+        android:id="@+id/tv_empty"
+        android:gravity="center"
+        android:text="暂未布置章节"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_chapter"
         android:layout_width="match_parent"

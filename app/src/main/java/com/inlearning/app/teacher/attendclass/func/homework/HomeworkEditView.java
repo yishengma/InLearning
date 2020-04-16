@@ -55,6 +55,7 @@ public class HomeworkEditView extends BaseQuesFunc implements View.OnClickListen
     private TextView mTitleView;
     private LinearLayout mCheckBoxLayout;
     private Question mQuestion;
+    private TextView mTipsView;
 
     private void initView() {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.view_homework_question_edit, this);
@@ -72,6 +73,7 @@ public class HomeworkEditView extends BaseQuesFunc implements View.OnClickListen
         mAddView.setOnClickListener(this);
         mUploadView.setOnClickListener(this);
         mBackView.setOnClickListener(this);
+        mTipsView = view.findViewById(R.id.tv_input_answer_tips);
     }
 
     @Override
@@ -195,6 +197,7 @@ public class HomeworkEditView extends BaseQuesFunc implements View.OnClickListen
         }
         if (question.getType() == Question.Type.CHOICE_QUESTION) {
             mCheckBoxLayout.setVisibility(VISIBLE);
+            mTipsView.setVisibility(VISIBLE);
             List<String> list = question.getChoiceAnswers();
             for (int i = 0; i < mCheckBoxLayout.getChildCount(); i++) {
                 CheckBox box = (CheckBox) mCheckBoxLayout.getChildAt(i);
@@ -202,6 +205,7 @@ public class HomeworkEditView extends BaseQuesFunc implements View.OnClickListen
             }
         } else {
             mCheckBoxLayout.setVisibility(GONE);
+            mTipsView.setVisibility(GONE);
         }
 
         setVisibility(VISIBLE);

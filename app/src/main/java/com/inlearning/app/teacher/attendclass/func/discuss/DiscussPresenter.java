@@ -31,6 +31,7 @@ public class DiscussPresenter {
             }
         });
         mChapter = chapter;
+        mDiscussFuncView.setTitle(mChapter.getChapterName()+"/讨论");
         initData();
     }
 

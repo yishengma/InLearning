@@ -50,7 +50,7 @@ public class AttendClassFragment extends BaseFragment {
     }
 
     private void initData() {
-        ChapterModel.getTeacherSchedule(new ChapterModel.Callback<List<TeacherCourse>>() {
+        ChapterModel.getTeacherSchedule(TeacherRuntime.getCurrentTeacher(), new ChapterModel.Callback<List<TeacherCourse>>() {
             @Override
             public void onResult(List<TeacherCourse> classSchedules) {
                 TeacherRuntime.setSchedules(classSchedules);

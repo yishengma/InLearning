@@ -54,6 +54,8 @@ public class DiscussFuncView extends RelativeLayout implements View.OnClickListe
     private ImageView mEditPostView;
     private ImageView mBackView;
     private ImageView mFullImageView;
+    private TextView mTitleView;
+    private TextView mEmptyView;
 
     private void initView() {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.view_student_discuss_function, this);
@@ -69,6 +71,7 @@ public class DiscussFuncView extends RelativeLayout implements View.OnClickListe
         mEditPostView.setEnabled(false);
         mBackView.setOnClickListener(this);
         mFullImageView = view.findViewById(R.id.imv_full_image);
+        mTitleView = view.findViewById(R.id.tv_bar_title);
         mFullImageView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,6 +86,7 @@ public class DiscussFuncView extends RelativeLayout implements View.OnClickListe
                 Glide.with(getContext()).load(path).into(mFullImageView);
             }
         });
+        mEmptyView = view.findViewById(R.id.tv_empty);
     }
 
     @Override
@@ -107,11 +111,16 @@ public class DiscussFuncView extends RelativeLayout implements View.OnClickListe
         mPosts.clear();
         mPosts.addAll(posts);
         mPostAdapter.notifyDataSetChanged();
+        mEmptyView.setVisibility(posts.isEmpty() ? VISIBLE : GONE);
     }
 
     public void update(Post posts) {
         mPosts.add(0, posts);
         mPostAdapter.notifyDataSetChanged();
+    }
+
+    public void setTitle(String msg) {
+        mTitleView.setText(msg);
     }
 
     public static class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
