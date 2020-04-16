@@ -25,6 +25,8 @@ import com.inlearning.app.common.bean.CourseChapter;
 import com.inlearning.app.common.util.StatusBar;
 import com.inlearning.app.common.util.ThreadMgr;
 
+import com.inlearning.app.common.util.ToastUtil;
+import com.inlearning.app.student.course.CourseModel;
 import com.inlearning.app.teacher.TeacherRuntime;
 import com.inlearning.app.teacher.attendclass.func.ChapterFunctionActivity;
 import com.inlearning.app.teacher.attendclass.func.video.VideoUploadMgr;
@@ -101,6 +103,12 @@ public class CourseChapterActivity extends AppCompatActivity implements View.OnC
         mChapterAdapter.setOnClickListener(new CourseChapterAdapter.OnClickListener() {
             @Override
             public void onTitleClick(CourseChapter chapter) {
+                showUpdateDialog(chapter);
+            }
+
+            @Override
+            public void onDeleteClick(ChapterProxy proxy) {
+                showDeleteDialog(proxy);
             }
 
             @Override
@@ -166,7 +174,8 @@ public class CourseChapterActivity extends AppCompatActivity implements View.OnC
         mChapterDialog = new Dialog(this, R.style.SimpleDialog);//SimpleDialog
         mChapterDialog.setContentView(R.layout.dialog_tea_add_chapter);
         mChapterDialog.setCanceledOnTouchOutside(true);
-        final TextInputEditText editText = mChapterDialog.findViewById(R.id.et_input_content);
+        final TextInputEditText chapterNameEt = mChapterDialog.findViewById(R.id.et_input_content);
+        final TextInputEditText chapterNumEt = mChapterDialog.findViewById(R.id.et_input_num);
         TextView cancelView = mChapterDialog.findViewById(R.id.tv_cancel);
         TextView confirmView = mChapterDialog.findViewById(R.id.tv_confirm);
         cancelView.setOnClickListener(new View.OnClickListener() {
@@ -178,10 +187,21 @@ public class CourseChapterActivity extends AppCompatActivity implements View.OnC
         confirmView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String chapterName = editText.getText().toString();
+                String chapterName = chapterNameEt.getText().toString();
                 if (TextUtils.isEmpty(chapterName)) {
                     Toast.makeText(CourseChapterActivity.this, "请输入章节名称", Toast.LENGTH_SHORT).show();
                     return;
+                }
+                String chapterNum = chapterNumEt.getText().toString();
+                if (TextUtils.isEmpty(chapterNum) || Integer.valueOf(chapterName) <= 0) {
+                    Toast.makeText(CourseChapterActivity.this, "请输入合法的章节序", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                for (ChapterProxy c : mChapters) {
+                    if (c.getChapter().getChapterNum() == Integer.valueOf(chapterNum)) {
+                        Toast.makeText(CourseChapterActivity.this, "该章节序已存在", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                 }
                 CourseChapter courseChapter = new CourseChapter();
                 courseChapter.setTeacher(TeacherRuntime.getCurrentTeacher());
@@ -296,5 +316,107 @@ public class CourseChapterActivity extends AppCompatActivity implements View.OnC
                 });
             }
         });
+    }
+
+    private void showDeleteDialog(final ChapterProxy proxy) {
+        final Dialog dialog = new Dialog(this, R.style.SimpleDialog);//SimpleDialog
+        dialog.setContentView(R.layout.dialog_delete);
+        TextView titleView = dialog.findViewById(R.id.tv_title);
+        titleView.setText("删除");
+        TextView infoView = dialog.findViewById(R.id.tv_content);
+        infoView.setText("确定删除该章节？删除后不可恢复");
+        TextView cancelView = dialog.findViewById(R.id.tv_cancel);
+        TextView confirmView = dialog.findViewById(R.id.tv_confirm);
+        cancelView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        confirmView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteCourseChapter(proxy);
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
+
+    private void deleteCourseChapter(ChapterProxy proxy) {
+        ChapterModel.deleteCourseChapter(proxy.getChapter(), new ChapterModel.Callback<Boolean>() {
+            @Override
+            public void onResult(Boolean aBoolean) {
+                ThreadMgr.getInstance().postToUIThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mChapters.remove(proxy);
+                        mChapterAdapter.notifyDataSetChanged();
+                        ToastUtil.showToast("删除成功", Toast.LENGTH_SHORT);
+                    }
+                });
+            }
+        });
+    }
+
+    private void showUpdateDialog(CourseChapter chapter) {
+        Dialog dialog = new Dialog(this, R.style.SimpleDialog);//SimpleDialog
+        dialog.setContentView(R.layout.dialog_tea_add_chapter);
+        dialog.setCanceledOnTouchOutside(true);
+        TextView titleView = dialog.findViewById(R.id.tv_title);
+        final TextInputEditText chapterNameEt = dialog.findViewById(R.id.et_input_content);
+        final TextInputEditText chapterNumEt = dialog.findViewById(R.id.et_input_num);
+        TextView cancelView = dialog.findViewById(R.id.tv_cancel);
+        TextView confirmView = dialog.findViewById(R.id.tv_confirm);
+        cancelView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        chapterNameEt.setText(chapter.getChapterName());
+        chapterNumEt.setText(String.valueOf(chapter.getChapterNum()));
+        confirmView.setText("更新");
+        titleView.setText("更新章节");
+        confirmView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String chapterName = chapterNameEt.getText().toString();
+                if (TextUtils.isEmpty(chapterName)) {
+                    Toast.makeText(CourseChapterActivity.this, "请输入章节名称", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                String chapterNum = chapterNumEt.getText().toString();
+                if (TextUtils.isEmpty(chapterNum) || Integer.valueOf(chapterNum) <= 0) {
+                    Toast.makeText(CourseChapterActivity.this, "请输入合法的章节序", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (chapterName.equals(chapter.getChapterName()) && Integer.valueOf(chapterNum) == chapter.getChapterNum()) {
+                    return;
+                }
+                for (ChapterProxy c : mChapters) {
+                    if (c.getChapter().getChapterNum() == Integer.valueOf(chapterNum) && Integer.valueOf(chapterNum) != chapter.getChapterNum()) {
+                        Toast.makeText(CourseChapterActivity.this, "该章节序已存在", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                }
+                chapter.setChapterNum(Integer.valueOf(chapterNum));
+                chapter.setChapterName(chapterName);
+                ChapterModel.updateCourseChapter(chapter, new ChapterModel.Callback<CourseChapter>() {
+                    @Override
+                    public void onResult(CourseChapter chapter) {
+                        ThreadMgr.getInstance().postToUIThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                mChapterAdapter.notifyDataSetChanged();
+                            }
+                        });
+                    }
+                });
+                dialog.dismiss();
+
+            }
+        });
+        dialog.show();
     }
 }

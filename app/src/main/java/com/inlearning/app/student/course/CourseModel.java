@@ -54,6 +54,7 @@ public class CourseModel {
         BmobQuery<CourseChapter> query = new BmobQuery<>();
         query.addWhereEqualTo("mTeacher", schedule.getTeacher());
         query.addWhereEqualTo("mCourse2", schedule.getCourse2());
+        query.order("mChapterNum");
         query.findObjects(new FindListener<CourseChapter>() {
             @Override
             public void done(List<CourseChapter> list, BmobException e) {

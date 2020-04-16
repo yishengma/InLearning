@@ -40,13 +40,13 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder,final int i) {
         final CourseChapter chapter = mChapters.get(i);
-        viewHolder.mChapterNameView.setText(String.format("第%s节 %s", i + 1, chapter.getChapterName().trim()));
+        viewHolder.mChapterNameView.setText(String.format("第%s节 %s", chapter.getChapterNum(), chapter.getChapterName().trim()));
         viewHolder.mChapterInfoView.setText(String.format("时间 %s", chapter.getCreatedAt().substring(0, 11)));
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (mListener != null) {
-                    mListener.onClick(chapter,i+1);
+                    mListener.onClick(chapter,chapter.getChapterNum());
                 }
             }
         });

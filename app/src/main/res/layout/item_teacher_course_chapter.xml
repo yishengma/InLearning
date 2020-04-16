@@ -15,6 +15,18 @@
         android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/tv_delete"
+        android:text="x"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:layout_alignTop="@+id/tv_chapter_num"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="24dp"
+        android:textColor="@color/textBlack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
         android:id="@+id/tv_chapter_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -33,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/tv_chapter_name"
         android:layout_alignParentEnd="true"
-        android:layout_marginRight="42dp"
+        android:layout_marginRight="48dp"
         android:src="@drawable/icon_play_gray" />
 
 
@@ -45,7 +57,7 @@
         android:layout_below="@id/imv_video_play"
         android:layout_alignParentRight="true"
         android:layout_marginTop="5dp"
-        android:layout_marginRight="24dp"
+        android:layout_marginRight="30dp"
         android:max="100"
         android:progress="10"
         android:progressDrawable="@drawable/bg_lesson_progress" />

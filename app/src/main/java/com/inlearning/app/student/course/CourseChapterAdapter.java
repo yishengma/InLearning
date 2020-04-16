@@ -62,7 +62,7 @@ public class CourseChapterAdapter extends RecyclerView.Adapter<CourseChapterAdap
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         final CourseChapter chapter = mCourseChapters.get(i);
-        viewHolder.mChapterNumView.setText(String.format("第%s节", i + 1));
+        viewHolder.mChapterNumView.setText(String.format("第%s节", chapter.getChapterNum()));
         viewHolder.mChapterNameView.setText(chapter.getChapterName());
         viewHolder.mChapterNameView.setOnClickListener(new View.OnClickListener() {
             @Override

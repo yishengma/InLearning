@@ -39,6 +39,8 @@ public class CourseChapterAdapter extends RecyclerView.Adapter<CourseChapterAdap
 
         void onTitleClick(CourseChapter chapter);
 
+        void onDeleteClick(ChapterProxy proxy);
+
         void onVideoClick(CourseChapter chapter);
 
         void onTimeClick(CourseChapter chapter);
@@ -72,6 +74,14 @@ public class CourseChapterAdapter extends RecyclerView.Adapter<CourseChapterAdap
             public void onClick(View v) {
                 if (mOnClickListener != null) {
                     mOnClickListener.onTitleClick(chapter);
+                }
+            }
+        });
+        viewHolder.mDeleteView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mOnClickListener != null) {
+                    mOnClickListener.onDeleteClick(proxy);
                 }
             }
         });
@@ -132,24 +142,7 @@ public class CourseChapterAdapter extends RecyclerView.Adapter<CourseChapterAdap
                 }
             }
         });
-//
-//        if (chapter.getExerciseCount() != 0) {
-//            viewHolder.mExerciseFuncView.setTextColor(R.color.app_global_blue);
-//            viewHolder.mExerciseFuncView.setIcon(R.drawable.icon_exercise_blue);
-//            viewHolder.mExerciseFuncView.setContent(chapter.getMaterialCount() + "个题目");
-//        } else {
-//            viewHolder.mExerciseFuncView.setTextColor(R.color.app_global_gray);
-//            viewHolder.mExerciseFuncView.setIcon(R.drawable.icon_exercise_gray);
-//            viewHolder.mExerciseFuncView.setContent("暂未上传");
-//        }
-//        viewHolder.mExerciseFuncView.setClickListener(new ChapterFuncItemView.ClickListener() {
-//            @Override
-//            public void onClick() {
-//                if (mOnClickListener != null) {
-//                    mOnClickListener.onExerciseClick(chapter);
-//                }
-//            }
-//        });
+
         if (chapter.getHomeworkCount() != 0) {
             viewHolder.mHomeworkFuncView.setTextColor(R.color.app_global_blue);
             viewHolder.mHomeworkFuncView.setIcon(R.drawable.icon_homework_blue);
@@ -199,6 +192,7 @@ public class CourseChapterAdapter extends RecyclerView.Adapter<CourseChapterAdap
         private TextView mChapterNumView;
         private TextView mChapterNameView;
         private ImageView mVideoView;
+        private TextView mDeleteView;
         private ChapterFuncItemView mTimeFuncView;
         private ChapterFuncItemView mMaterialFuncView;
 //        private ChapterFuncItemView mExerciseFuncView;
@@ -212,6 +206,7 @@ public class CourseChapterAdapter extends RecyclerView.Adapter<CourseChapterAdap
             mChapterNameView = itemView.findViewById(R.id.tv_chapter_name);
             mVideoView = itemView.findViewById(R.id.imv_video_play);
             mProgressBar = itemView.findViewById(R.id.view_progress);
+            mDeleteView = itemView.findViewById(R.id.tv_delete);
             mTimeFuncView = itemView.findViewById(R.id.func_time_view);
             mTimeFuncView.setText("截止时间");
             mMaterialFuncView = itemView.findViewById(R.id.func_material_view);
