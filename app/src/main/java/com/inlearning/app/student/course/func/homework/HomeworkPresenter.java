@@ -48,7 +48,7 @@ public class HomeworkPresenter {
             }
         });
         mHomeworkList = new ArrayList<>();
-        mHomeworkAdapter = new HomeworkAdapter(mHomeworkList, context);
+        mHomeworkAdapter = new HomeworkAdapter(mHomeworkList, context, chapter);
         mHomeworkAdapter.setClickListener(new HomeworkAdapter.ClickListener() {
             @Override
             public void onAddImage(Homework homework) {

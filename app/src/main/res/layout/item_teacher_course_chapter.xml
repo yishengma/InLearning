@@ -59,29 +59,15 @@
         android:layout_marginTop="20dp"
         android:background="@color/split_line" />
 
-    <com.inlearning.app.teacher.attendclass.ChapterFuncItemView
-        android:id="@+id/func_time_view"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_below="@id/split_line"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/bg_item_click" />
+
 
     <com.inlearning.app.teacher.attendclass.ChapterFuncItemView
         android:id="@+id/func_material_view"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_below="@id/func_time_view"
+        android:layout_below="@id/split_line"
         android:layout_marginTop="10dp"
         android:background="@drawable/bg_item_click" />
-
-<!--    <com.inlearning.app.teacher.attendclass.ChapterFuncItemView-->
-<!--        android:id="@+id/func_exercise_view"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="50dp"-->
-<!--        android:layout_below="@id/func_material_view"-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        android:background="@drawable/bg_item_click" />-->
 
     <com.inlearning.app.teacher.attendclass.ChapterFuncItemView
         android:id="@+id/func_homework_view"
@@ -92,10 +78,18 @@
         android:background="@drawable/bg_item_click" />
 
     <com.inlearning.app.teacher.attendclass.ChapterFuncItemView
-        android:id="@+id/func_discuss_view"
+        android:id="@+id/func_time_view"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_below="@id/func_homework_view"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_item_click" />
+
+    <com.inlearning.app.teacher.attendclass.ChapterFuncItemView
+        android:id="@+id/func_discuss_view"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/func_time_view"
         android:layout_marginTop="10dp"
         android:background="@drawable/bg_item_click" />
 

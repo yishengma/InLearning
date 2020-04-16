@@ -7,6 +7,7 @@ import android.util.Log;
 import com.dueeeke.videoplayer.ijk.IjkPlayerFactory;
 import com.dueeeke.videoplayer.player.VideoViewConfig;
 import com.dueeeke.videoplayer.player.VideoViewManager;
+import com.inlearning.app.common.util.DLog;
 import com.inlearning.app.common.util.ThreadMgr;
 import com.inlearning.app.director.DirectorAppRuntime;
 import com.inlearning.app.teacher.TeacherRuntime;
@@ -20,7 +21,7 @@ import java.util.HashMap;
 import cn.bmob.v3.Bmob;
 
 public class App extends Application {
-
+    private static final String TAG = "App";
     private static Context mContext;
 
     @Override
@@ -62,12 +63,12 @@ public class App extends Application {
 
             @Override
             public void onViewInitFinished(boolean arg0) {
-                // TODO Auto-generated method stub
+                DLog.i(TAG, "onViewInitFinished: "+arg0);
             }
 
             @Override
             public void onCoreInitFinished() {
-                // TODO Auto-generated method stub
+                DLog.i(TAG, "onCoreInitFinished");
 
             }
         };

@@ -17,6 +17,8 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.inlearning.app.R;
 import com.inlearning.app.common.bean.Answer;
+import com.inlearning.app.common.bean.Course2;
+import com.inlearning.app.common.bean.CourseChapter;
 import com.inlearning.app.common.bean.Question;
 import com.inlearning.app.student.StudentRuntime;
 
@@ -27,10 +29,12 @@ public class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.ViewHo
 
     private List<Homework> mHomeworkList;
     private Context mContext;
+    private CourseChapter mChapter;
 
-    public HomeworkAdapter(List<Homework> homework, Context context) {
+    public HomeworkAdapter(List<Homework> homework, Context context, CourseChapter chapter) {
         mHomeworkList = homework;
         mContext = context;
+        mChapter = chapter;
     }
 
     public interface ClickListener {
@@ -127,23 +131,31 @@ public class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.ViewHo
         }
         final Answer finalAnswer = answer;
         final Answer finalAnswer1 = answer;
-        if (!TextUtils.isEmpty(answer.getObjectId())) {
-            viewHolder.mUploadView.setText("已提交");
-            viewHolder.mUploadView.setBackground(mContext.getDrawable(R.drawable.bg_edit_gray_shape));
-            viewHolder.mUploadView.setEnabled(false);
-            viewHolder.mImageDeleteView.setEnabled(false);
-            viewHolder.mImageDeleteView.setVisibility(View.GONE);
-            viewHolder.mCheckBoxView.setEnabled(false);
-            setCheckBox(viewHolder.mCheckBoxView,false);
-        }else {
-            viewHolder.mImageDeleteView.setVisibility(View.VISIBLE);
-            viewHolder.mImageDeleteView.setEnabled(true);
-            viewHolder.mCheckBoxView.setEnabled(true);
-            viewHolder.mUploadView.setEnabled(true);
-            viewHolder.mUploadView.setBackground(mContext.getDrawable(R.drawable.bg_edit_blue_shape));
-            setCheckBox(viewHolder.mCheckBoxView,true);
+        if (!TextUtils.isEmpty(mChapter.getDeadLine())) {
+            long deadline = Long.valueOf(mChapter.getDeadLine());
+            if (deadline < System.currentTimeMillis()) {
+                viewHolder.mUploadView.setText("已过期");
+                viewHolder.mUploadView.setBackground(mContext.getDrawable(R.drawable.bg_edit_gray_shape));
+                viewHolder.mUploadView.setEnabled(false);
+            } else {
+                if (!TextUtils.isEmpty(answer.getObjectId())) {
+                    viewHolder.mUploadView.setText("已提交");
+                    viewHolder.mUploadView.setBackground(mContext.getDrawable(R.drawable.bg_edit_gray_shape));
+                    viewHolder.mUploadView.setEnabled(false);
+                    viewHolder.mImageDeleteView.setEnabled(false);
+                    viewHolder.mImageDeleteView.setVisibility(View.GONE);
+                    viewHolder.mCheckBoxView.setEnabled(false);
+                    setCheckBox(viewHolder.mCheckBoxView, false);
+                } else {
+                    viewHolder.mImageDeleteView.setVisibility(View.VISIBLE);
+                    viewHolder.mImageDeleteView.setEnabled(true);
+                    viewHolder.mCheckBoxView.setEnabled(true);
+                    viewHolder.mUploadView.setEnabled(true);
+                    viewHolder.mUploadView.setBackground(mContext.getDrawable(R.drawable.bg_edit_blue_shape));
+                    setCheckBox(viewHolder.mCheckBoxView, true);
+                }
+            }
         }
-
         viewHolder.mUploadView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -191,13 +203,13 @@ public class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.ViewHo
             CheckBox box = (CheckBox) layout.getChildAt(i);
             if (list.contains(box.getText().toString())) {
                 box.setChecked(true);
-            }else {
+            } else {
                 box.setChecked(false);
             }
         }
     }
 
-    private void setCheckBox(LinearLayout layout,boolean enable) {
+    private void setCheckBox(LinearLayout layout, boolean enable) {
         for (int i = 0; i < layout.getChildCount(); i++) {
             CheckBox box = (CheckBox) layout.getChildAt(i);
             box.setEnabled(enable);

@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.inlearning.app.R;
 import com.inlearning.app.common.bean.CourseChapter;
+import com.inlearning.app.common.util.ToastUtil;
 
 
 import java.text.DateFormat;
@@ -116,24 +117,6 @@ public class CourseChapterAdapter extends RecyclerView.Adapter<CourseChapterAdap
                 }
             }
         });
-//
-//        if (chapter.getExerciseCount() != 0) {
-//            viewHolder.mExerciseFuncView.setTextColor(R.color.app_global_blue);
-//            viewHolder.mExerciseFuncView.setIcon(R.drawable.icon_exercise_blue);
-//            viewHolder.mExerciseFuncView.setContent(chapter.getMaterialCount() + "个题目");
-//        } else {
-//            viewHolder.mExerciseFuncView.setTextColor(R.color.app_global_gray);
-//            viewHolder.mExerciseFuncView.setIcon(R.drawable.icon_exercise_gray);
-//            viewHolder.mExerciseFuncView.setContent("暂未上传");
-//        }
-//        viewHolder.mExerciseFuncView.setClickListener(new ChapterFuncItemView.ClickListener() {
-//            @Override
-//            public void onClick() {
-//                if (mOnClickListener != null) {
-//                    mOnClickListener.onExerciseClick(chapter);
-//                }
-//            }
-//        });
         if (chapter.getHomeworkCount() != 0) {
             viewHolder.mHomeworkFuncView.setTextColor(R.color.app_global_blue);
             viewHolder.mHomeworkFuncView.setIcon(R.drawable.icon_homework_blue);
@@ -194,7 +177,7 @@ public class CourseChapterAdapter extends RecyclerView.Adapter<CourseChapterAdap
             mChapterNameView = itemView.findViewById(R.id.tv_chapter_name);
             mVideoView = itemView.findViewById(R.id.imv_video_play);
             mTimeFuncView = itemView.findViewById(R.id.func_time_view);
-            mTimeFuncView.setText("时间");
+            mTimeFuncView.setText("截止时间");
             mMaterialFuncView = itemView.findViewById(R.id.func_material_view);
             mMaterialFuncView.setText("资料");
             mHomeworkFuncView = itemView.findViewById(R.id.func_homework_view);

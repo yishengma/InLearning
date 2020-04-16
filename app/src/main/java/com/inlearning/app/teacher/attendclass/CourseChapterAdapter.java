@@ -213,7 +213,7 @@ public class CourseChapterAdapter extends RecyclerView.Adapter<CourseChapterAdap
             mVideoView = itemView.findViewById(R.id.imv_video_play);
             mProgressBar = itemView.findViewById(R.id.view_progress);
             mTimeFuncView = itemView.findViewById(R.id.func_time_view);
-            mTimeFuncView.setText("时间");
+            mTimeFuncView.setText("截止时间");
             mMaterialFuncView = itemView.findViewById(R.id.func_material_view);
             mMaterialFuncView.setText("资料");
 //            mExerciseFuncView = itemView.findViewById(R.id.func_exercise_view);
