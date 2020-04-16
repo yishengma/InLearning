@@ -35,7 +35,6 @@ public class DiscussPresenter {
                 mSendPostView.show();
             }
         });
-        mSendPostView.setChapter(mChapter);
         mSendPostView.setStudent(StudentRuntime.getStudent());
         mSendPostView.setPostListener(new SendPostView.SendPostListener() {
             @Override
@@ -50,6 +49,8 @@ public class DiscussPresenter {
             }
         });
         mChapter = chapter;
+        mSendPostView.setChapter(mChapter);
+        mDiscussFuncView.setTitle(mChapter.getChapterName()+"/讨论");
         initData();
     }
 

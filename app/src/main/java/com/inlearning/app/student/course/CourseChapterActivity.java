@@ -15,6 +15,7 @@ import com.inlearning.app.R;
 import com.inlearning.app.common.bean.ClassSchedule;
 import com.inlearning.app.common.bean.Course2;
 import com.inlearning.app.common.bean.CourseChapter;
+import com.inlearning.app.common.util.LoadingDialogUtil;
 import com.inlearning.app.common.util.StatusBar;
 import com.inlearning.app.common.util.ThreadMgr;
 import com.inlearning.app.student.course.func.ChapterFunctionActivity;
@@ -42,6 +43,7 @@ public class CourseChapterActivity extends AppCompatActivity implements View.OnC
     private RecyclerView mRvChapter;
     private CourseChapterAdapter mChapterAdapter;
     private List<CourseChapter> mChapters;
+    private TextView mEmptyView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +81,7 @@ public class CourseChapterActivity extends AppCompatActivity implements View.OnC
         mAddView.setVisibility(View.GONE);
         mTitleView.setText(mClassSchedule.getCourse2().getName());
         mRvChapter = findViewById(R.id.rv_chapter);
+        mEmptyView = findViewById(R.id.tv_empty);
         mChapters = new ArrayList<>();
         mChapterAdapter = new CourseChapterAdapter(mChapters);
         mRvChapter.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
@@ -131,10 +134,12 @@ public class CourseChapterActivity extends AppCompatActivity implements View.OnC
     }
 
     private void initData() {
+        LoadingDialogUtil.showLoadingDialog(this, "正在加载...");
         CourseModel.getCourseChapter(mClassSchedule, new ChapterModel.Callback<List<CourseChapter>>() {
             @Override
             public void onResult(List<CourseChapter> courseChapters) {
                 Log.e("ethan", "" + courseChapters.size());
+                LoadingDialogUtil.closeDialog();
                 updateChapters(courseChapters);
             }
         });
@@ -147,6 +152,7 @@ public class CourseChapterActivity extends AppCompatActivity implements View.OnC
                 mChapters.clear();
                 mChapters.addAll(courseChapters);
                 mChapterAdapter.notifyDataSetChanged();
+                mEmptyView.setVisibility(mChapters.isEmpty() ? View.VISIBLE : View.GONE);
             }
         });
     }

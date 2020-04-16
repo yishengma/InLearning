@@ -113,7 +113,7 @@ public class MaterialTbsView extends RelativeLayout implements View.OnClickListe
             Log.e("ethan", parseName(filePath));
             mDownloadTextView.setText("打开文件");
             mDownloadTextView.setVisibility(View.GONE);
-            displayFile();
+            displayFile(true);
         } else {
             if (!filePath.contains("http")) {
                 new AlertDialog.Builder(getContext())
@@ -160,8 +160,10 @@ public class MaterialTbsView extends RelativeLayout implements View.OnClickListe
     }
 
 
-    private void displayFile() {
-        Toast.makeText(getContext(),"已下载到/Download/文件夹",Toast.LENGTH_SHORT).show();
+    private void displayFile(boolean isLocal) {
+        if (!isLocal) {
+            Toast.makeText(getContext(),"已下载到/Download/文件夹",Toast.LENGTH_SHORT).show();
+        }
         mProgressBar.setVisibility(GONE);
         mDownloadTextView.setVisibility(GONE);
         mTbsReaderView.setVisibility(VISIBLE);
@@ -255,7 +257,7 @@ public class MaterialTbsView extends RelativeLayout implements View.OnClickListe
                 Log.i("downloadUpdate: ", currentBytes + " " + totalBytes + " " + status + " " + progress);
                 if (DownloadManager.STATUS_SUCCESSFUL == status && mDownloadTextView.getVisibility() == View.VISIBLE) {
                     if (isLocalExist(parseName(mFileUrl))) {
-                        displayFile();
+                        displayFile(false);
                     }
                 }
             }

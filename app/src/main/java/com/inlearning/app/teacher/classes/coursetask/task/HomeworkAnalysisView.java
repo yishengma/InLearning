@@ -50,6 +50,7 @@ public class HomeworkAnalysisView extends LinearLayout {
     private RecyclerView mRvStuAnswer;
     private AnswerAdapter mAnswerAdapter;
     private List<Answer> mAnswers;
+    private TextView mEmptyView;
 
 
     private void initView() {
@@ -57,7 +58,8 @@ public class HomeworkAnalysisView extends LinearLayout {
         mPieChartLayout = view.findViewById(R.id.view_pie_chart);
         mPieChart = view.findViewById(R.id.pie_chart_view);
         mRvStuAnswer = view.findViewById(R.id.rv_content);
-        mRvStuAnswer.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
+        mRvStuAnswer.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        mEmptyView = view.findViewById(R.id.tv_empty);
     }
 
     public void setAnswerAdapter(List<Answer> answers, Question question) {
@@ -65,6 +67,7 @@ public class HomeworkAnalysisView extends LinearLayout {
         mAnswers.addAll(answers);
         mAnswerAdapter = new AnswerAdapter(mAnswers, question);
         mRvStuAnswer.setAdapter(mAnswerAdapter);
+        mEmptyView.setVisibility(mAnswers.isEmpty() ? VISIBLE : GONE);
     }
 
     private void initPieChart() {
@@ -91,6 +94,10 @@ public class HomeworkAnalysisView extends LinearLayout {
 
 
     public void setData(List<Answer> answers, Question question) {
+        if (answers.isEmpty()) {
+            mEmptyView.setVisibility(answers.isEmpty() ? VISIBLE : GONE);
+            return;
+        }
         HashMap<String, Integer> answerMap = new HashMap<>();
         int total = answers.size();
         int progress = 0;

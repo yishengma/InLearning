@@ -148,4 +148,22 @@ public class HomeworkDetailActivity extends AppCompatActivity implements View.On
                 break;
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        if (mHomeworkCheckView.getVisibility() == View.VISIBLE) {
+            mHomeworkCheckView.setVisibility(View.GONE);
+            if (mFlag == HOMEWORK_DETAIL) {
+                mHomeworkAnalysisView.setVisibility(View.GONE);
+                mHomeworkDetailView.setVisibility(View.VISIBLE);
+            }
+            if (mFlag == HOMEWORK_ANALYSIS) {
+                mHomeworkAnalysisView.setVisibility(View.VISIBLE);
+                mHomeworkDetailView.setVisibility(View.GONE);
+            }
+            mBarLayout.setVisibility(View.VISIBLE);
+            return;
+        }
+        super.onBackPressed();
+    }
 }

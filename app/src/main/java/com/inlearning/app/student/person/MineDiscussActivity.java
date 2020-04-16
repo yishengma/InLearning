@@ -48,6 +48,7 @@ public class MineDiscussActivity extends AppCompatActivity implements View.OnCli
     private ImageView mEditPostView;
     private ImageView mBackView;
     private ImageView mFullImageView;
+    private TextView mEmptyView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +90,7 @@ public class MineDiscussActivity extends AppCompatActivity implements View.OnCli
                 showDialog(post);
             }
         });
+        mEmptyView = findViewById(R.id.tv_empty);
     }
 
     @Override
@@ -121,11 +123,13 @@ public class MineDiscussActivity extends AppCompatActivity implements View.OnCli
         mPosts.clear();
         mPosts.addAll(posts);
         mPostAdapter.notifyDataSetChanged();
+        mEmptyView.setVisibility(mPosts.isEmpty() ? VISIBLE : GONE);
     }
 
     public void update(Post posts) {
         mPosts.add(0, posts);
         mPostAdapter.notifyDataSetChanged();
+        mEmptyView.setVisibility(mPosts.isEmpty() ? VISIBLE : GONE);
     }
 
 
@@ -164,6 +168,7 @@ public class MineDiscussActivity extends AppCompatActivity implements View.OnCli
                     public void run() {
                         mPosts.remove(post);
                         mPostAdapter.notifyDataSetChanged();
+                        mEmptyView.setVisibility(mPosts.isEmpty() ? VISIBLE : GONE);
                     }
                 });
             }
@@ -182,6 +187,7 @@ public class MineDiscussActivity extends AppCompatActivity implements View.OnCli
 
     public static class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         private List<Post> mPosts;
+        private Context mContext;
 
         public PostAdapter(List<Post> posts) {
             mPosts = posts;
@@ -203,6 +209,7 @@ public class MineDiscussActivity extends AppCompatActivity implements View.OnCli
         @NonNull
         @Override
         public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+            mContext = viewGroup.getContext();
             return new ViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_func_discuss, viewGroup, false));
         }
 
@@ -240,6 +247,11 @@ public class MineDiscussActivity extends AppCompatActivity implements View.OnCli
                     DiscussDetailActivity.startActivity(viewHolder.itemView.getContext(), post);
                 }
             });
+            if (post.getStudent() != null && !TextUtils.isEmpty(post.getStudent().getProfilePhotoUrl())) {
+                Glide.with(mContext).load(post.getStudent().getProfilePhotoUrl()).into(viewHolder.mUserImageView);
+            } else {
+                viewHolder.mUserImageView.setBackground(mContext.getDrawable(R.drawable.viewpage_guide_2));
+            }
         }
 
         @Override

@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.inlearning.app.R;
@@ -19,6 +20,8 @@ import com.inlearning.app.common.bean.Answer;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import cn.bmob.v3.util.V;
 
 public class HomeworkDetailView extends LinearLayout {
 
@@ -38,6 +41,7 @@ public class HomeworkDetailView extends LinearLayout {
     private RecyclerView mRvAnswer;
     private List<Answer> mAnswers;
     private AnswerAdapter mAnswerAdapter;
+    private TextView mEmptyView;
 
     private void initView() {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.view_homework_detail, this);
@@ -46,6 +50,7 @@ public class HomeworkDetailView extends LinearLayout {
         mAnswers = new ArrayList<>();
         mAnswerAdapter = new AnswerAdapter(mAnswers);
         mRvAnswer.setAdapter(mAnswerAdapter);
+        mEmptyView = view.findViewById(R.id.tv_empty);
     }
 
     public void setAnswers(List<Answer> list) {
@@ -53,7 +58,7 @@ public class HomeworkDetailView extends LinearLayout {
         mAnswers.clear();
         mAnswers.addAll(list);
         mAnswerAdapter.notifyDataSetChanged();
-        Log.e("ethan", "suzeL" + list.size());
+        mEmptyView.setVisibility(list.isEmpty()? VISIBLE:GONE);
     }
 
 
@@ -73,7 +78,6 @@ public class HomeworkDetailView extends LinearLayout {
         @Override
         public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
             Answer answer = mAdapterAnswers.get(i);
-            Log.e("ethan", "" + answer.getImageUrl());
             Glide.with(viewHolder.itemView.getContext()).load(answer.getImageUrl()).into(viewHolder.mAnswerView);
         }
 

@@ -19,6 +19,7 @@ import com.inlearning.app.R;
 import com.inlearning.app.common.bean.CourseChapter;
 import com.inlearning.app.common.bean.Post;
 import com.inlearning.app.common.bean.Student;
+import com.inlearning.app.common.util.LoadingDialogUtil;
 import com.inlearning.app.common.util.ThreadMgr;
 
 import java.io.File;
@@ -168,12 +169,14 @@ public class SendPostView extends BaseFuncView implements View.OnClickListener {
         post.setTitle(title);
         post.setChapter(mChapter);
         post.setStudent(mStudent);
+        LoadingDialogUtil.showLoadingDialog(getContext(),"发布中...");
         ThreadMgr.getInstance().postToSubThread(new Runnable() {
             @Override
             public void run() {
                 DiscussModel.sendPost(post, new DiscussModel.Callback<Post>() {
                     @Override
                     public void onResult(Post post) {
+                        LoadingDialogUtil.closeDialog();
                         if (mPostListener != null) {
                             mPostListener.onSendPost(post);
                         }

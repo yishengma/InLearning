@@ -56,6 +56,12 @@ public class DiscussModel {
                         }
                     });
                     post.getChapter().increment("mDiscussCount", 1);
+                    post.getChapter().update(new UpdateListener() {
+                        @Override
+                        public void done(BmobException e) {
+
+                        }
+                    });
                 }
             });
         } else {
@@ -65,6 +71,12 @@ public class DiscussModel {
                     post.setObjectId(s);
                     callback.onResult(post);
                     post.getChapter().increment("mDiscussCount", 1);
+                    post.getChapter().update(new UpdateListener() {
+                        @Override
+                        public void done(BmobException e) {
+
+                        }
+                    });
                 }
             });
         }

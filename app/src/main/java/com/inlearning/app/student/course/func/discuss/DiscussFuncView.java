@@ -55,6 +55,8 @@ public class DiscussFuncView extends RelativeLayout implements View.OnClickListe
     private ImageView mEditPostView;
     private ImageView mBackView;
     private ImageView mFullImageView;
+    private TextView mEmptyView;
+    private TextView mTitleView;
 
     private void initView() {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.view_student_discuss_function, this);
@@ -68,7 +70,7 @@ public class DiscussFuncView extends RelativeLayout implements View.OnClickListe
         mEditPostView.setOnClickListener(this);
         mBackView.setOnClickListener(this);
         mFullImageView = view.findViewById(R.id.imv_full_image);
-        mFullImageView.setOnClickListener(new View.OnClickListener(){
+        mFullImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -77,11 +79,13 @@ public class DiscussFuncView extends RelativeLayout implements View.OnClickListe
         });
         mPostAdapter.setClickListener(new PostAdapter.ClickListener() {
             @Override
-            public void onClicl(String path) {
+            public void onClick(String path) {
                 mFullImageView.setVisibility(VISIBLE);
                 Glide.with(getContext()).load(path).into(mFullImageView);
             }
         });
+        mEmptyView = view.findViewById(R.id.tv_empty);
+        mTitleView = view.findViewById(R.id.tv_bar_title);
     }
 
     @Override
@@ -102,19 +106,25 @@ public class DiscussFuncView extends RelativeLayout implements View.OnClickListe
     }
 
     public void setPosts(List<Post> posts) {
-        Log.e("ethan",posts.size()+"");
         mPosts.clear();
         mPosts.addAll(posts);
         mPostAdapter.notifyDataSetChanged();
+        mEmptyView.setVisibility(mPosts.isEmpty() ? VISIBLE : GONE);
     }
 
     public void update(Post posts) {
         mPosts.add(0, posts);
         mPostAdapter.notifyDataSetChanged();
+        mEmptyView.setVisibility(mPosts.isEmpty() ? VISIBLE : GONE);
+    }
+
+    public void setTitle(String msg) {
+        mTitleView.setText(msg);
     }
 
     public static class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         private List<Post> mPosts;
+        private Context mContext;
 
         public PostAdapter(List<Post> posts) {
             mPosts = posts;
@@ -122,7 +132,7 @@ public class DiscussFuncView extends RelativeLayout implements View.OnClickListe
 
 
         public interface ClickListener {
-            void onClicl(String path);
+            void onClick(String path);
         }
 
         private ClickListener mClickListener;
@@ -134,6 +144,7 @@ public class DiscussFuncView extends RelativeLayout implements View.OnClickListe
         @NonNull
         @Override
         public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+            mContext = viewGroup.getContext();
             return new ViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_func_discuss, viewGroup, false));
         }
 
@@ -144,11 +155,11 @@ public class DiscussFuncView extends RelativeLayout implements View.OnClickListe
             if (!TextUtils.isEmpty(post.getImageUrl())) {
                 Glide.with(viewHolder.itemView.getContext()).load(post.getImageUrl()).into(viewHolder.mContentImageView);
                 viewHolder.mContentImageView.setVisibility(VISIBLE);
-                viewHolder.mContentImageView.setOnClickListener(new View.OnClickListener(){
+                viewHolder.mContentImageView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         if (mClickListener != null) {
-                            mClickListener.onClicl(post.getImageUrl());
+                            mClickListener.onClick(post.getImageUrl());
                         }
                     }
                 });
@@ -162,6 +173,11 @@ public class DiscussFuncView extends RelativeLayout implements View.OnClickListe
                     DiscussDetailActivity.startActivity(viewHolder.itemView.getContext(), post);
                 }
             });
+            if (post.getStudent() != null && !TextUtils.isEmpty(post.getStudent().getProfilePhotoUrl())) {
+                Glide.with(mContext).load(post.getStudent().getProfilePhotoUrl()).into(viewHolder.mUserImageView);
+            } else {
+                viewHolder.mUserImageView.setBackground(mContext.getDrawable(R.drawable.viewpage_guide_2));
+            }
         }
 
         @Override

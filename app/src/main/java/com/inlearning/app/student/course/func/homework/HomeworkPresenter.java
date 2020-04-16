@@ -18,6 +18,7 @@ import com.inlearning.app.R;
 import com.inlearning.app.common.bean.Answer;
 import com.inlearning.app.common.bean.CourseChapter;
 import com.inlearning.app.common.util.FileUtil;
+import com.inlearning.app.common.util.LoadingDialogUtil;
 import com.inlearning.app.common.util.PhotoUtils;
 import com.inlearning.app.common.util.TakePhotoUtil;
 import com.inlearning.app.common.util.ThreadMgr;
@@ -64,9 +65,11 @@ public class HomeworkPresenter {
 
             @Override
             public void onSaveAnswer(final Homework homework) {
+                LoadingDialogUtil.showLoadingDialog(mContext, "正在保存...");
                 HomeworkModel.uploadAnswer(homework.getAnswer(), new HomeworkModel.Callback<Answer>() {
                     @Override
                     public void onResult(final Answer answer) {
+                        LoadingDialogUtil.closeDialog();
                         ThreadMgr.getInstance().postToUIThread(new Runnable() {
                             @Override
                             public void run() {
