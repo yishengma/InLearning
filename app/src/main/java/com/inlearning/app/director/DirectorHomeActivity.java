@@ -35,6 +35,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DirectorHomeActivity extends AppCompatActivity implements View.OnClickListener {
+
+    public static void startHomePageActivity(Context context) {
+        Intent intent = new Intent(context, DirectorHomeActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        context.startActivity(intent);
+    }
+
     private static final String TAG = "DirectorHomeActivity";
     private TabLayout mBottomTab;
     private CommonFragmentStatePagerAdapter mFragmentAdapter;
@@ -237,8 +244,4 @@ public class DirectorHomeActivity extends AppCompatActivity implements View.OnCl
     }
 
 
-    public static void startHomePageActivity(Context context) {
-        Intent intent = new Intent(context, DirectorHomeActivity.class);
-        context.startActivity(intent);
-    }
 }

@@ -33,6 +33,7 @@ public class TeacherHomeActivity extends AppCompatActivity implements View.OnCli
 
     public static void startHomePageActivity(Context context) {
         Intent intent = new Intent(context, TeacherHomeActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         context.startActivity(intent);
     }
 
