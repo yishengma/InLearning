@@ -51,7 +51,7 @@ public class ClassInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         if (viewHolder instanceof InfoViewHolder) {
             final ClassInfo classInfo = proxy.getSchedule().getClassInfo();
             ((InfoViewHolder) viewHolder).mClassInfo.setText(classInfo.getName());
-            ((InfoViewHolder) viewHolder).mClassCount.setText(String.valueOf(classInfo.getCount()));
+            ((InfoViewHolder) viewHolder).mClassCount.setText(String.format("%s个学生",classInfo.getCount()));
             viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

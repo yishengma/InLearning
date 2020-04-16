@@ -22,6 +22,8 @@ import com.openxu.utils.DensityUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.bmob.v3.util.V;
+
 public class HomeworkView extends LinearLayout {
 
     public HomeworkView(Context context) {
@@ -42,6 +44,7 @@ public class HomeworkView extends LinearLayout {
     private RecyclerView mRvHomeWork;
     private HomeworkAdapter mHomeworkAdapter;
     private List<Question> mQuestions;
+    private TextView mEmptyView;
 
     private void initView() {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.view_tea_course_task_homework, this);
@@ -51,6 +54,7 @@ public class HomeworkView extends LinearLayout {
         mQuestions = new ArrayList<>();
         mHomeworkAdapter = new HomeworkAdapter(mQuestions);
         mRvHomeWork.setAdapter(mHomeworkAdapter);
+        mEmptyView = view.findViewById(R.id.tv_empty);
     }
 
     private void initPieChart() {
@@ -61,6 +65,15 @@ public class HomeworkView extends LinearLayout {
     }
 
     public void setPieChartData(int questionCount, List<Integer> answerCountPerStu) {
+        if (answerCountPerStu == null || answerCountPerStu.isEmpty()) {
+            List<ChartLable> lables = new ArrayList<>();
+            lables.add(new ChartLable(String.valueOf(0 * 100.0 / 100) + " %",
+                    DensityUtil.sp2px(getContext(), 18), getResources().getColor(R.color.app_global_blue)));
+            lables.add(new ChartLable("完成率",
+                    DensityUtil.sp2px(getContext(), 12), getResources().getColor(R.color.text_color_light_gray)));
+            mPieChart.setData(100, 0, lables);
+            return;
+        }
         int total = answerCountPerStu.size();
         int progress = 0;
         for (Integer i : answerCountPerStu) {
@@ -79,6 +92,7 @@ public class HomeworkView extends LinearLayout {
         mQuestions.clear();
         mQuestions.addAll(questions);
         mHomeworkAdapter.notifyDataSetChanged();
+        mEmptyView.setVisibility(questions.isEmpty() ? VISIBLE : GONE);
     }
 
     public HomeworkAdapter getHomeworkAdapter() {

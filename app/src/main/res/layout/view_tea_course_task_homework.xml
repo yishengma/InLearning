@@ -12,7 +12,12 @@
         android:layout_marginTop="12dp"
         android:layout_marginBottom="12dp"
         android:background="@color/app_global_white" />
-
+    <TextView
+        android:id="@+id/tv_empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="暂未布置" />
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_homework"
         android:layout_width="match_parent"

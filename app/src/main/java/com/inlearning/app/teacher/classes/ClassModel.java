@@ -42,11 +42,13 @@ public class ClassModel {
         query.findObjects(new FindListener<ClassSchedule>() {
             @Override
             public void done(List<ClassSchedule> list, BmobException e) {
-                if (list != null) {
-                    Log.e("ethan", "ClassModel:" + list.size());
+                if (list == null) {
+                    callback.onResult(new ArrayList<>());
+                    return;
                 }
-                if (e != null) {
-                    Log.e("ethan", e.getMessage());
+                if (e == null) {
+                    callback.onResult(new ArrayList<>());
+                    return;
                 }
                 Map<String, List<ClassSchedule>> map = new HashMap<>();
                 for (ClassSchedule schedule : list) {

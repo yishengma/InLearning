@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,6 +20,8 @@ import com.inlearning.app.teacher.attendclass.ChapterModel;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import cn.bmob.v3.util.V;
 
 public class ChapterActivity extends AppCompatActivity {
 
@@ -34,6 +37,7 @@ public class ChapterActivity extends AppCompatActivity {
     private ChapterAdapter mAdapter;
     private ImageView mBackView;
     private TextView mTitleView;
+    private TextView mEmptyView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,12 +54,13 @@ public class ChapterActivity extends AppCompatActivity {
         mBackView = findViewById(R.id.imv_bar_back);
         mTitleView = findViewById(R.id.tv_edit_title);
         mRvChapter = findViewById(R.id.rv_chapter);
+        mEmptyView = findViewById(R.id.tv_empty);
         mChapters = new ArrayList<>();
         mAdapter = new ChapterAdapter(mChapters);
         mAdapter.setListener(new ChapterAdapter.ClickListener() {
             @Override
             public void onClick(CourseChapter courseChapter, int position) {
-                CourseTaskActivity.startActivity(ChapterActivity.this, mSchedule, courseChapter,position);
+                CourseTaskActivity.startActivity(ChapterActivity.this, mSchedule, courseChapter, position);
             }
         });
         mRvChapter.setAdapter(mAdapter);
@@ -70,7 +75,7 @@ public class ChapterActivity extends AppCompatActivity {
 
     private void getIntentData() {
         mSchedule = (ClassSchedule) getIntent().getSerializableExtra("classschedule");
-        mTitleView.setText(String.format("%s/%s", mSchedule.getClassInfo().getName(), mSchedule.getCourse2().getName()));
+        mTitleView.setText(String.format("%s/%s", mSchedule.getCourse2().getName(), mSchedule.getClassInfo().getName()));
     }
 
     private void initData() {
@@ -80,9 +85,11 @@ public class ChapterActivity extends AppCompatActivity {
                 ThreadMgr.getInstance().postToUIThread(new Runnable() {
                     @Override
                     public void run() {
+                        Log.e("ethan", "chapterActivity" + courseChapters.size());
                         mChapters.clear();
                         mChapters.addAll(courseChapters);
                         mAdapter.notifyDataSetChanged();
+                        mEmptyView.setVisibility(mChapters.isEmpty() ? View.VISIBLE : View.GONE);
                     }
                 });
             }

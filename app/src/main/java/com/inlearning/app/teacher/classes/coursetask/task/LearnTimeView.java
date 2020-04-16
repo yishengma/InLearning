@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.inlearning.app.R;
 import com.inlearning.app.common.bean.ChapterProgress;
@@ -41,11 +42,13 @@ public class LearnTimeView extends LinearLayout {
 
     private ProgressPieChart mPieChart;
     private BarHorizontalChart mHorizontalChart;
+    private TextView mEmptyView;
 
     private void initView() {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.view_tea_course_task_learn_time, this);
         mPieChart = view.findViewById(R.id.pie_chart_view);
         mHorizontalChart = view.findViewById(R.id.bar_horizontal_chart_view);
+        mEmptyView = view.findViewById(R.id.tv_empty);
     }
 
 
@@ -57,18 +60,28 @@ public class LearnTimeView extends LinearLayout {
     }
 
     private void setPieChartData(List<ChapterProgress> progresses) {
+        if (progresses == null || progresses.isEmpty()) {
+            List<ChartLable> lables = new ArrayList<>();
+            lables.add(new ChartLable(String.valueOf(0 * 100.0 / 100) + " %",
+                    DensityUtil.sp2px(getContext(), 18), getResources().getColor(R.color.app_global_blue)));
+            lables.add(new ChartLable("完成率",
+                    DensityUtil.sp2px(getContext(), 12), getResources().getColor(R.color.text_color_light_gray)));
+            mPieChart.setData(100, 0, lables);
+            return;
+        }
         int total = progresses.size();
         int progress = 0;
         for (ChapterProgress s : progresses) {
             progress += s.isDone() ? 1 : 0;
         }
+
         List<ChartLable> lables = new ArrayList<>();
         lables.add(new ChartLable(String.valueOf(progress * 100.0 / total) + " %",
                 DensityUtil.sp2px(getContext(), 18), getResources().getColor(R.color.app_global_blue)));
         lables.add(new ChartLable("完成率",
                 DensityUtil.sp2px(getContext(), 12), getResources().getColor(R.color.text_color_light_gray)));
         mPieChart.setData(total, progress, lables);
-        Log.e("ethan","setPieChartData:"+progresses.size());
+        Log.e("ethan", "setPieChartData:" + progresses.size());
     }
 
     private void initHorizontalChart() {
@@ -80,6 +93,11 @@ public class LearnTimeView extends LinearLayout {
     }
 
     private void setBarChartData(List<ChapterProgress> progresses) {
+        if (progresses == null || progresses.isEmpty()) {
+            mEmptyView.setVisibility(VISIBLE);
+            return;
+        }
+        mEmptyView.setVisibility(GONE);
         List<String> strXList = new ArrayList<>();
         List<List<TimeBarBean>> dataList = new ArrayList<>();
         for (ChapterProgress progress : progresses) {
@@ -88,7 +106,7 @@ public class LearnTimeView extends LinearLayout {
         }
         mHorizontalChart.setLoading(false);
         mHorizontalChart.setData(dataList, strXList);
-        Log.e("ethan","setBarChartData:"+progresses.size());
+        Log.e("ethan", "setBarChartData:" + progresses.size());
     }
 
     public void setData(List<ChapterProgress> progresses) {

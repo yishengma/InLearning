@@ -8,17 +8,23 @@
         android:id="@+id/pie_chart_view"
         android:layout_width="match_parent"
         android:layout_height="120dp"
+        android:layout_gravity="center"
         android:layout_marginTop="12dp"
         android:layout_marginBottom="12dp"
-        android:layout_gravity="center"
         android:background="@color/app_global_white" />
+
+    <TextView
+        android:id="@+id/tv_empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="暂无观看记录" />
 
     <com.openxu.cview.chart.barchart.BarHorizontalChart
         android:id="@+id/bar_horizontal_chart_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="20dp"
-        android:layout_marginRight="24dp"
         android:background="@color/app_global_white"
         android:padding="10dp" />
 </LinearLayout>
