@@ -1,15 +1,20 @@
 package com.inlearning.app.teacher.attendclass;
 
+import android.util.Log;
+
 import com.inlearning.app.common.bean.ClassSchedule;
 import com.inlearning.app.common.bean.Course2;
 import com.inlearning.app.common.bean.CourseChapter;
 import com.inlearning.app.common.bean.Teacher;
 import com.inlearning.app.common.bean.TeacherCourse;
+import com.inlearning.app.director.DirectorAppRuntime;
 import com.inlearning.app.teacher.TeacherRuntime;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.datatype.BmobPointer;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
@@ -21,21 +26,21 @@ public class ChapterModel {
         void onResult(T t);
     }
 
-    public static void getTeacherSchedule(final Callback<List<TeacherCourse>> callback) {
-        Teacher teacher = new Teacher();
-        teacher.setObjectId("7746c34330");
-        BmobQuery<TeacherCourse> teacherCourseQuery = new BmobQuery<>();
-        teacherCourseQuery.include("mCourse2");
-        teacherCourseQuery.addWhereEqualTo("mTeacher", teacher);
-        teacherCourseQuery.findObjects(new FindListener<TeacherCourse>() {
-            @Override
-            public void done(List<TeacherCourse> list, BmobException e) {
-                if (e == null) {
-                    callback.onResult(list);
-                }
-            }
-        });
+    public static void getTeacherSchedule(Teacher teacher, final Callback<List<TeacherCourse>> callback) {
+        BmobQuery<Course2> query = new BmobQuery<Course2>();
+        query.addWhereRelatedTo("mCourses", new BmobPointer(teacher));
+        query.findObjects(new FindListener<Course2>() {
 
+            @Override
+            public void done(List<Course2> object, BmobException e) {
+                List<TeacherCourse> teacherCourses = new ArrayList<>();
+                for (Course2 course2 : object) {
+                    teacherCourses.add(new TeacherCourse(teacher, course2));
+                }
+                callback.onResult(teacherCourses);
+            }
+
+        });
     }
 
     public static void getCourseChapter(Course2 course2, final Callback<List<CourseChapter>> callback) {
