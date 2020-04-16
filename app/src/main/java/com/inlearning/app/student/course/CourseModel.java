@@ -37,7 +37,7 @@ public class CourseModel {
 
         BmobQuery<Teacher> inTeaQuery = new BmobQuery<>();
         inTeaQuery.addWhereExists("objectId");
-        schedule.addWhereMatchesQuery("Teacher", "mTeacher", inTeaQuery);
+        schedule.addWhereMatchesQuery("mTeacher", "Teacher", inTeaQuery);
 
         schedule.findObjects(new FindListener<ClassSchedule>() {
             @Override

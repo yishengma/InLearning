@@ -95,7 +95,7 @@ public class DiscussModel {
 
         BmobQuery<Teacher> inTeaQuery = new BmobQuery<>();
         inTeaQuery.addWhereExists("objectId");
-        query.addWhereMatchesQuery("Teacher", "mTeacher", inTeaQuery);
+        query.addWhereMatchesQuery("mTeacher", "Teacher", inTeaQuery);
 
         query.findObjects(new FindListener<Comment>() {
             @Override

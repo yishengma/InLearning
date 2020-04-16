@@ -1,6 +1,8 @@
 package com.inlearning.app.director.person.coursemanager.classes;
 
 
+import android.util.Log;
+
 import com.inlearning.app.common.bean.ClassInfo;
 import com.inlearning.app.common.bean.ClassSchedule;
 import com.inlearning.app.common.bean.Course2;
@@ -33,7 +35,7 @@ public class ClassCourseModel {
 
         BmobQuery<Course2> inCourseQuery = new BmobQuery<>();
         inCourseQuery.addWhereExists("objectId");
-        query.addWhereMatchesQuery("mCourse2", "mCourse2", inCourseQuery);
+        query.addWhereMatchesQuery("mCourse2", "Course2", inCourseQuery);
 
         query.findObjects(new FindListener<ClassSchedule>() {
             @Override
@@ -41,8 +43,10 @@ public class ClassCourseModel {
                 ThreadMgr.getInstance().postToUIThread(new Runnable() {
                     @Override
                     public void run() {
+
                         if (e == null) {
                             callback.onResult(true, list);
+                            return;
                         }
                     }
                 });
