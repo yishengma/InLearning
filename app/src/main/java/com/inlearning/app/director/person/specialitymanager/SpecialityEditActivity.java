@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -17,9 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.inlearning.app.R;
-import com.inlearning.app.common.bean.Director;
 import com.inlearning.app.common.bean.Speciality;
-import com.inlearning.app.common.util.LoadingDialogUtil;
+import com.inlearning.app.common.util.LoadingDialog;
 import com.inlearning.app.common.util.PixeUtil;
 import com.inlearning.app.common.util.StatusBar;
 import com.inlearning.app.common.util.ThreadMgr;
@@ -121,11 +119,11 @@ public class SpecialityEditActivity extends AppCompatActivity {
                 }
                 mSpeciality.setName(mSpecialityView.getContent())
                         .setShortName(mShortNameView.getContent());
-                LoadingDialogUtil.showLoadingDialog(SpecialityEditActivity.this, "正在更新..");
+                LoadingDialog.showLoadingDialog(SpecialityEditActivity.this, "正在更新..");
                 SpecialityModel.updateSpeciality(mSpeciality, new SpecialityModel.Callback<Speciality>() {
                     @Override
                     public void onResult(boolean suc, Speciality speciality) {
-                        LoadingDialogUtil.closeDialog();
+                        LoadingDialog.closeDialog();
                         showToast("更新成功");
                         finish();
                     }
@@ -161,11 +159,11 @@ public class SpecialityEditActivity extends AppCompatActivity {
 
 
     private void deleteSpeciality() {
-        LoadingDialogUtil.showLoadingDialog(SpecialityEditActivity.this, "正在删除..");
+        LoadingDialog.showLoadingDialog(SpecialityEditActivity.this, "正在删除..");
         SpecialityModel.deleteSpeciality(mSpeciality, new SpecialityModel.Callback<Speciality>() {
             @Override
             public void onResult(boolean suc, Speciality speciality) {
-                LoadingDialogUtil.closeDialog();
+                LoadingDialog.closeDialog();
 
                 if (suc) {
                     showToast("删除成功");

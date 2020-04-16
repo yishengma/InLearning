@@ -16,7 +16,7 @@ import android.widget.Toast;
 import com.inlearning.app.R;
 import com.inlearning.app.common.bean.Teacher;
 import com.inlearning.app.common.bean.TeacherCourse;
-import com.inlearning.app.common.util.LoadingDialogUtil;
+import com.inlearning.app.common.util.LoadingDialog;
 import com.inlearning.app.common.util.PixeUtil;
 import com.inlearning.app.common.util.StatusBar;
 import com.inlearning.app.common.util.ThreadMgr;
@@ -124,12 +124,12 @@ public class TeacherEditActivity extends AppCompatActivity {
                 mTeacher.setAccount(mJonNumberEditView.getContent())
                         .setTitle(mTitleEditView.getContent())
                         .setName(mNameEditView.getContent());
-                LoadingDialogUtil.showLoadingDialog(TeacherEditActivity.this, "正在更新");
+                LoadingDialog.showLoadingDialog(TeacherEditActivity.this, "正在更新");
                 TeacherModel.updateTeacher(mTeacher, mTeaAddCoursePresenter.getCourse2s(),
                         new TeacherModel.Callback<Teacher>() {
                             @Override
                             public void onResult(boolean suc, Teacher teacher) {
-                                LoadingDialogUtil.closeDialog();
+                                LoadingDialog.closeDialog();
                                 if (suc) {
                                     showToast("更新成功");
                                     finish();

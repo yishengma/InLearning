@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +18,7 @@ import com.inlearning.app.R;
 import com.inlearning.app.common.BaseFragment;
 import com.inlearning.app.common.bean.ClassInfo;
 import com.inlearning.app.common.bean.Speciality;
-import com.inlearning.app.common.util.LoadingDialogUtil;
+import com.inlearning.app.common.util.LoadingDialog;
 import com.inlearning.app.common.util.ThreadMgr;
 import com.inlearning.app.director.person.coursemanager.classes.ClassCourseModel;
 import com.inlearning.app.director.speciality.classinfo.ClassInfoActivity;
@@ -141,11 +140,11 @@ public class SpecialityInfoFragment extends BaseFragment {
     }
 
     private void deleteClass(final ClassInfo classInfo) {
-        LoadingDialogUtil.showLoadingDialog(getContext(), "正在删除");
+        LoadingDialog.showLoadingDialog(getContext(), "正在删除");
         SpecialityModel.deleteClass(classInfo, new SpecialityModel.Callback<ClassInfo>() {
             @Override
             public void onResult(boolean suc, ClassInfo c) {
-                LoadingDialogUtil.closeDialog();
+                LoadingDialog.closeDialog();
                 if (suc) {
                     showToast("删除成功");
                     updateList(classInfo);

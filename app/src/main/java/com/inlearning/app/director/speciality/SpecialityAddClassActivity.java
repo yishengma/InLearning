@@ -5,10 +5,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
@@ -18,7 +16,7 @@ import android.widget.Toast;
 
 import com.inlearning.app.R;
 import com.inlearning.app.common.bean.Speciality;
-import com.inlearning.app.common.util.LoadingDialogUtil;
+import com.inlearning.app.common.util.LoadingDialog;
 import com.inlearning.app.common.util.PixeUtil;
 import com.inlearning.app.common.util.ThreadMgr;
 import com.inlearning.app.common.util.ToastUtil;
@@ -136,11 +134,11 @@ public class SpecialityAddClassActivity extends BaseSingleImportActivity impleme
             ToastUtil.showToast("输入合法的数目", Toast.LENGTH_SHORT);
             return;
         }
-        LoadingDialogUtil.showLoadingDialog(SpecialityAddClassActivity.this, "正在添加..");
+        LoadingDialog.showLoadingDialog(SpecialityAddClassActivity.this, "正在添加..");
         SpecialityModel.addClasses(speciality, count, new SpecialityModel.Callback<Speciality>() {
             @Override
             public void onResult(boolean suc, Speciality speciality) {
-                LoadingDialogUtil.closeDialog();
+                LoadingDialog.closeDialog();
                 if (suc) {
                     showToast();
                     finish();

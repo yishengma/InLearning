@@ -6,16 +6,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.inlearning.app.R;
 import com.inlearning.app.common.bean.ClassSchedule;
-import com.inlearning.app.common.bean.Course2;
 import com.inlearning.app.common.bean.CourseChapter;
-import com.inlearning.app.common.util.LoadingDialogUtil;
+import com.inlearning.app.common.util.LoadingDialog;
 import com.inlearning.app.common.util.StatusBar;
 import com.inlearning.app.common.util.ThreadMgr;
 import com.inlearning.app.student.course.func.ChapterFunctionActivity;
@@ -128,11 +126,11 @@ public class CourseChapterActivity extends AppCompatActivity implements View.OnC
     }
 
     private void initData() {
-        LoadingDialogUtil.showLoadingDialog(this, "正在加载...");
+        LoadingDialog.showLoadingDialog(this, "正在加载...");
         CourseModel.getCourseChapter(mClassSchedule, new ChapterModel.Callback<List<CourseChapter>>() {
             @Override
             public void onResult(List<CourseChapter> courseChapters) {
-                LoadingDialogUtil.closeDialog();
+                LoadingDialog.closeDialog();
                 updateChapters(courseChapters);
             }
         });

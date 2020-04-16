@@ -8,7 +8,7 @@ import android.widget.Toast;
 
 import com.inlearning.app.common.bean.Teacher;
 import com.inlearning.app.common.util.FileUtil;
-import com.inlearning.app.common.util.LoadingDialogUtil;
+import com.inlearning.app.common.util.LoadingDialog;
 import com.inlearning.app.common.util.ToastUtil;
 import com.inlearning.app.director.BaseExcelImportActivity;
 
@@ -59,11 +59,11 @@ public class TeacherExcelImportActivity extends BaseExcelImportActivity {
 
     @Override
     protected void upload() {
-        LoadingDialogUtil.showLoadingDialog(TeacherExcelImportActivity.this, "正在上传");
+        LoadingDialog.showLoadingDialog(TeacherExcelImportActivity.this, "正在上传");
         TeacherModel.addTeacherList(mTeacherList, new TeacherModel.Callback<List<Teacher>>() {
             @Override
             public void onResult(boolean suc, List<Teacher> teachers) {
-                LoadingDialogUtil.closeDialog();
+                LoadingDialog.closeDialog();
                 if (suc) {
                     finish();
                 }

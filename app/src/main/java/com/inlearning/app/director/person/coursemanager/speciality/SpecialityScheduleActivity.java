@@ -20,10 +20,9 @@ import com.inlearning.app.common.adapter.CommonFragmentStatePagerAdapter;
 import com.inlearning.app.common.bean.Course2;
 import com.inlearning.app.common.bean.Speciality;
 import com.inlearning.app.common.bean.SpecialitySchedule;
-import com.inlearning.app.common.util.LoadingDialogUtil;
+import com.inlearning.app.common.util.LoadingDialog;
 import com.inlearning.app.common.util.StatusBar;
 import com.inlearning.app.common.util.ThreadMgr;
-import com.inlearning.app.director.speciality.SpecialityModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,11 +94,11 @@ public class SpecialityScheduleActivity extends AppCompatActivity implements Vie
     }
 
     private void initData() {
-        LoadingDialogUtil.showLoadingDialog(this,"正在加载...");
+        LoadingDialog.showLoadingDialog(this,"正在加载...");
         SpecialityScheduleModel.getSpecialitySchedule(mSpeciality, new SpecialityScheduleModel.Callback<List<SpecialitySchedule>>() {
             @Override
             public void onResult(List<SpecialitySchedule> specialitySchedules) {
-                LoadingDialogUtil.closeDialog();
+                LoadingDialog.closeDialog();
                 List<Course2> course2s = new ArrayList<>();
                 for (SpecialitySchedule s : specialitySchedules) {
                     course2s.add(s.getCourse2());

@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.inlearning.app.R;
 import com.inlearning.app.common.bean.CourseChapter;
 import com.inlearning.app.common.bean.Question;
-import com.inlearning.app.common.util.LoadingDialogUtil;
+import com.inlearning.app.common.util.LoadingDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -121,11 +121,11 @@ public class HomeworkPresenter implements BaseQuesFunc.ClickListener {
     @Override
     public void onUpload(final Question question) {
         question.setCourseChapter(mChapter);
-        LoadingDialogUtil.showLoadingDialog(mContext,"正在保存...");
+        LoadingDialog.showLoadingDialog(mContext,"正在保存...");
         QuestionModel.addQuestion(question, new QuestionModel.Callback<Question>() {
             @Override
             public void onResult(Question question) {
-                LoadingDialogUtil.closeDialog();
+                LoadingDialog.closeDialog();
                 mQuestions.add(question);
                 mHomeworkAdapter.notifyDataSetChanged();
                 mHomeworkFuncView.refreshUI(!mQuestions.isEmpty());
@@ -162,11 +162,11 @@ public class HomeworkPresenter implements BaseQuesFunc.ClickListener {
         confirmView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LoadingDialogUtil.showLoadingDialog(mContext,"正在删除...");
+                LoadingDialog.showLoadingDialog(mContext,"正在删除...");
                 QuestionModel.deleteQuestion(question, new QuestionModel.Callback<Boolean>() {
                     @Override
                     public void onResult(Boolean aBoolean) {
-                        LoadingDialogUtil.closeDialog();
+                        LoadingDialog.closeDialog();
                         mQuestions.remove(question);
                         mHomeworkAdapter.notifyDataSetChanged();
                         mHomeworkFuncView.refreshUI(!mQuestions.isEmpty());
@@ -180,11 +180,11 @@ public class HomeworkPresenter implements BaseQuesFunc.ClickListener {
 
     @Override
     public void onUpdate(Question question) {
-        LoadingDialogUtil.showLoadingDialog(mContext,"正在更新...");
+        LoadingDialog.showLoadingDialog(mContext,"正在更新...");
         QuestionModel.updateQuestion(question, new QuestionModel.Callback<Question>() {
             @Override
             public void onResult(Question question) {
-                LoadingDialogUtil.closeDialog();
+                LoadingDialog.closeDialog();
                 mHomeworkFuncView.refreshUI(true);
                 mHomeworkEditView.hide();
                 mHomeworkAdapter.notifyDataSetChanged();

@@ -5,14 +5,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.inlearning.app.common.bean.ClassInfo;
 import com.inlearning.app.common.bean.Student;
 import com.inlearning.app.common.util.FileUtil;
-import com.inlearning.app.common.util.LoadingDialogUtil;
+import com.inlearning.app.common.util.LoadingDialog;
 import com.inlearning.app.common.util.StatusBar;
 import com.inlearning.app.common.util.ToastUtil;
 import com.inlearning.app.director.BaseExcelImportActivity;
@@ -79,12 +78,12 @@ public class StudentExcelImportActivity extends BaseExcelImportActivity {
 
     @Override
     protected void upload() {
-        LoadingDialogUtil.showLoadingDialog(this, "正在上传...");
+        LoadingDialog.showLoadingDialog(this, "正在上传...");
         ClassInfoModel.saveStudents(mClassInfo, mStudentList, new ClassInfoModel.Callback<Student>() {
             @Override
             public void onResult(boolean suc, Student student) {
                 if (suc) {
-                    LoadingDialogUtil.closeDialog();
+                    LoadingDialog.closeDialog();
                     finish();
                 }
             }

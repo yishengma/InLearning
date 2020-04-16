@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.inlearning.app.R;
 
 
-public class LoadingDialogUtil {
+public class LoadingDialog {
 
     private static Dialog sDialog;
 
