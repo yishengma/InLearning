@@ -16,6 +16,7 @@ import com.inlearning.app.common.bean.ChapterProgress;
 import com.inlearning.app.common.bean.ClassInfo;
 import com.inlearning.app.common.bean.ClassSchedule;
 import com.inlearning.app.common.bean.CourseChapter;
+import com.inlearning.app.common.bean.HomeworkProgress;
 import com.inlearning.app.common.bean.Question;
 import com.inlearning.app.common.bean.Student;
 import com.inlearning.app.common.util.StatusBar;
@@ -166,19 +167,21 @@ public class CourseTaskActivity extends AppCompatActivity implements View.OnClic
                 ThreadMgr.getInstance().postToUIThread(new Runnable() {
                     @Override
                     public void run() {
-                        mLearnTimeView.setData(chapterProgresses);
+                        mLearnTimeView.setData(mSchedule.getClassInfo().getCount(), chapterProgresses);
+                        mStuListView.setChapterProgresses(chapterProgresses);
                     }
                 });
             }
         });
-        HomeworkModel.getHomeworkProgress(mChapter, mSchedule.getClassInfo(), new HomeworkModel.Callback<List<Question>, List<Integer>>() {
+        HomeworkModel.getHomeworkProgress(mChapter, mSchedule.getClassInfo(), new HomeworkModel.Callback<List<Question>, List<HomeworkProgress>>() {
             @Override
-            public void callback(List<Question> questions, List<Integer> integers) {
+            public void callback(List<Question> questions, List<HomeworkProgress> progresses) {
                 ThreadMgr.getInstance().postToUIThread(new Runnable() {
                     @Override
                     public void run() {
                         mHomeworkTaskView.setQuestionData(questions);
-                        mHomeworkTaskView.setPieChartData(questions.size(), integers);
+                        mHomeworkTaskView.setPieChartData(mSchedule.getClassInfo().getCount(), questions.size(), progresses);
+                        mStuListView.setHomeworkProgresses(questions.size(), progresses);
                     }
                 });
             }
@@ -189,7 +192,7 @@ public class CourseTaskActivity extends AppCompatActivity implements View.OnClic
                 ThreadMgr.getInstance().postToUIThread(new Runnable() {
                     @Override
                     public void run() {
-                        mStuListView.setStudents(students);
+                        mStuListView.setStudents(StuListView.StudentProxy.transfer(students));
                     }
                 });
             }

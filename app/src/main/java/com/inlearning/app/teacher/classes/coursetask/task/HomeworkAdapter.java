@@ -107,6 +107,7 @@ public class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.ViewHo
             viewHolder.mCheckBoxView.setEnabled(false);
             setCheckBox(viewHolder.mCheckBoxView, false);
         } else {
+            viewHolder.mUploadView.setText("保存");
             viewHolder.mImageDeleteView.setVisibility(View.VISIBLE);
             viewHolder.mImageDeleteView.setEnabled(true);
             viewHolder.mCheckBoxView.setEnabled(true);

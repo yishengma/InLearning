@@ -5,8 +5,10 @@ import android.util.Log;
 import com.inlearning.app.common.bean.Answer;
 import com.inlearning.app.common.bean.ClassInfo;
 import com.inlearning.app.common.bean.CourseChapter;
+import com.inlearning.app.common.bean.HomeworkProgress;
 import com.inlearning.app.common.bean.Question;
 import com.inlearning.app.common.bean.Student;
+import com.inlearning.app.common.util.DLog;
 import com.inlearning.app.common.util.ThreadMgr;
 import com.inlearning.app.student.StudentRuntime;
 import com.inlearning.app.student.course.func.homework.Homework;
@@ -37,9 +39,9 @@ public class HomeworkModel {
     }
 
 
-    public static void getHomeworkProgress(CourseChapter chapter, ClassInfo classInfo, Callback<List<Question>, List<Integer>> callback) {
+    public static void getHomeworkProgress(CourseChapter chapter, ClassInfo classInfo, Callback<List<Question>, List<HomeworkProgress>> callback) {
         ArrayList<Question> questions = new ArrayList<>();
-        ArrayList<Integer> progress = new ArrayList<>();
+        ArrayList<HomeworkProgress> progress = new ArrayList<>();
         ThreadMgr.getInstance().postToSubThread(new Runnable() {
             @Override
             public void run() {
@@ -66,7 +68,12 @@ public class HomeworkModel {
                             if (jsonArray != null) {
                                 for (int i = 0; i < jsonArray.length(); i++) {
                                     JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                    progress.add(jsonObject.getInt("_count"));
+                                    int count = jsonObject.getInt("_count");
+                                    JSONObject object = jsonObject.getJSONObject("mStudent");
+                                    String objectId = object.getString("objectId");
+                                    Student student = new Student();
+                                    student.setObjectId(objectId);
+                                    progress.add(new HomeworkProgress(student, count));
                                 }
                             }
                         } catch (JSONException ex) {
@@ -88,6 +95,13 @@ public class HomeworkModel {
         query.include("mStudent,mChapter");
         query.addWhereEqualTo("mClassInfo", classInfo);
         query.addWhereEqualTo("mQuestion", question);
+        BmobQuery<Student> inStudentQuery = new BmobQuery<>();
+        inStudentQuery.addWhereExists("objectId");
+        query.addWhereMatchesQuery("mStudent", "Student", inStudentQuery);
+
+        BmobQuery<CourseChapter> inChapterQuery = new BmobQuery<>();
+        inChapterQuery.addWhereExists("objectId");
+        query.addWhereMatchesQuery("mChapter", "CourseChapter", inChapterQuery);
         query.findObjects(new FindListener<Answer>() {
             @Override
             public void done(List<Answer> list, BmobException e) {

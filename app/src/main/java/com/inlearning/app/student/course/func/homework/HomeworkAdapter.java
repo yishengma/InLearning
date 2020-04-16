@@ -131,29 +131,27 @@ public class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.ViewHo
         }
         final Answer finalAnswer = answer;
         final Answer finalAnswer1 = answer;
-        if (!TextUtils.isEmpty(mChapter.getDeadLine())) {
-            long deadline = Long.valueOf(mChapter.getDeadLine());
-            if (deadline < System.currentTimeMillis()) {
-                viewHolder.mUploadView.setText("已过期");
+        if (!TextUtils.isEmpty(mChapter.getDeadLine()) && Long.valueOf(mChapter.getDeadLine()) < System.currentTimeMillis()) {
+            viewHolder.mUploadView.setText("已过期");
+            viewHolder.mUploadView.setBackground(mContext.getDrawable(R.drawable.bg_edit_gray_shape));
+            viewHolder.mUploadView.setEnabled(false);
+        } else {
+            if (!TextUtils.isEmpty(answer.getObjectId())) {
+                viewHolder.mUploadView.setText("已提交");
                 viewHolder.mUploadView.setBackground(mContext.getDrawable(R.drawable.bg_edit_gray_shape));
                 viewHolder.mUploadView.setEnabled(false);
+                viewHolder.mImageDeleteView.setEnabled(false);
+                viewHolder.mImageDeleteView.setVisibility(View.GONE);
+                viewHolder.mCheckBoxView.setEnabled(false);
+                setCheckBox(viewHolder.mCheckBoxView, false);
             } else {
-                if (!TextUtils.isEmpty(answer.getObjectId())) {
-                    viewHolder.mUploadView.setText("已提交");
-                    viewHolder.mUploadView.setBackground(mContext.getDrawable(R.drawable.bg_edit_gray_shape));
-                    viewHolder.mUploadView.setEnabled(false);
-                    viewHolder.mImageDeleteView.setEnabled(false);
-                    viewHolder.mImageDeleteView.setVisibility(View.GONE);
-                    viewHolder.mCheckBoxView.setEnabled(false);
-                    setCheckBox(viewHolder.mCheckBoxView, false);
-                } else {
-                    viewHolder.mImageDeleteView.setVisibility(View.VISIBLE);
-                    viewHolder.mImageDeleteView.setEnabled(true);
-                    viewHolder.mCheckBoxView.setEnabled(true);
-                    viewHolder.mUploadView.setEnabled(true);
-                    viewHolder.mUploadView.setBackground(mContext.getDrawable(R.drawable.bg_edit_blue_shape));
-                    setCheckBox(viewHolder.mCheckBoxView, true);
-                }
+                viewHolder.mUploadView.setText("提交");
+                viewHolder.mImageDeleteView.setVisibility(View.VISIBLE);
+                viewHolder.mImageDeleteView.setEnabled(true);
+                viewHolder.mCheckBoxView.setEnabled(true);
+                viewHolder.mUploadView.setEnabled(true);
+                viewHolder.mUploadView.setBackground(mContext.getDrawable(R.drawable.bg_edit_blue_shape));
+                setCheckBox(viewHolder.mCheckBoxView, true);
             }
         }
         viewHolder.mUploadView.setOnClickListener(new View.OnClickListener() {

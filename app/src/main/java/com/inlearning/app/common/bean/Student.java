@@ -2,6 +2,8 @@ package com.inlearning.app.common.bean;
 
 
 
+import java.util.Objects;
+
 import cn.bmob.v3.BmobObject;
 import cn.bmob.v3.datatype.BmobFile;
 
@@ -91,6 +93,19 @@ public class Student extends BmobObject {
 
     public void setProfilePhotoUrl(String profilePhotoUrl) {
         mProfilePhotoUrl = profilePhotoUrl;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Student student = (Student) o;
+        return Objects.equals(getObjectId(), student.getObjectId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getObjectId());
     }
 }
 

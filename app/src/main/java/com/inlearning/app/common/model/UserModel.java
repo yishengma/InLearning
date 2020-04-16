@@ -1,6 +1,7 @@
 package com.inlearning.app.common.model;
 
 
+import com.inlearning.app.common.bean.ClassInfo;
 import com.inlearning.app.common.bean.Director;
 import com.inlearning.app.common.bean.Student;
 import com.inlearning.app.common.bean.Teacher;
@@ -28,6 +29,9 @@ public class UserModel {
                 studentBeanBmobQuery.addWhereEqualTo("mAccount", account);
                 studentBeanBmobQuery.addWhereEqualTo("mPassword", password);
                 studentBeanBmobQuery.include("mClassInfo");
+                BmobQuery<ClassInfo> inQuery = new BmobQuery<>();
+                inQuery.addWhereExists("objectId");
+                studentBeanBmobQuery.addWhereMatchesQuery("mClassInfo", "ClassInfo", inQuery);
                 studentBeanBmobQuery.findObjects(new FindListener<Student>() {
                     @Override
                     public void done(List<Student> list, BmobException e) {

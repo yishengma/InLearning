@@ -18,6 +18,7 @@ import com.openxu.cview.chart.bean.ChartLable;
 import com.openxu.cview.chart.bean.TimeBarBean;
 import com.openxu.utils.DensityUtil;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -59,7 +60,7 @@ public class LearnTimeView extends LinearLayout {
         mPieChart.setProColor(getResources().getColor(R.color.app_global_blue));  //进度颜色
     }
 
-    private void setPieChartData(List<ChapterProgress> progresses) {
+    private void setPieChartData(int size ,List<ChapterProgress> progresses) {
         if (progresses == null || progresses.isEmpty()) {
             List<ChartLable> lables = new ArrayList<>();
             lables.add(new ChartLable(String.valueOf(0 * 100.0 / 100) + " %",
@@ -69,14 +70,14 @@ public class LearnTimeView extends LinearLayout {
             mPieChart.setData(100, 0, lables);
             return;
         }
-        int total = progresses.size();
+        int total = size;
         int progress = 0;
         for (ChapterProgress s : progresses) {
             progress += s.isDone() ? 1 : 0;
         }
 
         List<ChartLable> lables = new ArrayList<>();
-        lables.add(new ChartLable(String.valueOf(progress * 100.0 / total) + " %",
+        lables.add(new ChartLable(new DecimalFormat("#0.00").format(progress * 100 / total) + " %",
                 DensityUtil.sp2px(getContext(), 18), getResources().getColor(R.color.app_global_blue)));
         lables.add(new ChartLable("完成率",
                 DensityUtil.sp2px(getContext(), 12), getResources().getColor(R.color.text_color_light_gray)));
@@ -107,13 +108,13 @@ public class LearnTimeView extends LinearLayout {
         mHorizontalChart.setData(dataList, strXList);
     }
 
-    public void setData(List<ChapterProgress> progresses) {
+    public void setData(int size,List<ChapterProgress> progresses) {
 //        List<ChapterProgress> progresses1 = new ArrayList<>();
 //        for (int i = 0; i < 20; i++) {
 //            progresses1.add(new ChapterProgress().setDone(i%2==0).setStudyDuration(58000+i*10000).setStudent((Student) new Student().setName("马小"+i)));
 //        }
         setBarChartData(progresses);
-        setPieChartData(progresses);
+        setPieChartData(size,progresses);
     }
 
 }

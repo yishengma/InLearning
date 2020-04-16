@@ -14,11 +14,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.inlearning.app.R;
+import com.inlearning.app.common.bean.HomeworkProgress;
 import com.inlearning.app.common.bean.Question;
 import com.openxu.cview.chart.ProgressPieChart;
 import com.openxu.cview.chart.bean.ChartLable;
 import com.openxu.utils.DensityUtil;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,7 +66,7 @@ public class HomeworkView extends LinearLayout {
         mPieChart.setProColor(getResources().getColor(R.color.app_global_blue));  //进度颜色
     }
 
-    public void setPieChartData(int questionCount, List<Integer> answerCountPerStu) {
+    public void setPieChartData(int size,int questionCount, List<HomeworkProgress> answerCountPerStu) {
         if (answerCountPerStu == null || answerCountPerStu.isEmpty()) {
             List<ChartLable> lables = new ArrayList<>();
             lables.add(new ChartLable(String.valueOf(0 * 100.0 / 100) + " %",
@@ -74,13 +76,13 @@ public class HomeworkView extends LinearLayout {
             mPieChart.setData(100, 0, lables);
             return;
         }
-        int total = answerCountPerStu.size();
+        int total = size;
         int progress = 0;
-        for (Integer i : answerCountPerStu) {
-            progress += i >= questionCount ? 1 : 0;
+        for (HomeworkProgress i : answerCountPerStu) {
+            progress += i.getProgress() >= questionCount ? 1 : 0;
         }
         List<ChartLable> lables = new ArrayList<>();
-        lables.add(new ChartLable(String.valueOf(progress * 100.0 / total) + " %",
+        lables.add(new ChartLable(new DecimalFormat("#0.00").format(progress * 100 / total) + " %",
                 DensityUtil.sp2px(getContext(), 18), getResources().getColor(R.color.app_global_blue)));
         lables.add(new ChartLable("完成率",
                 DensityUtil.sp2px(getContext(), 12), getResources().getColor(R.color.text_color_light_gray)));

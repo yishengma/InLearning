@@ -1,7 +1,9 @@
 package com.inlearning.app.teacher.classes.coursetask.task;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -10,6 +12,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.inlearning.app.R;
 import com.inlearning.app.common.bean.Student;
 
@@ -19,10 +22,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class StudentInfoAdapter extends RecyclerView.Adapter<StudentInfoAdapter.ViewHolder> {
 
-    private List<Student> mStudentList;
-    private boolean mIsImport;
+    private List<StuListView.StudentProxy> mStudentList;
+    private Context mContext;
 
-    public StudentInfoAdapter(List<Student> studentList) {
+    public StudentInfoAdapter(List<StuListView.StudentProxy> studentList) {
         mStudentList = studentList;
     }
 
@@ -30,11 +33,6 @@ public class StudentInfoAdapter extends RecyclerView.Adapter<StudentInfoAdapter.
 
     public StudentInfoAdapter setClickListener(ClickListener clickListener) {
         mClickListener = clickListener;
-        return this;
-    }
-
-    public StudentInfoAdapter setImport(boolean isImport) {
-        mIsImport = isImport;
         return this;
     }
 
@@ -46,20 +44,14 @@ public class StudentInfoAdapter extends RecyclerView.Adapter<StudentInfoAdapter.
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new ViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_director_student_info, viewGroup, false));
+        mContext = viewGroup.getContext();
+        return new ViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_teacher_task_stu_info, viewGroup, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        final Student student = mStudentList.get(i);
-        viewHolder.mSelectView.setVisibility(mIsImport ? View.VISIBLE : View.GONE);
-        viewHolder.mSelectView.setChecked(student.isSelected());
-        viewHolder.mSelectView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                student.setSelected(b);
-            }
-        });
+        StuListView.StudentProxy proxy = mStudentList.get(i);
+        final Student student = proxy.getStudent();
         viewHolder.mNumberView.setText(String.valueOf(student.getAccount()));
         viewHolder.mNameView.setText(String.valueOf(student.getName()));
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -70,6 +62,16 @@ public class StudentInfoAdapter extends RecyclerView.Adapter<StudentInfoAdapter.
                 }
             }
         });
+        if (!TextUtils.isEmpty(student.getProfilePhotoUrl())) {
+            Glide.with(mContext).load(student.getProfilePhotoUrl()).into(viewHolder.mImageView);
+        } else {
+            viewHolder.mImageView.setBackground(mContext.getDrawable(R.drawable.viewpage_guide_2));
+        }
+        viewHolder.mVideoStateView.setText(proxy.isVideoDone() ? "已完成" : "未完成");
+        viewHolder.mVideoStateView.setTextColor(proxy.isVideoDone() ? mContext.getColor(R.color.app_global_blue) : mContext.getColor(R.color.app_global_red));
+
+        viewHolder.mHomeworkStateView.setText(proxy.isHomeworkDone() ? "已完成" : "未完成");
+        viewHolder.mHomeworkStateView.setTextColor(proxy.isHomeworkDone() ? mContext.getColor(R.color.app_global_blue) : mContext.getColor(R.color.app_global_red));
 
     }
 
@@ -82,14 +84,17 @@ public class StudentInfoAdapter extends RecyclerView.Adapter<StudentInfoAdapter.
         private CircleImageView mImageView;
         private TextView mNameView;
         private TextView mNumberView;
-        private CheckBox mSelectView;
+        private TextView mVideoStateView;
+        private TextView mHomeworkStateView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            mSelectView = itemView.findViewById(R.id.btn_select);
             mImageView = itemView.findViewById(R.id.imv_student_image);
             mNameView = itemView.findViewById(R.id.tv_student_name);
             mNumberView = itemView.findViewById(R.id.tv_student_number);
+            mVideoStateView = itemView.findViewById(R.id.tv_video_state);
+            mHomeworkStateView = itemView.findViewById(R.id.tv_homework_state);
+
         }
     }
 }

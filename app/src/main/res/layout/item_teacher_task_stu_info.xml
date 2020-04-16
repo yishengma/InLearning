@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="68dp"
+    android:background="@drawable/bg_item_click">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imv_student_image"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="12dp"
+        android:layout_toRightOf="@+id/btn_select"
+        android:src="@drawable/viewpage_guide_3" />
+
+    <TextView
+        android:id="@+id/tv_student_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imv_student_image"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/imv_student_image"
+        android:text="33112134650"
+        android:textColor="@color/textBlack"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_student_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_student_number"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/imv_student_image"
+        android:text="马小明"
+        android:textColor="#777777"
+        android:textSize="14sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_alignLeft="@+id/tv_student_number"
+        android:layout_alignParentBottom="true"
+        android:background="@color/split_line" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="180dp"
+        android:gravity="center_vertical"
+        android:text="视频"
+        android:textColor="@color/textBlack"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/tv_video_state"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="120dp"
+        android:gravity="center_vertical"
+        android:text="未完成"
+        android:textColor="@color/app_global_red"
+        android:textSize="12sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="70dp"
+        android:gravity="center_vertical"
+        android:text="作业"
+        android:textColor="@color/textBlack"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/tv_homework_state"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="24dp"
+        android:gravity="center_vertical"
+        android:text="未完成"
+        android:textColor="@color/app_global_red"
+        android:textSize="12sp" />
+</RelativeLayout>
