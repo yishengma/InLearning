@@ -63,7 +63,6 @@ public class App extends Application {
             @Override
             public void onViewInitFinished(boolean arg0) {
                 // TODO Auto-generated method stub
-                Log.e("ethan", " onViewInitFinished is " + arg0);
             }
 
             @Override
@@ -75,17 +74,14 @@ public class App extends Application {
         QbSdk.setTbsListener(new TbsListener() {
             @Override
             public void onDownloadFinish(int i) {
-                Log.d("ethan", "onDownloadFinish");
             }
 
             @Override
             public void onInstallFinish(int i) {
-                Log.d("ethan", "onInstallFinish");
             }
 
             @Override
             public void onDownloadProgress(int i) {
-                Log.d("ethan", "onDownloadProgress:" + i);
             }
         });
 

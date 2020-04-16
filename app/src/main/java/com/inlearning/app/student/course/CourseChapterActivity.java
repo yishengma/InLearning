@@ -89,12 +89,10 @@ public class CourseChapterActivity extends AppCompatActivity implements View.OnC
         mChapterAdapter.setOnClickListener(new CourseChapterAdapter.OnClickListener() {
             @Override
             public void onTitleClick(CourseChapter chapter) {
-                Log.e("ethan", "onTitleClick");
             }
 
             @Override
             public void onVideoClick(CourseChapter chapter) {
-                Log.e("ethan", "onVideoClick");
                 StuVideoActivity.startActivity(CourseChapterActivity.this, chapter);
             }
 
@@ -105,25 +103,21 @@ public class CourseChapterActivity extends AppCompatActivity implements View.OnC
 
             @Override
             public void onExerciseClick(CourseChapter chapter) {
-                Log.e("ethan", "onExerciseClick");
             }
 
             @Override
             public void onMaterialClick(CourseChapter chapter) {
-                Log.e("ethan", "onMaterialClick");
                 ChapterFunctionActivity.startActivity(CourseChapterActivity.this, chapter, ChapterFunctionActivity.FLAG.MATERIAL_FUNCTION);
 
             }
 
             @Override
             public void onHomeworkClick(CourseChapter chapter) {
-                Log.e("ethan", "onHomeworkClick");
                 ChapterFunctionActivity.startActivity(CourseChapterActivity.this, chapter, ChapterFunctionActivity.FLAG.HOMEWORK_FUNCTION);
             }
 
             @Override
             public void onDiscussClick(CourseChapter chapter) {
-                Log.e("ethan", "onDiscussClick");
                 ChapterFunctionActivity.startActivity(CourseChapterActivity.this, chapter, ChapterFunctionActivity.FLAG.DISCUSS_FUNCTION);
             }
         });
@@ -138,7 +132,6 @@ public class CourseChapterActivity extends AppCompatActivity implements View.OnC
         CourseModel.getCourseChapter(mClassSchedule, new ChapterModel.Callback<List<CourseChapter>>() {
             @Override
             public void onResult(List<CourseChapter> courseChapters) {
-                Log.e("ethan", "" + courseChapters.size());
                 LoadingDialogUtil.closeDialog();
                 updateChapters(courseChapters);
             }

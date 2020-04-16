@@ -59,7 +59,6 @@ public class TakePhotoUtil {
             } catch (Exception e) {
             }
         }
-        Log.e("ethan",image.getPath());
         return image;
     }
 
@@ -75,8 +74,7 @@ public class TakePhotoUtil {
     }
 
     private static boolean hasExternalStoragePermission(Context context) {
-            int perm = context.checkCallingOrSelfPermission("android.permission.WRITE_EXTERNAL_STORAGE");
-        Log.e("ethan",""+perm );
+        int perm = context.checkCallingOrSelfPermission("android.permission.WRITE_EXTERNAL_STORAGE");
         return perm == 0;
     }
 

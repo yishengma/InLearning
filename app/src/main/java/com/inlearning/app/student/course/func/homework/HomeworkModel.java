@@ -98,7 +98,6 @@ public class HomeworkModel {
                 answer.save(new SaveListener<String>() {
                     @Override
                     public void done(String s, BmobException e) {
-                        Log.e("ethan", s + "");
                         answer.setObjectId(s);
                         callback.onResult(answer);
                     }
@@ -113,7 +112,6 @@ public class HomeworkModel {
                     bmobFile.uploadblock(new UploadFileListener() {
                         @Override
                         public void done(BmobException e) {
-                            Log.e("ethan", e + "");
                             answer.setImageUrl(bmobFile.getUrl());
                             if (!TextUtils.isEmpty(answer.getObjectId())) {
                                 answer.update(new UpdateListener() {
@@ -126,7 +124,6 @@ public class HomeworkModel {
                                 answer.save(new SaveListener<String>() {
                                     @Override
                                     public void done(String s, BmobException e) {
-                                        Log.e("ethan", s + "");
                                         answer.setObjectId(s);
                                         callback.onResult(answer);
                                     }

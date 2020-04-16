@@ -138,7 +138,6 @@ public class FileUtil {
                 case Cell.CELL_TYPE_NUMERIC: {
                     DecimalFormat df = new DecimalFormat("0");
                     cellValue = df.format(cell.getNumericCellValue());
-                    Log.e("ethan", "number" + cellValue);
                     break;
                 }
                 case Cell.CELL_TYPE_FORMULA: {
@@ -150,12 +149,10 @@ public class FileUtil {
                         // 数字
                         cellValue = String.valueOf(cell.getNumericCellValue());
                     }
-                    Log.e("ethan", "date" + cellValue);
                     break;
                 }
                 case Cell.CELL_TYPE_STRING: {
                     cellValue = cell.getRichStringCellValue().getString();
-                    Log.e("ethan", "string" + cellValue);
                     break;
                 }
 

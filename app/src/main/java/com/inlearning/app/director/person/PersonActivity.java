@@ -93,7 +93,6 @@ public class PersonActivity extends AppCompatActivity {
         mImageView.setClickListener(new PersonInfoView.ClickListener() {
             @Override
             public void onClick() {
-                Log.e("ethan", "image click");
                 mImageDialog.show();
             }
         });
@@ -289,12 +288,10 @@ public class PersonActivity extends AppCompatActivity {
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 case CODE_CAMERA_REQUEST:
-                    Log.e("ethan", mTakePhotoPath);
                     setQuesImage(new File(mTakePhotoPath));
                     break;
                 case CODE_GALLERY_REQUEST:
                     String path = FileUtil.getChooseFileResultPath(this, data.getData());
-                    Log.e("ethan", path);
                     setQuesImage(new File(path));
                     break;
                 default:

@@ -191,7 +191,6 @@ public class HomeworkFuncView extends LinearLayout implements View.OnClickListen
     }
 
     public int getCurrentPosition() {
-        Log.e("ethan", "getCurrentPosition:" + mCuttentPosition);
         return mCuttentPosition;
     }
 }

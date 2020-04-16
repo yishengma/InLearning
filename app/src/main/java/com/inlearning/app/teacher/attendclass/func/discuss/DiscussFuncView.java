@@ -107,7 +107,6 @@ public class DiscussFuncView extends RelativeLayout implements View.OnClickListe
     }
 
     public void setPosts(List<Post> posts) {
-        Log.e("ethan", posts.size() + "");
         mPosts.clear();
         mPosts.addAll(posts);
         mPostAdapter.notifyDataSetChanged();

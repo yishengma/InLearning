@@ -50,7 +50,6 @@ public class ClassTeaAdapter extends RecyclerView.Adapter<ClassTeaAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
         ClassSchedule bean = mClassSchedules.get(i);
         final Course2 course = bean.getCourse2();
-        Log.e("ethan",course.getName());
         viewHolder.mCourseName.setText(course.getName());
         viewHolder.mCourseTime.setText(String.format("学时:%s",course.getTime()));
         viewHolder.mCourseScore.setText(String.format("学分:%s",course.getScore()));

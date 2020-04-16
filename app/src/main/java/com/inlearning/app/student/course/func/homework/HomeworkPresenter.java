@@ -185,13 +185,11 @@ public class HomeworkPresenter {
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 case CODE_CAMERA_REQUEST:
-                    Log.e("ethan", mTakePhotoPath);
                     mHomework.getAnswer().setImageUrl(new File(mTakePhotoPath).getPath());
                     mHomeworkAdapter.notifyDataSetChanged();
                     break;
                 case CODE_GALLERY_REQUEST:
                     String path = FileUtil.getChooseFileResultPath(mContext, data.getData());
-                    Log.e("ethan", path);
                     mHomework.getAnswer().setImageUrl(new File(path).getPath());
                     mHomeworkAdapter.notifyDataSetChanged();
                     break;

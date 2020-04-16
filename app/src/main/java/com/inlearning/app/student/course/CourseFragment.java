@@ -43,7 +43,6 @@ public class CourseFragment extends BaseFragment {
         mCourseInfoAdapter.setClickListener(new CourseInfoAdapter.ClickListener() {
             @Override
             public void onClick(ClassSchedule schedule) {
-                Log.e("ethan",schedule.getCourse2().getObjectId()+"teacher:"+schedule.getTeacher().getObjectId());
                 CourseChapterActivity.startActivity(getContext(), schedule);
             }
         });

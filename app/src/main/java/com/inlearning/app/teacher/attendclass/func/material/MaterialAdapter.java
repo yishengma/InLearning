@@ -47,7 +47,6 @@ public class MaterialAdapter extends RecyclerView.Adapter<MaterialAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         final Materials materials = mMaterials.get(i);
         viewHolder.setIconView(Materials.getType(materials.getMaterialName()));
-        Log.e("ethan",""+Materials.getType(materials.getMaterialName()));
         viewHolder.mNameView.setText(materials.getMaterialName());
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

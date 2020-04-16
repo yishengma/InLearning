@@ -119,7 +119,6 @@ public class StudentExcelImportActivity extends BaseExcelImportActivity {
             }
             students.add(student);
         }
-        Log.e("ethan", "student excel size" + students.size());
         mStudentList.addAll(students);
         mInfoAdapter.notifyDataSetChanged();
         updateContentView();

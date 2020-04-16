@@ -117,10 +117,8 @@ public class SpecialityAddClassActivity extends BaseSingleImportActivity impleme
 
     private void addSpeciality() {
         Speciality speciality = null;
-        Log.e("ethan",DirectorAppRuntime.getSpecialities().size()+"");
         for (Speciality s : DirectorAppRuntime.getSpecialities()) {
             if (s.getName().equals(mSpecialityView.getContent())) {
-                Log.e("ethan",s.getName());
                 speciality = s;
                 break;
             }

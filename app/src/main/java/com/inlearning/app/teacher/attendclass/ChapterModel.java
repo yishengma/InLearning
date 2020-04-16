@@ -47,7 +47,6 @@ public class ChapterModel {
         BmobQuery<CourseChapter> query = new BmobQuery<>();
         query.addWhereEqualTo("mTeacher", TeacherRuntime.getCurrentTeacher());
         query.addWhereEqualTo("mCourse2", course2);
-        Log.e("ethan","getCourseChapter:"+course2.getObjectId()+"get"+TeacherRuntime.getCurrentTeacher().getObjectId());
         query.findObjects(new FindListener<CourseChapter>() {
             @Override
             public void done(List<CourseChapter> list, BmobException e) {

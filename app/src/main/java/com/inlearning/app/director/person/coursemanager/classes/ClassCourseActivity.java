@@ -111,14 +111,10 @@ public class ClassCourseActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void updateClassCourse(final List<ClassSchedule> classSchedules) {
-        Log.e("ethan", "updateClassCourse" + classSchedules.size());
         mClassSchedules.clear();
         mClassSchedules.addAll(classSchedules);
         mClassTeaAdapter.notifyDataSetChanged();
         mEmptyView.setVisibility(mClassSchedules.isEmpty() ? View.VISIBLE : View.GONE);
-        for (ClassSchedule s : classSchedules) {
-            Log.e("ethan", s.getCourse2().getName() + "course");
-        }
     }
 
 

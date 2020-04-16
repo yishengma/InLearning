@@ -105,7 +105,6 @@ public class ResponseQuesView extends BaseQuesFunc implements View.OnClickListen
         mQuesImageLayout.setVisibility(VISIBLE);
         Glide.with(getContext()).load(fileCropUri).into(mQuesImageView);
         mImageFilePath = fileCropUri.getPath();
-        Log.e("ethan", mImageFilePath);
         mQuesImageView.setImageBitmap(BitmapFactory.decodeFile(fileCropUri.getPath()));
         mAddView.setVisibility(GONE);
     }

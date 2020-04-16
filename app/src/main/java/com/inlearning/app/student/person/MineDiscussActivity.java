@@ -119,7 +119,6 @@ public class MineDiscussActivity extends AppCompatActivity implements View.OnCli
     }
 
     public void setPosts(List<Post> posts) {
-        Log.e("ethan", posts.size() + "");
         mPosts.clear();
         mPosts.addAll(posts);
         mPostAdapter.notifyDataSetChanged();

@@ -43,12 +43,10 @@ public class ClassModel {
             @Override
             public void done(List<ClassSchedule> list, BmobException e) {
                 if (list == null) {
-                    Log.e("ethan",e.getMessage());
                     callback.onResult(new ArrayList<>());
                     return;
                 }
                 if (e != null) {
-                    Log.e("ethan",e.getMessage());
                     callback.onResult(new ArrayList<>());
                     return;
                 }

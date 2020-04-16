@@ -101,43 +101,36 @@ public class CourseChapterActivity extends AppCompatActivity implements View.OnC
         mChapterAdapter.setOnClickListener(new CourseChapterAdapter.OnClickListener() {
             @Override
             public void onTitleClick(CourseChapter chapter) {
-                Log.e("ethan", "onTitleClick");
             }
 
             @Override
             public void onVideoClick(CourseChapter chapter) {
-                Log.e("ethan", "onVideoClick");
                 ChapterFunctionActivity.startActivity(CourseChapterActivity.this, chapter, ChapterFunctionActivity.FLAG.VIDEO_FUNCTION);
             }
 
             @Override
             public void onTimeClick(CourseChapter chapter) {
-                Log.e("ethan", "onTimeClick");
                 mCurrentChapter = chapter;
                 mTimePickerView.show();
             }
 
             @Override
             public void onExerciseClick(CourseChapter chapter) {
-                Log.e("ethan", "onExerciseClick");
             }
 
             @Override
             public void onMaterialClick(CourseChapter chapter) {
-                Log.e("ethan", "onMaterialClick");
                 ChapterFunctionActivity.startActivity(CourseChapterActivity.this, chapter, ChapterFunctionActivity.FLAG.MATERIAL_FUNCTION);
 
             }
 
             @Override
             public void onHomeworkClick(CourseChapter chapter) {
-                Log.e("ethan", "onHomeworkClick");
                 ChapterFunctionActivity.startActivity(CourseChapterActivity.this, chapter, ChapterFunctionActivity.FLAG.HOMEWORK_FUNCTION);
             }
 
             @Override
             public void onDiscussClick(CourseChapter chapter) {
-                Log.e("ethan", "onDiscussClick");
                 ChapterFunctionActivity.startActivity(CourseChapterActivity.this, chapter, ChapterFunctionActivity.FLAG.DISCUSS_FUNCTION);
             }
         });

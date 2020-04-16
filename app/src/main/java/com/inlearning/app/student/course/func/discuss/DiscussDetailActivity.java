@@ -233,7 +233,6 @@ public class DiscussDetailActivity extends AppCompatActivity implements View.OnC
             Comment comment = mComments.get(i);
 
             if (comment.getStudent() != null) {
-                Log.e("ethan", comment.getStudent().getName());
                 viewHolder.mUserNameView.setText(comment.getStudent().getName());
                 if (comment.getStudent().getObjectId() != null && comment.getStudent().getObjectId().equals(StudentRuntime.getStudent().getObjectId())) {
                     viewHolder.mDeleteView.setVisibility(VISIBLE);
@@ -243,7 +242,6 @@ public class DiscussDetailActivity extends AppCompatActivity implements View.OnC
                 }
             }
             if (comment.getTeacher() != null) {
-                Log.e("ethan", comment.getTeacher().getName());
                 viewHolder.mUserNameView.setText(comment.getTeacher().getName());
                 if (comment.getStudent().getObjectId() != null && comment.getStudent().getObjectId().equals(TeacherRuntime.getCurrentTeacher().getObjectId())) {
                     viewHolder.mDeleteView.setVisibility(VISIBLE);
@@ -475,12 +473,10 @@ public class DiscussDetailActivity extends AppCompatActivity implements View.OnC
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 case CODE_CAMERA_REQUEST:
-                    Log.e("ethan", mTakePhotoPath);
                     setQuesImage(new File(mTakePhotoPath));
                     break;
                 case CODE_GALLERY_REQUEST:
                     String path = FileUtil.getChooseFileResultPath(this, data.getData());
-                    Log.e("ethan", path);
                     setQuesImage(new File(path));
                     break;
                 default:

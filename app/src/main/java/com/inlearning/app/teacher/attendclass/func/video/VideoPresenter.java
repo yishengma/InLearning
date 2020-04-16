@@ -103,7 +103,6 @@ public class VideoPresenter implements VideoUploadMgr.UploadListener {
 
         mVideoFunctionView.setVideoUrl(uri.toString());
         mPath = FileUtil.getChooseFileResultPath(mContext, uri);
-        Log.e("ethan", "get video uri:" + mPath);
     }
 
     public void onResume() {
@@ -135,7 +134,6 @@ public class VideoPresenter implements VideoUploadMgr.UploadListener {
 
             @Override
             public void onProgress(Integer value) {
-                Log.e("ethan", "value:" + value);
                 VideoUploadMgr.getInstance().notifyProgress(chapter, value);
             }
         });

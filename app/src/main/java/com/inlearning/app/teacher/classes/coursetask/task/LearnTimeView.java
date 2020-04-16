@@ -81,7 +81,6 @@ public class LearnTimeView extends LinearLayout {
         lables.add(new ChartLable("完成率",
                 DensityUtil.sp2px(getContext(), 12), getResources().getColor(R.color.text_color_light_gray)));
         mPieChart.setData(total, progress, lables);
-        Log.e("ethan", "setPieChartData:" + progresses.size());
     }
 
     private void initHorizontalChart() {
@@ -106,7 +105,6 @@ public class LearnTimeView extends LinearLayout {
         }
         mHorizontalChart.setLoading(false);
         mHorizontalChart.setData(dataList, strXList);
-        Log.e("ethan", "setBarChartData:" + progresses.size());
     }
 
     public void setData(List<ChapterProgress> progresses) {

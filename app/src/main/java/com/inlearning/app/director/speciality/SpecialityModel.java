@@ -142,7 +142,6 @@ public class SpecialityModel {
                             BmobQuery<ClassInfo> classInfoBmobQuery = new BmobQuery<>();
                             classInfoBmobQuery.addWhereEqualTo("mSpeciality", s);
                             List<ClassInfo> classInfos = classInfoBmobQuery.findObjectsSync(ClassInfo.class);
-                            Log.i(TAG, "ClassInfo done: list " + classInfos.size() + s.getObjectId());
                             DirectorAppRuntime.setsClassInfo(s,classInfos);
                         }
                         callback.onResult(true, list);
@@ -165,7 +164,6 @@ public class SpecialityModel {
                     public void done(BmobException e) {
                         if (e == null) {
                             classInfo.getSpeciality().setClassCount(classInfo.getSpeciality().getClassCount() - 1);
-                            Log.e("ethan",""+classInfo.getSpeciality().getClassCount());
                         }
                     }
                 });

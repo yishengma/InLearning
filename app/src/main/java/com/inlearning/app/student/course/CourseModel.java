@@ -42,7 +42,6 @@ public class CourseModel {
         schedule.findObjects(new FindListener<ClassSchedule>() {
             @Override
             public void done(List<ClassSchedule> list, BmobException e) {
-                Log.e("ethan", list + "" + e + "" + classInfo);
                 if (e == null) {
                     callback.onResult(list);
                 }

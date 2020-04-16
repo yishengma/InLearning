@@ -33,7 +33,6 @@ public class CourseTaskModel {
         query.findObjects(new FindListener<ChapterProgress>() {
             @Override
             public void done(List<ChapterProgress> list, BmobException e) {
-                Log.e("ethan", e + "" + list.size());
                 if (e == null) {
                     callback.onResult(list);
                 }

@@ -79,7 +79,6 @@ public class HomeworkModel {
 
                 }
                 callback.callback(questions, progress);
-                Log.e("ethan", questions.toString() + progress.toString());
             }
         });
     }
@@ -95,7 +94,6 @@ public class HomeworkModel {
                 if (e == null) {
                     callback.callback(list);
                 }
-                Log.e("ethan", "" + list.size());
             }
         });
     }

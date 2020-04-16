@@ -85,7 +85,6 @@ public class ChapterActivity extends AppCompatActivity {
                 ThreadMgr.getInstance().postToUIThread(new Runnable() {
                     @Override
                     public void run() {
-                        Log.e("ethan", "chapterActivity" + courseChapters.size());
                         mChapters.clear();
                         mChapters.addAll(courseChapters);
                         mAdapter.notifyDataSetChanged();

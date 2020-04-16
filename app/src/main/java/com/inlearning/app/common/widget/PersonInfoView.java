@@ -67,7 +67,6 @@ public class PersonInfoView extends RelativeLayout {
     }
 
     public void setPersonImageView(String path) {
-        Log.e("ethan",""+path);
         mPersonContentView.setVisibility(GONE);
         mPersonImageView.setVisibility(VISIBLE);
         if (TextUtils.isEmpty(path)) {

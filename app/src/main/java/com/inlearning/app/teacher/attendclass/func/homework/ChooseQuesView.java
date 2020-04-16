@@ -111,7 +111,6 @@ public class ChooseQuesView extends BaseQuesFunc implements View.OnClickListener
         mQuesImageLayout.setVisibility(VISIBLE);
         Glide.with(getContext()).load(fileCropUri).into(mQuesImageView);
         mImageFilePath = fileCropUri.getPath();
-        Log.e("ethan", "" + fileCropUri.exists());
         mQuesImageView.setImageBitmap(BitmapFactory.decodeFile(fileCropUri.getPath()));
         mAddView.setVisibility(GONE);
     }

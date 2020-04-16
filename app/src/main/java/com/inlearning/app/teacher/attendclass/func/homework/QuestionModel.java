@@ -66,7 +66,6 @@ public class QuestionModel {
     }
 
     public static void addQuestion(final Question question, final Callback<Question> callback) {
-        Log.e("ethan", "addQuestion");
         if (TextUtils.isEmpty(question.getQuestionImage())) {
             question.save(new SaveListener<String>() {
                 @Override
@@ -92,7 +91,6 @@ public class QuestionModel {
                     @Override
                     public void done(BmobException e) {
                         if (e == null) {
-                            Log.e("ethan", "done");
                             question.setQuestionImage(bmobFile.getFileUrl());
                             question.save(new SaveListener<String>() {
                                 @Override
@@ -119,13 +117,11 @@ public class QuestionModel {
                     @Override
                     public void onProgress(Integer value) {
                         super.onProgress(value);
-                        Log.e("ethan", "" + value);
                     }
 
                     @Override
                     public void doneError(int code, String msg) {
                         super.doneError(code, msg);
-                        Log.e("ethan", msg);
                     }
                 });
             }
@@ -157,7 +153,6 @@ public class QuestionModel {
                     @Override
                     public void done(BmobException e) {
                         if (e == null) {
-                            Log.e("ethan", "done");
                             question.setQuestionImage(bmobFile.getFileUrl());
                             question.update(new UpdateListener() {
                                 @Override
@@ -176,13 +171,11 @@ public class QuestionModel {
                     @Override
                     public void onProgress(Integer value) {
                         super.onProgress(value);
-                        Log.e("ethan", "" + value);
                     }
 
                     @Override
                     public void doneError(int code, String msg) {
                         super.doneError(code, msg);
-                        Log.e("ethan", msg);
                     }
                 });
             }

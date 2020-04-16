@@ -183,7 +183,6 @@ public class HomeworkEditView extends BaseQuesFunc implements View.OnClickListen
 
     public void show(Question question) {
         mQuestion = question;
-        Log.e("ethan", "title" + question.getQuestionTitle());
         if (TextUtils.isEmpty(question.getQuestionTitle())) {
             mInputEditText.setText("如图");
         } else {

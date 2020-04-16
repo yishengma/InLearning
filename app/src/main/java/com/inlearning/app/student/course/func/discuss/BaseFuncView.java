@@ -125,12 +125,10 @@ public abstract class BaseFuncView extends RelativeLayout {
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 case CODE_CAMERA_REQUEST:
-                    Log.e("ethan", mTakePhotoPath);
                     setQuesImage(new File(mTakePhotoPath));
                     break;
                 case CODE_GALLERY_REQUEST:
                     String path = FileUtil.getChooseFileResultPath(getActivity(), data.getData());
-                    Log.e("ethan", path);
                     setQuesImage(new File(path));
                     break;
                 default:

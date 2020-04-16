@@ -52,7 +52,6 @@ public class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.ViewHo
         } else {
             viewHolder.mImageTipsView.setVisibility(View.VISIBLE);
             viewHolder.mQuesImageView.setVisibility(View.VISIBLE);
-            Log.e("ethan",questionImage);
             Glide.with(mContext).load(questionImage).into(viewHolder.mQuesImageView);
         }
         if (question.getType() == Question.Type.CHOICE_QUESTION) {

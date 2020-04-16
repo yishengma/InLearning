@@ -28,7 +28,6 @@ public class ChapterProgressModel {
         query.findObjects(new FindListener<ChapterProgress>() {
             @Override
             public void done(List<ChapterProgress> list, BmobException e) {
-                Log.e("ethan", e + "BmobException " + chapter + student);
                 if (e == null && list.isEmpty() || e == null && !chapter.getVideoFile().getFileUrl().equals(list.get(0).getVideoUrl())) {
                     final ChapterProgress progress = new ChapterProgress();
                     progress.setStudent(student);
@@ -41,12 +40,12 @@ public class ChapterProgressModel {
                         public void done(String s, BmobException e) {
                             progress.setObjectId(s);
                             callback.onResult(progress);
-                            Log.e("ethan", e + "progress ");
+
                         }
                     });
                 } else if (e == null && !list.isEmpty()) {
                     callback.onResult(list.get(0));
-                    Log.e("ethan", e + "isEmpty");
+
                 }
 
             }
@@ -57,8 +56,6 @@ public class ChapterProgressModel {
         if (progress.isDone()) {
             return;
         }
-        Log.e("ethan", "updateStudyProgress: "+currentDuration );
-        Log.e("ethan", "updateStudyProgress: ."+duration );
         progress.setStudyDuration(currentDuration);
         progress.setDone(Math.abs(duration-currentDuration) <= 1000);
         progress.update(new UpdateListener() {

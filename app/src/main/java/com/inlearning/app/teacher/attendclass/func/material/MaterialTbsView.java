@@ -103,13 +103,11 @@ public class MaterialTbsView extends RelativeLayout implements View.OnClickListe
     }
 
     public void openFile(String name ,String filePath) {
-        Log.e("ethan", filePath);
         setVisibility(VISIBLE);
         mFileUrl = filePath;
         mProgressBar.setVisibility(VISIBLE);
         mDownloadTextView.setVisibility(VISIBLE);
         if (isLocalExist(parseName(filePath))) {
-            Log.e("ethan", parseName(filePath));
             mDownloadTextView.setText("打开文件");
             mDownloadTextView.setVisibility(View.GONE);
             displayFile();
@@ -126,7 +124,6 @@ public class MaterialTbsView extends RelativeLayout implements View.OnClickListe
                             }
                         }).create().show();
             }
-            Log.e("ethan", "start download");
             startDownload();
         }
         setTitle(name);
@@ -196,7 +193,6 @@ public class MaterialTbsView extends RelativeLayout implements View.OnClickListe
 
     private File getLocalFile(String fileName) {
         File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), fileName);
-        Log.e("ethan", file.getPath());
         return file;
     }
 
