@@ -1,7 +1,7 @@
 package com.inlearning.app.director;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import com.inlearning.app.BaseActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -13,13 +13,14 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.inlearning.app.BaseActivity;
 import com.inlearning.app.R;
 import com.inlearning.app.common.util.InputMethodUtil;
 import com.inlearning.app.common.util.StatusBar;
 
 import java.util.List;
 
-public abstract class BaseSearchActivity extends AppCompatActivity implements View.OnClickListener {
+public abstract class BaseSearchActivity extends BaseActivity implements View.OnClickListener {
 
     private TextView mCancelView;
     private RecyclerView mResultRecyclerView;

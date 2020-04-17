@@ -4,7 +4,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import com.inlearning.app.BaseActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -16,10 +16,11 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.inlearning.app.BaseActivity;
 import com.inlearning.app.R;
 import com.inlearning.app.common.util.FileUtil;
 
-public abstract class BaseExcelImportActivity extends AppCompatActivity implements View.OnClickListener {
+public abstract class BaseExcelImportActivity extends BaseActivity implements View.OnClickListener {
 
     public static final int EXCEL_OPEN_REQUEST = 1;
     private ImageView mBackView;

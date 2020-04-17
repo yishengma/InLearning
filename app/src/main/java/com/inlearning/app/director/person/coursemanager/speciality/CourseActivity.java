@@ -6,10 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
+import com.inlearning.app.BaseActivity;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.inlearning.app.BaseActivity;
 import com.inlearning.app.R;
 import com.inlearning.app.common.BaseFragment;
 import com.inlearning.app.common.adapter.CommonFragmentStatePagerAdapter;
@@ -21,7 +22,7 @@ import com.inlearning.app.director.DirectorAppRuntime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CourseActivity extends AppCompatActivity {
+public class CourseActivity extends BaseActivity {
     public static void startActivity(Context context) {
         Intent intent = new Intent(context, CourseActivity.class);
         context.startActivity(intent);

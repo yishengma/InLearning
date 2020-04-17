@@ -2,16 +2,17 @@ package com.inlearning.app.director;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import com.inlearning.app.BaseActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.inlearning.app.BaseActivity;
 import com.inlearning.app.R;
 import com.inlearning.app.common.util.StatusBar;
 
-public abstract class BaseSingleImportActivity extends AppCompatActivity {
+public abstract class BaseSingleImportActivity extends BaseActivity {
 
 //    public static void startEditActivity(Context context) {
 //        Intent intent = new Intent(context, BaseSingleImportActivity.class);

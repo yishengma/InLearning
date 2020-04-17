@@ -13,7 +13,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
+import com.inlearning.app.BaseActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -52,7 +52,7 @@ import cn.bmob.v3.util.V;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
-public class DiscussDetailActivity extends AppCompatActivity implements View.OnClickListener {
+public class DiscussDetailActivity extends BaseActivity implements View.OnClickListener {
 
     public static void startActivity(Context context, Post post) {
         Intent intent = new Intent(context, DiscussDetailActivity.class);

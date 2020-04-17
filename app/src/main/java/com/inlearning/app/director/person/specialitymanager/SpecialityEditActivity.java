@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import com.inlearning.app.BaseActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +28,7 @@ import com.inlearning.app.director.speciality.SpecialityModel;
 
 import static android.view.Gravity.CENTER;
 
-public class SpecialityEditActivity extends AppCompatActivity {
+public class SpecialityEditActivity extends BaseActivity {
     public static void startActivity(Context context, Speciality speciality) {
         Intent intent = new Intent(context, SpecialityEditActivity.class);
         intent.putExtra("speciality", speciality);

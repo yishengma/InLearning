@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
+import com.inlearning.app.BaseActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -20,7 +20,7 @@ import com.inlearning.app.student.person.PersonFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StudentHomeActivity extends AppCompatActivity implements View.OnClickListener {
+public class StudentHomeActivity extends BaseActivity implements View.OnClickListener {
 
     private static final String TAG = "DirectorHomeActivity";
     private TabLayout mBottomTab;

@@ -2,7 +2,7 @@ package com.inlearning.app.student.course.func.video;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import com.inlearning.app.BaseActivity;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -16,7 +16,7 @@ import com.inlearning.app.common.util.ThreadMgr;
 import com.inlearning.app.student.StudentRuntime;
 import com.inlearning.app.student.course.func.ChapterProgressModel;
 
-public class StuVideoActivity extends AppCompatActivity {
+public class StuVideoActivity extends BaseActivity {
 
     public static void startActivity(Context context, CourseChapter chapter) {
         Intent intent = new Intent(context, StuVideoActivity.class);

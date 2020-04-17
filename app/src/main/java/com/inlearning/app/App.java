@@ -1,5 +1,6 @@
 package com.inlearning.app;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.util.Log;
@@ -16,13 +17,17 @@ import com.tencent.smtt.sdk.QbSdk;
 import com.tencent.smtt.sdk.TbsListener;
 
 
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import cn.bmob.v3.Bmob;
 
 public class App extends Application {
     private static final String TAG = "App";
     private static Context mContext;
+    private static List<WeakReference<Activity>> mReferences;
 
     @Override
     public void onCreate() {
@@ -63,7 +68,7 @@ public class App extends Application {
 
             @Override
             public void onViewInitFinished(boolean arg0) {
-                DLog.i(TAG, "onViewInitFinished: "+arg0);
+                DLog.i(TAG, "onViewInitFinished: " + arg0);
             }
 
             @Override
@@ -97,10 +102,35 @@ public class App extends Application {
                 //QbSdk.preInit(context, cb);
             }
         });
+        mReferences = new ArrayList<>();
     }
 
     public static Context getGlobalContext() {
         return mContext;
+    }
+
+
+    public static void onActivityCreate(Activity activity) {
+        mReferences.add(new WeakReference<>(activity));
+    }
+
+    public static void onActivityDestory(Activity activity) {
+        for (WeakReference<Activity> ref : mReferences) {
+            if (activity == ref.get()) {
+                mReferences.remove(ref);
+                break;
+            }
+        }
+    }
+
+    public static void finishAllActivity() {
+        for (WeakReference<Activity> ref : mReferences) {
+            Activity activity = ref.get();
+            if (activity != null && !activity.isFinishing()) {
+                activity.finish();
+            }
+        }
+        mReferences.clear();
     }
 
 }

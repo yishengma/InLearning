@@ -27,12 +27,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-
-
-        <activity android:name=".common.AboutAppActivity"/>
+        <activity android:name=".common.PasswordActivity"></activity>
+        <activity android:name=".common.AboutAppActivity" />
         <activity android:name=".common.FeedbackActivity" />
-
-
         <activity android:name=".director.person.coursemanager.classes.organize.OrganizeListActivity" />
         <activity android:name=".director.person.coursemanager.classes.ClassCourseActivity" />
         <activity android:name=".director.person.coursemanager.classes.ClassListActivity" />
@@ -59,8 +56,6 @@
         <activity android:name=".director.course.CourseEditActivity" />
         <activity android:name=".director.DirectorHomeActivity" />
         <activity android:name=".director.person.PersonActivity" />
-
-
         <activity
             android:name=".teacher.attendclass.func.ChapterFunctionActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
@@ -73,7 +68,6 @@
         <activity android:name=".teacher.classes.coursetask.task.HomeworkDetailActivity" />
         <activity android:name=".teacher.classes.coursetask.CourseTaskActivity" />
         <activity android:name=".teacher.classes.coursetask.ChapterActivity" />
-
         <activity android:name=".student.StudentHomeActivity" />
         <activity android:name=".student.course.CourseChapterActivity" />
         <activity android:name=".student.course.func.ChapterFunctionActivity" />
@@ -84,7 +78,6 @@
         <activity android:name=".student.person.PersonActivity" />
         <activity android:name=".student.person.MineDiscussActivity" />
         <activity android:name=".student.course.func.discuss.DiscussDetailActivity" />
-
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

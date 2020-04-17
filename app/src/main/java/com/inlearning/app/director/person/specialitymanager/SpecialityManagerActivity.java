@@ -3,7 +3,7 @@ package com.inlearning.app.director.person.specialitymanager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import com.inlearning.app.BaseActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -20,7 +20,7 @@ import com.inlearning.app.director.speciality.SpecialityModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SpecialityManagerActivity extends AppCompatActivity implements View.OnClickListener {
+public class SpecialityManagerActivity extends BaseActivity implements View.OnClickListener {
     public static void startActivity(Context context) {
         Intent intent = new Intent(context, SpecialityManagerActivity.class);
         context.startActivity(intent);

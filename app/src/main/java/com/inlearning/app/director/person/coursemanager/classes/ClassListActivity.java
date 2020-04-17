@@ -3,11 +3,12 @@ package com.inlearning.app.director.person.coursemanager.classes;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import com.inlearning.app.BaseActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.inlearning.app.BaseActivity;
 import com.inlearning.app.R;
 import com.inlearning.app.common.bean.Speciality;
 import com.inlearning.app.common.util.StatusBar;
@@ -17,7 +18,7 @@ import com.inlearning.app.director.speciality.SpecialityModel;
 
 import java.util.List;
 
-public class ClassListActivity extends AppCompatActivity {
+public class ClassListActivity extends BaseActivity {
     public static void startActivity(Context context) {
         Intent intent = new Intent(context, ClassListActivity.class);
         context.startActivity(intent);

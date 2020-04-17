@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import com.inlearning.app.BaseActivity;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -25,7 +25,7 @@ import com.inlearning.app.common.widget.EditItemView;
 
 import static android.view.Gravity.CENTER;
 
-public class StudentEditActivity extends AppCompatActivity implements TextWatcher {
+public class StudentEditActivity extends BaseActivity implements TextWatcher {
     public static void startActivity(Context context, Student student) {
         Intent intent = new Intent(context, StudentEditActivity.class);
         intent.putExtra("student", student);

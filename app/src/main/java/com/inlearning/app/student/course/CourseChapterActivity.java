@@ -3,13 +3,14 @@ package com.inlearning.app.student.course;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import com.inlearning.app.BaseActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.inlearning.app.BaseActivity;
 import com.inlearning.app.R;
 import com.inlearning.app.common.bean.ClassSchedule;
 import com.inlearning.app.common.bean.CourseChapter;
@@ -26,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class CourseChapterActivity extends AppCompatActivity implements View.OnClickListener {
+public class CourseChapterActivity extends BaseActivity implements View.OnClickListener {
 
     public static void startActivity(Context context, ClassSchedule schedule) {
         Intent intent = new Intent(context, CourseChapterActivity.class);

@@ -3,7 +3,7 @@ package com.inlearning.app.teacher.classes.coursetask;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import com.inlearning.app.BaseActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.inlearning.app.BaseActivity;
 import com.inlearning.app.R;
 import com.inlearning.app.common.bean.ClassSchedule;
 import com.inlearning.app.common.bean.CourseChapter;
@@ -23,7 +24,7 @@ import java.util.List;
 
 import cn.bmob.v3.util.V;
 
-public class ChapterActivity extends AppCompatActivity {
+public class ChapterActivity extends BaseActivity {
 
     public static void startActivity(Context context, ClassSchedule schedule) {
         Intent intent = new Intent(context, ChapterActivity.class);

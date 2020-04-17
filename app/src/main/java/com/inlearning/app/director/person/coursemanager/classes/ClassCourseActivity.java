@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import com.inlearning.app.BaseActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.inlearning.app.BaseActivity;
 import com.inlearning.app.R;
 import com.inlearning.app.common.bean.ClassInfo;
 import com.inlearning.app.common.bean.ClassSchedule;
@@ -24,7 +25,7 @@ import com.inlearning.app.director.person.coursemanager.classes.organize.Organiz
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClassCourseActivity extends AppCompatActivity implements View.OnClickListener {
+public class ClassCourseActivity extends BaseActivity implements View.OnClickListener {
     public static void startActivity(Context context, ClassInfo classInfo) {
         Intent intent = new Intent(context, ClassCourseActivity.class);
         intent.putExtra("classinfo", classInfo);

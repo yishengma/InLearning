@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
+import com.inlearning.app.BaseActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -29,7 +29,7 @@ import java.util.List;
 
 import static com.inlearning.app.director.person.coursemanager.speciality.CourseActivity.REQUEST_CODE;
 
-public class SpecialityScheduleActivity extends AppCompatActivity implements View.OnClickListener, CourseInfoFragment.ClickListener {
+public class SpecialityScheduleActivity extends BaseActivity implements View.OnClickListener, CourseInfoFragment.ClickListener {
 
     public static void startScheduleActivity(Context context, Speciality speciality) {
         Intent intent = new Intent(context, SpecialityScheduleActivity.class);

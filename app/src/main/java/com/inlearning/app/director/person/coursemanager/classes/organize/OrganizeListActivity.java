@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.IntDef;
-import android.support.v7.app.AppCompatActivity;
+import com.inlearning.app.BaseActivity;
 import android.os.Bundle;
 import android.view.View;
 
@@ -29,7 +29,7 @@ import java.lang.annotation.Target;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrganizeListActivity extends AppCompatActivity {
+public class OrganizeListActivity extends BaseActivity {
 
     @IntDef({OrganizeListActivity.FLAG.TEACHER_LIST, OrganizeListActivity.FLAG.COURSE_LIST})
     @Retention(RetentionPolicy.SOURCE)

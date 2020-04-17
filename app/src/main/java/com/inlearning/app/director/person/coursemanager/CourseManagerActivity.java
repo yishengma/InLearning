@@ -3,7 +3,7 @@ package com.inlearning.app.director.person.coursemanager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import com.inlearning.app.BaseActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -14,7 +14,7 @@ import com.inlearning.app.common.util.StatusBar;
 import com.inlearning.app.director.person.coursemanager.classes.ClassListActivity;
 import com.inlearning.app.director.person.coursemanager.speciality.SpecialityCoursePresenter;
 
-public class CourseManagerActivity extends AppCompatActivity implements View.OnClickListener {
+public class CourseManagerActivity extends BaseActivity implements View.OnClickListener {
     public static void startActivity(Context context) {
         Intent intent = new Intent(context, CourseManagerActivity.class);
         context.startActivity(intent);

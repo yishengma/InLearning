@@ -4,7 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import com.inlearning.app.BaseActivity;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -31,7 +31,7 @@ import com.inlearning.app.teacher.classes.coursetask.task.StuListView;
 
 import java.util.List;
 
-public class CourseTaskActivity extends AppCompatActivity implements View.OnClickListener {
+public class CourseTaskActivity extends BaseActivity implements View.OnClickListener {
 
     public static void startActivity(Context context, ClassSchedule schedule, CourseChapter chapter, int num) {
         Intent intent = new Intent(context, CourseTaskActivity.class);

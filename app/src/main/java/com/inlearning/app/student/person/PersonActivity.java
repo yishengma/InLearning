@@ -11,7 +11,7 @@ import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
+import com.inlearning.app.BaseActivity;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -23,6 +23,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.inlearning.app.R;
+import com.inlearning.app.common.PasswordActivity;
 import com.inlearning.app.common.bean.Student;
 import com.inlearning.app.common.bean.Teacher;
 import com.inlearning.app.common.util.FileUtil;
@@ -43,7 +44,7 @@ import cn.bmob.v3.listener.UploadFileListener;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
-public class PersonActivity extends AppCompatActivity {
+public class PersonActivity extends BaseActivity {
 
     public static void startActivity(Context context, Student student) {
         Intent intent = new Intent(context, PersonActivity.class);
@@ -58,6 +59,7 @@ public class PersonActivity extends AppCompatActivity {
     private PersonInfoView mNameView;
     private Student mStudent;
     private ImageView mBackView;
+    private TextView mEditPasswordView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,6 +111,13 @@ public class PersonActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+        mEditPasswordView = findViewById(R.id.tv_edit_password);
+        mEditPasswordView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PasswordActivity.startPasswordActivity(PersonActivity.this, PasswordActivity.Type.STUDENT);
             }
         });
     }

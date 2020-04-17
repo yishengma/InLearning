@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
+import com.inlearning.app.BaseActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -34,7 +34,7 @@ import com.inlearning.app.director.teacher.TeacherSingleImportActivity2;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DirectorHomeActivity extends AppCompatActivity implements View.OnClickListener {
+public class DirectorHomeActivity extends BaseActivity implements View.OnClickListener {
 
     public static void startHomePageActivity(Context context) {
         Intent intent = new Intent(context, DirectorHomeActivity.class);

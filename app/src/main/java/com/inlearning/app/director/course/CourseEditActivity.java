@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import com.inlearning.app.BaseActivity;
 import android.text.InputType;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +25,7 @@ import com.inlearning.app.common.widget.EditItemView;
 
 import static android.view.Gravity.CENTER;
 
-public class CourseEditActivity extends AppCompatActivity {
+public class CourseEditActivity extends BaseActivity {
     public static void startActivity(Context context, Course2 course) {
         Intent intent = new Intent(context, CourseEditActivity.class);
         intent.putExtra("course", course);

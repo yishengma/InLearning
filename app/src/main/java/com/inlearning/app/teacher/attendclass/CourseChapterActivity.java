@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
-import android.support.v7.app.AppCompatActivity;
+import com.inlearning.app.BaseActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -37,7 +37,7 @@ import java.util.List;
 
 import cn.bmob.v3.datatype.BmobFile;
 
-public class CourseChapterActivity extends AppCompatActivity implements View.OnClickListener, VideoUploadMgr.UploadListener {
+public class CourseChapterActivity extends BaseActivity implements View.OnClickListener, VideoUploadMgr.UploadListener {
 
     public static void startActivity(Context context, Course2 course2) {
         Intent intent = new Intent(context, CourseChapterActivity.class);

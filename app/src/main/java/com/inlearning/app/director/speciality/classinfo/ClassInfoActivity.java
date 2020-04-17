@@ -4,7 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import com.inlearning.app.BaseActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
@@ -15,6 +15,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.inlearning.app.BaseActivity;
 import com.inlearning.app.R;
 import com.inlearning.app.common.bean.ClassInfo;
 import com.inlearning.app.common.bean.Student;
@@ -25,7 +26,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class ClassInfoActivity extends AppCompatActivity implements View.OnClickListener {
+public class ClassInfoActivity extends BaseActivity implements View.OnClickListener {
     private RecyclerView mStudentInfoRecyclerView;
     private StudentInfoAdapter mStudentInfoAdapter;
     private ClassInfo mClassInfo;

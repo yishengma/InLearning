@@ -2,7 +2,7 @@ package com.inlearning.app.teacher.classes.coursetask.task;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import com.inlearning.app.BaseActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -24,7 +24,7 @@ import java.util.List;
 
 import cn.bmob.v3.util.V;
 
-public class HomeworkDetailActivity extends AppCompatActivity implements View.OnClickListener {
+public class HomeworkDetailActivity extends BaseActivity implements View.OnClickListener {
 
 
     public static final int HOMEWORK_DETAIL = 0;

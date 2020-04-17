@@ -4,7 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+import com.inlearning.app.BaseActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -31,7 +31,7 @@ import cn.bmob.v3.util.V;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
-public class MineDiscussActivity extends AppCompatActivity implements View.OnClickListener {
+public class MineDiscussActivity extends BaseActivity implements View.OnClickListener {
 
 
     public static void startMineDiscussActivity(Context context) {

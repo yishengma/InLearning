@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import com.inlearning.app.BaseActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -26,7 +26,7 @@ import java.util.List;
 
 import static android.view.Gravity.CENTER;
 
-public class TeacherEditActivity extends AppCompatActivity {
+public class TeacherEditActivity extends BaseActivity {
     public static void startActivity(Context context, Teacher teacher) {
         Intent intent = new Intent(context, TeacherEditActivity.class);
         intent.putExtra("teacher", teacher);

@@ -2,7 +2,7 @@ package com.inlearning.app.teacher.classes.coursetask.task;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import com.inlearning.app.BaseActivity;
 import android.os.Bundle;
 
 import com.inlearning.app.R;
@@ -14,7 +14,7 @@ import com.inlearning.app.teacher.classes.coursetask.CourseTaskActivity;
 
 import java.util.List;
 
-public class StuHomeworkActivity extends AppCompatActivity {
+public class StuHomeworkActivity extends BaseActivity {
 
     public static void startActivity(Context context, CourseChapter chapter, Student student) {
         Intent intent = new Intent(context, StuHomeworkActivity.class);

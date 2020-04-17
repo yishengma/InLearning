@@ -2,7 +2,7 @@ package com.inlearning.app.common;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import com.inlearning.app.BaseActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
@@ -14,7 +14,7 @@ import com.inlearning.app.common.util.StatusBar;
 
 import cn.bmob.v3.http.I;
 
-public class FeedbackActivity extends AppCompatActivity {
+public class FeedbackActivity extends BaseActivity {
 
     public static void startFeedbackActivity(Context context) {
         Intent intent = new Intent(context, FeedbackActivity.class);
