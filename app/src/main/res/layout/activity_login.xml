@@ -25,21 +25,9 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="158dp"
         android:gravity="center"
-        android:src="@drawable/icon_common_image"
+        android:src="@drawable/app_icon_round"
         android:textColor="@color/White"
         android:textSize="45sp" />
-
-    <TextView
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="158dp"
-        android:gravity="center"
-        android:text="在学"
-        android:textColor="@color/White"
-        android:textSize="45sp"
-        android:typeface="serif" />
-
 
     <LinearLayout
         android:id="@+id/linearLayout"
