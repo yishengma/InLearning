@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputEditText;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -35,8 +36,8 @@ import org.apache.commons.logging.Log;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
-    private EditText mAccount;
-    private EditText mPassword;
+    private TextInputEditText mAccount;
+    private TextInputEditText mPassword;
     private Button mLogin;
     private RadioButton mStudentView;
     private RadioButton mTeacherView;

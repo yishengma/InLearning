@@ -1,1 +1,1 @@
-include ':app', ':OXViewLib'
+include ':app', ':OXViewLib', ':wave'
