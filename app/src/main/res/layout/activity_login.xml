@@ -15,7 +15,7 @@
         app:mwhIsRunning="true"
         app:mwhGradientAngle="270"
         app:mwhWaveHeight="60dp"
-        app:mwhStartColor="@color/White"
+        app:mwhStartColor="@color/app_global_low"
         app:mwhCloseColor="@color/app_global_blue"
         app:mwhWaves="MultiWave"/>
 

@@ -25,6 +25,7 @@
     <!--director-->
     <color name="app_global_red">#FFFF0031</color>
     <color name="app_global_blue">#FF2196F3</color>
+    <color name="app_global_low">#43A4F3</color>
     <color name="app_global_gray">#777777</color>
     <color name="app_global_simple_gray">#DDDDDD</color>
     <color name="app_global_white">#FFFFFF</color>
