@@ -18,9 +18,9 @@
         android:id="@+id/tv_class_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/imv_course_icon"
+        android:layout_alignTop="@+id/imv_class_icon"
         android:layout_marginLeft="12dp"
-        android:layout_toRightOf="@+id/imv_course_icon"
+        android:layout_toRightOf="@+id/imv_class_icon"
         android:text="计算机科学与技术5班"
         android:textColor="@color/textBlack"
         android:textSize="16sp" />
@@ -31,19 +31,32 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_class_info"
         android:layout_marginLeft="12dp"
-        android:layout_toRightOf="@+id/imv_course_icon"
+        android:layout_toRightOf="@+id/imv_class_icon"
         android:gravity="center"
         android:text="35 人"
         android:textSize="14sp" />
 
     <ImageView
-        android:id="@+id/imv_course_icon"
+        android:id="@+id/imv_class_icon"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_centerVertical="true"
         android:layout_marginLeft="12dp"
         android:scaleType="centerCrop"
         android:src="@drawable/icon_common_image" />
+
+    <TextView
+        android:id="@+id/imv_class_text"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="12dp"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:text="5班"
+        android:textColor="@color/White"
+        android:typeface="serif"
+         />
     <!--    </android.support.v7.widget.CardView>-->
 
     <View

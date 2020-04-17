@@ -101,6 +101,21 @@
         android:scaleType="centerCrop"
         android:src="@drawable/icon_common_image" />
 
+    <TextView
+        android:id="@+id/imv_course_text"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignTop="@+id/tv_course_name"
+        android:layout_alignParentEnd="true"
+        android:gravity="center"
+        android:textSize="28sp"
+        android:maxLines="1"
+        android:maxLength="2"
+        android:text="下面"
+        android:textColor="@color/White"
+        android:typeface="serif"
+        />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"

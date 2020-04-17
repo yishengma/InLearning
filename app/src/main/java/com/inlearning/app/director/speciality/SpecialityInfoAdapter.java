@@ -19,6 +19,7 @@ public class SpecialityInfoAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     private ClickListener mClickListener;
     private float mX;
     private float mY;
+
     public SpecialityInfoAdapter setClickListener(ClickListener clickListener) {
         mClickListener = clickListener;
         return this;
@@ -29,6 +30,7 @@ public class SpecialityInfoAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
         void onLongClick(View view, float x, float y, ClassInfo classInfo);
     }
+
     public SpecialityInfoAdapter(List<ClassInfo> classInfoList) {
         mClassInfoList = classInfoList;
     }
@@ -53,7 +55,7 @@ public class SpecialityInfoAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         final ClassInfo classInfo = mClassInfoList.get(i);
         if (viewHolder instanceof InfoViewHolder) {
             ((InfoViewHolder) viewHolder).mClassInfo.setText(classInfo.getName());
-            ((InfoViewHolder) viewHolder).mClassCount.setText(String.format("%s 个学生",classInfo.getCount()));
+            ((InfoViewHolder) viewHolder).mClassCount.setText(String.format("%s 个学生", classInfo.getCount()));
             viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -79,6 +81,7 @@ public class SpecialityInfoAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                     return false;
                 }
             });
+            ((InfoViewHolder) viewHolder).mClassImageTextView.setText(classInfo.getName().substring(classInfo.getName().length() - 3));
 
         }
         if (viewHolder instanceof SeparateViewHolder) {
@@ -99,16 +102,19 @@ public class SpecialityInfoAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     class InfoViewHolder extends RecyclerView.ViewHolder {
         private TextView mClassInfo;
         private TextView mClassCount;
+        private TextView mClassImageTextView;
 
         public InfoViewHolder(@NonNull View itemView) {
             super(itemView);
             mClassInfo = itemView.findViewById(R.id.tv_class_info);
             mClassCount = itemView.findViewById(R.id.tv_class_student_count);
+            mClassImageTextView = itemView.findViewById(R.id.imv_class_text);
         }
     }
 
     class SeparateViewHolder extends RecyclerView.ViewHolder {
         private TextView mInfo;
+
         public SeparateViewHolder(@NonNull View itemView) {
             super(itemView);
             mInfo = itemView.findViewById(R.id.tv_info);

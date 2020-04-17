@@ -90,7 +90,7 @@ public class CourseInfoAdapter extends  RecyclerView.Adapter<CourseInfoAdapter.V
                 return false;
             }
         });
-
+        viewHolder.mCourseIconTextView.setText(course.getName());
     }
 
     @Override
@@ -104,6 +104,7 @@ public class CourseInfoAdapter extends  RecyclerView.Adapter<CourseInfoAdapter.V
         private TextView mCourseType;
         private TextView mCourseScore;
         private CheckBox mSelectView;
+        private TextView mCourseIconTextView;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             mCourseName = itemView.findViewById(R.id.tv_course_name);
@@ -111,6 +112,7 @@ public class CourseInfoAdapter extends  RecyclerView.Adapter<CourseInfoAdapter.V
             mCourseType = itemView.findViewById(R.id.tv_course_type);
             mCourseScore = itemView.findViewById(R.id.tv_course_score);
             mSelectView = itemView.findViewById(R.id.btn_select);
+            mCourseIconTextView = itemView.findViewById(R.id.imv_course_text);
         }
     }
 }

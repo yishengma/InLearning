@@ -62,6 +62,7 @@ public class CourseInfoAdapter extends RecyclerView.Adapter<CourseInfoAdapter.Vi
                 }
             }
         });
+        viewHolder.mCourseIconTextView.setText(course.getName());
         if (TextUtils.isEmpty(teacher.getProfilePhotoUrl())) {
             String name = teacher.getName();
             if (name.length() >= 2) {
@@ -91,6 +92,7 @@ public class CourseInfoAdapter extends RecyclerView.Adapter<CourseInfoAdapter.Vi
         private TextView mStuCountView;
         private ImageView mCourseIconView;
         private TextView mTeaIconTextView;
+        private TextView mCourseIconTextView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -103,6 +105,7 @@ public class CourseInfoAdapter extends RecyclerView.Adapter<CourseInfoAdapter.Vi
             mStuCountView = itemView.findViewById(R.id.tv_student_count);
             mCourseIconView = itemView.findViewById(R.id.imv_course_icon);
             mTeaIconTextView = itemView.findViewById(R.id.imv_teacher_text);
+            mCourseIconTextView = itemView.findViewById(R.id.imv_course_text);
         }
     }
 }

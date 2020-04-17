@@ -81,6 +81,22 @@
                 android:layout_marginRight="24dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/icon_common_image" />
+
+            <TextView
+                android:id="@+id/imv_course_text"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="24dp"
+                android:gravity="center"
+                android:maxLines="1"
+                android:maxLength="2"
+                android:textSize="28sp"
+                android:text="下面"
+                android:textColor="@color/White"
+                android:typeface="serif"
+                />
         </RelativeLayout>
 
     <View
