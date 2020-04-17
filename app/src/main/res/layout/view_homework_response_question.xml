@@ -27,7 +27,6 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/tv_bar_manager"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|center_vertical"
@@ -44,7 +43,6 @@
         android:layout_below="@+id/fl_title_bar">
 
         <LinearLayout
-            android:id="@+id/view_response_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">

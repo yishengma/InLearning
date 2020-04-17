@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorBackground">#f1f0f6</color>
     <color name="colorDefault">#ffffff</color>
     <color name="colorText">#9b9b9b</color>
     <color name="dkplayer_background_color">#4D000000</color>

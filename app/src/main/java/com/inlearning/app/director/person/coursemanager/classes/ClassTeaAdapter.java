@@ -60,7 +60,7 @@ public class ClassTeaAdapter extends RecyclerView.Adapter<ClassTeaAdapter.ViewHo
         viewHolder.mTeaTitle.setText(teacher.getTitle());
         viewHolder.mTeaJobNumber.setText(teacher.getAccount());
         if (TextUtils.isEmpty(teacher.getProfilePhotoUrl())) {
-            viewHolder.mTeaIconView.setBackgroundDrawable(mContext.getDrawable(R.drawable.viewpage_guide_2));
+            viewHolder.mTeaIconView.setBackgroundDrawable(mContext.getDrawable(R.drawable.viewpage_guide_3));
         } else {
             Glide.with(viewHolder.itemView.getContext()).load(teacher.getProfilePhotoUrl()).into(viewHolder.mTeaIconView);
         }

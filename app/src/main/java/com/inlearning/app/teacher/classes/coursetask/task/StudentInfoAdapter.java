@@ -65,7 +65,7 @@ public class StudentInfoAdapter extends RecyclerView.Adapter<StudentInfoAdapter.
         if (!TextUtils.isEmpty(student.getProfilePhotoUrl())) {
             Glide.with(mContext).load(student.getProfilePhotoUrl()).into(viewHolder.mImageView);
         } else {
-            viewHolder.mImageView.setBackground(mContext.getDrawable(R.drawable.viewpage_guide_2));
+            viewHolder.mImageView.setBackground(mContext.getDrawable(R.drawable.viewpage_guide_3));
         }
         viewHolder.mVideoStateView.setText(proxy.isVideoDone() ? "已完成" : "未完成");
         viewHolder.mVideoStateView.setTextColor(proxy.isVideoDone() ? mContext.getColor(R.color.app_global_blue) : mContext.getColor(R.color.app_global_red));

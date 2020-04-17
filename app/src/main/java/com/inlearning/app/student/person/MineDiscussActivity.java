@@ -249,7 +249,7 @@ public class MineDiscussActivity extends AppCompatActivity implements View.OnCli
             if (post.getStudent() != null && !TextUtils.isEmpty(post.getStudent().getProfilePhotoUrl())) {
                 Glide.with(mContext).load(post.getStudent().getProfilePhotoUrl()).into(viewHolder.mUserImageView);
             } else {
-                viewHolder.mUserImageView.setBackground(mContext.getDrawable(R.drawable.viewpage_guide_2));
+                viewHolder.mUserImageView.setBackground(mContext.getDrawable(R.drawable.viewpage_guide_3));
             }
         }
 

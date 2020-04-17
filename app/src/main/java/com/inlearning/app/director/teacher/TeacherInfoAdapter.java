@@ -100,7 +100,7 @@ public class TeacherInfoAdapter extends RecyclerView.Adapter<TeacherInfoAdapter.
         if (!TextUtils.isEmpty(teacher.getProfilePhotoUrl())) {
             Glide.with(mContext).load(teacher.getProfilePhotoUrl()).into(viewHolder.mTeaIcon);
         } else {
-            viewHolder.mTeaIcon.setBackgroundDrawable(mContext.getDrawable(R.drawable.viewpage_guide_2));
+            viewHolder.mTeaIcon.setBackgroundDrawable(mContext.getDrawable(R.drawable.viewpage_guide_3));
         }
     }
 

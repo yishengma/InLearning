@@ -159,7 +159,7 @@ public class ClassCourseActivity extends AppCompatActivity implements View.OnCli
         courseInfoView.setVisibility(View.VISIBLE);
         courseInfoView.setText(String.format("学分：%s 学时：%s", schedule.getCourse2().getScore(), schedule.getCourse2().getTime()));
         if (TextUtils.isEmpty(schedule.getTeacher().getProfilePhotoUrl())) {
-            teaIconView.setBackground(getDrawable(R.drawable.viewpage_guide_2));
+            teaIconView.setBackground(getDrawable(R.drawable.viewpage_guide_3));
         } else {
             Glide.with(this).load(schedule.getTeacher().getProfilePhotoUrl()).into(teaIconView);
         }
