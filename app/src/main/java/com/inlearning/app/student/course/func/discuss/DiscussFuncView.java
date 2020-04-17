@@ -6,7 +6,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.inlearning.app.R;
-import com.inlearning.app.common.bean.CourseChapter;
 import com.inlearning.app.common.bean.Post;
 
 import java.util.ArrayList;
@@ -176,7 +174,7 @@ public class DiscussFuncView extends RelativeLayout implements View.OnClickListe
             if (post.getStudent() != null && !TextUtils.isEmpty(post.getStudent().getProfilePhotoUrl())) {
                 Glide.with(mContext).load(post.getStudent().getProfilePhotoUrl()).into(viewHolder.mUserImageView);
             } else {
-                viewHolder.mUserImageView.setBackground(mContext.getDrawable(R.drawable.viewpage_guide_3));
+                viewHolder.mUserImageView.setBackground(mContext.getDrawable(R.drawable.icon_common_image));
             }
         }
 

@@ -11,7 +11,7 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="12dp"
         android:layout_toRightOf="@+id/btn_select"
-        android:src="@drawable/viewpage_guide_3" />
+        android:src="@drawable/icon_common_image" />
 
     <TextView
         android:id="@+id/tv_material_name"

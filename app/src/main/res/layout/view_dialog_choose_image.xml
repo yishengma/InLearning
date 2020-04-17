@@ -19,7 +19,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            android:src="@drawable/viewpage_guide_3"
+            android:src="@drawable/icon_common_image"
             android:visibility="visible" />
 
         <ImageView

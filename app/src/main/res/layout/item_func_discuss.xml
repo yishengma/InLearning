@@ -11,7 +11,7 @@
         android:layout_height="30dp"
         android:layout_marginLeft="24dp"
         android:layout_marginTop="12dp"
-        android:src="@drawable/viewpage_guide_3" />
+        android:src="@drawable/icon_common_image" />
 
     <TextView
         android:id="@+id/tv_post_title"
@@ -62,7 +62,7 @@
         android:layout_marginRight="24dp"
         android:clickable="true"
         android:scaleType="centerCrop"
-        android:src="@drawable/viewpage_guide_3"
+        android:src="@drawable/icon_common_image"
         android:visibility="gone" />
 
     <View

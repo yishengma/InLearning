@@ -22,7 +22,7 @@
         android:layout_height="40dp"
         android:layout_centerVertical="true"
         android:layout_marginLeft="12dp"
-        android:src="@drawable/viewpage_guide_3" />
+        android:src="@drawable/icon_common_image" />
 
     <TextView
         android:id="@+id/director_teacher_name"

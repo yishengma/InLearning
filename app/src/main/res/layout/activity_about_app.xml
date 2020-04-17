@@ -65,7 +65,7 @@
                 android:layout_height="95dp"
                 android:layout_gravity="center_horizontal"
                 android:scaleType="center"
-                android:src="@drawable/viewpage_guide_3" />
+                android:src="@drawable/icon_common_image" />
 
             <TextView
                 android:layout_width="wrap_content"

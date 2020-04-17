@@ -1,10 +1,8 @@
 package com.inlearning.app.common.widget;
 
 import android.content.Context;
-import android.media.Image;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -70,7 +68,7 @@ public class PersonInfoView extends RelativeLayout {
         mPersonContentView.setVisibility(GONE);
         mPersonImageView.setVisibility(VISIBLE);
         if (TextUtils.isEmpty(path)) {
-            mPersonImageView.setBackgroundDrawable(getContext().getDrawable(R.drawable.viewpage_guide_3));
+            mPersonImageView.setBackgroundDrawable(getContext().getDrawable(R.drawable.icon_common_image));
             return;
         }
         Glide.with(getContext()).load(path).into(mPersonImageView);

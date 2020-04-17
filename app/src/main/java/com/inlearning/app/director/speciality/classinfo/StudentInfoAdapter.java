@@ -100,7 +100,7 @@ public class StudentInfoAdapter extends RecyclerView.Adapter<StudentInfoAdapter.
         if (!TextUtils.isEmpty(student.getProfilePhotoUrl())) {
             Glide.with(viewHolder.itemView.getContext()).load(student.getProfilePhotoUrl()).into(viewHolder.mImageView);
         } else {
-            viewHolder.mImageView.setBackgroundDrawable(mContext.getDrawable(R.drawable.viewpage_guide_3));
+            viewHolder.mImageView.setBackgroundDrawable(mContext.getDrawable(R.drawable.icon_common_image));
         }
     }
 

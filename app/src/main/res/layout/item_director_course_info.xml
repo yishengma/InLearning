@@ -80,7 +80,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="24dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/viewpage_guide_3" />
+                android:src="@drawable/icon_common_image" />
         </RelativeLayout>
 
     <View

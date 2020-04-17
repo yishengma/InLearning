@@ -5,11 +5,8 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -65,7 +62,7 @@ public class StudentInfoAdapter extends RecyclerView.Adapter<StudentInfoAdapter.
         if (!TextUtils.isEmpty(student.getProfilePhotoUrl())) {
             Glide.with(mContext).load(student.getProfilePhotoUrl()).into(viewHolder.mImageView);
         } else {
-            viewHolder.mImageView.setBackground(mContext.getDrawable(R.drawable.viewpage_guide_3));
+            viewHolder.mImageView.setBackground(mContext.getDrawable(R.drawable.icon_common_image));
         }
         viewHolder.mVideoStateView.setText(proxy.isVideoDone() ? "已完成" : "未完成");
         viewHolder.mVideoStateView.setTextColor(proxy.isVideoDone() ? mContext.getColor(R.color.app_global_blue) : mContext.getColor(R.color.app_global_red));

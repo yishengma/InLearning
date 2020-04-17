@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,13 +18,10 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.inlearning.app.R;
 import com.inlearning.app.common.bean.Post;
-import com.inlearning.app.common.bean.Student;
 import com.inlearning.app.common.util.StatusBar;
 import com.inlearning.app.common.util.ThreadMgr;
-import com.inlearning.app.student.StudentHomeActivity;
 import com.inlearning.app.student.StudentRuntime;
 import com.inlearning.app.student.course.func.discuss.DiscussDetailActivity;
-import com.inlearning.app.student.course.func.discuss.DiscussFuncView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -249,7 +245,7 @@ public class MineDiscussActivity extends AppCompatActivity implements View.OnCli
             if (post.getStudent() != null && !TextUtils.isEmpty(post.getStudent().getProfilePhotoUrl())) {
                 Glide.with(mContext).load(post.getStudent().getProfilePhotoUrl()).into(viewHolder.mUserImageView);
             } else {
-                viewHolder.mUserImageView.setBackground(mContext.getDrawable(R.drawable.viewpage_guide_3));
+                viewHolder.mUserImageView.setBackground(mContext.getDrawable(R.drawable.icon_common_image));
             }
         }
 

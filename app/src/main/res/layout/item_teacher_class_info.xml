@@ -43,7 +43,7 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="12dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/viewpage_guide_3" />
+        android:src="@drawable/icon_common_image" />
     <!--    </android.support.v7.widget.CardView>-->
 
     <View

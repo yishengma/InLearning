@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,7 +59,7 @@ public class ClassTeaAdapter extends RecyclerView.Adapter<ClassTeaAdapter.ViewHo
         viewHolder.mTeaTitle.setText(teacher.getTitle());
         viewHolder.mTeaJobNumber.setText(teacher.getAccount());
         if (TextUtils.isEmpty(teacher.getProfilePhotoUrl())) {
-            viewHolder.mTeaIconView.setBackgroundDrawable(mContext.getDrawable(R.drawable.viewpage_guide_3));
+            viewHolder.mTeaIconView.setBackgroundDrawable(mContext.getDrawable(R.drawable.icon_common_image));
         } else {
             Glide.with(viewHolder.itemView.getContext()).load(teacher.getProfilePhotoUrl()).into(viewHolder.mTeaIconView);
         }

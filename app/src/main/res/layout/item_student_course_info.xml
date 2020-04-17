@@ -45,7 +45,7 @@
         android:layout_below="@+id/tv_course_time"
         android:layout_marginTop="10dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/viewpage_guide_3" />
+        android:src="@drawable/icon_common_image" />
 
     <TextView
         android:id="@+id/tv_teacher_name"
@@ -86,7 +86,7 @@
         android:layout_alignTop="@+id/tv_course_name"
         android:layout_alignParentEnd="true"
         android:scaleType="centerCrop"
-        android:src="@drawable/viewpage_guide_3" />
+        android:src="@drawable/icon_common_image" />
 
     <View
         android:layout_width="match_parent"
