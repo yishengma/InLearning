@@ -29,6 +29,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class PersonFragment extends BaseFragment implements View.OnClickListener {
     private CircleImageView mProfilePhotoView;
+    private TextView mProfileTextView;
     private TextView mNameView;
     private TextView mInfoView;
     private RelativeLayout mSpecialityManagerView;
@@ -52,8 +53,14 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
         mNameView.setText(DirectorAppRuntime.getsDirector().mName);
         mInfoView.setText("管理员");
         if (TextUtils.isEmpty(DirectorAppRuntime.getsDirector().getProfilePhotoUrl())) {
+            String name = DirectorAppRuntime.getsDirector().mName;
+            if (name.length() >= 2) {
+                name = name.substring(name.length() - 2);
+            }
+            mProfileTextView.setText(name);
             return;
         }
+        mProfileTextView.setVisibility(View.GONE);
         Glide.with(this).load(DirectorAppRuntime.getsDirector().getProfilePhotoUrl()).into(mProfilePhotoView);
     }
 
@@ -79,6 +86,8 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
 
         mLoginOutView = view.findViewById(R.id.view_login_out);
         mLoginOutView.setOnClickListener(this);
+
+        mProfileTextView = view.findViewById(R.id.cv_profile_text);
     }
 
     @Override

@@ -60,9 +60,16 @@ public class StudentInfoAdapter extends RecyclerView.Adapter<StudentInfoAdapter.
             }
         });
         if (!TextUtils.isEmpty(student.getProfilePhotoUrl())) {
+            viewHolder.mImageTextView.setVisibility(View.GONE);
             Glide.with(mContext).load(student.getProfilePhotoUrl()).into(viewHolder.mImageView);
         } else {
-            viewHolder.mImageView.setBackground(mContext.getDrawable(R.drawable.icon_common_image));
+            String name = student.getName();
+            if (name.length() >= 2) {
+                name = name.substring(name.length() - 2);
+            }
+            viewHolder.mImageTextView.setText(name);
+            viewHolder.mImageTextView.setVisibility(View.VISIBLE);
+            viewHolder.mImageView.setImageResource(R.drawable.icon_common_image);
         }
         viewHolder.mVideoStateView.setText(proxy.isVideoDone() ? "已完成" : "未完成");
         viewHolder.mVideoStateView.setTextColor(proxy.isVideoDone() ? mContext.getColor(R.color.app_global_blue) : mContext.getColor(R.color.app_global_red));
@@ -83,6 +90,7 @@ public class StudentInfoAdapter extends RecyclerView.Adapter<StudentInfoAdapter.
         private TextView mNumberView;
         private TextView mVideoStateView;
         private TextView mHomeworkStateView;
+        private TextView mImageTextView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -91,6 +99,7 @@ public class StudentInfoAdapter extends RecyclerView.Adapter<StudentInfoAdapter.
             mNumberView = itemView.findViewById(R.id.tv_student_number);
             mVideoStateView = itemView.findViewById(R.id.tv_video_state);
             mHomeworkStateView = itemView.findViewById(R.id.tv_homework_state);
+            mImageTextView = itemView.findViewById(R.id.imv_student_text);
 
         }
     }

@@ -30,7 +30,6 @@ public class SpecialityModel {
         speciality.save(new SaveListener<String>() {
             @Override
             public void done(String objectId, BmobException e) {
-                Log.i(TAG, "done: %s", e);
                 if (e == null) {
                     speciality.setObjectId(objectId);
                     addClassInfo(speciality, callback);
@@ -51,7 +50,6 @@ public class SpecialityModel {
 
             @Override
             public void done(List<BatchResult> results, BmobException e) {
-                Log.i(TAG, "done: %s", e);
                 if (e == null) {
                     callback.onResult(true, speciality);
                 }
@@ -77,7 +75,6 @@ public class SpecialityModel {
 
             @Override
             public void done(List<BatchResult> results, BmobException e) {
-                Log.i(TAG, "done: %s", e);
                 if (e == null) {
                     callback.onResult(true, speciality);
                     speciality.increment("mClassCount", classInfos.size());
@@ -97,7 +94,6 @@ public class SpecialityModel {
         speciality.delete(new UpdateListener() {
             @Override
             public void done(BmobException e) {
-                Log.i(TAG, "done: %s", e);
                 if (e == null) {
                     callback.onResult(true, speciality);
                 }
@@ -113,7 +109,6 @@ public class SpecialityModel {
         update.update(speciality.getObjectId(), new UpdateListener() {
             @Override
             public void done(BmobException e) {
-                Log.i(TAG, "done: %s", e);
                 if (e == null) {
                     callback.onResult(true, speciality);
                 }
@@ -123,15 +118,11 @@ public class SpecialityModel {
 
 
     public static void getSpeciality(final Callback<List<Speciality>> callback) {
-        Log.i(TAG, "getSpeciality done: list getSpeciality");
-
         final BmobQuery<Speciality> specialityBmobQuery = new BmobQuery<>();
         specialityBmobQuery.findObjects(new FindListener<Speciality>() {
             @Override
             public void done(final List<Speciality> list, BmobException e) {
-                Log.i(TAG, "getSpeciality done: list " + (list == null ? 0 : list.size()));
                 if (e != null) {
-                    Log.i(TAG, "getSpeciality done: list " + e);
                     return;
                 }
                 new Thread(new Runnable() {

@@ -52,8 +52,6 @@ public class SpecialityFragment extends BaseFragment implements View.OnClickList
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.imv_search:
-                break;
             default:
                 break;
         }

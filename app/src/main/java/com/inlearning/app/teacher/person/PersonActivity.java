@@ -83,7 +83,7 @@ public class PersonActivity extends AppCompatActivity {
         mRootView = findViewById(R.id.root_view);
         mImageView = new PersonInfoView(this);
         mImageView.setTitleText("头像");
-        mImageView.setPersonImageView(mTeacher.getProfilePhotoUrl());
+        mImageView.setPersonImageView(mTeacher.getName(), mTeacher.getProfilePhotoUrl());
         mImageView.setClickable(true);
         mJobNumberView = new PersonInfoView(this);
         mJobNumberView.setTitleText("工号");
@@ -207,7 +207,7 @@ public class PersonActivity extends AppCompatActivity {
             @Override
             public void run() {
                 mImageDialog.dismiss();
-                mImageView.setPersonImageView(mTeacher.getProfilePhotoUrl());
+                mImageView.setPersonImageView(mTeacher.getName(), mTeacher.getProfilePhotoUrl());
             }
         });
     }

@@ -2,6 +2,7 @@ package com.inlearning.app.student.course;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.inlearning.app.R;
 import com.inlearning.app.common.bean.ClassSchedule;
 import com.inlearning.app.common.bean.Course2;
@@ -60,6 +62,18 @@ public class CourseInfoAdapter extends RecyclerView.Adapter<CourseInfoAdapter.Vi
                 }
             }
         });
+        if (TextUtils.isEmpty(teacher.getProfilePhotoUrl())) {
+            String name = teacher.getName();
+            if (name.length() >= 2) {
+                name = name.substring(name.length() - 2);
+            }
+            viewHolder.mTeaIconTextView.setText(name);
+            viewHolder.mTeaIconTextView.setVisibility(View.VISIBLE);
+            viewHolder.mTeaIconView.setImageResource(R.drawable.icon_common_image);
+        } else {
+            viewHolder.mTeaIconTextView.setVisibility(View.GONE);
+            Glide.with(viewHolder.itemView.getContext()).load(teacher.getProfilePhotoUrl()).into(viewHolder.mTeaIconView);
+        }
     }
 
     @Override
@@ -76,6 +90,7 @@ public class CourseInfoAdapter extends RecyclerView.Adapter<CourseInfoAdapter.Vi
         private TextView mTeaTitleView;
         private TextView mStuCountView;
         private ImageView mCourseIconView;
+        private TextView mTeaIconTextView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -87,7 +102,7 @@ public class CourseInfoAdapter extends RecyclerView.Adapter<CourseInfoAdapter.Vi
             mTeaTitleView = itemView.findViewById(R.id.tv_teacher_title);
             mStuCountView = itemView.findViewById(R.id.tv_student_count);
             mCourseIconView = itemView.findViewById(R.id.imv_course_icon);
-
+            mTeaIconTextView = itemView.findViewById(R.id.imv_teacher_text);
         }
     }
 }

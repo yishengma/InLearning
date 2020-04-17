@@ -173,8 +173,17 @@ public class DiscussFuncView extends RelativeLayout implements View.OnClickListe
             });
             if (post.getStudent() != null && !TextUtils.isEmpty(post.getStudent().getProfilePhotoUrl())) {
                 Glide.with(mContext).load(post.getStudent().getProfilePhotoUrl()).into(viewHolder.mUserImageView);
-            } else {
-                viewHolder.mUserImageView.setBackground(mContext.getDrawable(R.drawable.icon_common_image));
+                viewHolder.mUserImageTextView.setVisibility(GONE);
+                viewHolder.mPostNameView.setText(post.getStudent().getName());
+            } else if (post.getStudent() != null){
+                viewHolder.mPostNameView.setText(post.getStudent().getName());
+                String name = post.getStudent().getName();
+                if (name.length() >= 2) {
+                    name = name.substring(name.length() - 2);
+                }
+                viewHolder.mUserImageTextView.setText(name);
+                viewHolder.mUserImageTextView.setVisibility(VISIBLE);
+                viewHolder.mUserImageView.setImageResource(R.drawable.icon_common_image);
             }
         }
 
@@ -187,12 +196,16 @@ public class DiscussFuncView extends RelativeLayout implements View.OnClickListe
             private ImageView mUserImageView;
             private TextView mPostTitleView;
             private ImageView mContentImageView;
+            private TextView mUserImageTextView;
+            private TextView mPostNameView;
 
             public ViewHolder(@NonNull View itemView) {
                 super(itemView);
                 mUserImageView = itemView.findViewById(R.id.imv_user_image);
                 mPostTitleView = itemView.findViewById(R.id.tv_post_title);
                 mContentImageView = itemView.findViewById(R.id.imv_content_image);
+                mUserImageTextView = itemView.findViewById(R.id.imv_user_text);
+                mPostNameView = itemView.findViewById(R.id.tv_post_name);
             }
         }
     }

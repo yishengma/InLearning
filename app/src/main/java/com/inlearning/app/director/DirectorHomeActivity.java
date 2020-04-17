@@ -143,7 +143,6 @@ public class DirectorHomeActivity extends AppCompatActivity implements View.OnCl
 
     private void jumpToSearch() {
         if (mSelectedTab == null) {
-            Log.e(TAG, "jumpToSearch");
             return;
         }
         switch (mSelectedTab.getText().toString()) {
@@ -161,7 +160,6 @@ public class DirectorHomeActivity extends AppCompatActivity implements View.OnCl
 
     private void jumpToAdd() {
         if (mSelectedTab == null) {
-            Log.e(TAG, "jumpToAdd");
             return;
         }
         switch (mSelectedTab.getText().toString()) {

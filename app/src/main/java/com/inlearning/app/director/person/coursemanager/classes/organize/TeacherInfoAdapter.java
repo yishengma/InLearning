@@ -23,6 +23,7 @@ public class TeacherInfoAdapter extends RecyclerView.Adapter<TeacherInfoAdapter.
     private List<Teacher> mTeacherList;
     private boolean isImport = false;
     private Context mContext;
+
     public TeacherInfoAdapter(List<Teacher> teacherList) {
         mTeacherList = teacherList;
     }
@@ -52,7 +53,7 @@ public class TeacherInfoAdapter extends RecyclerView.Adapter<TeacherInfoAdapter.
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         mContext = viewGroup.getContext();
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_director_teacher_info,viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_director_teacher_info, viewGroup, false);
         return new ViewHolder(view);
     }
 
@@ -96,8 +97,16 @@ public class TeacherInfoAdapter extends RecyclerView.Adapter<TeacherInfoAdapter.
             }
         });
         if (TextUtils.isEmpty(teacher.getProfilePhotoUrl())) {
-            viewHolder.mTeaIcon.setBackgroundDrawable(mContext.getDrawable(R.drawable.icon_common_image));
+            String name = teacher.getName();
+            if (name.length() >= 2) {
+                name = name.substring(name.length() - 2);
+            }
+            viewHolder.mTeaIconTextView.setText(name);
+            viewHolder.mTeaIconTextView.setVisibility(View.VISIBLE);
+            viewHolder.mTeaIcon.setImageResource(R.drawable.icon_common_image);
+            viewHolder.mTeaIcon.setVisibility(View.VISIBLE);
         } else {
+            viewHolder.mTeaIconTextView.setVisibility(View.GONE);
             Glide.with(viewHolder.itemView.getContext()).load(teacher.getProfilePhotoUrl()).into(viewHolder.mTeaIcon);
         }
 
@@ -114,6 +123,7 @@ public class TeacherInfoAdapter extends RecyclerView.Adapter<TeacherInfoAdapter.
         private TextView mTeaJobNumber;
         private CheckBox mSelectView;
         private ImageView mTeaIcon;
+        private TextView mTeaIconTextView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -122,6 +132,7 @@ public class TeacherInfoAdapter extends RecyclerView.Adapter<TeacherInfoAdapter.
             mTeaTitle = itemView.findViewById(R.id.director_teacher_title);
             mTeaJobNumber = itemView.findViewById(R.id.director_teacher_job_number);
             mTeaIcon = itemView.findViewById(R.id.course_teacher_icon);
+            mTeaIconTextView = itemView.findViewById(R.id.course_teacher_text);
         }
     }
 }

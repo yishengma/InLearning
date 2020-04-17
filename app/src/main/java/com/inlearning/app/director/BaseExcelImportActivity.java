@@ -133,7 +133,6 @@ public abstract class BaseExcelImportActivity extends AppCompatActivity implemen
             String chooseFilePath;
             Uri uri = data.getData();
             chooseFilePath = FileUtil.getChooseFileResultPath(this, uri);
-            Log.e("chooseFilePath", chooseFilePath);
             doOpenFileResult(chooseFilePath);
         }
     }

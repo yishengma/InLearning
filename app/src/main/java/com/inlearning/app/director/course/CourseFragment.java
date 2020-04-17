@@ -57,12 +57,6 @@ public class CourseFragment extends BaseFragment implements View.OnClickListener
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.imv_search:
-//                CourseSearchActivity.startActivity(getContext());
-                break;
-//            case R.id.imv_add:
-//                CourseEditActivity.startActivity(getContext());
-//                break;
             default:
                 break;
         }

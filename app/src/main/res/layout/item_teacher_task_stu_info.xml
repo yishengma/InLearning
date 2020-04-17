@@ -14,6 +14,19 @@
         android:src="@drawable/icon_common_image" />
 
     <TextView
+        android:id="@+id/imv_student_text"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="12dp"
+        android:layout_toRightOf="@+id/btn_select"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:text="下面"
+        android:textColor="@color/White"
+        android:typeface="serif" />
+
+    <TextView
         android:id="@+id/tv_student_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

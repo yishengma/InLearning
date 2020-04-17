@@ -25,6 +25,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class PersonFragment extends BaseFragment implements View.OnClickListener {
     private CircleImageView mProfilePhotoView;
+    private TextView mProfileTextView;
     private TextView mNameView;
     private TextView mInfoView;
     private RelativeLayout mInfoLayoutView;
@@ -47,10 +48,15 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
         mNameView.setText(TeacherRuntime.getCurrentTeacher().getName());
         mInfoView.setText(TeacherRuntime.getCurrentTeacher().getTitle());
         if (TextUtils.isEmpty(TeacherRuntime.getCurrentTeacher().getProfilePhotoUrl())) {
+            String name = TeacherRuntime.getCurrentTeacher().getName();
+            if (name.length() >= 2) {
+                name = name.substring(name.length() - 2);
+            }
+            mProfileTextView.setText(name);
             return;
         }
         Glide.with(this).load(TeacherRuntime.getCurrentTeacher().getProfilePhotoUrl()).into(mProfilePhotoView);
-
+        mProfileTextView.setVisibility(View.GONE);
     }
 
     private void initView(View view) {
@@ -65,6 +71,7 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
         mAboutAppView.setOnClickListener(this);
         mLoginOutView = view.findViewById(R.id.view_login_out);
         mLoginOutView.setOnClickListener(this);
+        mProfileTextView = view.findViewById(R.id.cv_profile_text);
     }
 
     @Override

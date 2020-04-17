@@ -98,9 +98,16 @@ public class StudentInfoAdapter extends RecyclerView.Adapter<StudentInfoAdapter.
             }
         });
         if (!TextUtils.isEmpty(student.getProfilePhotoUrl())) {
+            viewHolder.mImageTextView.setVisibility(View.GONE);
             Glide.with(viewHolder.itemView.getContext()).load(student.getProfilePhotoUrl()).into(viewHolder.mImageView);
         } else {
-            viewHolder.mImageView.setBackgroundDrawable(mContext.getDrawable(R.drawable.icon_common_image));
+            String name = student.getName();
+            if (name.length() >= 2) {
+                name = name.substring(name.length() - 2);
+            }
+            viewHolder.mImageTextView.setText(name);
+            viewHolder.mImageTextView.setVisibility(View.VISIBLE);
+            Glide.with(viewHolder.itemView.getContext()).load(R.drawable.icon_common_image).into(viewHolder.mImageView);
         }
     }
 
@@ -114,6 +121,7 @@ public class StudentInfoAdapter extends RecyclerView.Adapter<StudentInfoAdapter.
         private TextView mNameView;
         private TextView mNumberView;
         private CheckBox mSelectView;
+        private TextView mImageTextView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -121,6 +129,7 @@ public class StudentInfoAdapter extends RecyclerView.Adapter<StudentInfoAdapter.
             mImageView = itemView.findViewById(R.id.imv_student_image);
             mNameView = itemView.findViewById(R.id.tv_student_name);
             mNumberView = itemView.findViewById(R.id.tv_student_number);
+            mImageTextView = itemView.findViewById(R.id.imv_student_text);
         }
     }
 }

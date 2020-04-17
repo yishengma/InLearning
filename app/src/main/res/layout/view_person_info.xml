@@ -36,6 +36,24 @@
         android:layout_marginTop="12dp"
         android:layout_marginRight="12dp"
         android:layout_marginBottom="12dp"
+        android:visibility="visible"
+        android:scaleType="centerCrop"
+        android:layout_toLeftOf="@+id/imv_arrow" />
+
+    <TextView
+        android:id="@+id/imv_person_text"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginBottom="12dp"
+        android:scaleType="centerCrop"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:text="下面"
+        android:textColor="@color/White"
+        android:typeface="serif"
         android:visibility="gone"
         android:layout_toLeftOf="@+id/imv_arrow" />
 

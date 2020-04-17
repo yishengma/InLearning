@@ -26,6 +26,8 @@ import com.inlearning.app.student.course.func.discuss.DiscussDetailActivity;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.bmob.v3.util.V;
+
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
@@ -244,7 +246,14 @@ public class MineDiscussActivity extends AppCompatActivity implements View.OnCli
             });
             if (post.getStudent() != null && !TextUtils.isEmpty(post.getStudent().getProfilePhotoUrl())) {
                 Glide.with(mContext).load(post.getStudent().getProfilePhotoUrl()).into(viewHolder.mUserImageView);
-            } else {
+                viewHolder.mUserImageTextView.setVisibility(GONE);
+            } else if (post.getStudent() != null){
+                String name = post.getStudent().getName();
+                if (name.length() >= 2) {
+                    name = name.substring(name.length() - 2);
+                }
+                viewHolder.mUserImageTextView.setText(name);
+                viewHolder.mUserImageTextView.setVisibility(VISIBLE);
                 viewHolder.mUserImageView.setBackground(mContext.getDrawable(R.drawable.icon_common_image));
             }
         }
@@ -259,6 +268,7 @@ public class MineDiscussActivity extends AppCompatActivity implements View.OnCli
             private TextView mPostTitleView;
             private ImageView mContentImageView;
             private TextView mDeleteView;
+            private TextView mUserImageTextView;
 
             public ViewHolder(@NonNull View itemView) {
                 super(itemView);
@@ -266,6 +276,7 @@ public class MineDiscussActivity extends AppCompatActivity implements View.OnCli
                 mPostTitleView = itemView.findViewById(R.id.tv_post_title);
                 mContentImageView = itemView.findViewById(R.id.imv_content_image);
                 mDeleteView = itemView.findViewById(R.id.tv_delete);
+                mUserImageTextView = itemView.findViewById(R.id.imv_user_text);
             }
         }
 

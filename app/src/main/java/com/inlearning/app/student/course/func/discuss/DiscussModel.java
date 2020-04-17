@@ -29,6 +29,13 @@ public class DiscussModel {
     public static void getDiscussPost(CourseChapter chapter, Callback<List<Post>> callback) {
         BmobQuery<Post> query = new BmobQuery<>();
         query.addWhereEqualTo("mChapter", chapter);
+        query.include("mStudent");
+
+
+        BmobQuery<Student> inStuQuery = new BmobQuery<>();
+        inStuQuery.addWhereExists("objectId");
+        query.addWhereMatchesQuery("mStudent", "Student", inStuQuery);
+
         query.findObjects(new FindListener<Post>() {
             @Override
             public void done(List<Post> list, BmobException e) {

@@ -48,6 +48,19 @@
         android:src="@drawable/icon_common_image" />
 
     <TextView
+        android:id="@+id/imv_teacher_text"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/tv_course_time"
+        android:layout_marginTop="10dp"
+        android:scaleType="centerCrop"
+        android:gravity="center"
+        android:textSize="12sp"
+        android:text="下面"
+        android:textColor="@color/White"
+        android:typeface="serif" />
+
+    <TextView
         android:id="@+id/tv_teacher_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

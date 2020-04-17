@@ -67,7 +67,7 @@ public class Student extends BmobObject {
 
     
     public String getName() {
-        return mName;
+        return mName == null ? "" : mName;
     }
 
     

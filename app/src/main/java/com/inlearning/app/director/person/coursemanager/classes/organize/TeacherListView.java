@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.inlearning.app.R;
 import com.inlearning.app.common.bean.Teacher;
-import com.inlearning.app.director.teacher.TeacherInfoAdapter;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +54,7 @@ public class TeacherListView extends RelativeLayout {
         mRvTeacherInfo = view.findViewById(R.id.rv_content);
         mRvTeacherInfo.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         mTeacherList = new ArrayList<>();
-        mTeacherInfoAdapter = new com.inlearning.app.director.teacher.TeacherInfoAdapter(mTeacherList);
+        mTeacherInfoAdapter = new TeacherInfoAdapter(mTeacherList);
         mRvTeacherInfo.setAdapter(mTeacherInfoAdapter);
         mTeacherInfoAdapter.setClickListener(new TeacherInfoAdapter.ClickListener() {
             @Override

@@ -38,7 +38,6 @@ public class TeacherModel {
                 if (e == null) {
                     callback.onResult(true, list);
                 }
-                Log.e(TAG, "" + e);
             }
         });
     }
@@ -54,7 +53,6 @@ public class TeacherModel {
                     teacher.setObjectId(s);
                     callback.onResult(true, teacher);
                 }
-                Log.e(TAG, "addTeacher" + e);
             }
         });
     }

@@ -145,6 +145,7 @@ public class ClassCourseActivity extends AppCompatActivity implements View.OnCli
         TextView courseInfoView = dialog.findViewById(R.id.tv_course_info);
         TextView selectTeaView = dialog.findViewById(R.id.tv_select_teacher);
         ImageView teaIconView = dialog.findViewById(R.id.imv_teacher_icon);
+        TextView teaIconTextView = dialog.findViewById(R.id.imv_teacher_text);
         TextView teaNameView = dialog.findViewById(R.id.tv_teacher_name);
         TextView teaJobNumView = dialog.findViewById(R.id.tv_teacher_job_number);
         TextView cancelView = dialog.findViewById(R.id.tv_cancel);
@@ -159,7 +160,14 @@ public class ClassCourseActivity extends AppCompatActivity implements View.OnCli
         courseInfoView.setText(String.format("学分：%s 学时：%s", schedule.getCourse2().getScore(), schedule.getCourse2().getTime()));
         if (TextUtils.isEmpty(schedule.getTeacher().getProfilePhotoUrl())) {
             teaIconView.setBackground(getDrawable(R.drawable.icon_common_image));
+            String name = schedule.getTeacher().getName();
+            if (name.length() >= 2) {
+                name = name.substring(name.length() - 2);
+            }
+            teaIconTextView.setVisibility(View.VISIBLE);
+            teaIconTextView.setText(name);
         } else {
+            teaIconTextView.setVisibility(View.GONE);
             Glide.with(this).load(schedule.getTeacher().getProfilePhotoUrl()).into(teaIconView);
         }
         teaNameView.setText(schedule.getTeacher().getName());

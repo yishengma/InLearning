@@ -35,6 +35,7 @@ public class UserModel {
                 studentBeanBmobQuery.findObjects(new FindListener<Student>() {
                     @Override
                     public void done(List<Student> list, BmobException e) {
+
                         if (list == null || list.size() == 0) {
                             sStudent = null;
                         } else {

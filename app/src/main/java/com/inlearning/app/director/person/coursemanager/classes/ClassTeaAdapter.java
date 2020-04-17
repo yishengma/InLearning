@@ -22,6 +22,7 @@ public class ClassTeaAdapter extends RecyclerView.Adapter<ClassTeaAdapter.ViewHo
 
     private List<ClassSchedule> mClassSchedules;
     private Context mContext;
+
     public interface ClickListener {
         void onClick(ClassSchedule schedule);
 
@@ -50,8 +51,8 @@ public class ClassTeaAdapter extends RecyclerView.Adapter<ClassTeaAdapter.ViewHo
         ClassSchedule bean = mClassSchedules.get(i);
         final Course2 course = bean.getCourse2();
         viewHolder.mCourseName.setText(course.getName());
-        viewHolder.mCourseTime.setText(String.format("学时:%s",course.getTime()));
-        viewHolder.mCourseScore.setText(String.format("学分:%s",course.getScore()));
+        viewHolder.mCourseTime.setText(String.format("学时:%s", course.getTime()));
+        viewHolder.mCourseScore.setText(String.format("学分:%s", course.getScore()));
         viewHolder.mCourseType.setText(course.getType());
 
         Teacher teacher = bean.getTeacher();
@@ -59,8 +60,15 @@ public class ClassTeaAdapter extends RecyclerView.Adapter<ClassTeaAdapter.ViewHo
         viewHolder.mTeaTitle.setText(teacher.getTitle());
         viewHolder.mTeaJobNumber.setText(teacher.getAccount());
         if (TextUtils.isEmpty(teacher.getProfilePhotoUrl())) {
-            viewHolder.mTeaIconView.setBackgroundDrawable(mContext.getDrawable(R.drawable.icon_common_image));
+            String name = teacher.getName();
+            if (name.length() >= 2) {
+                name = name.substring(name.length() - 2);
+            }
+            viewHolder.mTeaIconTextView.setText(name);
+            viewHolder.mTeaIconTextView.setVisibility(View.VISIBLE);
+            viewHolder.mTeaIconView.setImageResource(R.drawable.icon_common_image);
         } else {
+            viewHolder.mTeaIconTextView.setVisibility(View.GONE);
             Glide.with(viewHolder.itemView.getContext()).load(teacher.getProfilePhotoUrl()).into(viewHolder.mTeaIconView);
         }
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -88,6 +96,7 @@ public class ClassTeaAdapter extends RecyclerView.Adapter<ClassTeaAdapter.ViewHo
         private TextView mTeaTitle;
         private TextView mTeaJobNumber;
         private ImageView mTeaIconView;
+        private TextView mTeaIconTextView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -99,6 +108,7 @@ public class ClassTeaAdapter extends RecyclerView.Adapter<ClassTeaAdapter.ViewHo
             mTeaTitle = itemView.findViewById(R.id.director_teacher_title);
             mTeaJobNumber = itemView.findViewById(R.id.director_teacher_job_number);
             mTeaIconView = itemView.findViewById(R.id.course_teacher_icon);
+            mTeaIconTextView = itemView.findViewById(R.id.course_teacher_text);
         }
     }
 }

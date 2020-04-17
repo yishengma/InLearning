@@ -63,23 +63,14 @@ public class TeacherFragment extends BaseFragment implements View.OnClickListene
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        initData();
+    public void onClick(View v) {
+
     }
 
     @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.imv_search:
-                break;
-//            case R.id.imv_add:
-//                TeacherEditActivity.startTeacherEditActivity(getContext());
-//                break;
-            default:
-                break;
-
-        }
+    public void onResume() {
+        super.onResume();
+        initData();
     }
 
     private void initData() {

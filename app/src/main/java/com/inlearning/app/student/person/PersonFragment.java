@@ -25,6 +25,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class PersonFragment extends BaseFragment implements View.OnClickListener {
 
     private CircleImageView mProfilePhotoView;
+    private TextView mProfileTextView;
     private TextView mNameView;
     private TextView mInfoView;
     private RelativeLayout mMineDiscussView;
@@ -47,8 +48,15 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
         mNameView.setText(StudentRuntime.getStudent().getName());
         mInfoView.setText(StudentRuntime.getStudent().getClassInfo().getName());
         if (TextUtils.isEmpty(StudentRuntime.getStudent().getProfilePhotoUrl())) {
+            String name = StudentRuntime.getStudent().getName();
+            if (name.length() >= 2) {
+                name = name.substring(name.length() - 2);
+            }
+            mProfileTextView.setText(name);
+            mProfileTextView.setVisibility(View.VISIBLE);
             return;
         }
+        mProfileTextView.setVisibility(View.GONE);
         Glide.with(this).load(StudentRuntime.getStudent().getProfilePhotoUrl()).into(mProfilePhotoView);
     }
 
@@ -73,6 +81,8 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
 
         mLoginOutView = view.findViewById(R.id.view_login_out);
         mLoginOutView.setOnClickListener(this);
+
+        mProfileTextView = view.findViewById(R.id.cv_profile_text);
     }
 
     @Override
@@ -89,7 +99,8 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
                 break;
             case R.id.view_about_app:
                 AboutAppActivity.startAboutActivity(getContext());
-                break;case R.id.view_login_out:
+                break;
+            case R.id.view_login_out:
                 showLoginOutDialog();
                 break;
         }

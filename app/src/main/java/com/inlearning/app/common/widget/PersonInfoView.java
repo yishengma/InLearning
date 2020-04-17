@@ -31,6 +31,7 @@ public class PersonInfoView extends RelativeLayout {
     public interface ClickListener {
         void onClick();
     }
+
     private ClickListener mClickListener;
 
     public void setClickListener(ClickListener clickListener) {
@@ -40,6 +41,7 @@ public class PersonInfoView extends RelativeLayout {
     private TextView mPersonTitleView;
     private TextView mPersonContentView;
     private ImageView mPersonImageView;
+    private TextView mPersonImageTextView;
     private View mRootView;
 
     private void initView() {
@@ -48,7 +50,8 @@ public class PersonInfoView extends RelativeLayout {
         mPersonTitleView = view.findViewById(R.id.tv_person_title);
         mPersonContentView = view.findViewById(R.id.tv_person_content);
         mPersonImageView = view.findViewById(R.id.imv_person_image);
-        mRootView.setOnClickListener(new View.OnClickListener(){
+        mPersonImageTextView = view.findViewById(R.id.imv_person_text);
+        mRootView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mClickListener != null) {
@@ -64,14 +67,21 @@ public class PersonInfoView extends RelativeLayout {
         mPersonTitleView.setText(msg);
     }
 
-    public void setPersonImageView(String path) {
+    public void setPersonImageView(String name, String path) {
         mPersonContentView.setVisibility(GONE);
         mPersonImageView.setVisibility(VISIBLE);
         if (TextUtils.isEmpty(path)) {
-            mPersonImageView.setBackgroundDrawable(getContext().getDrawable(R.drawable.icon_common_image));
+            mPersonImageView.setImageResource(R.drawable.icon_common_image);
+            String text = name;
+            if (name.length() >= 2) {
+                text = name.substring(name.length() - 2);
+            }
+            mPersonImageTextView.setText(text);
+            mPersonImageTextView.setVisibility(VISIBLE);
             return;
         }
         Glide.with(getContext()).load(path).into(mPersonImageView);
+        mPersonImageTextView.setVisibility(GONE);
     }
 
     public void setPersonContentView(String msg) {

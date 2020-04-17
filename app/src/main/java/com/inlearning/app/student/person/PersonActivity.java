@@ -58,6 +58,7 @@ public class PersonActivity extends AppCompatActivity {
     private PersonInfoView mNameView;
     private Student mStudent;
     private ImageView mBackView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,7 +78,7 @@ public class PersonActivity extends AppCompatActivity {
         mRootView = findViewById(R.id.root_view);
         mImageView = new PersonInfoView(this);
         mImageView.setTitleText("头像");
-        mImageView.setPersonImageView(mStudent.getProfilePhotoUrl());
+        mImageView.setPersonImageView(mStudent.getName(), mStudent.getProfilePhotoUrl());
         mNumberView = new PersonInfoView(this);
         mNumberView.setTitleText("学号");
         mNumberView.setPersonContentView(mStudent.getAccount());
@@ -202,7 +203,7 @@ public class PersonActivity extends AppCompatActivity {
             @Override
             public void run() {
                 mImageDialog.dismiss();
-                mImageView.setPersonImageView(mStudent.getProfilePhotoUrl());
+                mImageView.setPersonImageView(mStudent.getName(), mStudent.getProfilePhotoUrl());
             }
         });
     }

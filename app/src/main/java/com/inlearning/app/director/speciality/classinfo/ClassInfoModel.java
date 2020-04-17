@@ -35,7 +35,6 @@ public class ClassInfoModel {
         query.findObjects(new FindListener<Student>() {
             @Override
             public void done(List<Student> list, BmobException e) {
-                Log.e("done", "" + e);
                 if (e == null && list != null) {
                     ClassInfo bmobClassInfo = new ClassInfo();
                     bmobClassInfo.setObjectId(classInfo.getObjectId());
@@ -89,7 +88,6 @@ public class ClassInfoModel {
         new BmobBatch().insertBatch(list).doBatch(new QueryListListener<BatchResult>() {
             @Override
             public void done(List<BatchResult> list, BmobException e) {
-                Log.e("done", "" + e);
                 if (e == null) {
                     callback.onResult(true, null);
                 }

@@ -73,7 +73,6 @@ public class CourseModel {
         new BmobBatch().insertBatch(list).doBatch(new QueryListListener<BatchResult>() {
             @Override
             public void done(List<BatchResult> list, BmobException e) {
-                Log.e("done", "" + e);
                 if (e == null) {
                     callback.onResult(true, null);
                 }

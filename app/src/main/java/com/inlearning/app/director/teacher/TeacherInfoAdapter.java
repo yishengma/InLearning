@@ -98,9 +98,17 @@ public class TeacherInfoAdapter extends RecyclerView.Adapter<TeacherInfoAdapter.
             }
         });
         if (!TextUtils.isEmpty(teacher.getProfilePhotoUrl())) {
+            viewHolder.mTeaIconTextView.setVisibility(View.GONE);
             Glide.with(mContext).load(teacher.getProfilePhotoUrl()).into(viewHolder.mTeaIcon);
         } else {
-            viewHolder.mTeaIcon.setBackgroundDrawable(mContext.getDrawable(R.drawable.icon_common_image));
+            viewHolder.mTeaIcon.setImageResource(R.drawable.icon_common_image);
+            viewHolder.mTeaIcon.setVisibility(View.VISIBLE);
+            viewHolder.mTeaIconTextView.setVisibility(View.VISIBLE);
+            String name = teacher.getName();
+            if (name.length() >= 2) {
+                name = name.substring(name.length() - 2);
+            }
+            viewHolder.mTeaIconTextView.setText(name);
         }
     }
 
@@ -115,6 +123,7 @@ public class TeacherInfoAdapter extends RecyclerView.Adapter<TeacherInfoAdapter.
         private TextView mTeaJobNumber;
         private CheckBox mSelectView;
         private CircleImageView mTeaIcon;
+        private TextView mTeaIconTextView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -123,6 +132,7 @@ public class TeacherInfoAdapter extends RecyclerView.Adapter<TeacherInfoAdapter.
             mTeaTitle = itemView.findViewById(R.id.director_teacher_title);
             mTeaJobNumber = itemView.findViewById(R.id.director_teacher_job_number);
             mTeaIcon = itemView.findViewById(R.id.course_teacher_icon);
+            mTeaIconTextView = itemView.findViewById(R.id.course_teacher_text);
         }
     }
 }

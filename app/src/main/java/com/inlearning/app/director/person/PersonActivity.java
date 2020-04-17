@@ -77,7 +77,7 @@ public class PersonActivity extends AppCompatActivity {
         mRootView = findViewById(R.id.root_view);
         mImageView = new PersonInfoView(this);
         mImageView.setTitleText("头像");
-        mImageView.setPersonImageView(mDirector.getProfilePhotoUrl());
+        mImageView.setPersonImageView(mDirector.mName, mDirector.getProfilePhotoUrl());
         mIdentifyView = new PersonInfoView(this);
         mIdentifyView.setTitleText("身份");
         mIdentifyView.setPersonContentView("管理员");
@@ -196,7 +196,7 @@ public class PersonActivity extends AppCompatActivity {
             @Override
             public void run() {
                 mImageDialog.dismiss();
-                mImageView.setPersonImageView(mDirector.getProfilePhotoUrl());
+                mImageView.setPersonImageView(mDirector.mName, mDirector.getProfilePhotoUrl());
             }
         });
     }
