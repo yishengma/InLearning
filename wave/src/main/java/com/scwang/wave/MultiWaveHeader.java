@@ -70,7 +70,7 @@ public class MultiWaveHeader extends ViewGroup {
         mWaveHeight = ta.getDimensionPixelOffset(R.styleable.MultiWaveHeader_mwhWaveHeight, Util.dp2px(50));
         mStartColor = ta.getColor(R.styleable.MultiWaveHeader_mwhStartColor, 0xFF056CD0);
         mCloseColor = ta.getColor(R.styleable.MultiWaveHeader_mwhCloseColor, 0xFF31AFFE);
-        mColorAlpha = ta.getFloat(R.styleable.MultiWaveHeader_mwhColorAlpha, 0.45f);
+        mColorAlpha = ta.getFloat(R.styleable.MultiWaveHeader_mwhColorAlpha, 1.0f);
         mVelocity = ta.getFloat(R.styleable.MultiWaveHeader_mwhVelocity, 1f);
         mGradientAngle = ta.getInt(R.styleable.MultiWaveHeader_mwhGradientAngle, 45);
         mIsRunning = ta.getBoolean(R.styleable.MultiWaveHeader_mwhIsRunning, true);

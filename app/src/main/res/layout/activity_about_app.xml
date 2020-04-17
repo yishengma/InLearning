@@ -54,7 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="20dp" />
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -64,27 +64,31 @@
                 android:layout_width="95dp"
                 android:layout_height="95dp"
                 android:layout_gravity="center_horizontal"
-                android:scaleType="center"
+                android:scaleType="centerCrop"
                 android:src="@drawable/icon_common_image" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="5dp"
-                android:text="@string/app_name"
-                android:textColor="@color/textBlack"
-                android:textSize="18sp" />
+                android:id="@+id/app_name"
+                android:layout_width="95dp"
+                android:layout_height="95dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="在学"
+                android:textColor="@color/White"
+                android:typeface="serif"
+                android:textSize="44sp" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="95dp"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/app_name"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="5dp"
+                android:gravity="center_horizontal"
                 android:text="V 1.0.0"
                 android:textColor="@color/textBlack"
                 android:textSize="12sp" />
-        </LinearLayout>
+        </>
 
         <LinearLayout
             android:layout_width="match_parent"
