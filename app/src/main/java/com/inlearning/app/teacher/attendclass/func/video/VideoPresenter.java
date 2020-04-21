@@ -96,6 +96,9 @@ public class VideoPresenter implements VideoUploadMgr.UploadListener {
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (data == null) {
+            return;
+        }
         Uri uri = data.getData();
         if (uri == null) {
             return;

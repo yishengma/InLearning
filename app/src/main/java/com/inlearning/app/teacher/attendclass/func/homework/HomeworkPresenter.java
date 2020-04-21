@@ -86,6 +86,9 @@ public class HomeworkPresenter implements BaseQuesFunc.ClickListener {
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (data == null) {
+            return;
+        }
         if (mResponseQuesView.getVisibility() == View.VISIBLE) {
             mResponseQuesView.onActivityResult(requestCode, resultCode, data);
         }
