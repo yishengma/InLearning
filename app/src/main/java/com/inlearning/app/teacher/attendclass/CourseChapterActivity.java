@@ -193,7 +193,7 @@ public class CourseChapterActivity extends BaseActivity implements View.OnClickL
                     return;
                 }
                 String chapterNum = chapterNumEt.getText().toString();
-                if (TextUtils.isEmpty(chapterNum) || Integer.valueOf(chapterName) <= 0) {
+                if (TextUtils.isEmpty(chapterNum) || Integer.valueOf(chapterNum) <= 0) {
                     Toast.makeText(CourseChapterActivity.this, "请输入合法的章节序", Toast.LENGTH_SHORT).show();
                     return;
                 }
