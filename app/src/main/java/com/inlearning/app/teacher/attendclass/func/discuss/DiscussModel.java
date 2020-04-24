@@ -7,6 +7,7 @@ import com.inlearning.app.common.bean.CourseChapter;
 import com.inlearning.app.common.bean.Post;
 import com.inlearning.app.common.bean.Student;
 import com.inlearning.app.common.bean.Teacher;
+import com.inlearning.app.common.model.DeleteModel;
 
 import java.io.File;
 import java.util.List;

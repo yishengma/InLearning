@@ -2,11 +2,17 @@ package com.inlearning.app.teacher.attendclass;
 
 import android.util.Log;
 
+import com.inlearning.app.common.bean.Answer;
+import com.inlearning.app.common.bean.ChapterProgress;
 import com.inlearning.app.common.bean.ClassSchedule;
 import com.inlearning.app.common.bean.Course2;
 import com.inlearning.app.common.bean.CourseChapter;
+import com.inlearning.app.common.bean.Materials;
+import com.inlearning.app.common.bean.Post;
+import com.inlearning.app.common.bean.Question;
 import com.inlearning.app.common.bean.Teacher;
 import com.inlearning.app.common.bean.TeacherCourse;
+import com.inlearning.app.common.model.DeleteModel;
 import com.inlearning.app.director.DirectorAppRuntime;
 import com.inlearning.app.teacher.TeacherRuntime;
 
@@ -64,6 +70,11 @@ public class ChapterModel {
             public void done(BmobException e) {
                 if (e == null) {
                     callback.onResult(true);
+                    DeleteModel.deleteAnswer("mChapter", chapter);
+                    DeleteModel.deleteChapterProgress("mChapter", chapter);
+                    DeleteModel.deleteMaterial("mChapter", chapter);
+                    DeleteModel.deletePost("mChapter", chapter);
+                    DeleteModel.deleteQuestion("mCourseChapter", chapter);
                 }
             }
         });

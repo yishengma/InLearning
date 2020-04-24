@@ -3,8 +3,10 @@ package com.inlearning.app.teacher.attendclass.func.homework;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.inlearning.app.common.bean.Answer;
 import com.inlearning.app.common.bean.CourseChapter;
 import com.inlearning.app.common.bean.Question;
+import com.inlearning.app.common.model.DeleteModel;
 import com.inlearning.app.common.util.ThreadMgr;
 
 import java.io.File;
@@ -55,6 +57,7 @@ public class QuestionModel {
 
                     }
                 });
+                DeleteModel.deleteAnswer("mQuestion",question);
                 ThreadMgr.getInstance().postToUIThread(new Runnable() {
                     @Override
                     public void run() {

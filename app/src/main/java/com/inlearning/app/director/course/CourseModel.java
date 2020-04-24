@@ -2,7 +2,12 @@ package com.inlearning.app.director.course;
 
 import android.util.Log;
 
+import com.inlearning.app.common.bean.ClassSchedule;
 import com.inlearning.app.common.bean.Course2;
+import com.inlearning.app.common.bean.CourseChapter;
+import com.inlearning.app.common.bean.SpecialitySchedule;
+import com.inlearning.app.common.bean.TeacherCourse;
+import com.inlearning.app.common.model.DeleteModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +52,7 @@ public class CourseModel {
             @Override
             public void done(BmobException e) {
                 if (e == null) {
-                    callback.onResult(true,course);
+                    callback.onResult(true, course);
                 }
             }
         });
@@ -61,7 +66,12 @@ public class CourseModel {
             @Override
             public void done(BmobException e) {
                 if (e == null) {
-                    callback.onResult(true,null);
+                    callback.onResult(true, null);
+                    DeleteModel.deleteClassSchedule("mCourse2",course);
+                    DeleteModel.deleteChapter("mCourse2",course);
+                    DeleteModel.deleteSpecialitySchedule("mCourse2",course);
+                    DeleteModel.deleteTeacherCourse("mCourse2",course);
+
                 }
             }
         });

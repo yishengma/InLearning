@@ -2,9 +2,12 @@ package com.inlearning.app.director.teacher;
 
 import android.util.Log;
 
+import com.inlearning.app.common.bean.ClassSchedule;
+import com.inlearning.app.common.bean.Comment;
 import com.inlearning.app.common.bean.Course2;
 import com.inlearning.app.common.bean.Teacher;
 import com.inlearning.app.common.bean.TeacherCourse;
+import com.inlearning.app.common.model.DeleteModel;
 import com.inlearning.app.common.util.ThreadMgr;
 
 import java.util.ArrayList;
@@ -121,6 +124,11 @@ public class TeacherModel {
             public void done(BmobException e) {
                 if (e == null) {
                     callback.onResult(true, null);
+                    DeleteModel.deleteClassSchedule("mTeacher",teacher);
+                    DeleteModel.deleteComment("mTeacher",teacher);
+                    DeleteModel.deleteTeacherCourse("mTeacher",teacher);
+                    DeleteModel.deleteChapter("mTeacher",teacher);
+
                 }
             }
         });

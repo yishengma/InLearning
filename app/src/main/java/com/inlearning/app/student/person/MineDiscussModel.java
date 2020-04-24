@@ -1,7 +1,9 @@
 package com.inlearning.app.student.person;
 
+import com.inlearning.app.common.bean.Comment;
 import com.inlearning.app.common.bean.Post;
 import com.inlearning.app.common.bean.Student;
+import com.inlearning.app.common.model.DeleteModel;
 
 import java.util.List;
 
@@ -40,6 +42,7 @@ public class MineDiscussModel {
             public void done(BmobException e) {
                 callback.onResult(e == null);
                 post.getChapter().increment("mDiscussCount", -1);
+                DeleteModel.deleteComment("mPost",post);
             }
         });
     }

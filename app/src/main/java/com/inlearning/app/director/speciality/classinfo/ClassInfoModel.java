@@ -2,8 +2,14 @@ package com.inlearning.app.director.speciality.classinfo;
 
 import android.util.Log;
 
+import com.inlearning.app.common.bean.Answer;
+import com.inlearning.app.common.bean.ChapterProgress;
 import com.inlearning.app.common.bean.ClassInfo;
+import com.inlearning.app.common.bean.Comment;
+import com.inlearning.app.common.bean.HomeworkProgress;
+import com.inlearning.app.common.bean.Post;
 import com.inlearning.app.common.bean.Student;
+import com.inlearning.app.common.model.DeleteModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -103,6 +109,10 @@ public class ClassInfoModel {
             public void done(BmobException e) {
                 if (e == null) {
                     callback.onResult(true, null);
+                    DeleteModel.deleteAnswer("mStudent", student);
+                    DeleteModel.deleteChapterProgress("mStudent", student);
+                    DeleteModel.deleteComment("mStudent", student);
+                    DeleteModel.deletePost("mStudent", student);
                 }
             }
         });

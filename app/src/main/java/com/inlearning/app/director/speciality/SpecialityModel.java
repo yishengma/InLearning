@@ -4,6 +4,8 @@ import android.util.Log;
 
 import com.inlearning.app.common.bean.ClassInfo;
 import com.inlearning.app.common.bean.Speciality;
+import com.inlearning.app.common.bean.SpecialitySchedule;
+import com.inlearning.app.common.model.DeleteModel;
 import com.inlearning.app.director.DirectorAppRuntime;
 
 import java.util.ArrayList;
@@ -81,7 +83,7 @@ public class SpecialityModel {
                     speciality.update(new UpdateListener() {
                         @Override
                         public void done(BmobException e) {
-                            speciality.setClassCount(speciality.getClassCount()+classInfos.size());
+                            speciality.setClassCount(speciality.getClassCount() + classInfos.size());
                         }
                     });
                 }
@@ -96,6 +98,8 @@ public class SpecialityModel {
             public void done(BmobException e) {
                 if (e == null) {
                     callback.onResult(true, speciality);
+                    DeleteModel.deleteSpecialitySchedule("mSpeciality", speciality);
+                    DeleteModel.deleteClassInfo("mSpeciality", speciality);
                 }
             }
         });
@@ -133,7 +137,7 @@ public class SpecialityModel {
                             BmobQuery<ClassInfo> classInfoBmobQuery = new BmobQuery<>();
                             classInfoBmobQuery.addWhereEqualTo("mSpeciality", s);
                             List<ClassInfo> classInfos = classInfoBmobQuery.findObjectsSync(ClassInfo.class);
-                            DirectorAppRuntime.setsClassInfo(s,classInfos);
+                            DirectorAppRuntime.setsClassInfo(s, classInfos);
                         }
                         callback.onResult(true, list);
                     }
@@ -158,6 +162,9 @@ public class SpecialityModel {
                         }
                     }
                 });
+                DeleteModel.deleteAnswer("mClassInfo", classInfo);
+                DeleteModel.deleteChapterProgress("mClassInfo", classInfo);
+                DeleteModel.deleteClassSchedule("mClassInfo", classInfo);
             }
         });
     }
