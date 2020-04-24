@@ -14,19 +14,6 @@
         android:src="@drawable/icon_common_image" />
 
     <TextView
-        android:id="@+id/imv_material_text"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="12dp"
-        android:layout_toRightOf="@+id/btn_select"
-        android:gravity="center"
-        android:textSize="16sp"
-        android:text="下面"
-        android:textColor="@color/White"
-        android:typeface="serif" />
-
-    <TextView
         android:id="@+id/tv_material_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -50,7 +37,7 @@
         android:gravity="center"
         android:text="删除"
         android:textColor="@color/app_global_blue"
-        android:textSize="10sp" />
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/tv_material_upload"
@@ -62,7 +49,7 @@
         android:gravity="center"
         android:text="上传"
         android:textColor="@color/app_global_blue"
-        android:textSize="10sp" />
+        android:textSize="14sp" />
 
     <View
         android:layout_width="match_parent"

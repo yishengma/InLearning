@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+
 import com.inlearning.app.BaseActivity;
+
 import android.os.Bundle;
 import android.view.View;
 
@@ -25,7 +27,7 @@ import java.lang.annotation.Target;
 
 public class ChapterFunctionActivity extends BaseActivity {
 
-    @IntDef({FLAG.VIDEO_FUNCTION, FLAG.MATERIAL_FUNCTION, FLAG.HOMEWORK_FUNCTION,FLAG.DISCUSS_FUNCTION})
+    @IntDef({FLAG.VIDEO_FUNCTION, FLAG.MATERIAL_FUNCTION, FLAG.HOMEWORK_FUNCTION, FLAG.DISCUSS_FUNCTION})
     @Retention(RetentionPolicy.SOURCE)
     @Target({ElementType.FIELD, ElementType.LOCAL_VARIABLE, ElementType.PARAMETER})
     public @interface FLAG {
@@ -43,6 +45,14 @@ public class ChapterFunctionActivity extends BaseActivity {
         context.startActivity(intent);
     }
 
+    public static void startActivity(Context context, int pos, CourseChapter chapter, @FLAG int flag) {
+        Intent intent = new Intent(context, ChapterFunctionActivity.class);
+        intent.putExtra("chapter", chapter);
+        intent.putExtra("flag", flag);
+        intent.putExtra("pos", pos);
+        context.startActivity(intent);
+    }
+
     private VideoPresenter mVideoPresenter;
     private MaterialPresenter mMaterialPresenter;
     private HomeworkPresenter mHomeworkPresenter;
@@ -50,6 +60,7 @@ public class ChapterFunctionActivity extends BaseActivity {
     private View mRootView;
     private int mFunctionFlag = -1;
     private CourseChapter mChapter;
+    private int mPos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +75,7 @@ public class ChapterFunctionActivity extends BaseActivity {
     private void getIntentData() {
         mFunctionFlag = getIntent().getIntExtra("flag", -1);
         mChapter = (CourseChapter) getIntent().getSerializableExtra("chapter");
+        mPos = getIntent().getIntExtra("pos", -1);
     }
 
     @Override
@@ -87,7 +99,7 @@ public class ChapterFunctionActivity extends BaseActivity {
 
     private void initPresenter() {
         mRootView = findViewById(R.id.root_view);
-        mVideoPresenter = new VideoPresenter(this, mRootView);
+        mVideoPresenter = new VideoPresenter(this, mRootView, mPos);
         mVideoPresenter.setChapter(mChapter);
         mMaterialPresenter = new MaterialPresenter(this, mChapter);
         mHomeworkPresenter = new HomeworkPresenter(this, mRootView, mChapter);

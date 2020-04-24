@@ -15,7 +15,7 @@ public class VideoUploadMgr {
     public interface UploadListener {
         void onProgress(CourseChapter chapter, int progress);
 
-        void onUploadDone(CourseChapter chapter, BmobFile file);
+        void onUploadDone(int pos, CourseChapter chapter, BmobFile file);
     }
 
     private static VideoUploadMgr mUploadMgr;
@@ -55,7 +55,7 @@ public class VideoUploadMgr {
         }
     }
 
-    public synchronized void uploadDone(CourseChapter chapter, final BmobFile file) {
+    public synchronized void uploadDone(int pos, CourseChapter chapter, final BmobFile file) {
         chapter.setVideoFile(file);
         ChapterModel.updateCourseChapter(chapter, new ChapterModel.Callback<CourseChapter>() {
             @Override
@@ -63,7 +63,7 @@ public class VideoUploadMgr {
                 if (chapter != null) {
                     for (WeakReference<UploadListener> reference : mReferences) {
                         if (reference != null && reference.get() != null) {
-                            reference.get().onUploadDone(chapter, file);
+                            reference.get().onUploadDone(pos,chapter, file);
                         }
                     }
                 }

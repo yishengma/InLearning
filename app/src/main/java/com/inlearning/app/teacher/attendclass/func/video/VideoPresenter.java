@@ -31,10 +31,12 @@ public class VideoPresenter implements VideoUploadMgr.UploadListener {
     private VideoFunctionView mVideoFunctionView;
     private String mPath;
     private CourseChapter mChapter;
+    private int mPos;
 
 
-    public VideoPresenter(Activity context, View rootView) {
+    public VideoPresenter(Activity context, View rootView, int pos) {
         mContext = context;
+        mPos = pos;
         mVideoFunctionView = rootView.findViewById(R.id.view_video_func);
         mVideoFunctionView.setClickListener(new VideoFunctionView.ClickListener() {
             @Override
@@ -132,7 +134,7 @@ public class VideoPresenter implements VideoUploadMgr.UploadListener {
         bmobFile.uploadblock(new UploadFileListener() {
             @Override
             public void done(BmobException e) {
-                VideoUploadMgr.getInstance().uploadDone(courseChapter, bmobFile);
+                VideoUploadMgr.getInstance().uploadDone(mPos, courseChapter, bmobFile);
             }
 
             @Override
@@ -148,7 +150,7 @@ public class VideoPresenter implements VideoUploadMgr.UploadListener {
     }
 
     @Override
-    public void onUploadDone(CourseChapter chapter, BmobFile file) {
+    public void onUploadDone(int pos, CourseChapter chapter, BmobFile file) {
         Toast.makeText(mContext, chapter.getChapterName() + "上传成功", Toast.LENGTH_SHORT).show();
     }
 }

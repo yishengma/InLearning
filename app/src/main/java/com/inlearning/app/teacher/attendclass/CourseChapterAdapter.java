@@ -41,7 +41,7 @@ public class CourseChapterAdapter extends RecyclerView.Adapter<CourseChapterAdap
 
         void onDeleteClick(ChapterProxy proxy);
 
-        void onVideoClick(CourseChapter chapter);
+        void onVideoClick(int pos, CourseChapter chapter);
 
         void onTimeClick(CourseChapter chapter);
 
@@ -101,7 +101,7 @@ public class CourseChapterAdapter extends RecyclerView.Adapter<CourseChapterAdap
             @Override
             public void onClick(View v) {
                 if (mOnClickListener != null) {
-                    mOnClickListener.onVideoClick(chapter);
+                    mOnClickListener.onVideoClick(i, chapter);
                 }
             }
         });
@@ -195,7 +195,7 @@ public class CourseChapterAdapter extends RecyclerView.Adapter<CourseChapterAdap
         private TextView mDeleteView;
         private ChapterFuncItemView mTimeFuncView;
         private ChapterFuncItemView mMaterialFuncView;
-//        private ChapterFuncItemView mExerciseFuncView;
+        //        private ChapterFuncItemView mExerciseFuncView;
         private ChapterFuncItemView mHomeworkFuncView;
         private ChapterFuncItemView mDiscussFuncView;
         private ProgressBar mProgressBar;

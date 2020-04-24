@@ -14,6 +14,7 @@ import com.inlearning.app.R;
 import com.inlearning.app.common.bean.CourseChapter;
 import com.inlearning.app.common.bean.Materials;
 import com.inlearning.app.common.util.FileUtil;
+import com.inlearning.app.common.util.LoadingDialog;
 import com.inlearning.app.common.util.ThreadMgr;
 import com.inlearning.app.teacher.attendclass.func.video.VideoUploadMgr;
 
@@ -56,9 +57,11 @@ public class MaterialPresenter {
 
             @Override
             public void onUpload(final Materials materials) {
+                LoadingDialog.showLoadingDialog(mActivity,"正在上传..");
                 ThreadMgr.getInstance().postToSubThread(new Runnable() {
                     @Override
                     public void run() {
+                        LoadingDialog.closeDialog();
                         uploadFile(mChapter, materials, mMaterialPathMap.get(materials));
                     }
                 });

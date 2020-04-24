@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
+
 import com.inlearning.app.BaseActivity;
+
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -22,6 +24,7 @@ import com.bigkoo.pickerview.view.TimePickerView;
 import com.inlearning.app.R;
 import com.inlearning.app.common.bean.Course2;
 import com.inlearning.app.common.bean.CourseChapter;
+import com.inlearning.app.common.util.LoadingDialog;
 import com.inlearning.app.common.util.StatusBar;
 import com.inlearning.app.common.util.ThreadMgr;
 
@@ -112,8 +115,8 @@ public class CourseChapterActivity extends BaseActivity implements View.OnClickL
             }
 
             @Override
-            public void onVideoClick(CourseChapter chapter) {
-                ChapterFunctionActivity.startActivity(CourseChapterActivity.this, chapter, ChapterFunctionActivity.FLAG.VIDEO_FUNCTION);
+            public void onVideoClick(int pos, CourseChapter chapter) {
+                ChapterFunctionActivity.startActivity(CourseChapterActivity.this, pos, chapter, ChapterFunctionActivity.FLAG.VIDEO_FUNCTION);
             }
 
             @Override
@@ -212,9 +215,11 @@ public class CourseChapterActivity extends BaseActivity implements View.OnClickL
                 courseChapter.setExerciseCount(0);
                 courseChapter.setHomeworkCount(0);
                 courseChapter.setDiscussCount(0);
+                LoadingDialog.showLoadingDialog(CourseChapterActivity.this, "正在添加...");
                 ChapterModel.addCourseChapter(courseChapter, new ChapterModel.Callback<CourseChapter>() {
                     @Override
                     public void onResult(CourseChapter chapter) {
+                        LoadingDialog.closeDialog();
                         updateAddChapter(chapter);
                     }
                 });
@@ -257,10 +262,11 @@ public class CourseChapterActivity extends BaseActivity implements View.OnClickL
     }
 
     @Override
-    public void onUploadDone(final CourseChapter chapter, BmobFile file) {
+    public void onUploadDone(int pos, final CourseChapter chapter, BmobFile file) {
         ThreadMgr.getInstance().postToUIThread(new Runnable() {
             @Override
             public void run() {
+                mChapters.get(pos).getChapter().setVideoFile(file);
                 Toast.makeText(CourseChapterActivity.this, chapter.getChapterName() + "上传成功", Toast.LENGTH_SHORT).show();
                 mChapterAdapter.notifyDataSetChanged();
             }
