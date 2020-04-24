@@ -13,7 +13,9 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+
 import com.inlearning.app.BaseActivity;
+
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -34,6 +36,7 @@ import com.inlearning.app.R;
 import com.inlearning.app.common.bean.Comment;
 import com.inlearning.app.common.bean.CourseChapter;
 import com.inlearning.app.common.bean.Post;
+import com.inlearning.app.common.util.DLog;
 import com.inlearning.app.common.util.FileUtil;
 import com.inlearning.app.common.util.PhotoUtils;
 import com.inlearning.app.common.util.StatusBar;
@@ -64,6 +67,7 @@ public class DiscussDetailActivity extends BaseActivity implements View.OnClickL
     private TextView mPostTitleView;
     private ImageView mStudentImageView;
     private TextView mStudentNameView;
+    private TextView mStudentImageTextView;
     private TextView mPostContentView;
     private ImageView mPostImageView;
     private RecyclerView mRvComment;
@@ -93,6 +97,7 @@ public class DiscussDetailActivity extends BaseActivity implements View.OnClickL
         mBackView = findViewById(R.id.imv_edit_back);
         mPostTitleView = findViewById(R.id.tv_post_title);
         mStudentImageView = findViewById(R.id.imv_student_image);
+        mStudentImageTextView = findViewById(R.id.imv_student_text);
         mStudentNameView = findViewById(R.id.tv_student_name);
         mPostContentView = findViewById(R.id.tv_post_content);
         mPostImageView = findViewById(R.id.imv_post_image);
@@ -128,6 +133,20 @@ public class DiscussDetailActivity extends BaseActivity implements View.OnClickL
         if (!TextUtils.isEmpty(mPost.getImageUrl())) {
             mPostImageView.setVisibility(VISIBLE);
             Glide.with(this).load(mPost.getImageUrl()).into(mPostImageView);
+        }
+        if (mPost.getStudent() != null && !TextUtils.isEmpty(mPost.getStudent().getProfilePhotoUrl())) {
+            mStudentImageView.setVisibility(VISIBLE);
+            mStudentImageTextView.setVisibility(GONE);
+            Glide.with(this).load(mPost.getStudent().getProfilePhotoUrl()).into(mStudentImageView);
+        }
+        if (mPost.getStudent() != null &&  TextUtils.isEmpty(mPost.getStudent().getProfilePhotoUrl())) {
+            String name = mPost.getStudent().getName();
+            if (name.length() >= 2) {
+                name = name.substring(name.length() - 2);
+            }
+            mStudentImageTextView.setVisibility(VISIBLE);
+            mStudentImageTextView.setText(name);
+            return;
         }
         mCommentView.setOnClickListener(this);
     }
@@ -204,6 +223,7 @@ public class DiscussDetailActivity extends BaseActivity implements View.OnClickL
     static class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHolder> {
 
         private List<Comment> mComments;
+        private Context mContext;
 
         public CommentAdapter(List<Comment> comments) {
             mComments = comments;
@@ -225,6 +245,7 @@ public class DiscussDetailActivity extends BaseActivity implements View.OnClickL
         @NonNull
         @Override
         public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+            mContext = viewGroup.getContext();
             return new ViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_discuss_comment, viewGroup, false));
         }
 
@@ -234,21 +255,37 @@ public class DiscussDetailActivity extends BaseActivity implements View.OnClickL
 
             if (comment.getStudent() != null) {
                 viewHolder.mUserNameView.setText(comment.getStudent().getName());
-                if (comment.getStudent().getObjectId() != null && comment.getStudent().getObjectId().equals(StudentRuntime.getStudent().getObjectId())) {
+                if (comment.getStudent().getObjectId() != null && StudentRuntime.getStudent() != null && comment.getStudent().getObjectId().equals(StudentRuntime.getStudent().getObjectId())) {
                     viewHolder.mDeleteView.setVisibility(VISIBLE);
-
                 } else {
                     viewHolder.mDeleteView.setVisibility(GONE);
                 }
+                if (TextUtils.isEmpty(comment.getStudent().getProfilePhotoUrl())) {
+                    String name = comment.getStudent().getName();
+                    if (name.length() >= 2) {
+                        name = name.substring(name.length() - 2);
+                    }
+                    viewHolder.mUserImageTextView.setText(name);
+                    return;
+                }
+                Glide.with(mContext).load(comment.getStudent().getProfilePhotoUrl()).into(viewHolder.mUserImageView);
             }
             if (comment.getTeacher() != null) {
                 viewHolder.mUserNameView.setText(comment.getTeacher().getName());
-                if (comment.getStudent().getObjectId() != null && comment.getStudent().getObjectId().equals(TeacherRuntime.getCurrentTeacher().getObjectId())) {
+                if (comment.getTeacher().getObjectId() != null && TeacherRuntime.getCurrentTeacher() != null && comment.getTeacher().getObjectId().equals(TeacherRuntime.getCurrentTeacher().getObjectId())) {
                     viewHolder.mDeleteView.setVisibility(VISIBLE);
                 } else {
                     viewHolder.mDeleteView.setVisibility(GONE);
                 }
-
+                if (TextUtils.isEmpty(comment.getTeacher().getProfilePhotoUrl())) {
+                    String name = comment.getTeacher().getName();
+                    if (name.length() >= 2) {
+                        name = name.substring(name.length() - 2);
+                    }
+                    viewHolder.mUserImageTextView.setText(name);
+                    return;
+                }
+                Glide.with(mContext).load(comment.getTeacher().getProfilePhotoUrl()).into(viewHolder.mUserImageView);
             }
             viewHolder.mDeleteView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -289,6 +326,7 @@ public class DiscussDetailActivity extends BaseActivity implements View.OnClickL
 
         class ViewHolder extends RecyclerView.ViewHolder {
             private ImageView mUserImageView;
+            private TextView mUserImageTextView;
             private TextView mUserNameView;
             private TextView mCommentTextView;
             private ImageView mContentImageView;
@@ -301,6 +339,7 @@ public class DiscussDetailActivity extends BaseActivity implements View.OnClickL
                 mCommentTextView = itemView.findViewById(R.id.tv_comment_content);
                 mContentImageView = itemView.findViewById(R.id.imv_content_image);
                 mDeleteView = itemView.findViewById(R.id.tv_delete);
+                mUserImageTextView = itemView.findViewById(R.id.imv_user_text);
             }
         }
     }

@@ -60,24 +60,39 @@
         android:textColor="@color/textBlack"
         android:textSize="16sp" />
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imv_student_image"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_below="@+id/tv_post_title"
         android:layout_marginLeft="24dp"
-        android:layout_marginTop="5dp" />
+        android:layout_marginTop="5dp"
+        android:src="@drawable/icon_common_image" />
+
+    <TextView
+        android:id="@+id/imv_student_text"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/tv_post_title"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="5dp"
+        android:text="sd"
+        android:gravity="center"
+        android:textColor="@color/White"
+        android:textSize="16sp"
+         />
 
     <TextView
         android:id="@+id/tv_student_name"
         android:layout_width="wrap_content"
-        android:layout_height="24dp"
+        android:layout_height="40dp"
         android:layout_below="@+id/tv_post_title"
+        android:layout_marginLeft="12dp"
         android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/imv_student_image"
         android:gravity="center_vertical"
         android:textColor="@color/textBlack"
-        android:textSize="14sp"
+        android:textSize="16sp"
         tools:text="sdf " />
 
     <TextView
@@ -87,12 +102,15 @@
         android:layout_below="@+id/imv_student_image"
         android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp"
+        android:textColor="@color/textBlack"
+        android:layout_marginTop="12dp"
         android:textSize="16sp" />
 
     <ImageView
         android:id="@+id/imv_post_image"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
         android:layout_below="@+id/tv_post_content"
         android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp"
@@ -109,7 +127,9 @@
         android:id="@+id/rv_comment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/split_line2" />
+        android:layout_above="@+id/tv_comment"
+        android:layout_below="@+id/split_line2"
+        android:layout_marginBottom="5dp" />
 
 
     <TextView
@@ -127,9 +147,9 @@
         android:textSize="14sp" />
 
     <ImageView
-        android:visibility="gone"
         android:id="@+id/imv_full_image"
-        android:background="@color/textBlack"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:background="@color/textBlack"
+        android:visibility="gone" />
 </RelativeLayout>

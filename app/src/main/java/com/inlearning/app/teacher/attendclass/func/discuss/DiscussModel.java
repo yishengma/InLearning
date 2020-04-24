@@ -82,16 +82,6 @@ public class DiscussModel {
         BmobQuery<Comment> query = new BmobQuery<>();
         query.addWhereEqualTo("mPost", post);
         query.include("mStudent,mTeacher");
-        query.addWhereExists("mTeacher");
-        query.addWhereExists("mStudent");
-
-        BmobQuery<Student> inStuQuery = new BmobQuery<>();
-        inStuQuery.addWhereExists("objectId");
-        query.addWhereMatchesQuery("mStudent", "Student", inStuQuery);
-
-        BmobQuery<Teacher> inTeaQuery = new BmobQuery<>();
-        inTeaQuery.addWhereExists("objectId");
-        query.addWhereMatchesQuery("mTeacher", "Teacher", inTeaQuery);
 
         query.findObjects(new FindListener<Comment>() {
             @Override
