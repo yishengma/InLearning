@@ -31,6 +31,10 @@ public final class ThreadMgr {
         getInstance().getUITreadHandler().post(runnable);
     }
 
+    public void postToUIThread(Runnable runnable, long ms) {
+        getInstance().getUITreadHandler().postDelayed(runnable, ms);
+    }
+
     private Handler getUITreadHandler() {
         if (UI_THREAD_HANDLER == null) {
             synchronized (this) {

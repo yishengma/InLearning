@@ -34,6 +34,12 @@ public class SpecialityManagerActivity extends BaseActivity implements View.OnCl
     private TextView mEmptyView;
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        resumeData();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_speciality_manager);
@@ -78,6 +84,26 @@ public class SpecialityManagerActivity extends BaseActivity implements View.OnCl
                     @Override
                     public void run() {
                         LoadingDialog.closeDialog();
+                        mSpecialities.clear();
+                        mSpecialities.addAll(specialities);
+                        mManagerAdapter.notifyDataSetChanged();
+                        mEmptyView.setVisibility(mSpecialities.isEmpty()?View.VISIBLE:View.GONE);
+                    }
+                },1000);
+            }
+        });
+    }
+
+    private void resumeData() {
+        SpecialityModel.getSpeciality(new SpecialityModel.Callback<List<Speciality>>() {
+            @Override
+            public void onResult(boolean suc, List<Speciality> specialities) {
+                ThreadMgr.getInstance().postToUIThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (mManagerAdapter == null || mEmptyView == null) {
+                            return;
+                        }
                         mSpecialities.clear();
                         mSpecialities.addAll(specialities);
                         mManagerAdapter.notifyDataSetChanged();

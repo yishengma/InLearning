@@ -132,7 +132,8 @@ public class StudentSingleImportActivity extends BaseSingleImportActivity implem
         student.setSex(mSexEditView.getContent())
                 .setClassInfo(classInfo)
                 .setName(mNameEditView.getContent())
-                .setAccount(mNumberEditView.getContent());
+                .setAccount(mNumberEditView.getContent())
+        .setPassword(mNumberEditView.getContent());
         ClassInfoModel.saveStudent(student, new ClassInfoModel.Callback2<Student>() {
             @Override
             public void onResult(boolean suc, int ret, Student student) {

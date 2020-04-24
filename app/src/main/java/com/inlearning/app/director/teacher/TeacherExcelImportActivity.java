@@ -93,6 +93,7 @@ public class TeacherExcelImportActivity extends BaseExcelImportActivity {
             teacher.setTitle(map.get("职称"));
             teacher.setName(map.get("姓名"));
             teachers.add(teacher);
+            teacher.setPassword(teacher.getAccount());
         }
         mTeacherList.addAll(teachers);
         mInfoAdapter.notifyDataSetChanged();

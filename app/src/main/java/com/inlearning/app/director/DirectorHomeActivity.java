@@ -75,7 +75,6 @@ public class DirectorHomeActivity extends BaseActivity implements View.OnClickLi
     @Override
     protected void onResume() {
         super.onResume();
-//        mBarTitle.setText(DirectorAppRuntime.getsDirector().mName);
     }
 
     private void initView() {
@@ -117,6 +116,7 @@ public class DirectorHomeActivity extends BaseActivity implements View.OnClickLi
 
             }
         });
+        mBarTitle.setText("专业");
     }
 
     private void onTabSelect(TabLayout.Tab tab) {

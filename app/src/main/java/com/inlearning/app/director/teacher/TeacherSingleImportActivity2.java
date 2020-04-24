@@ -129,6 +129,7 @@ public class TeacherSingleImportActivity2 extends BaseSingleImportActivity imple
         teacher.setName(mNameEditView.getContent())
                 .setAccount(mJonNumberEditView.getContent())
                 .setTitle(mTitleEditView.getContent());
+        teacher.setPassword(teacher.getAccount());
         LoadingDialog.showLoadingDialog(this, "正在添加.");
         TeacherModel.addTeacher(teacher, new TeacherModel.Callback<Teacher>() {
             @Override

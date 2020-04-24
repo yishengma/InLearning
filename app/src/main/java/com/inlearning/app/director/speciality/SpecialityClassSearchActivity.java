@@ -3,11 +3,13 @@ package com.inlearning.app.director.speciality;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.inlearning.app.common.bean.ClassInfo;
 import com.inlearning.app.common.bean.Speciality;
 import com.inlearning.app.director.BaseSearchActivity;
 import com.inlearning.app.director.DirectorAppRuntime;
+import com.inlearning.app.director.speciality.classinfo.ClassInfoActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +31,17 @@ public class SpecialityClassSearchActivity extends BaseSearchActivity {
         mClassList = new ArrayList<>();
         mInfoAdapter = new SpecialityInfoAdapter(mClassList);
         mTotalClassList.addAll(DirectorAppRuntime.getsClassInfo());
+        mInfoAdapter.setClickListener(new SpecialityInfoAdapter.ClickListener() {
+            @Override
+            public void onClick(ClassInfo classInfo) {
+                ClassInfoActivity.startActivity(SpecialityClassSearchActivity.this, classInfo);
+            }
+
+            @Override
+            public void onLongClick(View view, float x, float y, ClassInfo classInfo) {
+
+            }
+        });
 
     }
 

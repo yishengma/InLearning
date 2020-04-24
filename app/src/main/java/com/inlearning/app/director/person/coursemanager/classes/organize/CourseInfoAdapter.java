@@ -62,9 +62,9 @@ public class CourseInfoAdapter extends  RecyclerView.Adapter<CourseInfoAdapter.V
             }
         });
         viewHolder.mCourseName.setText(course.getName());
-        viewHolder.mCourseTime.setText(course.getTime());
-        viewHolder.mCourseScore.setText(course.getScore());
-        viewHolder.mCourseType.setText(course.getType());
+        viewHolder.mCourseTime.setText(String.format("学时:%s",course.getTime()));
+        viewHolder.mCourseScore.setText(String.format("学分:%s",course.getScore()));
+        viewHolder.mCourseType.setText(String.format("课程类型:%s",course.getType()));
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

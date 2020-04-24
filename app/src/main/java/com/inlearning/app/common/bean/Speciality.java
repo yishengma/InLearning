@@ -43,13 +43,12 @@ public class Speciality extends BmobObject {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Speciality that = (Speciality) o;
-        return mClassCount == that.mClassCount &&
-                Objects.equals(mName, that.mName) &&
+        return Objects.equals(mName, that.mName) &&
                 Objects.equals(mShortName, that.mShortName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(mName, mShortName, mClassCount);
+        return Objects.hash(mName, mShortName);
     }
 }

@@ -111,6 +111,7 @@ public class StudentExcelImportActivity extends BaseExcelImportActivity {
             student.mAccount = map.get("学号");
             student.mName = map.get("姓名");
             student.setSex(map.get("性别"));
+            student.mPassword = student.mAccount;
             if (TextUtils.isEmpty(student.getAccount()) ||
                     TextUtils.isEmpty(student.getName()) ||
                     TextUtils.isEmpty(student.getSex())) {
