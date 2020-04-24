@@ -29,6 +29,7 @@ import com.inlearning.app.common.PasswordActivity;
 import com.inlearning.app.common.bean.Director;
 import com.inlearning.app.common.bean.Student;
 import com.inlearning.app.common.util.FileUtil;
+import com.inlearning.app.common.util.LoadingDialog;
 import com.inlearning.app.common.util.PhotoUtils;
 import com.inlearning.app.common.util.StatusBar;
 import com.inlearning.app.common.util.TakePhotoUtil;
@@ -203,9 +204,11 @@ public class PersonActivity extends BaseActivity {
     }
 
     private void updateImage() {
+        LoadingDialog.showLoadingDialog(PersonActivity.this,"正在上传...");
         ThreadMgr.getInstance().postToUIThread(new Runnable() {
             @Override
             public void run() {
+                LoadingDialog.closeDialog();
                 mImageDialog.dismiss();
                 mImageView.setPersonImageView(mDirector.mName, mDirector.getProfilePhotoUrl());
             }

@@ -4,7 +4,9 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+
 import com.inlearning.app.BaseActivity;
+
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,6 +20,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.inlearning.app.R;
 import com.inlearning.app.common.bean.Post;
+import com.inlearning.app.common.util.DLog;
+import com.inlearning.app.common.util.LoadingDialog;
 import com.inlearning.app.common.util.StatusBar;
 import com.inlearning.app.common.util.ThreadMgr;
 import com.inlearning.app.student.StudentRuntime;
@@ -103,9 +107,11 @@ public class MineDiscussActivity extends BaseActivity implements View.OnClickLis
     }
 
     public void initData() {
+        LoadingDialog.showLoadingDialog(MineDiscussActivity.this, "加载中...");
         MineDiscussModel.getMinePost(StudentRuntime.getStudent(), new MineDiscussModel.Callback<List<Post>>() {
             @Override
             public void onResult(List<Post> posts) {
+                LoadingDialog.closeDialog();
                 ThreadMgr.getInstance().postToUIThread(new Runnable() {
                     @Override
                     public void run() {
@@ -247,7 +253,8 @@ public class MineDiscussActivity extends BaseActivity implements View.OnClickLis
             if (post.getStudent() != null && !TextUtils.isEmpty(post.getStudent().getProfilePhotoUrl())) {
                 Glide.with(mContext).load(post.getStudent().getProfilePhotoUrl()).into(viewHolder.mUserImageView);
                 viewHolder.mUserImageTextView.setVisibility(GONE);
-            } else if (post.getStudent() != null){
+                viewHolder.mPostNameView.setText(post.getStudent().getName());
+            } else if (post.getStudent() != null) {
                 String name = post.getStudent().getName();
                 if (name.length() >= 2) {
                     name = name.substring(name.length() - 2);
@@ -255,6 +262,7 @@ public class MineDiscussActivity extends BaseActivity implements View.OnClickLis
                 viewHolder.mUserImageTextView.setText(name);
                 viewHolder.mUserImageTextView.setVisibility(VISIBLE);
                 viewHolder.mUserImageView.setBackground(mContext.getDrawable(R.drawable.icon_common_image));
+                viewHolder.mPostNameView.setText(post.getStudent().getName());
             }
         }
 
@@ -269,6 +277,7 @@ public class MineDiscussActivity extends BaseActivity implements View.OnClickLis
             private ImageView mContentImageView;
             private TextView mDeleteView;
             private TextView mUserImageTextView;
+            private TextView mPostNameView;
 
             public ViewHolder(@NonNull View itemView) {
                 super(itemView);
@@ -277,6 +286,7 @@ public class MineDiscussActivity extends BaseActivity implements View.OnClickLis
                 mContentImageView = itemView.findViewById(R.id.imv_content_image);
                 mDeleteView = itemView.findViewById(R.id.tv_delete);
                 mUserImageTextView = itemView.findViewById(R.id.imv_user_text);
+                mPostNameView = itemView.findViewById(R.id.tv_post_name);
             }
         }
 

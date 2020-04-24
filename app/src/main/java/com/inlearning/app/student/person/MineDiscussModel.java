@@ -19,7 +19,11 @@ public class MineDiscussModel {
 
     public static void getMinePost(Student student, Callback<List<Post>> callback) {
         BmobQuery<Post> query = new BmobQuery<>();
-        query.addWhereEqualTo("mStudent", student);
+        query.include("mStudent,mChapter");
+        query.addWhereEqualTo("mStudent",student);
+        BmobQuery<Student> inQuery = new BmobQuery<>();
+        inQuery.addWhereExists("objectId");
+        query.addWhereMatchesQuery("mChapter", "CourseChapter", inQuery);
         query.findObjects(new FindListener<Post>() {
             @Override
             public void done(List<Post> list, BmobException e) {
@@ -30,7 +34,7 @@ public class MineDiscussModel {
         });
     }
 
-    public static void deletePost(Post post,Callback<Boolean> callback) {
+    public static void deletePost(Post post, Callback<Boolean> callback) {
         post.delete(new UpdateListener() {
             @Override
             public void done(BmobException e) {
